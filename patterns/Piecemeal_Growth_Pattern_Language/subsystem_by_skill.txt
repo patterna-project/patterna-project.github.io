@@ -1,0 +1,88 @@
+ SUBSYSTEM BY SKILL *
+ ...an organization of developers exists. They have different skills
+ and specialties, but there is not yet any structure in the organization,
+ nor in the system architecture, that reflects such specialization or
+ interest. 
+✥ ✥ ✥ 
+Birds of a feather flock together. By CONWAY’S LAW (5.1.7), you want
+ the architecture and organization to match each other. Yet there are
+ many possible principles of organizing both the software and the organization that builds it. There is one structure that relates to domain
+ knowledge and the system architecture; there is also a business structure, and a geographic structure as found in ORGANIZATION FOLLOWS
+ LOCATION (5.1.8). But in ORGANIZATION FOLLOWS LOCATION, each location
+ is largely autonomous and has its own organizational decisions to
+ make, so the issue remains of how to modularize the organizational
+ structure locally. ORGANIZATION FOLLOWS LOCATION conveys global constraints that relate to business priorities and concerns; CONWAY’S LAW
+ offers guidance in the large, but doesn’t extend as well to the fine
+ structure at the group level. And that structure—the primary low-level
+ structure of the organization—relates to the subsystem structure. So:
+ how do we help CONWAY’S LAW with a set of partitioning criteria? 
+Therefore: 
+Separate subsystems by staff skills and skill requirements. 
+ ✥ ✥ ✥ 
+This is a refinement of the pattern CONWAY’S LAW; it tells what criterion by which the structures of the organization should be aligned
+ with those of the product. 
+People skills tend to be relatively stable over time, so this organization protects against shifts in staff. 
+The variation protected against here is the variation in staff skills
+ over time. On a small enough project, the few people may have multiple skills that enable them to mix UI design with infrastructure
+ design with domain design. Unhappily, their successors may not,
+ which makes system evolution more difficult and costly. 
+On larger projects, the many people are more likely to have single
+ skills and specialties. If their code is intermingled, two expensive difficulties accrue: getting the different people to learn to understand each
+ other and come to common decisions, and the same system evolution
+ difficulty as with the smaller system. 
+Separating their specialties into different subsystems lets them
+ work with their special issues in their special vocabulary, lets their successors see those issues in isolation, and makes the project easier to
+ staff, since the staff need not be so multidisciplinary. Once the subsystems are identified, various forms of teaming may be used to
+ develop them. 
+The pattern of course should be applied in moderation; too many
+ subsystems means complex, slow software. And too fine of an organization structure is unwieldy and cumbersome. 
+Note the relationship to DOMAIN EXPERTISE IN ROLES (4.2.22). This pattern removes one degree of freedom in DIVERSE GROUPS (4.2.16). 
+Related subsystems may be connected, while still providing a
+ degree of independence between teams by using STANDARDS LINKING
+ LOCATIONS (5.2.12) from ORGANIZATIONAL MULTIPLEXING PATTERN LANGUAGE. 
+UPSIDE DOWN MATRIX MANAGEMENT (5.1.19) is a way of handling SUBSYSTEM BY SKILL. 
+Discussion 
+Alistair Cockburn offers the following analysis of the relationship
+ between HOLISTIC DIVERSITY (4.2.19) and SUBSYSTEM BY SKILL (4.2.23): 
+ HOLISTIC DIVERSITY is aimed at streamlining communication: 
+“For each function or set of functions to be delivered, create a 
+small team... evolve specialists in requirements gathering, UI 
+design, technical design, ...” “Evaluate the team as a single 
+unit. Arrange the team size and location so they can commu
+nicate directly.” “You will have to coordinate the teams to get 
+the ... UI design, software architecture and so on consistent 
+across teams.” 
+ SUBSYSTEM BY SKILL is aimed at protecting the system against 
+“variation in staff skills over time” — I thought of it primarily 
+as a software design pattern, rather than a project management pattern, which is why I hadn’t thought of them 
+together. “Many people are more likely to have single skills 
+and specialties... Separate their specialties into different subsystems” 
+What happens if you put the two together? You get the team 
+structuring I described in my book ([Cockburn1998], p. 88) 
+for a 40-person project: function teams (using HOLISTIC DIVERSITY), infrastructure teams, ARCHITECTURE TEAM, and technol
+ogy teams. The UI gets its own subsystem, the domain model 
+gets it own subsystem, the database gets its own subsystem... 
+and now you have to use HOLISTIC DIVERSITY to get all the parts 
+put back together to make a working system. Expertise from 
+each specialty on each team (some team members bring more 
+than one specialty with them). And you also have to run a UI 
+group across function teams to get consistent UIs; a persistence and a domain group similarly to get consistency there, 
+too. The software ends up partitioned by skill. So you work 
+extra hard to see that the teams don’t get similarly segregated. This is the stuff that my book covers, in its tiny way. 
+What happens if you don’t put the two together? If you don’t 
+do SUBSYSTEM BY SKILL, then you get UI, domain, persistence, 
+networking code all mixed together. Yuck, but that’s well 
+known. Why have we long separated these things? Because 
+they change independently or because they capitalize on different specialties?, or we have those specialties because they 
+change independently or they change independently because 
+we have those specialties? 
+ I don’t know and won’t guess. 
+What if you don’t do HOLISTIC DIVERSITY? Then you get a room 
+full of UI designers, another room full of domain modelers, 
+another room full of persistence designers / db designers, 
+etc. I think we have all seen enough of this and its negative 
+consequences. I am, by the way, currently in an organization 
+separated this way, and trying to get the people, who sit only 
+steps apart, to talk to each other on microteams. 
+So I think we need both: a project management pattern and a 
+software architecture pattern, that work together.

@@ -1,0 +1,43 @@
+ MATRON ROLE *
+ One of the members of my group was a woman named Anita. She was certainly technically competent, but I remember her more for the non-technical
+ things she did for the group. For birthdays, Anita was almost always the one
+ who brought cakes, pies, or other treats to celebrate. Because she liked to cook,
+ many treats were homemade; in fact, she occasionally brought something just
+ because she had tried out a new recipe. She did other things for the group too.
+ She was often on picnic committees, and helped arrange “take our daughter to
+ work” days. 
+Anita eventually moved on to another group, and our group has since been
+ fragmented into other groups. But we still remember ourselves as a cohesive
+ team, and Anita is a major part of the team. 
+...once a team is established, it needs regular care and feeding to
+ maintain the unity of the team. 
+✥ ✥ ✥ 
+Teams do not survive simply on the work they do. Some social
+ activities are necessary to keep the team going on the technical
+ work. 
+ “All work and no play makes Jack a dull boy.” This is also true of
+ teams; unless teams play together some, they have trouble maintaining healthy interpersonal relationships, even in work situations. 
+But many people are not particularly adept at arranging social functions for their teams. This is particularly true among software organizations, which are dominated by introverts. In fact, some people are
+ not even sufficiently aware of such things to be of any use in planning
+ them. 
+Therefore: 
+Make sure that the team contains a Matron who will do the social
+ and interpersonal things necessary to keep the team unified. 
+The Matron keeps track of birthdays and other occasions for celebration. The Matron is often willing to plan activities, and usually
+ finds himself/herself on party committees. 
+Note that you can’t force this role on someone; a person is either
+ naturally a Matron or not. Therefore, you need to find one rather than
+ manufacture one. 
+✥ ✥ ✥ 
+With a MATRON ROLE, the team is much more likely to be cohesive
+ through thick and thin. 
+Don Olson’s PEACE MAKER (10.5.21) pattern ([Olson1998a], p. 168) is
+ similar ([Rising2000], p. 131): 
+A peacemaker is a placeholder in an organization who tries to 
+calm and hold things together until a leader can be found or a 
+reorganization is complete. The peacemaker should be someone who is well liked but who is not necessarily technically 
+proficient. Usually this individual has many years with the 
+company, knows the political ropes, and can buy time for a 
+team as well as the team’s management. 
+MATRON ROLE is a broadening of PEACE MAKER. 
+The MATRON ROLE is usually a PUBLIC CHARACTER (4.2.17).

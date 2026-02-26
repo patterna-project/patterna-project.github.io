@@ -1,0 +1,119 @@
+ARCHITECT ALSO IMPLEMENTS **
+ Architects of a housing development working on-site, 1942. 
+...an organization is being built to serve an identified market (ORGANIZATION FOLLOWS MARKET (5.1.9)) or markets. Going forward, the
+ project needs the necessary architectural breadth to cover its markets
+ and to ensure smooth evolution, but it can’t be blindsided by pragmatic engineering and implementation concerns. Furthermore, the
+ project needs to carry through a singular architectural vision from con
+ception to implementation if it is to have conceptual integrity. 
+✥ ✥ ✥ 
+A software project must broaden the scope of leadership without
+ sacrificing depth and attention to pragmatics. Though developers are
+ good at making individual design and implementation decisions, a
+ project needs an overall guiding strategic technical direction. This usually comes from the architect. However, too many software architects
+ limit their thinking and direction to abstractions, and abstraction is a
+ disciplined form of ignorance. Too many projects fail on “details” of
+ performance, subtleties of APIs, and interworking of components—or,
+ at best, they discover such problems late. 
+If an omniscient plan were possible, one could solve this with total
+itarian control. But even if that were possible, totalitarian control is
+ viewed by most development teams as a draconian measure. 
+ The right information must flow through the right roles; in particular, the developers must latch onto the strategic vision and carry
+ responsibility for implementation. The architect, and to some degree
+ the developers, must also understand the application needs and what
+ they portend for the long-term structure of the system. But there
+ should be a more centralized locus of strategic direction that keeps the
+ project from floundering, makes sure the necessary details are
+ attended to, and keeps track of the emerging “fit” of all the pieces into
+ a whole. Sometimes this “fit” requires understanding low level details
+ of component interaction, protocols, APIs, performance, or reliability
+ concerns. 
+Therefore: 
+Beyond advising and communicating with Developers, Architects
+ should also participate in implementation. 
+The Architect should be organizationally engaged with Developers
+ and should himself or herself write code. The Architect may implement along with a developer using DEVELOPING IN PAIRS (4.2.28). 
+✥ ✥ ✥ 
+If the architect implements, the development organization perceives
+ buy-in from the guiding architects, and that can directly avail itself of
+ architectural expertise. The architects also learn by seeing, first-hand,
+ the results of their decisions and designs: an important place for feedback in the development process. 
+The importance of making this pattern explicit arose recently in a
+ project I work with. The architecture team was being assembled across
+ wide geographic boundaries with narrow communication bandwidth
+ between them. Though general architectural responsibilities were
+ identified and the roles were staffed, one group had expectations that
+ architects would also implement code; the other did not. 
+One manager suggests that, on some projects, architects should
+ focus only on the implementation of a common infrastructure, and
+ that the implementation of non-core code should be left solely to the
+ Developer role. This may work in some projects; however, it is crucial
+ that the architect have a strong feel for the application needs. It is by
+ understanding recurring application needs that the architect can build
+ long-term robust frameworks. If architects work only on infrastructure
+ without an engaged appreciation of application needs, there will be a
+ disconnect between the infrastructure (framework, middleware) and
+ the application. 
+“It would be convenient if architecture could be defined as 
+any building designed by an architect. But who is an architect? Although the Academie Royale d’Architecture in Paris 
+was founded in 1671, formal architectural schooling did not 
+appear until the nineteenth century. The famous Ecole des 
+BEAUX- ARTS was founded in 1816; the first English-language 
+school, in London, in 1847; and the first North American university program, at MIT, was established in 1868. Despite the 
+existence of professional schools, for a long time the relation
+ship between schooling and practice remained ambiguous. It 
+is still possible to become an architect without a university 
+degree, and in some countries, such as Switzerland, trained 
+architects have no legal monopoly over construction. This is 
+hardly surprising. For centuries, the difference between mas
+ter masons, journeymen builders, joiners, dilettantes, gifted 
+amateurs, and architects has been ill defined. The great 
+Renaissance buildings, for example, were designed by a variety of non-architects. Brunelleschi was trained as a gold
+smith; Michelango as a sculptor, Leonardo da Vinci as a 
+painter, and Alberti as a lawyer; only Bramante, who was also 
+a painter, had formally studied building. These men are 
+termed architects because, among other things, they created 
+architecture—a tautology that explains nothing.” — 
+[Rybczynski1989, p. 9]. 
+[Vitruvius1960] notes: “...[A]rchitects who have aimed at 
+acquiring manual skill without scholarship have never been 
+able to reach a position of authority to correspond to their 
+pains, while those who relied only upon theories and scholar
+ship were obviously hunting the shadow, not the substance. 
+But those who have a thorough knowledge of both, like men 
+armed at all points, have the sooner attained their object and 
+carried authority with them.” 
+John Thomas [mail of 18 Mar 1997] writes: "C. E. Walston and 
+C. P. Felix did an extensive multiple regression study of soft
+ware productivity — reported in the IBM Systems Journal, 
+ vol.16, 1977, pp. 54-73 ’A method of programming measurement and estimation.’ [WalstonFelix1977] 
+John continues, “As I recall, the proportion of architects who 
+were also on the implementation team had a very large coefficient. It was a much more powerful variable, e.g., than use of 
+a high level language or use of structured programming.” 
+Though the architect should be able to understand the minutiae of
+ development, it is not necessarily the architect’s business to deal with
+ detail day in and day out. Much of what the architect does is to be the
+ keeper of the flame, the owner of the principles that the project follows: principles that in turn shape structure. Much of the structure can
+ come out of a consensus process guided by the architect; in fact, in
+ practice, that’s much of what architects do. [CoplienDevos2000] 
+A related pattern is GURU DOES ALL (10.5.15) from the collection of
+ Don Olson [Olson1998a, 153-154], which states [Rising2000, 130]: 
+A newly formed team is given a project with a tight schedule, 
+uncertain requirements, uneven distribution of skills, and 
+new technologies. Let the most skilled and knowledgeable 
+developer drive the design and implement the critical pieces. 
+This can be an antipattern. 
+The important element of this pattern is to give the critical pieces to
+ the most skilled and knowledgeable practitioners (DOMAIN EXPERTISE IN
+ ROLES (4.2.22) and, of course, ARCHITECT ALSO IMPLEMENTS). But it also
+ has elements of SOLO VIRTUOSO (4.2.5), and can be thought of as an
+ interim application of SOLO VIRTUOSO in the context of a project that will
+ mature out of the need for such a pattern. This pattern should be tem
+pered with APPRENTICESHIP (4.2.4), PHASING IT IN (4.2.3), DAY CARE
+ (4.1.23) and others to move toward more of a peer team over time.
+ (DAY CARE, in fact, talks explicitly about problem of people starting to
+ say that “a few experts could get the project done faster”). Putting too
+ much burden on one developer can lead to early burnout (see THE
+ OPEN CLOSED PRINCIPLE OF TEAMS (6.1.4)). It is sometimes difficult for a
+ lead developer to give up the SOLO VIRTUOSO behavior on a given
+ project once having filled that role, so this pattern should be applied
+ with care.

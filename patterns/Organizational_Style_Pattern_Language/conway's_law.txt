@@ -1,0 +1,66 @@
+CONWAY’S LAW **
+ Construction of the Lincoln Memorial, 1916. 
+...an Architect and development team are in place. The architecture
+ is fairly well-established. 
+✥ ✥ ✥ 
+If the parts of an organization—such as teams, departments, or
+ subdivisions—do not closely reflect the essential parts of the
+ product, or if the relationships between organizations do not reflect
+ the relationships between product parts, then the project will be in
+ trouble. 
+The system architecture shapes the communication paths in an
+ organization. De facto organization structure shapes formal organization structure. Formal organization structure shapes architecture.
+ Early architectural formulations are only approximations and are
+ unstable. However, there are major rhythms in the architecture that
+ reflect areas of core business competency, and that level of concern is more closely tied to organizational structure than the broader concerns of the whole architectural structure. 
+Therefore: 
+Make sure the organization is compatible with the product architecture. At this point in the language, it is more likely that the architecture should drive the organization than vice versa. 
+ An organization will have periodic reviews of the architecture, and
+ potentially of project management strategies (see STAND UP MEETING
+ (5.2.7)). At each of these meetings (if indeed they are separate) care
+ should be taken to align the structure of the architecture with the
+ structure of the organization, by making piecemeal changes to one or
+ the other. 
+✥ ✥ ✥ 
+The organization and product architecture will be aligned. It
+ becomes easier for the pattern DEVELOPER CONTROLS PROCESS (4.1.17) to
+ succeed. 
+One reason to let the architecture dominate more than organizational concerns is that the architecture is more often constrained by the
+ problem, and that ties into the core reasons for the existence of the
+ enterprise; see ORGANIZATION FOLLOWS MARKET (5.1.9), for example.
+ However, political forces are also powerful and may dominate even
+ over core business needs; however, that usually bodes for serious
+ organizational struggles. 
+The best structure in the long term is one that comes from a three
+way alignment between the main structures of the business (domain),
+ the structure of the organization, and the structure of the software.
+ One approach is to design the major software artifacts around domain
+ analysis considerations and to align the organization with the architecture accordingly; this works best for greenfield projects and where the
+ original design team is small. Another approach is to design the organization around the business needs and let the architecture follow the
+ organization; this is more important in legacy organizations where
+ “expertise tradition” may suggest both organizations and architectures that don’t follow more standard domain analyses. 
+Of course, all three of these structures must change over time to
+ deal with evolution in the market, technology, and staff, though the
+ fundamental assumptions about relationships between parts are
+ unlikely to change frequently in a successful business. But even less
+ momentous changes must be dealt with and, more importantly, the
+ project must take opportunities to leverage its growing understanding
+ of the business, of the suitability of specific technologies to support the
+ business, and the organizational and system structures that can sup
+port the business. Much of this pattern language aims at maintaining
+ the project communication essential to the long-term alignment of
+ these structures. Specific patterns like STAND UP MEETING (5.2.7) should
+ be viewed as opportunities not only to review the architecture, but to
+ review the organizational structure and business strategies as well. 
+Gerard Meszaros (formerly of Nortel) notes that you want to bind
+ the organization to the architecture only after the architecture has stabilized. If you bind the organization to the architecture too early, architectural drift will lead to interference between individuals’ domains of
+ control. On the other hand, Alistair Cockburn points out in SKILL MIX
+ (10.5.28) [Cockburn1996] that it is sometimes necessary to separate
+ subsystems according to the staff skills you have, since it takes advantage of the skills the team already has. 
+SUBSYSTEM BY SKILL (4.2.23) addresses finer team structure with
+ regard to architectural considerations. DEPLOY ALONG THE GRAIN (5.2.8)
+ or, more specifically, OWNER PER DELIVERABLE (10.5.19) and CODE OWNER
+SHIP (5.2.13), are CONWAY’S LAW in the small. Use STANDARDS LINKING
+ LOCATIONS (5.2.12) to overcome the isolationism of CONWAY’S LAW. 
+The rationale is historical, from Conway’s timeless paper “How do
+ committees invent?” [Conway1968].

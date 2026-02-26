@@ -1,0 +1,105 @@
+DAY CARE *
+ Alias: “Progress Team / Training Team” 
+... the project has just brought on several new people. 
+✥ ✥ ✥ 
+Your experts are spending all their time mentoring novices. 
+You begin to hear things like “We are wasting our experts,” or “A
+ few experts could do the whole project faster.” Indeed, the experts are
+ not proceeding at the rate you or they would expect, because training
+ the new people is draining their energy, time and concentration. But
+ the new people must be trained, by experts, of course. 
+At the same time, you must make progress on the project itself. 
+Therefore: 
+Put one expert in charge of all the novices, let the others develop
+ the system. 
+Separate an experts-only “progress” team from a training team
+ under the tutelage of one or more mentors. Select the mentors for their
+ ability to teach design and programming (object-oriented design and
+ programming, for example) to novices. Let the progress team design
+ 85-95% of the system, let the training team focus on quality training,
+ delivering only 5-15% part of the system. Transfer people to the
+ progress team as they become able to contribute meaningfully. 
+Make sure that the training team does not simply do training exercises, but actually contributes to the final system in an ever-increasing
+ way. 
+If you have many people to train (more than, say, six), you will have
+ to design a series of tasks for them to attempt. Otherwise you may give
+ them a small, real part of the main system to design. 
+If the people in the training team are the ones who know the
+ domain, you will have to make some further adjustment, or else the
+ division may cause conflict. 
+✥ ✥ ✥ 
+The result is that most of the experts can continue to make progress
+ on the project. The novices contribute a small part of the project, that
+ grows as they gain experience. 
+In extreme cases, though, you eventually have too few people to
+ constitute a progress team. 
+How many people can one mentor train, if training results and not
+ running software are his/her deliverable? A small, reasonable number
+ is five. I have heard of one person mentoring 15 people on five concurrent mini-projects. 
+Related patterns: 
+This pattern is a cross-specialization of several given in this 
+chapter: OWNER PER DELIVERABLE (10.5.19), SOMEONE ALWAYS MAKES PROGRESS (4.1.20), TEAM PER TASK (4.1.21), SACRIFICE ONE PERSON (4.1.22). 
+Principles involved: 
+The principles are synergy vs. distraction, the synergy of having a novice learn directly from an expert vs. the distraction 
+to the expert. Experts having to answer novice questions are reduced to a fraction of their productivity, without particularly raising the productivity of the newcomers. Adding one 
+novice to an expert may cut the expert’s productivity in half, 
+adding two may cut it to a third, adding three may prevent 
+all productivity altogether. 
+ Assume there are X experts who work at productivity 1 each, 
+a larger number of N novices who work at n productivity 
+each, with n much smaller than 1, on the order of 1/10. If the 
+experts could work together, they would have, in this simple 
+model, a total productivity of 
+(X) for the experts working together. 
+If one of them is sacrificed to train the novices, that person 
+has zero productivity (except training novices), so the 
+group’s total productivity is 
+(X-1) + N*n for Day Care (upper curve in figure 8.1). 
+If they are all mixed together (“Even Mix”), m=N/X novices 
+per expert, each expert’s productivity falls from 1 to some
+thing like 1/(m+1). The group’s total productivity is now 
+(X*X/ (N+1)) + N*n for Even Mix (lower curve in figure 8.1). 
+Figure 8.1 shows the productivity of DAY CARE (4.1.23) versus 
+EVEN MIX, novices assumed to work at 1/10th the productiv
+ity of the experts. This shows the total productivity for the 
+team in units of experienced people’s productivity. As the 
+number of novices increases, the EVEN MIX line shows the 
+effect of training them. Let us check that the assumed produc
+tivity difference is not skewing the results. Figure 8.2 shows 
+the ratio of DAY CARE (4.1.23) to EVEN MIX, for different pro
+ductivity assumptions. Note that with five experts and five 
+novices, the ratio is actually just below one, meaning that the 
+ experts are absorbing and making use of the novices. By two 
+novices per expert, DAY CARE (4.1.23) is already considerably 
+more effective. 
+The nature of the training does not matter. Design and teaching are antagonistic tasks (as described in TEAM PER TASK 
+(4.1.21)), and better split into separate teams. 
+Treating the delivery of trained people as separate from the delivery
+ of running software gives you access to OWNER PER DELIVERABLE
+ (10.5.19). SOMEONE ALWAYS MAKES PROGRESS (4.1.20) protects the delivery
+ of running software. 
+Sample situations: 
+A. Mentoring. The standard recommendation in the industry is to
+ put 1-5 novices under each trained expert. The consequence is that the
+ experts spend the prime part of their energies training, halfheartedly.
+ Besides being drained of energy for designing the system, the experts
+ typically do not have the personality, background or inclination to
+ actually teach the novices how to do design. They are caught between
+ trying to get the maximum out of their trainees and trying to do the
+ maximum development themselves. Thus, they neither develop the
+ system, nor train the novices adequately. 
+Some companies have dedicated “Apprenticeship” programs, in
+ which novices are put under the tutelage of a dedicated mentor for 2
+ weeks out of every 3 for 6 months. 
+B. Adding staff. Fred Brooks, in The Mythical Man-Month, talks
+ about the training costs of adding people to a project. These new
+ people drain productivity from the experts. The same suggestion
+ applies: put the newcomers in a separate team to learn the system.
+ Move them to the progress team as soon as they are up to speed. 
+ Reading: 
+Brooks, F., The Mythical Man-Month, Addison-Wesley, 1995
+ [Brooks1995]. 
+In Situated Learning: Legitimate Peripheral Participation, [Lave1991],
+ Lave and Wenger describe the use of this sort of arrangement in
+ apprentice-based work situations. 
+A version of this pattern first appeared in [Cockburn1998].

@@ -1,0 +1,104 @@
+TEAM PER TASK **
+ ... a big diversion hits the team, threatening to disrupt the ongoing
+ work, and temporarily halt progress. 
+✥ ✥ ✥ 
+Large distractions (usually called crises) must not be allowed to
+ stop a project, even for a short time. Crises are inevitable, and they
+ are legion. If the project takes time to respond to each, its members will
+ soon find themselves spending so much time responding to each crisis
+ that the real work doesn’t get done. 
+Of course the diversions are real. A previous release needs an emergency bug fix. New people must be trained. The ISO audit will
+ happen. But they must be handled in a way that the project still moves
+ forward. 
+The temptation is to take this high-priority item and throw everything you have at it: let the whole team work the issue until it goes
+ away. However, such an approach confuses urgency with amount of
+ effort; some problems require only a small amount of attention,
+ although it should be immediate attention. A stitch in time saves nine. 
+Therefore: Let a sub-team handle the diversion, which allows the
+ main team to keep working. 
+One approach is to split the team. Sort the activities so that each
+ team has a primary task with additional, sympathetic activities. Sitting
+ in meetings, answering phone calls, writing reports, for example, are
+ non-sympathetic to designing software. Arrange it so that each team
+ can focus on its primary task, and each task has a dedicated team
+ member. 
+✥ ✥ ✥ 
+The result is that the important distractions are handled pretty
+ much entirely by specialized teams, thus allowing the main team to
+ continue uninterrupted. 
+However, one must be careful not to overdo it. Carried to extremes,
+ it results in single-person teams. In addition, while solving a crisis is
+ important, be careful not to heap praise too lavishly on the crisis
+ teams. Otherwise, addressing crises becomes the glamor job, and the
+ focus of the team becomes putting out fires rather than building the
+ building. (See COMPENSATE SUCCESS (4.2.25)) 
+Related patterns: 
+This pattern treats each task both as an activity and as a deliverable.
+ Therefore: 
+ OWNER PER DELIVERABLE (10.5.19) - the general form of ownership and accountability. 
+ FUNCTION OWNER AND COMPONENT OWNER - team for each artifact, as well as the task of designing it. 
+ SOMEONE ALWAYS MAKES PROGRESS (4.1.20) - the general distraction management pattern. 
+ SACRIFICE ONE PERSON (4.1.22) - specialization to lose only one 
+person. 
+ DAY CARE (4.1.23) - addresses training as a separate deliverable from the software. 
+Principles involved: 
+Increase flow time and decrease distractions, thus trading 
+personnel parallelism for time slicing. “Flow” is the quiet 
+time in the brain when the problem flows through the 
+designer ([Csikszentmihalyi1990], [DeMarcoLister1976]). It is 
+when the design alternatives are weighed, and decisions are 
+ made in rapid succession as mental doors open. The problem, 
+the alternatives and the state of the decision process are all 
+kept in the head. It is a not only a highly productive time, it is 
+the only time when the designer feels comfortable making 
+decisions. 
+It takes about 20 minutes to reach the internal state of flow, 
+and only a minute to lose it. Beyond getting into flow, the 
+designer must have time to make actually progress, which 
+may be another 10 minutes. Any significant interruption 
+within the half hour minute essentially causes the entire half 
+hour to be lost. As it takes energy to get into the flow, a distraction costs energy as well as time. 
+To increase flow time, distractions have to be reduced. Certain pairs of activities are more mutually distracting that others. Fixing a bug requires flow in the old system, hence 
+distracts from flow in the new system. Sitting in meetings, 
+answering questions and time on the telephone are major distracters to design flow. Therefore the recommendation to 
+group tasks into sympathetic sets. Requirements and analysis 
+involve meetings, reading, and writing. Design and programming require concentration on the implementation technology and keeping a great number of details in the head. 
+Parallelism vs. time-slicing. Time-slicing can be more attractive 
+in terms of job satisfaction - each person will do design some part of the time. The significant time to switch between tasks 
+causes parallelism to be preferred in this case. Some of the people may adopt the new task as their profession (see SACRIFICE ONE PERSON (4.1.22), DAY CARE (4.1.23), and FIRE WALLS 
+(4.2.9) for examples). 
+Sample situations: 
+A. Concurrently gathering requirements and designing software. 
+Project Winifred tried having each person do requirements, analysis, design and programming. We thought the developers would
+ enjoy the change of activity, that this would reduce the meetings and
+ bureaucratic documentation exchanged between people. 
+ What happened was that the first two activities were so different
+ from the latter two that people were unable to switch easily between
+ them. After having attended and documented meetings for much of
+ the day, it was difficult to start working on the design and programming. As with bug-fixing / new-development, every time a designer
+ was pulled away from her or his work, it cost an additional hour to
+ recover the train of thought. 
+We applied TEAM PER TASK (4.1.21), and split the teams along task
+ lines. Requirements gathering and analysis went with designated
+ people in each team, and design and programming went with the
+ others. The result was that the requirements/analysis people sat in
+ meetings, read and wrote specs, examined interfaces and the like.
+ They communicated their findings to the designer/programmers orally, for the most part, since they were closely linked on the same
+ team (HOLISTIC DIVERSITY (4.2.19)). The designer/programmers stayed
+ in their train of thought, getting fresh input from their requirements
+ colleagues. Some of the people put onto requirements really wanted to
+ program, so this was quite a sacrifice for them (SACRIFICE ONE PERSON
+ (4.1.22)). 
+Two things we did not do. We did not put the requirements/analysis people into a separate team (HOLISTIC DIVERSITY (4.2.19) again). A
+ team was jointly responsible for a section of the system, from requirements to delivery. The splitting was within each team. We also did not
+ require the requirements group to document their decisions for the
+ designers benefit (they did document for the project’s benefit). The
+ requirements and design people were in close contact at all times, and
+ most information passed orally. There was, therefore, no “throw it
+ over the wall” effect. These were both important teaming decisions
+ made earlier, which we were intent on preserving. 
+B. Training is distracting the experts. See DAY CARE (4.1.23). 
+C. Other examples under SACRIFICE ONE PERSON (4.1.22). 
+Reading: 
+See [Csikszentmihalyi1990] and [DeMarcoLister1976]. 
+A version of this pattern first appeared in [Cockburn1998].

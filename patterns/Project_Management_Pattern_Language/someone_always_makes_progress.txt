@@ -1,0 +1,49 @@
+SOMEONE ALWAYS MAKES PROGRESS *
+ Room enough for everyone to work... 
+...non-primary tasks are dominating the team’s time, keeping it
+ from moving forward with their primary goal. There are common
+ complaints of distraction. 
+✥ ✥ ✥ 
+It is important to keep a team moving forward and to avoid getting stuck on the obstacles. You need to pay attention to every task,
+ including small diverting ones. But you also need to complete the primary task by an important date. 
+Therefore: 
+Whatever you try, ensure that someone on the team is making
+ progress on the primary task. 
+✥ ✥ ✥ 
+If you do not complete your primary task, nothing else will matter.
+ Therefore, complete that at all costs. 
+ You can employ one of a broad range of particular solutions and
+ tactics depending on the exact forces to be resolved. The following
+ specializations are example refinements of this pattern: 
+•DEVELOPING IN PAIRS (4.2.28) - one person can always take the keyboard. 
+• TEAM PER TASK (4.1.21) - separate tasks into sympathetic sets. 
+• SACRIFICE ONE PERSON (4.1.22) - assign only one person to the distraction. 
+•DAY CARE (4.1.23) - separate the training task from that of producing software. 
+But, in any case, you will always be closer to your final goal —
+ which is not always the case when dealing with distractions. 
+The psychological effect of this pattern should not be underestimated. If the project is hit with many distractions, it can be demoralizing to see work grind to a halt. However, any visible progress will
+ help the entire team stay focused, and will encourage them to get
+ through their particular crisis, so that they too can once again make
+ progress. 
+Carried too far, this pattern might lead you into trouble for not adequately addressing the distractions. But too many distractions are usually a symptom of some other problem; see, for example, FIRE WALLS
+ (4.2.9). 
+Sample situations: 
+A. Scylla and Charybdis, Atalanta. In the ancient Greek story, Odysseus had to get his ship past Scylla and Charybdis. Scylla was a six
+headed monster guaranteed to eat six crew members, but the rest
+ would survive. Charydbis was a whirlpool guaranteed to destroy the
+ entire ship. In this paradigm of the dilemma, Odysseus chose to sacrif ice six people so that the rest would get past Scylla’s cave. 
+In the Greek story of Atalanta, Atalanta was assured by the gods
+ that she would remain the fastest runner as long as she remained a
+ virgin. So she told her father, the king that she would only marry the
+ man who could beat her in a foot race. The losers were to be killed for
+ wasting her time. The successful young man was aided by a god, who
+ gave him 3 golden apples. Each time Atalanta pulled ahead, he tossed
+ an apple in front of her. While she paused to pick up the golden apple,
+ he raced ahead, and eventually won. 
+ You could interpret this story as containing the moral that Atalanta
+ should not have stopped to pick up the apples - that would also illustrate the point of this pattern. I choose to view it more metaphorically,
+ that Atalanta represents distractions trying to beat you to your
+ project’s deadline. The apples are members of your team, whom you
+ will separate from the main team one at a time to ensure success. 
+See [Csikszentmihalyi1990] and [DeMarcoLister1976]. 
+A version of this pattern first appeared in [Cockburn1998].

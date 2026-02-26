@@ -1,0 +1,164 @@
+ MERCENARY ANALYST *
+ On one of his many journeys in the Appalachian Mountains, the itinerant
+ folk song collector John Jacob Niles heard a woman singing a particularly
+ beautiful song. He persuaded her to repeat the now-famous Christmas song,
+ “I Wonder as I Wander,” until he had learned it himself. He later said, “I
+ never saw her again.” 
+... you are assembling the roles for the organization. The organization exists in a context where external reviewers, customers, and
+ internal developers expect to use project documentation to understand
+ the system architecture and its internal workings. (User documentation is considered separately). Supporting a design notation, and the
+ related project documentation, is too tedious a job for people directly
+ contributing to product artifacts. 
+✥ ✥ ✥ 
+Technical documentation is the dirty work every project must do.
+ It’s important to create—and, more so, to maintain—good documentation for subsequent use by the project itself. Who writes these documents? 
+If developers do their own documentation, it hampers “real” work.
+ Meeting software deadlines means money to the organization; tech
+ nical documentation is one of those things we tell ourself can be
+ deferred until there is time to do it. But “the time to do it” often never
+ comes, and an organization without good internal technical documentation of its system has a serious handicap. 
+Documentation is often write-only. 
+Engineers often don’t have good communication skills. 
+Many projects use tools like Rose to do design, that produce pretty
+ pictures. A good picture is not necessarily a good design, and architects can become victims of the elegance of their own drawings (see
+ the rationale below). 
+Therefore: 
+Hire a technical writer, proficient in the necessary domains, but
+ without a stake in the design itself. 
+This person will capture the design using a suitable notation, and
+ will format and publish the design for reviews and for consumption
+ by the organization itself. 
+✥ ✥ ✥ 
+The documentation itself should be maintained on-line where ever
+ possible. It must be kept up-to-date (therefore, MERCENARY ANALYST is a
+ full-time job), and should relate to customer scenarios (SCENARIOS
+ DEFINE PROBLEM (4.2.8)). Note, though, that all team members need to
+ provide input to keep the documentation up to date. The AD- HOC
+ CORRECTIONS (10.5.2) pattern [Weir1998] suggests that a master copy of
+ the documentation be kept, and that team members write corrections
+ in the margin. One team member is assigned to periodically update
+ the document. 
+The success of this pattern depends on finding a suitably skilled
+ agent to fill the role of mercenary analyst. If the pattern succeeds, the
+ new context defines a project whose progress can be reviewed (the pattern STAND UP MEETING (5.2.7)) and monitored by community experts
+ outside the project. 
+If the MERCENARY ANALYST really is a “mercenary” who “rides into
+ town, gets the early stuff documented, kisses his horse, saddles up his
+ girl, and rides off into the sunset” (Paul Chisholm), then it’s good to
+ keep some of the expertise behind by combining MERCENARY ANALYST
+ with DEVELOPING IN PAIRS (4.2.28). 
+ This pattern is uncommon but empirically grounded and effective,
+ found in Borland’s Quattro Pro for Windows and many AT&T projects
+ (a joint venture based in New Jersey, a formative organization in
+ switching support, and others). It is difficult to find people with the
+ skills to fill this role. 
+Rybczynski writes: 
+Here is another liability: beautiful drawings can become ends 
+in themselves. Often, if the drawing deceives, it is not only 
+the viewer who is enchanted but also the maker, who is the 
+victim of his own artifice. Alberti understood this danger and 
+pointed out that architects should not try to imitate painters 
+and produce lifelike drawings. The purpose of architectural 
+drawings, according to him, was merely to illustrate the relationship of the various parts... Alberti understood, as many 
+architects of today do not, that the rules of drawing and the 
+rules of building are not one and the same, and mastery of 
+the former does not ensure success in the latter. — 
+[Rybczynski1989, p. 121]. 
+A passage from Manzoni’s I Promessi Sposi (The Betrothed
+ [Manzoni1984]) might amuse the MERCENARY ANALYST. 
+The peasant who knows not how to write, and who needs to 
+write, applies to one who knows that art, choosing as far as 
+he can one of his own station, for with others he is hesitant, or 
+a little untrusting. He informs him, with more or less clarity 
+and orderliness, of who his ancestors were, and in the same 
+manner tells him what to set down on paper. The literate person understands part and guesses at the rest, gives a few 
+pieces of advice, suggests a few changes, and says “Leave it 
+to me.” 
+He picks up his pen, puts the other’s thoughts as well as he 
+can in literary form, corrects them, improves them, embellishes them, tones them down, or even omits them, according 
+to how he thinks best, because—and there’s nothing to be 
+done about it—someone who knows better than others has 
+no wish to be a mere tool in their hands, and when he is concerned with the business of others he wants it to go a little in 
+his own way. 
+ Richard Gabriel [Gabriel1995] notes the following are important
+ traits of this role: 
+• good meeting facilitator 
+• likes things organized 
+• good attention to details 
+• has written instructional material (for software) 
+• has no ego to invest in the material being documented 
+• very smart, highly educated (Ph.D. in literature from Cornell in
+ my case) 
+In exceptional cases, the MERCENARY ANALYST can actually take a
+ stake in the design. Betsy Hanes Perry writes: 
+When I fill this role, I most definitely have a stake in the 
+design: I want to make sure it’s elegant, consistent, and clean. 
+The architect has primary responsibility, of course, but I also 
+suggest places in which the design conflicts with itself or may 
+lead to future misunderstandings. As I see it, a software 
+architecture is an idea. The designer/implementors are 
+responsible for expressing that idea (or those ideas) as code; I 
+express it/them as prose. Both are projections of the idea into 
+a particular plane. When there’s a conflict, the code is probably correct. 
+Many projects put faith in tools and notations such as UML to
+ improve quality. But, as Betsy points out, the tool largely provides the
+ forum and opportunity for a human being to engage in the processes  
+ and convey the insights that contribute to quality. For documentation
+ to have added value as a quality tool, the documentation process must
+ proceed in the spirit of this admonition. 
+Paul Chisholm offers the following about the history and rationale
+ of MERCENARY ANALYST: 
+ MERCENARY ANALYST came from two sources: 
+(1) Borland’s Quattro Pro for Windows, which Cope’s identified as the most productive software development 
+organization he’s ever seen (average 1000 delivered non-commentary 
+source lines of C++ per staff week), in large part due to the 
+ fact that developers had people to write the development 
+documentation for them. 
+Designer/coders have responsibilities that cannot be delegated. Some responsibilities, such as documentation, can be 
+delegated. Besides, many excellent programmers and most 
+average ones are less than stellar writers. Richard [Gabriel] 
+may disagree that this *is* the case, and will certainly disagree that this *should* be the case... 
+(2) A combination of two patterns. One, from Tony Hansen’s 
+group, is DISPOSABLE ANALYSIS: do analysis once, translate to 
+design, throw away the analysis, keep only the design up to 
+date with the code. The other is my observation that most 
+CASE tools require significant experience in the method and 
+the tool itself. If you have DISPOSABLE ANALYSIS (which few 
+projects plan to do but many follow unintentionally), you 
+should not develop local expertise in CASE tool operation. 
+It’s bad enough learning Framemaker. CASE tools tend to 
+have lousy user interfaces; it’s a real pain to use them, or 
+learn how to use them. 
+The “mercenary” in MERCENARY ANALYST. comes from the 
+“hired gun” quality a MERCENARY ANALYST might have; rides 
+into town, gets the early stuff documented, kisses his horse, 
+saddles up his girl, and rides off into the sunset. That’s the 
+DISPOSABLE ANALYSIS model, not the Borland Quattro Pro for 
+Windows model! 
+Mercenary Analyst plays well with DEVELOPING IN PAIRS 
+(4.2.28). 
+Someone quoted by Jim Coplien wrote that “Mercenary Analyst is the professional technical writer who takes care of all 
+the project diagrams and documentation so it doesn’t get in 
+the way of the architects.” 
+Maybe not a “tech writer”, and not " all the diagrams and 
+documentation," but, yes, that’s the idea. 
+ What should be a MERCENARY ANALYST’s education? Mastery of 
+his or her tools (e.g., word processor, CASE tool) beyond that 
+of most users. Experience (perhaps expertise) in the 
+“method” behind the documentation (e.g., an ObjecTime 
+MERCENARY ANALYST would have to know ROOM well, some
+one writing requirements would need systems engineering 
+and/or software development experience). 
+What is the MERCENARY ANALYST’s motivation? To get the software 
+(not the documentation) out faster! 
+How can one paint CASE diagrams without knowledge of soft
+ware? I had some naive hope that a CASE tool MERCENARY 
+ANALYST could be a highly skilled clerk. I’ve given up on that. 
+There may be some way of combining MERCENARY ANALYST 
+with DEVELOPING IN PAIRS (4.2.28) (or a variant for triples) to 
+make MERCENARY ANALYST some sort of entry-level or apprentice position. 
+Domain Knowledge. While knowledge of the domain is impor
+tant for a project (DOMAIN EXPERTISE IN ROLES (4.2.22)) I don’t 
+think the MERCENARY ANALYST (4.1.24) needs it. (I hope not!) 
+Knowledge of software is important. Would you trust a driving 
+instruction manual written by someone who’d never driven?

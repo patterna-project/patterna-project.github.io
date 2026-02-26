@@ -1,0 +1,73 @@
+ HALLWAY CHATTER *
+ One day a friend came into my office, depressed about her project. She was
+ in a test group, and their group was essentially shut off from the rest of the
+ project. They didn’t get timely information about what was happening; they
+ didn’t hear the latest project gossip. The only people they could talk to were
+ each other. Following the anthropologist Bateson, we call this condition
+ “schismogenesis”—the creation of schisms. Her situation was the most
+ striking example I had ever seen. She went on to other projects, so I didn’t find
+ out what ever happened with the organization. I suspect the problem wasn’t
+ fixed until the project was reorganized, or until a quality crisis forced them to
+ involve the testers better. 
+...the organization has been established, and people have settled
+ into their roles. This has led to uneven communication among the
+ team members, and some members do not feel a part of the team. 
+✥ ✥ ✥ 
+If people are left out of the main communication flow, they
+ become dissatisfied, gripe among themselves, and may even leave
+ the project. And by the way, they can’t do their jobs as well. 
+When people become disengaged from communication networks,
+ they can feel alienated from the community. They sometimes commiserate with others in the same situation, forming alliances with others
+ who are equally distant from the center of the community. This phe
+ nomenon was first observed by Bateson in the Sepik tribes in New
+ Guinea, and was named “schmismogenesis.” [Bateson1958] 
+The following interaction grid (see SOCIAL NETWORK THEORY FOUNDATIONS (7.5.2)) shows an organization exhibiting schismogenesis. One
+ can see interactions along, but not on, the diagonal. These are best
+ explained as “comfort groups” that differentiate themselves according
+ to their shared centrality (or relative lack thereof) with respect to the
+ organizational structure. See THE OPEN CLOSED PRINCIPLE OF TEAMS
+ (6.1.4) for more on schismogenesis. 
+For any given role, there is a certain amount of information which is
+ formally required for that role to be fulfilled. But this is usually insufficient for optimal efficiency; we tend to do better when we have contextual information as well as essential information. 
+But the hard thing is knowing what that additional information is.
+ It’s elusive: for example, a project might be officially on schedule, but
+ the developers are murmuring among themselves that development
+ isn’t going so well. There is nothing concrete to put one’s finger on, but
+ something isn’t quite right. This is important information if you are
+ the tester waiting for delivery. 
+Therefore: 
+Organizational Style Pattern Language
+ 271
+ Move team members physically as close to each other as possible.
+ Be sure that people with outer roles are located close to the central
+ roles. 
+Thomas Allen [Allen1977] gives guidelines for physical distance. 
+Of course, some projects, for various reasons, are split geographically. This can lead to exactly this problem unless ORGANIZATION FOLLOWS LOCATION (5.1.8) and CONWAY’S LAW (5.1.7) are followed. 
+Note that it is a misapplication of this pattern to apply it to only a
+ subset of an organization responsible for a project. If for example, one
+ clusters all the developers together in a “developer’s ghetto”, and forgets System Test or Marketing, you violate ENGAGE QUALITY ASSURANCE
+ (4.2.29) and ENGAGE CUSTOMERS (4.2.6). And you actually create, rather
+ than alleviate schismogenesis. In addition, communication with individuals outside the project is also important. Allen [Allen1977] points
+ out that the high performers had significantly more communication
+ outside the project than low performers. See THE WATER COOLER (5.1.20)
+ for additional ways to encourage communication, particularly outside
+ the project. 
+✥ ✥ ✥ 
+ The pattern complements DIVIDE AND CONQUER (5.1.6) both by
+ encouraging symmetries within local groups, and establishing pathways between groups. 
+There are two complementary effects of this action. First, the people
+ in the outer roles feel like they are a part of the project, and their
+ morale improves. They are less likely to gripe about the project with
+ other outsiders because they are no longer outsiders. The second thing
+ that happens is that they pick up more technical information through
+ informal means, such as the chatter in the hallways, and they can do
+ their jobs better. This secondary effect is the generative nature of this
+ pattern: As communication improves quality and time-to-market are
+ improved, which tends to reduce the number of people needed for the
+ project, which reduces communication overhead, which helps
+ improve communication, and so on. 
+An organization consists of both roles and the people who fill those
+ roles. Both must be considered. While most of the patterns in this language address one or the other, this pattern is unusual in that it
+ bridges the two. 
+A PUBLIC CHARACTER (4.2.17) such as a MATRON ROLE (4.2.18) or GATE
+ KEEPER (4.2.10) can be a catalyst for HALLWAY CHATTER.

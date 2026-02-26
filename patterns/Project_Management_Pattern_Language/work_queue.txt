@@ -1,0 +1,40 @@
+WORK QUEUE *
+ ...IMPLIED REQUIREMENTS (4.1.16) suggest deliverable program
+ enhancements which will have various necessities, dependencies,
+ risks and rewards. Deliverables may be ill-defined, being represented
+ more by a vision or desire than by anything concrete or measurable. 
+✥ ✥ ✥ 
+It is difficult to do linear, monochronic scheduling in light of
+ IMPLIED REQUIREMENTS. 
+If we were to work up a conventional schedule we would probably
+ begin with a block of requirements analysis for each item. From these
+ would be hung blocks of specification, design, implementation and
+ eventually integration and testing. Add to this some wild guesses and
+ a few ordering constraints and, presto, thirty feet of diagram saying
+ what will be finished when and by whom. Such a document takes on a
+ life of its own striking fear in developer’s hearts and generally distracting everyone else from the real scheduling task which is to get
+ better input, not larger output. 
+Therefore: 
+ Produce a schedule that is simply a prioritized list of work. Use
+ the list of IMPLIED REQUIREMENTS (4.1.16) (really just names) as a
+ starting point and order them into a likely implementation order
+ favoring the more urgent or higher priority items. When work can be
+ factored from two or more entries, go ahead and do so giving the
+ common element a name that establishes its worth and implies its
+ implementation precedence. 
+✥ ✥ ✥ 
+Example: 
+1. Settlement-Date Positions 
+2. Settlement-Date Based Tax Reports 
+3. Trade vs. Settlement Accounting Preference by Portfolio 
+Be prepared to reorder this list as unforeseen interactions surface or
+ business realities demand new priorities. Remove work from the list as
+ it is completed. Observed defects is not enough to return completed
+ work to the list. However, independently scheduled repair activity
+ may uncover omissions that are more appropriately removed from
+ defect tracking and scheduled in competition with all of the other
+ work on the WORK QUEUE (4.1.13). 
+A version of this pattern first appeared in [Cunningham1996]. The
+ pattern is similar to the later SCRUM pattern “Backlog” [Beedle1999,
+ 643-644], which is summarized in [Rising2000, 146]: 
+To organize the work remaining on a project, maintain a prioritized list, the Backlog. The list is dynamic and updated at the end of each Sprint. 

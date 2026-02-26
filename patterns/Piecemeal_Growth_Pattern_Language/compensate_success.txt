@@ -1,0 +1,124 @@
+COMPENSATE SUCCESS **
+ When I was in fourth grade (about 9 years old), we had a spelling test
+ every Friday. Our teacher told us that if everyone got a perfect score on a
+ spelling test, she would bring each of us a candy bar the following Monday.
+ We were excited about the prospect, but as time went on, it seemed that it
+ might never happen. There were always some who just couldn’t seem to spell.
+ Jimmy was probably the worst speller of all. He typically missed about half the
+ words. There was no hope with him in the class. 
+But one week the words were particularly easy. In the practice test on
+ Wednesday, everyone except Jimmy got all the words right. And Jimmy
+ missed only four words. The anticipation in the class was electric, as we all
+ gave special help and encouragement to Jimmy. On Friday, when everyone
+ got a perfect score, it was hard to tell whether we were more excited about the
+ upcoming candy bar or for Jimmy’s success. 
+...a group of developers is striving to meet tight schedules in a high
+payoff market. It is important to reward individuals in a way that
+ motivates them to do things that achieve business objectives in line
+ with the value system of the enterprise. 
+✥ ✥ ✥ 
+Successful projects remain successful by rewarding behaviors
+ that lead to success. 
+ Schedule motivations tend to be self-fulfilling: a wide range of
+ schedules may be perceived as equally applicable for a given task.
+ And schedules are poor motivators. 
+Some organizations count on altruism, but altruism and egoless
+ teams are quaint, Victorian notions. 
+Companies often embark on make-or-break projects, and such
+ projects should be managed differently from others. 
+You need both to reward teams and outstanding individuals. Yet
+ disparate rewards motivate those who receive them, but may frustrate
+ their peers. 
+You need both to reward solid workers and risk-takers; yet from an
+ economic perspective, you need to manage the risk of any investment
+ into speculative work. And if speculative work fails, and the contributors are rewarded according to performance, it will disincent the organization from embarking on future risk-taking projects. 
+Some contributions are difficult to quantify, such as those of THE CATALYST (see Peopleware by De Marco and Lister) who facilitates
+ communication between team members and perhaps helps morale. 
+Therefore: 
+Establish lavish rewards for individuals contributing to successful make-or-break projects. The entire team (social unit) should
+ receive comparable rewards, to avoid de-motivating individuals who
+ might assess their value by their salary relative to their peers. “Very
+ special” individuals might receive exceptional awards that are tied les
+ strongly to team performance. 
+A celebration is a particularly effective reward
+ [ZuckermanAndHatala1992]. 
+✥ ✥ ✥ 
+As a result, you get an organization that focuses less on schedule
+ (but see SIZE THE SCHEDULE (4.1.2)) and more on customer satisfaction
+ and systemic success. 
+In most enterprises you do not want to reward risk-taking in a way
+ that encourages people to take risks that don’t serve the long-term viability of the enterprise. The reward should always be more focused on
+ meeting the organization’s goals than on how the goals are met. If the
+ organization’s job is to produce a product, then reward people for
+ what they do in support of delivering the product. Sometimes this
+ includes an element of risk-taking, and to that degree risk-taking
+ should be rewarded. However, you want to remove obstacles to risktaking. That will allow people to take appropriate risks motivated by
+ meeting organizational objectives, rather than for the sake of having
+ taken a risk. See more about this in the pattern SKUNK WORKS (4.2.14). 
+Similarly, most software development organizations shouldn’t
+ encourage people to seek crisis situations as opportunities for the contributions that will receive the highest reward. That almost guarantees
+ that the project will become crisis driven. There are some jobs that are
+ legitimately built around a hero culture, such as (real-world) fire fighters and their figurative namesakes inside software projects, but
+ these are the exception rather than the rule. Be sure to reward what the
+ organization values, knowing that people will tend to do what they
+ are rewarded to do. 
+Similarly, it can be problematic to reward those who work for the
+ sake of the work ethic alone. Reward working smart more than
+ working hard; there should be no prize for the most hours worked.
+ Paul Bramble relates: 
+Working for stock options that could be expected to turn into 
+$12 million was a horrible experience. And having peers with 
+similar expectations only made it worse. It clouded their 
+judgment and they stopped using DOMAIN EXPERTISE IN ROLES 
+(4.2.22). Instead, they started giving the more difficult assign
+ments to the perceived “gung-ho” crowd rather than to the 
+people most likely to be able to do them. ... Some of the fanatics were regularly working 80-hour weeks and used the 
+reward system as leverage to exact punishment against those 
+who tried to work reasonable hours and balance work and 
+family life. 
+The liability of high rewards for meeting key corporate objectives is
+ that people who take on those responsibilities can over-extend them
+selves, leading to personal stress with potential risk to the project. This
+ is particularly problematic for rewards to management staff who run
+ the risk of developing a burnout culture in their subordinates to meet
+ the objectives (see “The Psychology of Burnout” in THE OPEN CLOSED PRINCIPLE OF TEAMS (6.1.4)). 
+There are factors that lead to success that are difficult to measure or
+ even identify, so it’s best to orient the rewards around the organiza
+ tion’s shared value system of what is important to achieve. Scoping
+ the concern of “organization” in this context is key to the long-term
+ success of the enterprise; a closed group can’t sustain values that are
+ inconsistent with those of the enclosing organization or the next
+ higher level of management. 
+Success makes it possible to build up the work environment infrastructure, making it a more attractive place to work. This is a form of
+ long-term compensation or of recognition of success and is particularly important in team settings. In one organization we used windfall
+ funds to buy an interactive terminal which, in that era (about 1974)
+ was a treat for the staff. On a broader scale you can buy an espresso
+ machine (for which Bell Labs computer science research was famous),
+ just a coffee machine, or a water cooler—or build an entire culture of
+ food. See the pattern THE WATER COOLER (5.1.20). 
+High rewards to some individuals may still de-motivate their peers,
+ but rewarding on a team basis helps remove the “personal” aspect of
+ this problem, and helps establish the mechanism as a motivator, in
+ addition to being just a postmortem soother. On the other hand, see
+ the discussion in THE ROLE OF MANAGEMENT (6.3.7) that puts individual
+ contributions in a broader perspective: are individual successes really
+ just team success in misleading packaging? 
+The grounding for this pattern is empirical. There is a strong correlation between wildly successful software projects, and a lucrative
+ reward structure. Cases include QPW, cases cited at the Risk Derivatives Conference in New York on 6 May 1994; see Pay and Organization
+ Development, by Edward E. Lawler, Addison-Wesley, 1981. The place of
+ reward mechanisms is well-established in the literature
+ [Kilmann1984]. 
+Dennis DeBruler noted at the PLoP review of this pattern, that most
+ contemporary organization culture derives from the industrial complex of the 1800s, which was patterned after the only working model
+ available at the time: military management. (One common model of
+ military management is: REWARD INDIVIDUALLY PUNISH CORPORATELY,
+ which leads to fear of failing and resentment towards those who fail.)
+ He notes that most American reward mechanisms are geared more
+ toward weeding out problems than toward encouraging solutions. A
+ good working model is that of groups of doctors and lawyers, where
+ managers are paid less than the employees. 
+ Paul Bramble adds, “The trick is to be discerning—sometimes it’s
+ the quiet plodders who generate the success, and you have to be able
+ to see past the self-promoting employees to see who really gets the
+ work done.” 
+See also COMPENSATE RESULTS [Beedle1997].
