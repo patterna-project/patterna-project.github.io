@@ -1,0 +1,772 @@
+    <!DOCTYPE html>
+    <html lang="sk">
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Patterna</title>
+        <link rel="stylesheet" href="styles.css">
+        <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
+        <!-- Tailwind CSS -->
+        <script src="https://cdn.tailwindcss.com"></script>
+        <!-- TensorFlow.js for NLP -->
+        <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.18.0/dist/tf.min.js"></script>
+        <!-- Universal Sentence Encoder -->
+        <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/universal-sentence-encoder@1.3.3/dist/universal-sentence-encoder.min.js"></script>
+        <!-- SortableJS for drag-and-drop -->
+        <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+        <!-- jsPDF pre PDF export -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+        <!-- html2canvas pre PNG export -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+        <!-- D3.js pre force-directed graph -->
+        <script src="https://d3js.org/d3.v7.min.js"></script>
+
+    </head>
+    <body class="flex flex-col min-h-screen text-gray-800">
+        <!-- Navbar -->
+        <nav id="mainNav"
+            class="fixed top-0 w-full z-50 bg-indigo-600 text-white py-4 px-4 md:px-0 shadow-md transition-all duration-300">
+            <div class="container mx-auto flex justify-between items-center">
+                <a href="index.html" class="flex items-center relative">
+                    <img src="assets/images/logo.png" alt="Patterna Logo" class="h-12 w-auto" id="mainLogo">
+                    <!-- Moon icon -->
+                    <img src="assets/images/moon.png" alt="Moon" class="moon-icon" id="moonIcon">
+                </a>
+
+                <div class="flex items-center">
+                    <button id="darkModeToggle" class="mr-4 p-2 rounded-full hover:bg-indigo-700">
+                        <svg id="darkIcon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                        </svg>
+                        <svg id="lightIcon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                    </button>
+
+
+                    <div class="relative inline-block text-left">
+                        <button id="languageToggle"
+                            class="bg-white text-indigo-600 px-4 py-2 rounded-lg mr-2 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 flex items-center">
+                            <img src="assets/images/slovak.png" alt="Slovak" class="w-5 h-5">
+                        </button>
+                    
+                    
+                    </div>
+
+                    <div class="relative inline-block text-left">
+                        <button id="examplesToggle"
+                            class="bg-white text-indigo-600 px-4 py-2 rounded-lg mr-2 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                            aria-haspopup="true" aria-expanded="false">
+                            Príklady
+                            <svg class="inline-block ml-1 h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.27a.75.75 0 01.02-1.06z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </button>
+
+                        
+
+                        <ul id="examplesMenu" class="origin-top absolute left-1/2 transform -translate-x-1/2 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5
+                                                        divide-y divide-gray-100 focus:outline-none hidden z-20">
+                            <li class="px-4 py-2 text-gray-700 font-semibold">Vyberte príklad:</li>
+                            <li>
+                                <button class="w-full text-left px-4 py-2 hover:bg-indigo-100" data-index="0">
+                                    A
+                                </button>
+                            </li>
+                            <li>
+                                <button class="w-full text-left px-4 py-2 hover:bg-indigo-100" data-index="1">
+                                    B
+                                </button>
+                            </li>
+                            <li>
+                                <button class="w-full text-left px-4 py-2 hover:bg-indigo-100" data-index="2">
+                                    C
+                                </button>
+                            </li>
+                            <li>
+                                <button class="w-full text-left px-4 py-2 hover:bg-indigo-100" data-index="3">D</button>
+                            </li>
+                            <li>
+                                <button class="w-full text-left px-4 py-2 hover:bg-indigo-100" data-index="4">E</button>
+                            </li>
+                        </ul>
+                    </div>
+                    <button id="loadCatalogBtn"
+                        class="bg-white text-indigo-600 px-4 py-2 rounded-lg mr-2 hover:bg-gray-200 flex items-center">
+                        Nahrať katalóg ➕
+                    </button>
+                    <button id="clearBtn" class="bg-red-500 px-4 py-2 rounded-lg hover:bg-red-600">
+                        Vymazať 🗑️
+                    </button>
+                </div>
+                <input type="file" id="fileInput" accept=".txt" class="hidden" />
+            </div>
+        </nav>
+
+        <!-- Main -->
+        <main class="flex-grow container mx-auto p-6">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
+            <section class="col-span-2 bg-white rounded-2xl shadow p-6 dark:bg-gray-800">
+                <div class="flex flex-wrap items-center gap-2 mb-4">
+                    <h2 class="text-lg font-semibold mr-4">Vyber vzory</h2>
+            
+                    <div id="catalogButtonsContainer" class="flex flex-wrap gap-2">
+                        <button id="coplienBtn" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+                            C & H
+                        </button>
+                    </div>
+                </div>
+            
+                <div id="patternCheckboxes"
+                    class="grid grid-cols-1 md:grid-cols-2 gap-2 max-h-64 overflow-y-auto p-2 border border-gray-300 rounded-lg dark:border-gray-600">
+                    <!-- Checkboxy sa naplnia dynamicky JS -->
+                </div>
+            
+                <div id="loadingIndicator" class="hidden mt-4">
+                    <div class="loading-bar">
+                        <div class="loading-progress"></div>
+                    </div>
+                    <p class="text-sm text-center mt-2 dark:text-gray-400"></p>
+                </div>
+            
+                <div class="flex items-center gap-4 mt-6">
+                    <!-- Tlačidlo Generovať + rozbaľovacie parametre ako jeden celok -->
+                    <div class="flex items-center">
+                        <!-- Tlačidlo Generovať -->
+                        <button id="generateBtn" 
+                            class="bg-indigo-600 text-white px-6 py-2 rounded-l-2xl hover:bg-indigo-700 transition flex-shrink-0">
+                            Generovať sekvenciu
+                        </button>
+
+                        <!-- Tlačidlo na rozbalenie/zbalenie (pripojené k generateBtn) -->
+                        <button id="toggleParamsBtn" 
+                            class="bg-indigo-600 text-white px-3 py-2 rounded-r-2xl hover:bg-indigo-700 transition flex items-center border-l border-indigo-500 h-full">
+                            <svg id="paramsArrow" class="w-4 h-4 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- Samotné parametre - teraz priamo napojené na tlačidlo -->
+                    <div id="paramsContainer" 
+                        class="flex items-center gap-3 p-2 rounded-lg transition-all duration-300 overflow-hidden">
+                        <div class="flex items-center gap-1 group relative">
+                            <label for="gammaInput" class="text-xs font-medium whitespace-nowrap">γ:</label>
+                            <input type="number" id="gammaInput" min="0" max="1" step="0.05" value="0.9"
+                                class="w-16 px-2 py-1 text-xs border rounded"
+                                >
+                        </div>
+
+                        <div class="flex items-center gap-1 group relative">
+                            <label for="goalRewardInput" class="text-xs font-medium whitespace-nowrap">R(cieľ):</label>
+                            <input type="number" id="goalRewardInput" min="0" step="1" value="10"
+                                class="w-16 px-2 py-1 text-xs border rounded"
+                                >
+                        </div>
+
+                        <div class="flex items-center gap-1 group relative">
+                            <label for="otherRewardInput" class="text-xs font-medium whitespace-nowrap">R(ostatné):</label>
+                            <input type="number" id="otherRewardInput" min="0" step="0.1" value="1"
+                                class="w-16 px-2 py-1 text-xs border rounded"
+                                >
+                        </div>
+
+                        <div class="flex items-center gap-1 group relative">
+                            <label for="epsilonInput" class="text-xs font-medium whitespace-nowrap">ε:</label>
+                            <input type="number" id="epsilonInput" min="0.0001" max="1" step="0.001" value="0.1"
+                                class="w-20 px-2 py-1 text-xs border rounded" 
+                                >
+                        </div>
+                    </div>
+
+                    <!-- Loading bar -->
+                    <div id="loadingIndicatorBtn" class="hidden flex-1 min-w-[200px] max-w-sm">
+                        <div class="flex items-center gap-3">
+                            <div class="flex-1 bg-gray-200 rounded-full h-2 dark:bg-gray-700">
+                                <div id="loadingProgress" class="bg-green-500 h-2 rounded-full transition-all duration-300 ease-in-out" style="width: 0%"></div>
+                            </div>
+                            <span id="loadingText" class="text-sm text-gray-600 dark:text-gray-400 whitespace-nowrap">Spúšťam analýzu...</span>
+                        </div>
+                    </div>
+                </div>
+
+                
+            
+                <div id="similarityInfo" class="mt-6 p-4 bg-blue-50 rounded-lg dark:bg-blue-900 dark:bg-opacity-30 hidden">
+                    <div id="similarityMatrix" class="text-sm overflow-x-auto"></div>
+                </div>
+                 
+                <div id="mdpSolution" class="mt-6 p-4 bg-blue-50 rounded-lg dark:bg-blue-900 dark:bg-opacity-30 hidden">
+                    <h3 class="font-medium mb-4 text-gray-800 dark:text-white">Postup riešenia Markov Decision Process (MDP):</h3>
+                    <div id="mdpSteps" class="text-sm space-y-4 overflow-x-auto"></div>
+                </div>
+            </section>
+        
+                <!-- Suggestions / Export -->
+                <section id="suggestionsSection" class="col-span-1 bg-white rounded-2xl shadow p-6 hidden dark:bg-gray-800">
+                    <div class="flex justify-between items-center mb-3">
+                        <div class="flex items-center gap-2">
+                            <h2 class="text-lg font-semibold">Navrhnutá sekvencia</h2>
+                            <span id="patternCount"
+                                class="bg-indigo-100 text-indigo-800 text-xs font-medium px-2 py-1 rounded-full dark:bg-indigo-900 dark:text-indigo-300">
+                                <!-- Počet vzorov sa doplní dynamicky -->
+                            </span>
+                        </div>
+                        <div class="flex gap-2">
+                            <button id="resetSequenceBtn"
+                                class="bg-gray-500 text-white p-2 rounded-lg hover:bg-gray-600 transition hidden"
+                                title="Resetovať na pôvodné poradie">
+                                🔄
+                            </button>
+                            <button id="copySequenceBtn" class="bg-blue-600 text-white p-2 rounded-lg hover:bg-blue-700 transition"
+                                title="Kopírovať sekvenciu">
+                                📋
+                            </button>
+                        </div>
+                    </div>
+
+                    <p class="text-sm text-gray-600 mb-4 dark:text-gray-400">Pretiahni vzory pre úpravu poradia.</p>
+                    <ul id="patternsList" class="flex flex-col gap-3 min-h-[240px]"></ul>
+
+                    <!-- Export button with dropdown -->
+                    <div class="mt-6 flex relative">
+                        <button id="exportBtn"
+                            class="flex-1 bg-green-600 text-white px-5 py-2 rounded-l-2xl hover:bg-green-700 transition text-center">
+                            Exportovať (.txt)
+                        </button>
+                        <button id="exportDropdownBtn"
+                            class="bg-green-600 text-white px-3 py-2 rounded-r-2xl hover:bg-green-700 transition border-l border-green-500">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                        <div id="exportDropdown"
+                            class="absolute mt-1 w-32 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 hidden z-50"
+                            style="transform: translateY(3rem); right: 0;">
+                            <button class="export-option w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-t-lg"
+                                data-format="txt">
+                                .txt
+                            </button>
+                            <button class="export-option w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
+                                data-format="pdf">
+                                .pdf
+                            </button>
+                            <button class="export-option w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-b-lg"
+                                data-format="csv">
+                                .csv
+                            </button>
+                            <button class="export-option w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-b-lg"
+                                data-format="png">
+                                .png
+                            </button>
+                            
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <!-- Footer -->
+        <footer class="bg-gray-50 border-t border-gray-200 dark:bg-gray-800 dark:border-gray-700 relative">
+            <div class="container mx-auto px-6 py-12 max-w-7xl">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mx-auto" style="max-width: 1200px;">
+                    <!-- Links Section -->
+                    <div class="space-y-4">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200">Rýchle odkazy</h3>
+                        <ul class="space-y-2">
+                            <li><a href="#" id="aboutLink"
+                                    class="text-gray-600 hover:text-indigo-600 dark:text-gray-400 dark:hover:text-indigo-400 transition-colors">O
+                                    projekte</a></li>
+                            <li><a href="#" id="docsLink"
+                                    class="text-gray-600 hover:text-indigo-600 dark:text-gray-400 dark:hover:text-indigo-400 transition-colors">Dokumentácia</a>
+                            </li>
+                            <li><a href="#" id="faqLink"
+                                    class="text-gray-600 hover:text-indigo-600 dark:text-gray-400 dark:hover:text-indigo-400 transition-colors">Časté
+                                    otázky</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Contact Section -->
+                    <div class="space-y-4">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200">Kontakt</h3>
+                        <div class="text-gray-600 dark:text-gray-400">
+                            <div class="flex items-center mb-4">
+                                <a href="https://www.fiit.stuba.sk/" target="_blank" rel="noopener noreferrer"
+                                    class="inline-flex items-center hover:opacity-80 transition-opacity">
+                                    <img src="assets/images/fiitlogo.png" alt="FIIT STU Logo" class="h-10 w-auto mr-2">
+                                </a>
+                                <a href="https://www.google.com/maps/place/Fakulta+informačných+technológií+STU+v+Bratislave/@48.1535953,17.0722677,17z/data=!3m1!4b1!4m6!3m5!1s0x476c89571171e1a5:0x3e9e6b1a8a1a3b1d!8m2!3d48.1535917!4d17.0748426!16s%2Fm%2F0h3x9f9?entry=ttu"
+                                    target="_blank" rel="noopener noreferrer"
+                                    class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
+                                    Ilkovičova 2, 842 16 Bratislava
+                                </a>
+                            </div>
+                            <p class="mb-2">Email: <a
+                                    href="mailto:xdrengubiak@stuba.sk?subject=Patterna%20Support&body=Dear%20Patterna%20Team,"
+                                    class="text-indigo-600 hover:text-indigo-700 dark:text-indigo-400">xdrengubiak@stuba.sk</a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Social/Follow Section -->
+                    <div class="space-y-4 text-center md:text-left"> 
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200">Zdrojový kód</h3>
+                        <div class="flex justify-center space-x-4">
+                            <a href="https://github.com/patterna-project" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            class="text-gray-600 hover:text-indigo-600 dark:text-gray-400 dark:hover:text-indigo-400 transition-colors">
+                                <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path fill-rule="evenodd"
+                                        d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Copyright Notice -->
+            <div class="border-t border-gray-200 dark:border-gray-700 text-center">
+                <p class="text-sm text-gray-600 dark:text-gray-400">
+                    © 2026 FIIT STU • Všetky práva vyhradené.
+                    •
+                    <a href="#" id="Termslink" class="text-indigo-600 hover:text-indigo-700 dark:text-indigo-400">Podmienky používania</a>
+                </p>
+            </div>
+        </footer>
+
+
+        <!-- About Project Modal -->
+        <div id="aboutModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+                <div class="p-6">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-2xl font-bold text-gray-800 dark:text-white">O projekte Patterna</h3>
+                        <button id="closeAboutModal" class="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M6 18L18 6M6 6l12 12">
+                                </path>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="mt-6 space-y-6 text-gray-600 dark:text-gray-300">
+                        <div class="bg-blue-50 dark:bg-blue-900/30 p-4 rounded-lg">
+                            <h4 class="font-semibold text-lg text-gray-800 dark:text-white mb-2">Bakalársky projekt</h4>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Študent</p>
+                                    <p>Ondrej Drengubiak</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Vedúci</p>
+                                    <p>Ing. Viktor Matovič, PhD.</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Rok</p>
+                                    <p>2025/2026</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Študijný program</p>
+                                    <p id="informaticsValue">Informatika</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 class="font-semibold text-gray-800 dark:text-gray-200">Popis projektu</h4>
+                            <p class="mt-2">
+                                Cieľom projektu je vytvoriť metódu pre analýzu textových opisov organizačných vzorov a
+                                generovanie sekvencií na základe protichodných síl medzi nimi. Aplikácia využíva pokročilé
+                                techniky spracovania prirodzeného jazyka na identifikáciu vzťahov medzi vzormi.
+                            </p>
+                        </div>
+
+                        <div>
+                            <h4 class="font-semibold text-gray-800 dark:text-gray-200">Kľúčové aspekty</h4>
+                            <ul class="list-disc pl-5 space-y-2 mt-2">
+                                <li>Kvantifikácia implicitných vzťahov medzi organizačnými vzormi</li>
+                                <li>Analýza protichodných síl v textových opisoch</li>
+                                <li>Generovanie optimálnych sekvencií vzorov</li>
+                                <li>Webové rozhranie pre interaktívnu analýzu</li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h4 class="font-semibold text-gray-800 dark:text-gray-200">Výskumné zdroje</h4>
+                            <div class="mt-2 space-y-2">
+                                <a href="https://ieeexplore.ieee.org/document/6910406" target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="text-indigo-600 hover:text-indigo-800 dark:text-indigo-400 dark:hover:text-indigo-300 flex items-start">
+                                    <svg class="w-4 h-4 mt-1 mr-2 flex-shrink-0" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1">
+                                        </path>
+                                    </svg>
+                                    <span>Článok o používaní podobnosti medzi opismi vzorov</span>
+                                </a>
+                                <a href="https://ieeexplore.ieee.org/document/5611523" target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="text-indigo-600 hover:text-indigo-800 dark:text-indigo-400 dark:hover:text-indigo-300 flex items-start">
+                                    <svg class="w-4 h-4 mt-1 mr-2 flex-shrink-0" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1">
+                                        </path>
+                                    </svg>
+                                    <span>Techniky analýzy podobnosti textových opisov</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="pt-4 border-t border-gray-200 dark:border-gray-700">
+                            <p class="text-sm text-gray-500 dark:text-gray-400 text-center">
+                                FIIT STU Bratislava | Ústav informatiky a softvérového inžinierstva | Verzia 1.0.0
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FAQ Modal -->
+        <div id="faqModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+                <div class="p-6">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-2xl font-bold text-gray-800 dark:text-white">Často kladené otázky</h3>
+                        <button id="closeFaqModal" class="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M6 18L18 6M6 6l12 12">
+                                </path>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="mt-6 space-y-6 text-gray-600 dark:text-gray-300">
+                        <div class="space-y-4">
+                            <!-- FAQ Item 1 -->
+                            <div class="border-b border-gray-200 dark:border-gray-700 pb-4">
+                                <button
+                                    class="faq-question flex justify-between items-center w-full text-left font-medium text-gray-800 dark:text-gray-200 hover:text-indigo-600 dark:hover:text-indigo-400">
+                                    <span>Ako funguje analýza organizačných vzorov?</span>
+                                    <svg class="w-5 h-5 transform transition-transform duration-200" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </button>
+                                <div class="faq-answer mt-2 hidden">
+                                    <p class="text-gray-600 dark:text-gray-300">
+                                        Aplikácia využíva kombináciu NLP (spracovanie prirodzeného jazyka) a pravidiel na
+                                        identifikáciu kľúčových organizačných vzorov v texte. Analyzuje vzťahy medzi vzormi
+                                        a
+                                        navrhuje optimálne sekvencie na základe protichodných síl.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- FAQ Item 2 -->
+                            <div class="border-b border-gray-200 dark:border-gray-700 pb-4">
+                                <button
+                                    class="faq-question flex justify-between items-center w-full text-left font-medium text-gray-800 dark:text-gray-200 hover:text-indigo-600 dark:hover:text-indigo-400">
+                                    <span>Aké typy súborov môžem nahrať na analýzu?</span>
+                                    <svg class="w-5 h-5 transform transition-transform duration-200" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </button>
+                                <div class="faq-answer mt-2 hidden">
+                                    <p class="text-gray-600 dark:text-gray-300">
+                                        Momentálne podporujeme iba textové súbory (.txt). V budúcnosti plánujeme pridať
+                                        podporu
+                                        pre PDF a DOCX formáty.
+                                    </p>
+                                </div>
+                            </div>
+
+                        <!-- FAQ Item 3 -->
+                        <div class="border-b border-gray-200 dark:border-gray-700 pb-4">
+                            <button
+                                class="faq-question flex justify-between items-center w-full text-left font-medium text-gray-800 dark:text-gray-200 hover:text-indigo-600 dark:hover:text-indigo-400">
+                                <span>Aký je rozdiel medzi jednoduchou a pokročilou analýzou?</span>
+                                <svg class="w-5 h-5 transform transition-transform duration-200" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+                            <div class="faq-answer mt-2 hidden">
+                                <p class="text-gray-600 dark:text-gray-300">
+                                    Jednoduchá analýza využíva základné porovnávanie vzorov, zatiaľ čo pokročilá analýza
+                                    pracuje s explicitnou maticou podobností medzi vzormi a využíva Markovove reťazce
+                                    na generovanie optimálnych sekvencií na základe pravdepodobnostných prechodov medzi vzormi.
+                                </p>
+                            </div>
+                        </div>
+
+                            <!-- FAQ Item 4 -->
+                            <div class="border-b border-gray-200 dark:border-gray-700 pb-4">
+                                <button
+                                    class="faq-question flex justify-between items-center w-full text-left font-medium text-gray-800 dark:text-gray-200 hover:text-indigo-600 dark:hover:text-indigo-400">
+                                    <span>Môžem pridať vlastné organizačné vzory?</span>
+                                    <svg class="w-5 h-5 transform transition-transform duration-200" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </button>
+                                <div class="faq-answer mt-2 hidden">
+                                    <p class="text-gray-600 dark:text-gray-300">
+                                    Áno, pomocou tlačidla "Nahrať katalóg" môžete nahrať vlastný katalóg vzorov.
+                                    Vyberte priečinok s txt súbormi, kde každý súbor predstavuje jeden vzor.
+                                    Váš katalóg sa potom zobrazí ako nová karta vedľa štandardného C & H katalógu.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- FAQ Item 5 -->
+                            <div class="border-b border-gray-200 dark:border-gray-700 pb-4">
+                                <button
+                                    class="faq-question flex justify-between items-center w-full text-left font-medium text-gray-800 dark:text-gray-200 hover:text-indigo-600 dark:hover:text-indigo-400">
+                                    <span>Ako môžem exportovať výsledky analýzy?</span>
+                                    <svg class="w-5 h-5 transform transition-transform duration-200" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </button>
+                                <div class="faq-answer mt-2 hidden">
+                                    <p class="text-gray-600 dark:text-gray-300">
+                                        Po dokončení analýzy kliknite na tlačidlo "Exportovať (.txt)" v sekcii navrhovaných
+                                        sekvencií.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- FAQ Item 5 -->
+                        <div class="border-b border-gray-200 dark:border-gray-700 pb-4">
+                            
+                            <button
+                                class="faq-question flex justify-between items-center w-full text-left font-medium text-gray-800 dark:text-gray-200 hover:text-indigo-600 dark:hover:text-indigo-400">
+                                <span>Môžem upraviť navrhnutú sekvenciu vzorov?</span>
+                                <svg class="w-5 h-5 transform transition-transform duration-200" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+                            <div class="faq-answer mt-2 hidden">
+                                <p class="text-gray-600 dark:text-gray-300">
+                                    Áno, po vygenerovaní sekvencie môžete vzory jednoducho pretiahnuť myšou a zmeniť ich poradie.
+                                    Systém zachová vaše úpravy a môžete exportovať finálnu sekvenciu vo vašom preferovanom poradí.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="pb-4">
+                            <p id="faqHelpText" class="text-sm text-gray-500 dark:text-gray-400">
+                                Potrebujete ďalšiu pomoc? Kontaktujte nás na <a href="mailto:xdrengubiak@stuba.sk"
+                                    class="text-indigo-600 dark:text-indigo-400">xdrengubiak@stuba.sk</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Terms of Use Modal -->
+        <div id="termsModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+                <div class="p-6">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-2xl font-bold text-gray-800 dark:text-white">Podmienky používania</h3>
+                        <button id="closeTermsModal" class="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="mt-6 space-y-6 text-gray-600 dark:text-gray-300">
+                        <!-- Section 1 -->
+                        <div class="border-b border-gray-200 dark:border-gray-700 pb-4">
+                            <button
+                                class="terms-question flex justify-between items-center w-full text-left font-medium text-gray-800 dark:text-gray-200 hover:text-indigo-600 dark:hover:text-indigo-400">
+                                <span>1. Všeobecné podmienky</span>
+                                <svg class="w-5 h-5 transform transition-transform duration-200" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+                            <div class="terms-answer mt-2 hidden">
+                                <p>
+                                    Táto webová aplikácia je poskytovaná ako služba bez akýchkoľvek záruk. Používateľ
+                                    súhlasí s
+                                    tým, že
+                                    používa aplikáciu na vlastné riziko.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Section 2 -->
+                        <div class="border-b border-gray-200 dark:border-gray-700 pb-4">
+                            <button
+                                class="terms-question flex justify-between items-center w-full text-left font-medium text-gray-800 dark:text-gray-200 hover:text-indigo-600 dark:hover:text-indigo-400">
+                                <span>2. Ochrana osobných údajov</span>
+                                <svg class="w-5 h-5 transform transition-transform duration-200" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+                            <div class="terms-answer mt-2 hidden">
+                                <p>
+                                    Aplikácia nezhromažďuje ani neukladá žiadne osobné údaje používateľov. Všetky analýzy
+                                    prebiehajú
+                                    lokálne v prehliadači.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Section 3 -->
+                        <div class="border-b border-gray-200 dark:border-gray-700 pb-4">
+                            <button
+                                class="terms-question flex justify-between items-center w-full text-left font-medium text-gray-800 dark:text-gray-200 hover:text-indigo-600 dark:hover:text-indigo-400">
+                                <span>3. Obmedzenia zodpovednosti</span>
+                                <svg class="w-5 h-5 transform transition-transform duration-200" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+                            <div class="terms-answer mt-2 hidden">
+                                <p>
+                                    Vytvárané sekvencie organizačných vzorov sú iba návrhmi a odporúčaniami. Autor ani FIIT
+                                    STU
+                                    nepreberajú zodpovednosť za dôsledky ich implementácie.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Section 4 -->
+                        <div class="border-b border-gray-200 dark:border-gray-700 pb-4">
+                            <button
+                                class="terms-question flex justify-between items-center w-full text-left font-medium text-gray-800 dark:text-gray-200 hover:text-indigo-600 dark:hover:text-indigo-400">
+                                <span>4. Duševné vlastníctvo</span>
+                                <svg class="w-5 h-5 transform transition-transform duration-200" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+                            <div class="terms-answer mt-2 hidden">
+                                <p>
+                                    Všetky práva k aplikácii sú vyhradené. Obsah môže byť používaný len pre osobné a
+                                    nekomerčné
+                                    účely.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="pb-4">
+                            <p id="termsValidFrom" class="text-sm text-gray-500 dark:text-gray-400">
+                                Platné od 1. januára 2026
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="catalogModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-md w-full">
+                <div class="p-6">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-2xl font-bold text-gray-800 dark:text-white">Nahrať katalóg vzorov</h3>
+                        <button id="closeCatalogModal" class="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+        
+                    <div class="mt-6 space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                Názov katalógu
+                            </label>
+                            <input type="text" id="catalogName"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-lg dark:border-gray-600 dark:bg-gray-700 dark:text-white"
+                                placeholder="Zadajte názov katalógu">
+                            <!-- Error message - spočiatku skrytá -->
+                            <p id="catalogNameError" class="text-red-500 text-xs mt-1 hidden"></p>
+                        </div>
+        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                Priečinok s txt súbormi
+                            </label>
+                            <input type="file" id="catalogFolderInput" multiple
+                                class="w-full px-3 py-2 border border-gray-300 rounded-lg dark:border-gray-600 dark:bg-gray-700 dark:text-white"
+                                accept=".txt">
+                        </div>
+        
+                        <div class="flex justify-end gap-3 mt-6">
+                            <button id="cancelCatalog"
+                                class="px-4 py-2 text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200">
+                                Zrušiť
+                            </button>
+                            <button id="confirmCatalog"
+                                class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700">
+                                Nahrať katalóg
+                            </button>
+
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    <!-- Back to top button - menšia šípka -->
+    <button id="backToTopBtn"
+        class="fixed bottom-6 right-6 bg-indigo-600 text-white w-12 h-12 rounded-full shadow-lg hover:bg-indigo-700 transition-all duration-300 transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 z-50 text-xl flex items-center justify-center"
+        aria-label="Back to top">
+        ▲
+    </button>
+
+        <script src="scripts/scripts.js"></script>
+        <script src="scripts/matrix.js"></script>
+        <script src="scripts/graph.js"></script>      
+        <script src="scripts/markov.js"></script>     
+        <script src="scripts/methodsteps.js"></script>
+        <script src="scripts/header.js"></script>
+        <script src="scripts/footerlinks.js"></script>
+        <script src="scripts/languages.js"></script>
+        <script src="scripts/nightmode.js"></script>
+        <script src="scripts/examples.js"></script>
+        <script src="scripts/export.js"></script> 
+        <script src="scripts/toast.js"></script>
+
+    </body>
+
+    </html>
