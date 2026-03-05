@@ -380,6 +380,11 @@ html:not(.dark) .pattern-language-header {
     color: #1f2937 !important;
 }
 
+html:not(.dark) #similarityInfo h3,
+html:not(.dark) #mdpSolution h3 {
+    color: #1f2937 !important;
+}
+
 html:not(.dark) .pattern-language-header h3 {
     color: #1f2937 !important;
 }
@@ -1181,41 +1186,6 @@ html {
     user-select: text;
 }
 
-.group:hover .tooltip {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
-
-.tooltip {
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%) translateY(5px);
-    background: #1f2937;
-    color: white;
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-size: 11px;
-    white-space: nowrap;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.2s ease;
-    pointer-events: none;
-    z-index: 60;
-}
-
-.tooltip::after {
-    content: '';
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    border-width: 4px;
-    border-style: solid;
-    border-color: #1f2937 transparent transparent transparent;
-}
-
 .bg-white.rounded-2xl.shadow {
     transition: box-shadow 0.3s ease, transform 0.2s ease;
 }
@@ -1399,16 +1369,6 @@ html:not(.dark) #similarityMatrix th {
     color: #1f2937;
 }
 
-html:not(.dark) .tooltip {
-    background-color: #ffffff;
-    color: #1f2937;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-html:not(.dark) .tooltip::after {
-    border-color: #ffffff transparent transparent transparent;
-}
-
 html:not(.dark) .text-indigo-600 {
     color: #4f46e5;
 }
@@ -1467,4 +1427,638 @@ html:not(.dark) .bg-blue-50 {
 
 html:not(.dark) .border-gray-200 {
     border-color: #e5e7eb;
+}
+
+/* Export dropdown */
+#exportDropdown {
+    right: 0;
+    min-width: 120px;
+    transform-origin: top right;
+    animation: dropdownFade 0.2s ease;
+}
+
+@keyframes dropdownFade {
+    from {
+        opacity: 0;
+        transform: translateY(-10px) scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(3rem) scale(1);
+    }
+}
+
+/* Dark mode pre dropdown */
+.dark #exportDropdown {
+    background-color: #1f2937;
+    border-color: #374151;
+}
+
+.dark .export-option:hover {
+    background-color: #374151;
+}
+
+/* Prepojenie tlačidla s parametrami */
+.flex.items-center.gap-4.mt-6 {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* Skupina tlačidiel (generate + šípka) */
+.flex.items-center:first-child {
+    position: relative;
+    z-index: 2;
+}
+
+/* ===== PARAMETRE - VIDITEĽNOSŤ A PREPOJENIE ===== */
+
+/* Hlavný kontajner parametrov - spojenie oboch štýlov */
+#paramsContainer {
+    background-color: #f3f4f6 !important;  /* Svetlé pozadie v light mode */
+    border: 1px solid #e5e7eb !important;  /* Jemný okraj */
+    margin-left: -5px !important;          /* Jemné prisunutie k šípke */
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    border-left: 2px solid rgba(79, 70, 229, 0.2) !important; /* Jemný indigo pruh */
+    padding-left: 12px !important;         /* Odsadenie obsahu od pruhu */
+    box-shadow: 2px 0 8px -4px rgba(0, 0, 0, 0.1) !important; /* Jemný tieň pre prepojenie */
+}
+
+/* Dark mode pre kontajner */
+.dark #paramsContainer {
+    background-color: #2d3748 !important;  /* Tmavšie pozadie */
+    border-color: #4a5568 !important;      /* Tmavší okraj */
+    border-left-color: rgba(129, 140, 248, 0.3) !important;
+    box-shadow: 2px 0 8px -4px rgba(255, 255, 255, 0.05) !important;
+}
+
+/* Keď sú parametre schované */
+#paramsContainer[style*="max-width: 0px"] {
+    border-left: none !important;
+    margin-left: 0 !important;
+    box-shadow: none !important;
+    background-color: transparent !important; /* Skryjeme aj pozadie */
+    border-color: transparent !important;
+}
+
+/* Štýly pre inputy */
+#paramsContainer input {
+    background-color: white !important;
+    border: 1px solid #d1d5db !important;
+    color: #1f2937 !important;
+    font-weight: 500 !important;
+    transition: all 0.2s ease;
+}
+
+/* Dark mode pre inputy */
+.dark #paramsContainer input {
+    background-color: #1f2937 !important;
+    border-color: #4b5563 !important;
+    color: #e5e7eb !important;
+}
+
+/* Hover efekt pre inputy */
+#paramsContainer input:hover {
+    border-color: #9ca3af !important;
+}
+
+.dark #paramsContainer input:hover {
+    border-color: #6b7280 !important;
+}
+
+/* Focus efekt pre inputy */
+#paramsContainer input:focus {
+    outline: none !important;
+    border-color: #4f46e5 !important;
+    box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2) !important;
+}
+
+.dark #paramsContainer input:focus {
+    border-color: #818cf8 !important;
+    box-shadow: 0 0 0 2px rgba(129, 140, 248, 0.2) !important;
+}
+
+/* Štýly pre labely */
+#paramsContainer label {
+    color: #4b5563 !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.025em !important;
+}
+
+.dark #paramsContainer label {
+    color: #9ca3af !important;
+}
+
+/* Šípka - už existuje samostatne */
+#paramsArrow {
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Tlačidlo Generovať a rozbaľovacie tlačidlo ako jeden celok */
+#generateBtn {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    height: 42px; /* Pridaná pevná výška - prispôsobte podľa potreby */
+    line-height: 1; /* Pre lepšie vertikálne zarovnanie textu */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#toggleParamsBtn {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    background-color: #4f46e5; /* indigo-600 */
+    height: 42px; /* Rovnaká výška ako generateBtn */
+    width: 42px; /* Pevná šírka pre štvorcový tvar */
+    padding: 0; /* Odstránime padding pre presné rozmery */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Dark mode pre tlačidlo */
+.dark #toggleParamsBtn {
+    background-color: #4338ca; /* indigo-600 v dark mode */
+}
+
+.dark #toggleParamsBtn:hover {
+    background-color: #3730a3; /* indigo-700 v dark mode */
+}
+
+/* Loading bar */
+#loadingIndicatorBtn {
+    transition: opacity 0.2s ease;
+}
+
+/* Oprava pre checkboxy - indigo farba namiesto ružovej */
+.form-checkbox,
+input[type="checkbox"] {
+    accent-color: #4f46e5 !important; /* indigo-600 */
+}
+
+/* Pre dark mode */
+.dark .form-checkbox,
+.dark input[type="checkbox"] {
+    accent-color: #818cf8 !important; /* indigo-400 */
+}
+
+/* Pre istotu aj pre checked stav */
+.form-checkbox:checked,
+input[type="checkbox"]:checked {
+    background-color: #4f46e5 !important;
+    border-color: #4f46e5 !important;
+}
+
+.dark .form-checkbox:checked,
+.dark input[type="checkbox"]:checked {
+    background-color: #818cf8 !important;
+    border-color: #818cf8 !important;
+}
+
+/* Oprava pre catalog badge - vždy vpravo v strede */
+.catalog-badge {
+    position: absolute !important;
+    top: 50% !important;
+    right: -0.5rem !important;
+    transform: translateY(-50%) !important;
+    z-index: 20 !important;
+    width: 1.25rem !important;
+    height: 1.25rem !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: 9999px !important;
+    font-size: 0.75rem !important;
+    line-height: 1 !important;
+}
+
+/* Pre user katalógy - kontajner musí mať relatívnu pozíciu */
+.relative.group {
+    position: relative !important;
+    margin-right: 0.5rem !important;
+}
+
+/* Krížik - vpravo hore */
+.relative.group .absolute.-top-2.-right-2 {
+    position: absolute !important;
+    top: -0.5rem !important;
+    right: -0.5rem !important;
+    z-index: 30 !important; /* Vyššie z-index aby bol nad badge */
+}
+
+/* Badge pre user katalógy - vpravo v strede */
+.relative.group .catalog-badge {
+    position: absolute !important;
+    top: 50% !important;
+    right: -0.5rem !important; /* Zmenené z 1.5rem na -0.5rem - úplne vpravo */
+    transform: translateY(-50%) !important;
+    z-index: 20 !important;
+}
+
+/* ===== TOAST NOTIFICATIONS ===== */
+.toast-container {
+    position: fixed;
+    top: 80px; /* Umiestnenie pod navbar */
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    pointer-events: none;
+}
+
+.toast {
+    min-width: 280px;
+    max-width: 380px;
+    background-color: white;
+    color: #1f2937;
+    border-radius: 8px;
+    padding: 12px 16px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transform: translateX(120%);
+    transition: transform 0.3s ease-in-out, opacity 0.2s ease;
+    opacity: 0;
+    pointer-events: auto;
+    border-left: 4px solid transparent;
+}
+
+.toast.show {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.toast.hide {
+    transform: translateX(120%);
+    opacity: 0;
+}
+
+/* Typy toastov */
+.toast-info {
+    border-left-color: #3b82f6; /* modrá */
+}
+.toast-info .toast-icon { color: #3b82f6; }
+
+.toast-success {
+    border-left-color: #10b981; /* zelená */
+}
+.toast-success .toast-icon { color: #10b981; }
+
+.toast-warning {
+    border-left-color: #f59e0b; /* oranžová */
+}
+.toast-warning .toast-icon { color: #f59e0b; }
+
+.toast-error {
+    border-left-color: #ef4444; /* červená */
+}
+.toast-error .toast-icon { color: #ef4444; }
+
+.toast-icon {
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+}
+
+.toast-content {
+    flex: 1;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.toast-close {
+    background: none;
+    border: none;
+    color: #9ca3af;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 0 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s;
+}
+.toast-close:hover {
+    color: #4b5563;
+}
+
+/* Dark mode pre toast */
+.dark .toast {
+    background-color: #1f2937;
+    color: #e5e7eb;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+}
+
+.dark .toast-close {
+    color: #6b7280;
+}
+.dark .toast-close:hover {
+    color: #d1d5db;
+}
+
+/* Responsivita */
+@media (max-width: 640px) {
+    .toast-container {
+        left: 20px;
+        right: 20px;
+        align-items: stretch;
+    }
+    .toast {
+        min-width: auto;
+        max-width: 100%;
+    }
+}
+
+/* ===== CONFIRM TOAST ===== */
+.toast-confirm {
+    border-left-color: #f59e0b; /* oranžová ako warning */
+    max-width: 400px;
+}
+
+.toast-confirm .toast-icon { color: #f59e0b; }
+
+.toast-confirm .toast-content {
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.toast-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    justify-content: flex-end;
+}
+
+.toast-btn {
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s ease;
+}
+
+.toast-btn-confirm {
+    background-color: #ef4444;
+    color: white;
+}
+.toast-btn-confirm:hover {
+    background-color: #dc2626;
+}
+
+.toast-btn-cancel {
+    background-color: #e5e7eb;
+    color: #374151;
+}
+.toast-btn-cancel:hover {
+    background-color: #d1d5db;
+}
+
+/* Dark mode pre confirm toast */
+.dark .toast-btn-cancel {
+    background-color: #4b5563;
+    color: #e5e7eb;
+}
+.dark .toast-btn-cancel:hover {
+    background-color: #6b7280;
+}
+
+/* ===== SIMILARITY GRAPH STYLES ===== */
+
+/* Kontajner pre graf */
+#similarityGraph {
+    background-color: #f8fafc;
+    border-radius: 0.75rem;
+    border: 1px solid #e5e7eb;
+    transition: all 0.3s ease;
+    min-height: 500px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Dark mode pre kontajner grafu */
+.dark #similarityGraph {
+    background-color: #1f2937;
+    border-color: #374151;
+}
+
+/* SVG v grafe */
+#similarityGraph svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+}
+
+/* Čiary (hrany) v grafe */
+#similarityGraph line {
+    transition: stroke-opacity 0.2s ease;
+    pointer-events: none;
+}
+
+/* Texty na čiarach */
+#similarityGraph .link-percentage {
+    font-size: 10px;
+    font-weight: 600;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+}
+
+.dark #similarityGraph .link-percentage {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Uzly v grafe */
+#similarityGraph g {
+    cursor: pointer;
+    transition: filter 0.2s ease;
+}
+
+#similarityGraph g:hover {
+    filter: brightness(1.1);
+}
+
+/* Kruhy uzlov */
+#similarityGraph circle {
+    transition: r 0.2s ease, filter 0.2s ease;
+}
+
+#similarityGraph g:hover circle {
+    r: 27;
+    filter: drop-shadow(0 4px 6px -1px rgba(0, 0, 0, 0.1));
+}
+
+.dark #similarityGraph g:hover circle {
+    filter: drop-shadow(0 4px 6px -1px rgba(255, 255, 255, 0.1));
+}
+
+/* Text v uzloch */
+#similarityGraph text {
+    user-select: none;
+    font-family: system-ui, -apple-system, sans-serif;
+}
+
+/* Info panel pre uzly */
+#nodeInfoPanel {
+    backdrop-filter: blur(8px);
+    background-color: rgba(255, 255, 255, 0.95);
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    max-width: 280px;
+    width: 100%;
+    transition: all 0.2s ease;
+    z-index: 100;
+}
+
+.dark #nodeInfoPanel {
+    background-color: rgba(31, 41, 55, 0.95);
+    border-color: #374151;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+}
+
+#nodeInfoTitle {
+    font-weight: 600;
+    font-size: 0.875rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #e5e7eb;
+    color: #1f2937;
+}
+
+.dark #nodeInfoTitle {
+    border-bottom-color: #374151;
+    color: #e5e7eb;
+}
+
+#nodeInfoContent {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+#nodeInfoContent div {
+    font-size: 0.75rem;
+    padding: 0.25rem 0;
+}
+
+/* Animácia pre zobrazenie panelu */
+#nodeInfoPanel:not(.hidden) {
+    animation: slideIn 0.2s ease-out;
+}
+
+/* Hlavný text v uzloch (skratka) - v light mode biela */
+html:not(.dark) #similarityGraph g text:first-of-type {
+    fill: #ffffff !important;  /* Biela farba pre text v kruhu */
+    font-weight: bold;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); /* Jemný tieň pre lepšiu čitateľnosť */
+}
+
+/* Popisky pod uzlami (celý názov) - v light mode tmavé */
+html:not(.dark) #similarityGraph g text:last-of-type {
+    fill: #1f2937 !important;  /* Tmavá farba (gray-800) */
+    font-weight: 500;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5); /* Svetlý tieň pre kontrast */
+}
+
+/* Info panel v light mode */
+html:not(.dark) #nodeInfoPanel {
+    background-color: rgba(255, 255, 255, 0.98);
+    border-color: #d1d5db;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Percentá na hranách - v light mode tmavé */
+html:not(.dark) .link-percentage {
+    fill: #1f2937 !important;  /* gray-800 */
+    font-weight: 600;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+/* Dark mode pre percentá */
+.dark .link-percentage {
+    fill: #e5e7eb !important;  /* gray-200 */
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Responzivita pre malé obrazovky */
+@media (max-width: 640px) {
+    #nodeInfoPanel {
+        max-width: calc(100% - 2rem);
+        left: 1rem;
+        right: 1rem;
+        bottom: 1rem;
+    }
+}
+
+/* Vyhľadávanie v grafe */
+#graphSearchResults {
+    scrollbar-width: thin;
+    scrollbar-color: #c1c1c1 #f1f1f1;
+}
+
+#graphSearchResults::-webkit-scrollbar {
+    width: 6px;
+}
+
+#graphSearchResults::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+#graphSearchResults::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 3px;
+}
+
+#graphSearchResults::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+.dark #graphSearchResults {
+    scrollbar-color: #6b7280 #374151;
+}
+
+.dark #graphSearchResults::-webkit-scrollbar-track {
+    background: #374151;
+}
+
+.dark #graphSearchResults::-webkit-scrollbar-thumb {
+    background: #6b7280;
+}
+
+.dark #graphSearchResults::-webkit-scrollbar-thumb:hover {
+    background: #9ca3af;
+}
+
+/* Animácia pre zvýraznenie uzlov */
+@keyframes pulse {
+    0%, 100% {
+        filter: brightness(1) drop-shadow(0 0 2px rgba(79, 70, 229, 0.5));
+    }
+    50% {
+        filter: brightness(1.3) drop-shadow(0 0 8px rgba(79, 70, 229, 0.8));
+    }
+}
+
+.highlight-pulse {
+    animation: pulse 1s ease-in-out;
 }

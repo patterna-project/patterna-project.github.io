@@ -12,10 +12,15 @@
         <!-- TensorFlow.js for NLP -->
         <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.18.0/dist/tf.min.js"></script>
         <!-- Universal Sentence Encoder -->
-        <script
-            src="https://cdn.jsdelivr.net/npm/@tensorflow-models/universal-sentence-encoder@1.3.3/dist/universal-sentence-encoder.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/universal-sentence-encoder@1.3.3/dist/universal-sentence-encoder.min.js"></script>
         <!-- SortableJS for drag-and-drop -->
         <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+        <!-- jsPDF pre PDF export -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+        <!-- html2canvas pre PNG export -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+        <!-- D3.js pre force-directed graph -->
+        <script src="https://d3js.org/d3.v7.min.js"></script>
 
     </head>
     <body class="flex flex-col min-h-screen text-gray-800">
@@ -128,52 +133,66 @@
                     <div class="loading-bar">
                         <div class="loading-progress"></div>
                     </div>
-                    <p class="text-sm text-center mt-2 dark:text-gray-400">Načítavam katalóg...</p>
+                    <p class="text-sm text-center mt-2 dark:text-gray-400"></p>
                 </div>
             
                 <div class="flex items-center gap-4 mt-6">
-                    <button id="generateBtn"
-                        class="bg-indigo-600 text-white px-6 py-2 rounded-2xl hover:bg-indigo-700 transition">Generovať
-                        sekvenciu</button>
+                    <!-- Tlačidlo Generovať + rozbaľovacie parametre ako jeden celok -->
+                    <div class="flex items-center">
+                        <!-- Tlačidlo Generovať -->
+                        <button id="generateBtn" 
+                            class="bg-indigo-600 text-white px-6 py-2 rounded-l-2xl hover:bg-indigo-700 transition flex-shrink-0">
+                            Generovať sekvenciu
+                        </button>
 
-                    <div class="flex items-center gap-3 bg-gray-100 dark:bg-gray-700 p-2 rounded-lg">
+                        <!-- Tlačidlo na rozbalenie/zbalenie (pripojené k generateBtn) -->
+                        <button id="toggleParamsBtn" 
+                            class="bg-indigo-600 text-white px-3 py-2 rounded-r-2xl hover:bg-indigo-700 transition flex items-center border-l border-indigo-500 h-full">
+                            <svg id="paramsArrow" class="w-4 h-4 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- Samotné parametre - teraz priamo napojené na tlačidlo -->
+                    <div id="paramsContainer" 
+                        class="flex items-center gap-3 p-2 rounded-lg transition-all duration-300 overflow-hidden">
                         <div class="flex items-center gap-1 group relative">
-                            <label for="gammaInput" class="text-xs font-medium text-gray-600 dark:text-gray-300">γ:</label>
+                            <label for="gammaInput" class="text-xs font-medium whitespace-nowrap">γ:</label>
                             <input type="number" id="gammaInput" min="0" max="1" step="0.05" value="0.9"
-                                class="w-16 px-2 py-1 text-xs border border-gray-300 rounded dark:bg-gray-600 dark:border-gray-500 dark:text-white"
-                                title="Diskontný faktor (0-1). Čím vyšší, tým viac model preferuje dlhšie cesty.">
+                                class="w-16 px-2 py-1 text-xs border rounded"
+                                >
                         </div>
-                    
+
                         <div class="flex items-center gap-1 group relative">
-                            <label for="goalRewardInput" class="text-xs font-medium text-gray-600 dark:text-gray-300">R(cieľ):</label>
+                            <label for="goalRewardInput" class="text-xs font-medium whitespace-nowrap">R(cieľ):</label>
                             <input type="number" id="goalRewardInput" min="0" step="1" value="10"
-                                class="w-16 px-2 py-1 text-xs border border-gray-300 rounded dark:bg-gray-600 dark:border-gray-500 dark:text-white"
-                                title="Odmena za dosiahnutie cieľa. Vyššia hodnota = väčšia motivácia ísť priamo do cieľa.">
+                                class="w-16 px-2 py-1 text-xs border rounded"
+                                >
                         </div>
-                    
+
                         <div class="flex items-center gap-1 group relative">
-                            <label for="otherRewardInput" class="text-xs font-medium text-gray-600 dark:text-gray-300">R(ostatné):</label>
+                            <label for="otherRewardInput" class="text-xs font-medium whitespace-nowrap">R(ostatné):</label>
                             <input type="number" id="otherRewardInput" min="0" step="0.1" value="1"
-                                class="w-16 px-2 py-1 text-xs border border-gray-300 rounded dark:bg-gray-600 dark:border-gray-500 dark:text-white"
-                                title="Odmena za návštevu ostatných stavov. Vyššia hodnota = viac sa oplatí zdržiavať na ceste.">
+                                class="w-16 px-2 py-1 text-xs border rounded"
+                                >
                         </div>
-                    
+
                         <div class="flex items-center gap-1 group relative">
-                            <label for="epsilonInput" class="text-xs font-medium text-gray-600 dark:text-gray-300">ε:</label>
+                            <label for="epsilonInput" class="text-xs font-medium whitespace-nowrap">ε:</label>
                             <input type="number" id="epsilonInput" min="0.0001" max="1" step="0.001" value="0.1"
-                                class="w-16 px-2 py-1 text-xs border border-gray-300 rounded dark:bg-gray-600 dark:border-gray-500 dark:text-white"
-                                title="Prah konvergencie. Menšia hodnota = presnejšie výpočty, ale viac iterácií.">
+                                class="w-20 px-2 py-1 text-xs border rounded" 
+                                >
                         </div>
                     </div>
 
-                    <div id="loadingIndicatorBtn" class="hidden flex-1 max-w-md">
+                    <!-- Loading bar -->
+                    <div id="loadingIndicatorBtn" class="hidden flex-1 min-w-[200px] max-w-sm">
                         <div class="flex items-center gap-3">
                             <div class="flex-1 bg-gray-200 rounded-full h-2 dark:bg-gray-700">
-                                <div id="loadingProgress" class="bg-green-500 h-2 rounded-full transition-all duration-300 ease-in-out"
-                                    style="width: 0%"></div>
+                                <div id="loadingProgress" class="bg-green-500 h-2 rounded-full transition-all duration-300 ease-in-out" style="width: 0%"></div>
                             </div>
-                            <span id="loadingText" class="text-sm text-gray-600 dark:text-gray-400 whitespace-nowrap">Spúšťam
-                                analýzu...</span>
+                            <span id="loadingText" class="text-sm text-gray-600 dark:text-gray-400 whitespace-nowrap">Spúšťam analýzu...</span>
                         </div>
                     </div>
                 </div>
@@ -181,7 +200,6 @@
                 
             
                 <div id="similarityInfo" class="mt-6 p-4 bg-blue-50 rounded-lg dark:bg-blue-900 dark:bg-opacity-30 hidden">
-                    <h3 class="font-medium mb-2 text-gray-800 dark:text-white">Podobnosti medzi vzormi (TF, cosínusová podobnosť):</h3>
                     <div id="similarityMatrix" class="text-sm overflow-x-auto"></div>
                 </div>
                  
@@ -213,13 +231,44 @@
                             </button>
                         </div>
                     </div>
-                    
+
                     <p class="text-sm text-gray-600 mb-4 dark:text-gray-400">Pretiahni vzory pre úpravu poradia.</p>
-                    <ul id="patternsList" class="flex flex-col gap-3 min-h-[240px]"></ul> 
-                
-                    <button id="exportBtn"
-                        class="mt-6 w-full bg-green-600 text-white px-5 py-2 rounded-2xl hover:bg-green-700 transition">Exportovať
-                        (.txt)</button>
+                    <ul id="patternsList" class="flex flex-col gap-3 min-h-[240px]"></ul>
+
+                    <!-- Export button with dropdown -->
+                    <div class="mt-6 flex relative">
+                        <button id="exportBtn"
+                            class="flex-1 bg-green-600 text-white px-5 py-2 rounded-l-2xl hover:bg-green-700 transition text-center">
+                            Exportovať (.txt)
+                        </button>
+                        <button id="exportDropdownBtn"
+                            class="bg-green-600 text-white px-3 py-2 rounded-r-2xl hover:bg-green-700 transition border-l border-green-500">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                        <div id="exportDropdown"
+                            class="absolute mt-1 w-32 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 hidden z-50"
+                            style="transform: translateY(3rem); right: 0;">
+                            <button class="export-option w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-t-lg"
+                                data-format="txt">
+                                .txt
+                            </button>
+                            <button class="export-option w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
+                                data-format="pdf">
+                                .pdf
+                            </button>
+                            <button class="export-option w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-b-lg"
+                                data-format="csv">
+                                .csv
+                            </button>
+                            <button class="export-option w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-b-lg"
+                                data-format="png">
+                                .png
+                            </button>
+                            
+                        </div>
+                    </div>
                 </section>
             </div>
         </main>
@@ -271,8 +320,10 @@
                     <div class="space-y-4 text-center md:text-left"> 
                         <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200">Zdrojový kód</h3>
                         <div class="flex justify-center space-x-4">
-                            <a href="https://github.com/Ondrejstuba"
-                                class="text-gray-600 hover:text-indigo-600 dark:text-gray-400 dark:hover:text-indigo-400 transition-colors">
+                            <a href="https://github.com/patterna-project" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            class="text-gray-600 hover:text-indigo-600 dark:text-gray-400 dark:hover:text-indigo-400 transition-colors">
                                 <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24" aria-hidden="true">
                                     <path fill-rule="evenodd"
                                         d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
@@ -281,6 +332,7 @@
                             </a>
                         </div>
                     </div>
+
                 </div>
             </div>
 
@@ -704,13 +756,16 @@
 
         <script src="scripts/scripts.js"></script>
         <script src="scripts/matrix.js"></script>
-        <script src="scripts/markov.js"></script>
+        <script src="scripts/graph.js"></script>      
+        <script src="scripts/markov.js"></script>     
         <script src="scripts/methodsteps.js"></script>
         <script src="scripts/header.js"></script>
         <script src="scripts/footerlinks.js"></script>
         <script src="scripts/languages.js"></script>
         <script src="scripts/nightmode.js"></script>
         <script src="scripts/examples.js"></script>
+        <script src="scripts/export.js"></script> 
+        <script src="scripts/toast.js"></script>
 
     </body>
 
