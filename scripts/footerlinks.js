@@ -127,5 +127,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (examplesMenu && !examplesMenu.classList.contains('hidden')) {
             examplesMenu.classList.add('hidden');
         }
+
+        // Zatvoriť export dropdown
+        const exportDropdown = document.getElementById('exportDropdown');
+        if (exportDropdown && !exportDropdown.classList.contains('hidden')) {
+            exportDropdown.classList.add('hidden');
+        }
     }
 });

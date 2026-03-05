@@ -100,10 +100,7 @@ class PatternSimilarity {
 
 function displaySimilarityMatrix(sequence, similarityMatrix) {
     const matrixDiv = document.getElementById("similarityMatrix");
-    const similarityInfo = document.getElementById("similarityInfo");
     matrixDiv.innerHTML = "";
-
-    similarityInfo.classList.remove("hidden");
 
     const table = document.createElement("table");
     table.className = "w-full text-xs border-collapse";

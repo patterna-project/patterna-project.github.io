@@ -7,6 +7,7 @@ const translations = {
         loadCatalog: "Nahrať katalóg ➕",
         clear: "Vymazať 🗑️",
         language: "SK",
+        searchPlaceholder: "Hľadať...",
 
         // Examples dropdown
         selectExample: "Vyberte príklad:",
@@ -19,14 +20,14 @@ const translations = {
         // Main section
         selectPatterns: "Vyber vzory",
         generateSequence: "Generovať sekvenciu",
-        analysisInProgress: "Načítavam katalóg...",
+        loadingProgress: "Načítavam katalóg... {current}/{total}",
 
         // Suggestions section
         suggestedSequence: "Navrhnutá sekvencia",
         dragToReorder: "Pretiahni vzory pre úpravu poradia.",
         resetSequence: "Resetovať na pôvodné poradie",
         copySequence: "Kopírovať sekvenciu",
-        export: "Exportovať (.txt)",
+        export: "Exportovať",
 
         // MDP Parameters
         gamma: "γ:",
@@ -35,7 +36,8 @@ const translations = {
         epsilon: "ε:",
 
         // Similarity
-        similarities: "Podobnosti medzi vzormi (TF, kosínusová podobnosť):",
+        similarityMatrix: "📊 Matica podobností",
+        similarityGraph: "🕸️ Graf podobností",
 
         // Footer
         quickLinks: "Rýchle odkazy",
@@ -106,10 +108,10 @@ const translations = {
         catalogNameExists: "Katalóg s týmto názvom už existuje",
 
         // OnHover info
-        mdpParamGammaTitle: "Diskontný faktor (0-1). Čím vyšší, tým viac model preferuje dlhšie cesty.",
-        mdpParamGoalRewardTitle: "Odmena za dosiahnutie cieľa. Vyššia hodnota = väčšia motivácia ísť priamo do cieľa.",
-        mdpParamOtherRewardTitle: "Odmena za návštevu ostatných stavov. Vyššia hodnota = viac sa oplatí zdržiavať na ceste.",
-        mdpParamEpsilonTitle: "Prah konvergencie. Menšia hodnota = presnejšie výpočty, ale viac iterácií.",
+        mdpParamGammaTitle: "γ: 0-1 | Diskontný faktor.Vyššia hodnota = preferencia dlhších ciest.",
+        mdpParamGoalRewardTitle: "R(cieľ): ≥0 | Odmena za dosiahnutie cieľa. Vyššia hodnota = väčšia motivácia ísť priamo do cieľa.",
+        mdpParamOtherRewardTitle: "R(ostatné): ≥0 | Odmena za návštevu ostatných stavov. Vyššia hodnota = viac sa oplatí zdržiavať na ceste.",
+        mdpParamEpsilonTitle: "ε: 0.0001-1 | Prah konvergencie. Menšia hodnota = presnejšie výpočty, ale viac iterácií.",
 
         // MDP steps
         mdpTitle: "Postup riešenia Markov Decision Process (MDP):",
@@ -150,10 +152,16 @@ const translations = {
         noTxtFiles: "Priečinok neobsahuje žiadne txt súbory",
         failedToLoadFiles: "Nepodarilo sa načítať žiadne txt súbory",
         catalogLoadError: "Chyba pri načítaní katalógu: ",
-        removeCatalogConfirm: "Naozaj chcete odstrániť katalóg \"{catalogName}\"?",
-        catalogRemoved: "Katalóg \"{catalogName}\" bol odstránený",
         sequenceGenerationError: "Chyba pri generovaní sekvencie. Skúste to znova.",
-        copyFailed: "Nepodarilo sa skopírovať sekvenciu"
+        exportSuccess: "Exportovaný!",
+        copyFailed: "Nepodarilo sa skopírovať sekvenciu",
+        loadError: "Chyba pri načítavaní vzorov.",
+        noSequenceToExport: "Žiadna sekvencia na export",
+        confirmDelete: "Naozaj chcete odstrániť katalóg",
+        confirmYes: "Áno, odstrániť",
+        confirmNo: "Zrušiť",
+        catalogDeleted: "Katalóg {catalogName} bol odstránený",
+        catalogDeletionCancelled: "Odstránenie katalógu bolo zrušené"
     },
     en: {
         // Navigation
@@ -161,6 +169,7 @@ const translations = {
         loadCatalog: "Load Catalog ➕",
         clear: "Clear 🗑️",
         language: "EN",
+        searchPlaceholder: "Search...",
 
         // Examples dropdown
         selectExample: "Select example:",
@@ -173,14 +182,14 @@ const translations = {
         // Main section
         selectPatterns: "Select Patterns",
         generateSequence: "Generate Sequence",
-        analysisInProgress: "Loading catalog...",
+        loadingProgress: "Loading catalog... {current}/{total}",
 
         // Suggestions section
         suggestedSequence: "Suggested Sequence",
         dragToReorder: "Drag patterns to reorder.",
         resetSequence: "Reset to original order",
         copySequence: "Copy sequence",
-        export: "Export (.txt)",
+        export: "Export",
 
         // MDP Parameters
         gamma: "γ:",
@@ -189,7 +198,8 @@ const translations = {
         epsilon: "ε:",
 
         // Similarity
-        similarities: "Similarities between patterns (TF, cosine similarity):",
+        similarityMatrix: "📊 Similarity Matrix",
+        similarityGraph: "🕸️ Similarity Graph",
 
         // Footer
         quickLinks: "Quick Links",
@@ -260,10 +270,10 @@ const translations = {
         catalogNameExists: "A catalog with this name already exists",
 
         // OnHover info
-        mdpParamGammaTitle: "Discount factor (0-1). Higher values favor longer paths.",
-        mdpParamGoalRewardTitle: "Reward for reaching the goal. Higher value = more motivation to go directly to goal.",
-        mdpParamOtherRewardTitle: "Reward for visiting other states. Higher value = more benefit from detours.",
-        mdpParamEpsilonTitle: "Convergence threshold. Lower value = more precise calculations, but more iterations.",
+        mdpParamGammaTitle: "γ: 0-1 | Discount factor. Higher value = preference for longer paths.",
+        mdpParamGoalRewardTitle: "R(goal): ≥0 | Reward for reaching the goal. Higher value = greater motivation to go directly to the goal.",
+        mdpParamOtherRewardTitle: "R(other): ≥0 | Reward for visiting other states. Higher value = more benefit from detours.",
+        mdpParamEpsilonTitle: "ε: 0.0001-1 | Convergence threshold. Smaller value = more precise calculations, but more iterations.",
 
         // MDP steps
         mdpTitle: "Markov Decision Process (MDP) Solution Steps:",
@@ -304,10 +314,16 @@ const translations = {
         noTxtFiles: "Folder contains no txt files",
         failedToLoadFiles: "Failed to load any txt files",
         catalogLoadError: "Error loading catalog: ",
-        removeCatalogConfirm: "Are you sure you want to remove the catalog \"{catalogName}\"?",
-        catalogRemoved: "Catalog \"{catalogName}\" was removed",
         sequenceGenerationError: "Error generating sequence. Please try again.",
-        copyFailed: "Failed to copy sequence"
+        exportSuccess: "Exported!",
+        copyFailed: "Failed to copy sequence",
+        loadError: "Error loading patterns.",
+        noSequenceToExport: "No sequence to export",
+        confirmDelete: "Do you really want to delete catalog",
+        confirmYes: "Yes, delete",
+        confirmNo: "Cancel",
+        catalogDeleted: "Catalog {catalogName} was deleted",
+        catalogDeletionCancelled: "Catalog deletion cancelled"
 
         
 
@@ -330,6 +346,7 @@ document.getElementById("languageToggle").addEventListener("click", () => {
 
 function switchLanguage(lang) {
     currentLanguage = lang;
+    window.currentLanguage = lang;   
     updateTextContent();
 
     // Ak existuje funkcia na prekreslenie MDP krokov, zavolaj ju
@@ -348,7 +365,6 @@ function switchLanguage(lang) {
 
     languageToggle.innerHTML = `<img src="${iconSrc}" alt="${iconAlt}" class="w-5 h-5">`;
 }
-
 
 function updateTextContent() {
     const t = translations[currentLanguage];
@@ -390,7 +406,14 @@ function updateTextContent() {
 
     document.querySelector('#suggestionsSection h2').textContent = t.suggestedSequence;
     document.querySelector('#suggestionsSection p').textContent = t.dragToReorder;
-    document.getElementById("exportBtn").textContent = t.export;
+
+    // Export button - vždy aktualizujeme text podľa jazyka
+    updateExportButtonText();
+
+    
+    if (typeof window.updateCatalogSearchPlaceholders === 'function') {
+        window.updateCatalogSearchPlaceholders();
+    }
 
     // MDP Parameters translations
     const gammaLabel = document.querySelector('label[for="gammaInput"]');
@@ -416,8 +439,21 @@ function updateTextContent() {
 
     const epsilonInput = document.getElementById('epsilonInput');
     if (epsilonInput) epsilonInput.title = t.mdpParamEpsilonTitle;
+    
+    const matrixViewBtn = document.getElementById('matrixViewBtn');
+    const graphViewBtn = document.getElementById('graphViewBtn');
+    
+    if (matrixViewBtn) {
+        matrixViewBtn.innerHTML = t.similarityMatrix;
+    }
+    
+    if (graphViewBtn) {
+        graphViewBtn.innerHTML = t.similarityGraph;
+    }
 
-    document.querySelector('#similarityInfo h3').textContent = t.similarities;
+    if (typeof window.updateGraphSearchPlaceholder === 'function') {
+        window.updateGraphSearchPlaceholder();
+    }
 
     document.getElementById("resetSequenceBtn").title = t.resetSequence;
     document.getElementById("copySequenceBtn").title = t.copySequence;

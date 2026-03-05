@@ -7,6 +7,7 @@ let userCatalogs = {};
 let originalSequence = []; 
 let originalSimilarityMatrix = {}; 
 let isSequenceReordered = false; 
+let currentView = 'matrix';
 // Na začiatok súboru, k existujúcim premenným
 let globalCheckedPatterns = {}; // { "catalogName": { "filename1": true, "filename2": true } }
 
@@ -63,7 +64,7 @@ function switchToCoplienCatalog() {
 
 function switchToUserCatalog(catalogName) {
     if (!userCatalogs[catalogName]) {
-        alert('Katalóg nebol nájdený');
+        showToast(translations[currentLanguage]?.catalogNotFound || 'Katalóg nebol nájdený', 'error');
         switchToCoplienCatalog();
         return;
     }
@@ -133,8 +134,15 @@ function updateCatalogButtons() {
 
 async function loadUserCatalog(catalogName) {
     document.getElementById('loadingIndicator').classList.remove('hidden');
+    
+    const loadingText = document.querySelector('#loadingIndicator p');
+    const originalText = loadingText.textContent;
+    const t = translations[currentLanguage];
+    
     try {
         const catalog = userCatalogs[catalogName];
+        const totalPatterns = Object.keys(catalog.patterns).length;
+        let loadedCount = 0;
 
         // NEMAŽEME allPatternsData, len pridávame
         for (const [filename, content] of Object.entries(catalog.patterns)) {
@@ -144,12 +152,19 @@ async function loadUserCatalog(catalogName) {
                 filename: filename,
                 language: catalogName
             };
+            loadedCount++;
+            
+            // Aktualizujeme text loading indikátora s prekladom
+            loadingText.textContent = t.loadingProgress
+                .replace('{current}', loadedCount)
+                .replace('{total}', totalPatterns);
         }
 
         initializeUserCatalogSections(catalogName, catalog.patterns);
     } catch (err) {
-        alert('Chyba pri načítaní katalógu: ' + err.message);
+        showToast((translations[currentLanguage]?.catalogLoadError || 'Chyba pri načítaní katalógu: ') + err.message, 'error');
     } finally {
+        loadingText.textContent = originalText;
         document.getElementById('loadingIndicator').classList.add('hidden');
     }
 }
@@ -179,7 +194,7 @@ function initializeUserCatalogSections(catalogName, patterns) {
             <div class="search-container relative ml-auto search-hidden" onclick="event.stopPropagation()">
                 <input type="text" 
                     class="search-input text-xs pl-7 pr-2 py-1 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 w-32 focus:w-48 transition-all duration-300 focus:outline-none focus:ring-1 focus:ring-indigo-500"
-                    placeholder="Hľadať...">
+                    placeholder="${window.translations?.[window.currentLanguage]?.searchPlaceholder || 'Hľadať...'}">
             </div>
         </div>
         <div class="flex items-center space-x-2">
@@ -376,6 +391,8 @@ document.getElementById('confirmCatalog').addEventListener('click', async () => 
             patterns: patterns
         };
 
+        showToast(`Katalóg "${catalogName}" bol úspešne nahraný`, 'success', 4000);
+
         document.getElementById('catalogModal').classList.add('hidden');
         document.getElementById('catalogName').value = '';
         folderInput.value = '';
@@ -414,7 +431,21 @@ async function loadAllPatterns() {
     }
 
     document.getElementById('loadingIndicator').classList.remove('hidden');
+    
+    // Pridáme počítadlo do loading indikátora
+    const loadingText = document.querySelector('#loadingIndicator p');
+    const originalText = loadingText.textContent;
+    const t = translations[currentLanguage];
+    
     try {
+        // Spočítame celkový počet vzorov
+        let totalPatterns = 0;
+        Object.values(patternLanguages).forEach(files => {
+            totalPatterns += files.length;
+        });
+        
+        let loadedCount = 0;
+        
         // NEMAŽEME allPatternsData, len pridávame
         for (const [language, files] of Object.entries(patternLanguages)) {
             for (const file of files) {
@@ -429,14 +460,29 @@ async function loadAllPatterns() {
                             filename: file,
                             language: language
                         };
+                        loadedCount++;
+                        
+                        // Aktualizujeme text loading indikátora s prekladom
+                        loadingText.textContent = t.loadingProgress
+                            .replace('{current}', loadedCount)
+                            .replace('{total}', totalPatterns);
                     }
+                } else {
+                    // Ak už bol nahratý, tiež ho počítame
+                    loadedCount++;
+                    loadingText.textContent = t.loadingProgress
+                        .replace('{current}', loadedCount)
+                        .replace('{total}', totalPatterns);
                 }
             }
         }
+        
         initializePatternSections();
     } catch (err) {
-        alert('Chyba v načítavaní.');
+        showToast(translations[currentLanguage]?.loadError || 'Chyba pri načítavaní vzorov.', 'error');
     } finally {
+        // Obnovíme pôvodný text a skryjeme loading
+        loadingText.textContent = originalText;
         document.getElementById('loadingIndicator').classList.add('hidden');
     }
 }
@@ -462,7 +508,8 @@ function initializePatternSections() {
                 <div class="search-container relative ml-auto search-hidden" onclick="event.stopPropagation()">
                     <input type="text" 
                         class="search-input text-xs pl-7 pr-2 py-1 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 w-32 focus:w-48 transition-all duration-300 focus:outline-none focus:ring-1 focus:ring-indigo-500"
-                        placeholder="Hľadať...">
+                        placeholder="${window.translations?.[window.currentLanguage]?.searchPlaceholder || 'Hľadať...'}">
+
                 </div>
             </div>
             <div class="flex items-center space-x-2">
@@ -597,6 +644,12 @@ document.getElementById('clearBtn').addEventListener('click', () => {
     document.getElementById('similarityMatrix').innerHTML = '';
     document.getElementById('similarityInfo').classList.add('hidden');
 
+    document.getElementById('similarityMatrix').innerHTML = '';
+    const graphDiv = document.getElementById('similarityGraph');
+    if (graphDiv) {
+        graphDiv.innerHTML = ''; // Vyčistíme graf
+    }
+
     // 5. Vymaže postup MDP riešenia
     const mdpSolution = document.getElementById('mdpSolution');
     const mdpSteps = document.getElementById('mdpSteps');
@@ -619,6 +672,9 @@ document.getElementById('clearBtn').addEventListener('click', () => {
 
     updateCatalogBadges();
     updateAllLanguageCounters();
+    updateGenerateButtonState();
+
+    showToast('Všetky vzory boli vymazané', 'info');
 });
 
 document.getElementById('coplienBtn').addEventListener('click', switchToCoplienCatalog);
@@ -655,40 +711,35 @@ function updateCatalogBadges() {
 }
 
 function updateCatalogBadge(catalogName, count) {
-    // Nájdi všetky tlačidlá katalógov
     const catalogButtons = document.querySelectorAll('#catalogButtonsContainer button');
 
     catalogButtons.forEach(btn => {
-        // Pre Coplien - špeciálne spracovanie
-        if (catalogName === 'coplien') {
-            if (btn.id === 'coplienBtn') {
-                // Odstráň existujúci badge
-                const existingBadge = btn.querySelector('.catalog-badge');
-                if (existingBadge) existingBadge.remove();
+        if (catalogName === 'coplien' && btn.id === 'coplienBtn') {
+            // Pre Coplien - badge v tlačidle
+            const existingBadge = btn.querySelector('.catalog-badge');
+            if (existingBadge) existingBadge.remove();
 
-                // Pridaj nový badge len ak je count > 0
-                if (count > 0) {
-                    const badge = document.createElement('span');
-                    badge.className = 'catalog-badge absolute -top-2 -right-2 bg-indigo-600 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold';
-                    badge.textContent = count;
-                    btn.style.position = 'relative';
-                    btn.appendChild(badge);
-                }
+            if (count > 0) {
+                const badge = document.createElement('span');
+                badge.className = 'catalog-badge';
+                badge.textContent = count;
+                btn.style.position = 'relative';
+                btn.appendChild(badge);
             }
         }
         // Pre user katalógy
         else if (btn.textContent.includes(catalogName) && !btn.id) {
-            // Odstráň existujúci badge
-            const existingBadge = btn.querySelector('.catalog-badge');
+            const container = btn.closest('.relative.group');
+            if (!container) return;
+
+            const existingBadge = container.querySelector('.catalog-badge');
             if (existingBadge) existingBadge.remove();
 
-            // Pridaj nový badge len ak je count > 0
             if (count > 0) {
                 const badge = document.createElement('span');
-                badge.className = 'catalog-badge absolute -top-2 -right-2 bg-indigo-600 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold';
+                badge.className = 'catalog-badge';
                 badge.textContent = count;
-                btn.style.position = 'relative';
-                btn.appendChild(badge);
+                container.appendChild(badge);
             }
         }
     });
@@ -742,55 +793,25 @@ function escapeHtml(unsafe) {
     });
 }
 
-// ========== EXPORT FUNCTIONALITY ==========
-
-document.getElementById('exportBtn').addEventListener('click', () => {
-    const patterns = Array.from(document.querySelectorAll('#patternsList .pattern-item'));
-    const sequenceData = patterns.map((item, index) => {
-        const patternName = item.dataset.patternName;
-        const pattern = allPatternsData[patternName];
-        return {
-            order: index + 1,
-            name: pattern.name,
-            content: pattern.content,
-            language: pattern.language
-        };
-    });
-
-    const exportText = generateExportText(sequenceData);
-    downloadAsText(exportText, 'pattern_sequence.txt');
-});
-
-function generateExportText(sequenceData) {
-    let text = 'SEKVENCIA ORGANIZAČNÝCH VZOROV\n';
-    text += 'Generované pomocou Patterna\n';
-    text += `Dátum: ${new Date().toLocaleDateString('sk-SK')}\n\n`;
-
-    sequenceData.forEach(item => {
-        text += `${item.order}. ${item.name}\n`;
-        text += `   Jazyk: ${item.language.replace(/_/g, ' ')}\n`;
-        text += `   Obsah: ${item.content.substring(0, 200)}...\n\n`;
-    });
-
-    return text;
-}
-
-function downloadAsText(text, filename) {
-    const blob = new Blob([text], { type: 'text/plain' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = filename;
-    a.click();
-    URL.revokeObjectURL(url);
-}
-
 // ========== INITIALIZE APP ==========
 
+// Pridajte volanie pri inicializácii
 document.addEventListener('DOMContentLoaded', () => {
     loadAllPatterns();
     updateCatalogButtons();
     setupCheckboxChangeListeners();
+    initExportDropdown();
+    
+    // Inicializácia stavu šípky - parametre sú na začiatku viditeľné
+    setTimeout(() => {
+        const paramsArrow = document.getElementById('paramsArrow');
+        if (paramsArrow) {
+            paramsArrow.style.transform = 'rotate(180deg)';
+        }
+    }, 100);
+    
+    // PRIDANÉ: Inicializácia stavu tlačidla
+    setTimeout(updateGenerateButtonState, 500);
 });
 
 // ========== COUNTER FUNCTIONS ==========
@@ -876,14 +897,25 @@ function setupCheckboxChangeListeners() {
     document.addEventListener('change', (e) => {
         if (e.target.type === 'checkbox' && e.target.closest('#patternCheckboxes')) {
             updateAllLanguageCounters();
+            updateGenerateButtonState();
         }
     });
 }
 
-function removeCatalog(catalogName) {
-    if (confirm(`Naozaj chcete odstrániť katalóg "${catalogName}"?`)) {
+async function removeCatalog(catalogName) {
+    const t = translations[currentLanguage];
+    
+    // Zobrazenie konfirmačného toastu s prekladmi
+    const confirmed = await showConfirmToast(
+        `${t.confirmDelete} "${catalogName}"?`,
+        t.confirmYes,
+        t.confirmNo,
+        10000 // 10 sekúnd na rozhodnutie
+    );
+    
+    if (confirmed) {
         delete userCatalogs[catalogName];
-        delete globalCheckedPatterns[catalogName]; // VYMAŽ Z GLOBÁLNEHO STAVU
+        delete globalCheckedPatterns[catalogName];
 
         if (currentCatalog === catalogName) {
             switchToCoplienCatalog();
@@ -891,7 +923,14 @@ function removeCatalog(catalogName) {
             updateCatalogButtons();
         }
 
-        updateCatalogBadges(); // Aktualizuj badge
+        updateCatalogBadges(); 
+        updateGenerateButtonState();
+        
+        // ✅ OPRAVA: Nahradíme {catalogName} za skutočný názov
+        const successMessage = t.catalogDeleted.replace('{catalogName}', `"${catalogName}"`);
+        showToast(`${successMessage}`, 'success');
+    } else {
+        showToast(t.catalogDeletionCancelled, 'info', 2000);
     }
 }
 
@@ -921,6 +960,7 @@ function selectAllPatternsInLanguage(languageName) {
 
     updateAllLanguageCounters();
     updateCatalogBadges(); // Aktualizuj badge
+    updateGenerateButtonState();
 }
 
 // ========== SEQUENCE RESET + COPY FUNCTIONALITY ==========
@@ -952,7 +992,7 @@ function copySequenceToClipboard() {
             copyBtn.classList.add('bg-blue-600');
         }, 2000);
     }).catch(err => {
-        alert('Nepodarilo sa skopírovať sekvenciu');
+        showToast(translations[currentLanguage]?.copyFailed || 'Nepodarilo sa skopírovať sekvenciu', 'error');
     });
 }
 
@@ -1070,3 +1110,175 @@ function updateCatalogNameValidation() {
 // Pridáme event listenery pre validáciu
 document.getElementById('catalogName')?.addEventListener('input', updateCatalogNameValidation);
 document.getElementById('catalogName')?.addEventListener('blur', updateCatalogNameValidation);
+
+
+
+// ========== PARAMETRE ROZBALOVANIE ==========
+
+let paramsExpanded = true; // true = parametre sú viditeľné
+
+function toggleParams(expand) {
+    const paramsContainer = document.getElementById('paramsContainer');
+    const paramsArrow = document.getElementById('paramsArrow');
+    
+    if (!paramsContainer || !paramsArrow) return;
+    
+    if (expand === undefined) {
+        expand = !paramsExpanded;
+    }
+    
+    if (expand) {
+        // ROZBALIŤ - parametre sú viditeľné
+        paramsContainer.style.maxWidth = '520px';
+        paramsContainer.style.opacity = '1';
+        paramsContainer.style.padding = '0.5rem';
+        paramsArrow.style.transform = 'rotate(180deg)'; // Šípka doľava = parametre sú otvorené
+        paramsExpanded = true;
+    } else {
+        // ZBALIŤ - parametre sú skryté
+        paramsContainer.style.maxWidth = '0';
+        paramsContainer.style.opacity = '0';
+        paramsContainer.style.padding = '0';
+        paramsArrow.style.transform = 'rotate(0deg)'; // Šípka doprava = parametre sú skryté
+        paramsExpanded = false;
+    }
+}
+
+document.getElementById('toggleParamsBtn')?.addEventListener('click', () => {
+    toggleParams();
+});
+
+// Upravíme generovanie - pridáme event listener, ktorý zavolá toggleParams pred generovaním
+document.getElementById("generateBtn").addEventListener("click", async () => {
+    // Zbalíme parametre
+    toggleParams(false);
+    
+    try {
+        await generateSequence();
+    } catch (error) {
+        showToast(translations[currentLanguage]?.sequenceGenerationError || 'Chyba pri generovaní sekvencie. Skúste to znova.', 'error');
+    }
+});
+
+// Sledujeme loading indicator a po jeho zmiznutí rozbalíme parametre
+function watchLoadingIndicator() {
+    const loadingIndicator = document.getElementById('loadingIndicatorBtn');
+    if (!loadingIndicator) return;
+    
+    const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                if (loadingIndicator.classList.contains('hidden')) {
+                    // Loading bar zmizol - rozbalíme parametre
+                    toggleParams(true);
+                }
+            }
+        });
+    });
+    
+    observer.observe(loadingIndicator, { attributes: true });
+}
+
+// Spustíme sledovanie po načítaní stránky
+document.addEventListener('DOMContentLoaded', () => {
+    watchLoadingIndicator();
+    validateInputs(); 
+});
+
+// ========== VALIDÁCIA HODNÔT V PARAMETROCH ==========
+
+// ========== VALIDÁCIA HODNÔT V PARAMETROCH ==========
+
+function validateInputs() {
+    // Gamma input - rozsah 0-1
+    const gammaInput = document.getElementById('gammaInput');
+    if (gammaInput) {
+        gammaInput.addEventListener('blur', function() {
+            let value = parseFloat(this.value);
+            if (isNaN(value)) {
+                this.value = 0.9; // predvolená hodnota
+            } else {
+                // Obmedzenie na rozsah 0-1
+                value = Math.min(Math.max(value, 0), 1);
+                this.value = value;
+            }
+        });
+    }
+
+    // Epsilon input - rozsah 0.0001-1 (opravené)
+    const epsilonInput = document.getElementById('epsilonInput');
+    if (epsilonInput) {
+        epsilonInput.addEventListener('blur', function() {
+            let value = parseFloat(this.value);
+            if (isNaN(value)) {
+                this.value = 0.1; // predvolená hodnota
+            } else {
+                // Zachováme desatinné miesta
+                value = Math.min(Math.max(value, 0.0001), 1);
+                // Zaokrúhlime na 4 desatinné miesta pre čitateľnosť
+                this.value = Math.round(value * 10000) / 10000;
+            }
+        });
+    }
+
+    // Goal Reward - len nezáporné čísla
+    const goalInput = document.getElementById('goalRewardInput');
+    if (goalInput) {
+        goalInput.addEventListener('blur', function() {
+            let value = parseFloat(this.value);
+            if (isNaN(value) || value < 0) {
+                this.value = 10; // predvolená hodnota
+            }
+        });
+    }
+
+    // Other Reward - len nezáporné čísla
+    const otherInput = document.getElementById('otherRewardInput');
+    if (otherInput) {
+        otherInput.addEventListener('blur', function() {
+            let value = parseFloat(this.value);
+            if (isNaN(value) || value < 0) {
+                this.value = 1; // predvolená hodnota
+            }
+        });
+    }
+}
+
+// ========== DISABLE GENERATE BUTTON WHEN NO PATTERNS SELECTED ==========
+
+function updateGenerateButtonState() {
+    const generateBtn = document.getElementById('generateBtn');
+    if (!generateBtn) return;
+    
+    // Spočítame všetky zaškrtnuté vzory z globálneho stavu
+    let totalSelected = 0;
+    Object.keys(globalCheckedPatterns).forEach(catalogName => {
+        totalSelected += Object.keys(globalCheckedPatterns[catalogName] || {})
+            .filter(f => globalCheckedPatterns[catalogName][f]).length;
+    });
+    
+    if (totalSelected === 0) {
+        // Disable tlačidlo
+        generateBtn.disabled = true;
+        generateBtn.classList.add('opacity-50', 'cursor-not-allowed');
+        generateBtn.classList.remove('hover:bg-indigo-700');
+        generateBtn.title = translations[currentLanguage]?.selectAtLeastOnePattern || 'Vyber aspoň jeden vzor!';
+    } else {
+        // Enable tlačidlo
+        generateBtn.disabled = false;
+        generateBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+        generateBtn.classList.add('hover:bg-indigo-700');
+        generateBtn.title = '';
+    }
+}
+
+window.updateCatalogSearchPlaceholders = function() {
+    const t = window.translations?.[window.currentLanguage];
+    if (!t) return;
+    
+    // Nájdeme všetky vyhľadávacie inputy v sekciách
+    const searchInputs = document.querySelectorAll('.pattern-language-header .search-input');
+    searchInputs.forEach(input => {
+        input.placeholder = t.searchPlaceholder;
+    });
+};

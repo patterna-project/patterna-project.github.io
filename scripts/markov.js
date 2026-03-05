@@ -188,12 +188,34 @@ class MDPSequenceGenerator {
         // Ak existuje len jeden vzor, začneme cieľom
         if (!startState) startState = goalState;
 
+        // 2. Pre každý stav si pripravíme zoradené prechody z policyCalculations
+        //    Tieto dáta už máme z calculateOptimalPolicy!
+        const sortedTransitions = {};
+        
+        // Nájdeme policyCalculations z posledného kroku
+        const policyStep = this.steps.find(step => step.type === 'policy_calculation');
+        if (policyStep && policyStep.calculations) {
+            Object.entries(policyStep.calculations).forEach(([state, calc]) => {
+                // Zoradíme podľa hodnoty (value = prob * utility)
+                const transitions = Object.entries(calc.calculations)
+                    .map(([nextState, data]) => ({
+                        nextState,
+                        value: data.value
+                    }))
+                    .filter(t => t.value > 0.001) // len zmysluplné prechody
+                    .sort((a, b) => b.value - a.value)
+                    .map(t => t.nextState);
+                
+                sortedTransitions[state] = transitions;
+            });
+        }
+
         const sequence = [];
         const visited = new Set();
         let currentState = startState;
         const sequenceSteps = [];
 
-        // 2. Kráčame podľa politiky, kým neprídeme do cieľa
+        // 3. Kráčame podľa politiky, ale ak narazíme na cyklus, skúsime ďalšiu najlepšiu možnosť
         while (currentState && !visited.has(currentState)) {
             visited.add(currentState);
             const pattern = this.patterns.find(p => p.filename === currentState);
@@ -208,12 +230,26 @@ class MDPSequenceGenerator {
 
             if (currentState === goalState) break;
 
-            // Ďalší stav podľa politiky
-            currentState = policy[currentState];
-            if (!currentState) break; // bezpečnosť
+            // Hľadáme najbližší nenavštívený stav podľa priority
+            const possibleNextStates = sortedTransitions[currentState] || [];
+            let nextState = null;
+            
+            for (const candidate of possibleNextStates) {
+                if (!visited.has(candidate)) {
+                    nextState = candidate;
+                    break;
+                }
+            }
+
+            if (nextState) {
+                currentState = nextState;
+            } else {
+                // Ak už nie je žiadny nenavštívený prechod, skončíme
+                break;
+            }
         }
 
-        // 3. Ak by sme náhodou nedošli do cieľa (napr. cyklus), pridáme ho
+        // 4. Ak sme nedošli do cieľa, pridáme ho
         if (!visited.has(goalState)) {
             const goalPattern = this.patterns.find(p => p.filename === goalState);
             sequence.push(goalPattern);
@@ -241,6 +277,8 @@ class MDPSequenceGenerator {
 
         const goalState = this.determineGoalState();
         const transitionMatrix = this.createTransitionMatrix(goalState);
+
+        this.transitionMatrix = transitionMatrix;
 
         this.steps.push({
             type: 'complete_transition_matrix',
@@ -310,7 +348,7 @@ async function generateSequence() {  // Odstráň parameter selectedFiles
         });
 
         if (selectedFiles.length === 0) {
-            alert("Vyber aspoň jeden vzor!");
+            showToast(translations[currentLanguage]?.selectAtLeastOnePattern || 'Vyber aspoň jeden vzor!', 'warning');
             updateLoadingIndicator(0, '');
             return;
         }
@@ -363,7 +401,7 @@ async function generateSequence() {  // Odstráň parameter selectedFiles
         await delay(300);
 
         displayPatternSequence(result.sequence, similarityMatrix);
-        displaySimilarityMatrix(selectedPatterns, similarityMatrix);
+        displaySimilarityMatrixWithToggle(selectedPatterns, similarityMatrix);
         displayMDPSolution(result, selectedPatterns);
 
         document.getElementById("suggestionsSection").classList.remove("hidden");
@@ -372,7 +410,7 @@ async function generateSequence() {  // Odstráň parameter selectedFiles
         await delay(1000);
 
     } catch (error) {
-        alert('Chyba pri generovaní sekvencie: ' + error.message);
+        showToast((translations[currentLanguage]?.sequenceGenerationError || 'Chyba pri generovaní sekvencie: ') + error.message, 'error');
         updateLoadingIndicator(0, 'Chyba - skúste znova');
 
         setTimeout(() => {
