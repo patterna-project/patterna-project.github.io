@@ -1,11 +1,11 @@
-//matrix.js
+// matrix.js
 
 class PatternSimilarity {
     constructor() {
-        this.stopWords = new Set([
-            'a', 'an', 'the', 'and', 'it', 'is', 'to', 'at', 'in', 'we', 'of', 'be'
-        ]);
-    }
+    this.stopWords = window.customStopWords || new Set([
+        'a', 'an', 'the', 'and', 'it', 'is', 'to', 'at', 'in', 'we', 'of', 'be'
+    ]);
+}
 
     preprocessText(text) {
         return text
@@ -29,7 +29,7 @@ class PatternSimilarity {
             tf[token] = (tf[token] || 0) + 1;
         });
 
-        // Normalizácia
+        // Normalizácia TF
         Object.keys(tf).forEach(term => {
             tf[term] = tf[term] / totalTerms;
         });
@@ -37,18 +37,59 @@ class PatternSimilarity {
         return tf;
     }
 
-    calculateTFVectors(patterns) {
-        const documents = patterns.map(pattern =>
+    calculateIDF(documentsTokens) {
+        const idf = {};
+        const totalDocs = documentsTokens.length;
+
+        // Pre každý term spočítame, v koľkých dokumentoch sa vyskytuje
+        documentsTokens.forEach(tokens => {
+            const uniqueTerms = new Set(tokens);
+            uniqueTerms.forEach(term => {
+                idf[term] = (idf[term] || 0) + 1;
+            });
+        });
+
+        // Výpočet IDF: log(počet_dokumentov / počet_dokumentov_s_termom)
+        Object.keys(idf).forEach(term => {
+            idf[term] = Math.log(totalDocs / idf[term]);
+        });
+
+        return idf;
+    }
+
+    calculateTFIDF(tokens, idf) {
+        const tf = this.calculateTF(tokens);
+        const tfidf = {};
+
+        Object.keys(tf).forEach(term => {
+            tfidf[term] = tf[term] * (idf[term] || 0);
+        });
+
+        return tfidf;
+    }
+
+    calculateTFVectors(patterns, useIDF = false) {
+        // Najprv vytvoríme tokeny pre všetky dokumenty
+        const documentsTokens = patterns.map(pattern =>
             this.preprocessText(pattern.content)
         );
 
+        // Ak používame IDF, vypočítame ho
+        const idf = useIDF ? this.calculateIDF(documentsTokens) : null;
+
         return patterns.map((pattern, index) => {
-            const tokens = documents[index];
-            const tf = this.calculateTF(tokens);
+            const tokens = documentsTokens[index];
+            
+            let vector;
+            if (useIDF) {
+                vector = this.calculateTFIDF(tokens, idf);
+            } else {
+                vector = this.calculateTF(tokens);
+            }
 
             return {
                 pattern: pattern,
-                vector: tf // Používame priamo TF, nie TF-IDF
+                vector: vector
             };
         });
     }
@@ -75,8 +116,8 @@ class PatternSimilarity {
         return dotProduct / (magnitudeA * magnitudeB);
     }
 
-    calculateSimilarityMatrix(patterns) {
-        const vectors = this.calculateTFVectors(patterns); // Zmenené na TF vektory
+    calculateSimilarityMatrix(patterns, useIDF = false) {
+        const vectors = this.calculateTFVectors(patterns, useIDF);
         const matrix = {};
 
         patterns.forEach((pattern1, i) => {

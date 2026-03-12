@@ -1,4 +1,4 @@
-// ========== EXPORT ==========
+//export.js
 
 let currentExportFormat = 'txt';
 
@@ -240,11 +240,11 @@ function exportAsPng(sequenceData) {
     const logo = document.createElement('img');
     logo.src = 'assets/images/logo.png';
     logo.alt = 'Patterna Logo';
-    logo.style.height = '18px';  // Trochu väčšie
+    logo.style.height = '18px'; 
     logo.style.width = 'auto';
     logo.style.opacity = '0.7';
     logo.style.display = 'block';  // Ako blok pre lepšiu kontrolu
-    logo.style.marginTop = '6px';  // POSUN NADOL
+    logo.style.marginTop = '6px'; 
     logo.style.transform = 'translateY(2px)';  // Ďalšie posunutie (voliteľné)
 
     footer.appendChild(footerText);

@@ -156,9 +156,13 @@ function renderSimilarityGraph(patterns, similarityMatrix) {
         element: null // Sem neskôr uložíme referenciu na D3 element
     }));
     
-    // Pripravíme hrany (links) - len pre podobnosti > 0.3
+    // Pripravíme hrany (links) - len pre podobnosti > treshold
     const links = [];
-    const threshold = 0.3; // Hranica pre zobrazenie hrany
+
+    // Hranica pre zobrazenie hrany - Dynamický threshold podľa toho, či je zapnuté IDF
+    const idfCheckbox = document.getElementById('idfCheckbox');
+    const useIDF = idfCheckbox ? idfCheckbox.checked : false;
+    const threshold = useIDF ? 0.1 : 0.3; // Pre IDF použijeme nižšiu hranicu
     
     patterns.forEach((p1, i) => {
         patterns.forEach((p2, j) => {
@@ -208,20 +212,32 @@ function renderSimilarityGraph(patterns, similarityMatrix) {
         .force('charge', d3.forceManyBody().strength(-300))
         .force('center', d3.forceCenter(width / 2, height / 2))
         .force('collision', d3.forceCollide().radius(60));
-    
-    // Vytvoríme čiary (hrany) - najprv bez textov
+
+
     const link = g.append('g')
         .selectAll('line')
         .data(links)
         .enter()
         .append('line')
         .attr('stroke', d => {
-            // Farba podľa sily podobnosti - zelená
-            const intensity = Math.min(0.8, d.value);
-            return `rgba(34, 197, 94, ${intensity})`; // Zelená farba
+            let intensity;
+            if (useIDF) {
+                // Pre IDF: škálujeme od 0.25 do 0.9
+                intensity = 0.25 + (d.value * 0.65);
+            } else {
+                // Pôvodné správanie: priamo value, ale min 0.2
+                intensity = Math.min(0.9, Math.max(0.2, d.value));
+            }
+            return `rgba(34, 197, 94, ${intensity})`;
         })
-        .attr('stroke-width', d => Math.max(1, d.value * 4))
-        .attr('stroke-opacity', d => d.value)
+        .attr('stroke-width', d => {
+            if (useIDF) {
+                return Math.max(2, Math.min(6, d.value * 12));
+            } else {
+                return Math.max(1, d.value * 4);
+            }
+        })
+        .attr('stroke-opacity', 1)
         .attr('data-source', d => d.sourceId)
         .attr('data-target', d => d.targetId);
     
@@ -295,6 +311,10 @@ function renderSimilarityGraph(patterns, similarityMatrix) {
         .attr('fill', 'currentColor')
         .attr('font-size', '10px')
         .attr('class', 'text-gray-700 dark:text-gray-300');
+
+    node.each(function(d) {
+        d.element = this; // Teraz má každý uzol referenciu na svoj <g> element
+    });
     
     // Aktualizácia pozícií pri simulácii
     simulation.on('tick', () => {

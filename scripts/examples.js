@@ -1,4 +1,5 @@
-// Examples functionality
+//examples.js
+
 const examples = [
     ["build_prototypes.txt", "day_care.txt", "developer_controls_process.txt"], // A
     ["completion_headroom.txt", "informal_labor_plan.txt", "team_per_task.txt"], // B

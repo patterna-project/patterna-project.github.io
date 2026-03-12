@@ -15,7 +15,6 @@ document.addEventListener('DOMContentLoaded', function () {
         const isDark = document.documentElement.classList.contains('dark');
 
         if (isDark) {
-            // slnko
             darkIcon.classList.add('hidden');
             lightIcon.classList.remove('hidden');
         } else {

@@ -366,8 +366,6 @@ async function generateSequence() {  // Odstráň parameter selectedFiles
             throw new Error('Žiadne vybrané vzory (dáta nenájdené)');
         }
 
-        console.log('Načítané vzory:', selectedPatterns.map(p => p.name));
-
         // Fáza 1: Výpočet matice podobnosti
         updateLoadingIndicator(20, 'Načítavam vzory...');
         await delay(100);
@@ -375,8 +373,11 @@ async function generateSequence() {  // Odstráň parameter selectedFiles
         updateLoadingIndicator(40, 'Analyzujem textové opisy...');
         await delay(100);
 
+        // Zistíme, či je zaškrtnutý IDF checkbox
+        const useIDF = document.getElementById('idfCheckbox')?.checked || false;
+
         const similarityCalculator = new PatternSimilarity();
-        const similarityMatrix = similarityCalculator.calculateSimilarityMatrix(selectedPatterns);
+        const similarityMatrix = similarityCalculator.calculateSimilarityMatrix(selectedPatterns, useIDF);
 
         // Fáza 2: Generovanie sekvencie pomocou MDP
         updateLoadingIndicator(60, 'Vypočítavam podobnosti...');
@@ -407,6 +408,12 @@ async function generateSequence() {  // Odstráň parameter selectedFiles
         document.getElementById("suggestionsSection").classList.remove("hidden");
 
         updateLoadingIndicator(100, 'Hotovo! Sekvencia vygenerovaná');
+        
+        
+        // Spustíme AI evaluáciu (ak je funkcia dostupná)
+        if (typeof evaluateWithAI === 'function') {
+            evaluateWithAI(result.sequence, similarityMatrix);
+        }
         await delay(1000);
 
     } catch (error) {
@@ -433,55 +440,493 @@ function displayPatternSequence(sequence, similarityMatrix) {
 
     sequence.forEach((pattern, index) => {
         const li = document.createElement("li");
-        li.className = "pattern-item bg-gray-50 dark:bg-gray-700 p-3 rounded-lg border border-gray-200 dark:border-gray-600 cursor-move";
+        li.className = "pattern-item";
         li.draggable = true;
         li.dataset.patternName = pattern.filename;
 
         // Výpočet podobnosti s predchádzajúcim vzorom
         let similarityHTML = '';
         if (index === 0) {
-            // First pattern - show "-" instead of percentage
             similarityHTML = `
                 <span class="text-xs bg-gray-100 dark:bg-gray-600 text-gray-600 dark:text-gray-300 px-2 py-1 rounded">
                     -
                 </span>
             `;
         } else {
-            // Calculate similarity with previous pattern for other patterns
             const previousPattern = sequence[index - 1];
             const similarityWithPrevious = similarityMatrix[previousPattern.filename][pattern.filename] || 0;
-
+            const percent = similarityWithPrevious * 100;
+            const colors = getConfidenceColor(percent);
+            
             similarityHTML = `
-                <span class="text-sm text-gray-500 similarity-badge" 
-                      style="background-color: rgba(99, 102, 241, ${similarityWithPrevious * 0.5})">
+                <span class="text-xs similarity-badge px-2 py-1 rounded" 
+                      style="background: ${colors.bg}; color: ${colors.text}; border: 1px solid ${colors.border};">
                     ${(similarityWithPrevious * 100).toFixed(0)}%
                 </span>
             `;
         }
 
-        li.innerHTML = `
-            <div class="flex justify-between items-center">
-                <div>
+        // Zistenie katalógu a jazyka (rovnaké ako v showPatternDetail)
+        let catalogName = 'C & H';
+        let isUserCatalog = false;
+        let languageName = '';
+
+        if (pattern.language) {
+            if (Object.keys(userCatalogs).includes(pattern.language)) {
+                catalogName = pattern.language;
+                isUserCatalog = true;
+            } else {
+                languageName = pattern.language.replace(/_/g, ' ');
+            }
+        }
+
+        // Vytvorenie badgeov pre katalóg a jazyk
+        const catalogBadge = `
+            <span class="px-2 py-1 rounded-full text-xs font-medium ${
+                !isUserCatalog 
+                    ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200' 
+                    : 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
+            }">
+                ${catalogName}
+            </span>
+        `;
+
+        const languageBadge = languageName ? `
+            <span class="px-2 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200">
+                ${languageName}
+            </span>
+        ` : '';
+
+        // Obsahová časť - bez textu vzoru
+        const contentDiv = document.createElement('div');
+        contentDiv.className = "pattern-content";
+        contentDiv.innerHTML = `
+            <div class="flex justify-between items-start">
+                <div class="flex items-center gap-2">
                     <span class="font-semibold text-indigo-600 dark:text-indigo-400">${pattern.name}</span>
-                    <span class="text-xs bg-gray-200 dark:bg-gray-600 px-2 py-1 rounded ml-2">#${index + 1}</span>
+                    <span class="text-xs bg-gray-200 dark:bg-gray-600 px-2 py-1 rounded">#${index + 1}</span>
                 </div>
-                <div class="flex items-center space-x-2">
-                    <span class="text-xs bg-blue-100 dark:bg-blue-800 text-blue-800 dark:text-blue-200 px-2 py-1 rounded">
-                        ${pattern.language ? pattern.language.split('_')[0] : 'User'}
-                    </span>
-                    ${similarityHTML}
-                </div>
+                ${similarityHTML}
             </div>
-            <div class="text-sm text-gray-600 dark:text-gray-300 mt-1 line-clamp-2">
-                ${pattern.content.substring(0, 150)}...
+            <div class="flex flex-wrap items-center gap-2 mt-2">
+                ${catalogBadge}
+                ${languageBadge}
             </div>
         `;
 
+        // Tlačidlo
+        const button = document.createElement('button');
+        button.className = "view-pattern-btn";
+        button.setAttribute('data-filename', pattern.filename);
+        button.setAttribute('data-index', index);
+        button.setAttribute('title', translations[currentLanguage]?.patternDetailViewButton || 'Zobraziť podrobnosti');
+        button.innerHTML = `
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
+            </svg>
+        `;
+
+        li.appendChild(contentDiv);
+        li.appendChild(button);
         patternsList.appendChild(li);
     });
 
-    initializeSortable();
+    // Pridáme event listenery pre tlačidlá detailu
+    document.querySelectorAll('.view-pattern-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            e.preventDefault();
+            const filename = btn.dataset.filename;
+            const index = parseInt(btn.dataset.index);
+            showPatternDetail(filename, index, sequence, similarityMatrix);
+        });
+    });
 
+    // Výpočet celkovej spoľahlivosti
+    let totalSim = 0;
+    let count = 0;
+    for (let i = 1; i < sequence.length; i++) {
+        const prev = sequence[i-1];
+        const curr = sequence[i];
+        const sim = similarityMatrix[prev.filename][curr.filename] || 0;
+        totalSim += sim;
+        count++;
+    }
+    const avgConfidence = count > 0 ? (totalSim / count) * 100 : 0;
+    const confidenceValue = document.getElementById('confidenceValue');
+    if (confidenceValue) {
+        confidenceValue.textContent = avgConfidence.toFixed(1) + '%';
+        
+        const colors = getConfidenceColor(avgConfidence);
+        confidenceValue.style.background = colors.bg;
+        confidenceValue.style.color = colors.text;
+        confidenceValue.style.borderColor = colors.border;
+        confidenceValue.style.borderWidth = '1px';
+        confidenceValue.style.borderStyle = 'solid';
+    }
+
+    initializeSortable();
     document.getElementById('resetSequenceBtn').classList.add('hidden');
     document.getElementById('copySequenceBtn').classList.remove('hidden');
+}
+
+function updateOverallConfidenceFromDOM() {
+    const listItems = document.querySelectorAll('#patternsList .pattern-item');
+    const currentOrder = Array.from(listItems).map(item => item.dataset.patternName);
+    if (currentOrder.length < 2) {
+        document.getElementById('confidenceValue').textContent = '0%';
+        return;
+    }
+
+    let totalSim = 0;
+    for (let i = 1; i < currentOrder.length; i++) {
+        const prev = currentOrder[i-1];
+        const curr = currentOrder[i];
+        const sim = originalSimilarityMatrix[prev]?.[curr] || 0;
+        totalSim += sim;
+    }
+    const avg = (totalSim / (currentOrder.length - 1)) * 100;
+    const confidenceValue = document.getElementById('confidenceValue');
+    confidenceValue.textContent = avg.toFixed(1) + '%';
+    
+    // Nastav farbu podľa hodnoty
+    const colors = getConfidenceColor(avg);
+    confidenceValue.style.background = colors.bg;
+    confidenceValue.style.color = colors.text;
+    confidenceValue.style.borderColor = colors.border;
+    confidenceValue.style.borderWidth = '1px';
+    confidenceValue.style.borderStyle = 'solid';
+}
+
+function getConfidenceColor(percent) {
+    // percent je 0-100
+    // HSL pre plynulý prechod: červená (0°), oranžová (30°), žltá (60°), zelená (120°)
+    
+    const p = Math.min(100, Math.max(0, percent)) / 100; // 0-1
+    
+    // Pre light mode
+    if (!document.documentElement.classList.contains('dark')) {
+        // Prechod cez HSL pre plynulé farby
+        if (p < 0.25) {
+            // Červená -> oranžová (0-25%)
+            const t = p / 0.25; // 0-1
+            const hue = 0 + (30 * t); // 0° -> 30°
+            return {
+                bg: `hsl(${hue}, 100%, 95%)`,
+                text: `hsl(${hue}, 80%, 30%)`,
+                border: `hsl(${hue}, 80%, 70%)`
+            };
+        } else if (p < 0.5) {
+            // Oranžová -> žltá (25-50%)
+            const t = (p - 0.25) / 0.25; // 0-1
+            const hue = 30 + (30 * t); // 30° -> 60°
+            return {
+                bg: `hsl(${hue}, 100%, 92%)`,
+                text: `hsl(${hue}, 80%, 30%)`,
+                border: `hsl(${hue}, 80%, 65%)`
+            };
+        } else if (p < 0.75) {
+            // Žltá -> svetlozelená (50-75%)
+            const t = (p - 0.5) / 0.25; // 0-1
+            const hue = 60 + (30 * t); // 60° -> 90°
+            return {
+                bg: `hsl(${hue}, 90%, 90%)`,
+                text: `hsl(${hue}, 80%, 25%)`,
+                border: `hsl(${hue}, 70%, 60%)`
+            };
+        } else {
+            // Svetlozelená -> zelená (75-100%)
+            const t = (p - 0.75) / 0.25; // 0-1
+            const hue = 90 + (30 * t); // 90° -> 120°
+            return {
+                bg: `hsl(${hue}, 85%, 88%)`,
+                text: `hsl(${hue}, 80%, 25%)`,
+                border: `hsl(${hue}, 70%, 55%)`
+            };
+        }
+    } 
+    // Pre dark mode
+    else {
+        if (p < 0.25) {
+            // Tmavo červená -> tmavo oranžová
+            const t = p / 0.25;
+            const hue = 0 + (30 * t);
+            return {
+                bg: `hsl(${hue}, 70%, 20%)`,
+                text: `hsl(${hue}, 90%, 85%)`,
+                border: `hsl(${hue}, 70%, 35%)`
+            };
+        } else if (p < 0.5) {
+            // Tmavo oranžová -> tmavo žltá
+            const t = (p - 0.25) / 0.25;
+            const hue = 30 + (30 * t);
+            return {
+                bg: `hsl(${hue}, 70%, 22%)`,
+                text: `hsl(${hue}, 90%, 85%)`,
+                border: `hsl(${hue}, 70%, 38%)`
+            };
+        } else if (p < 0.75) {
+            // Tmavo žltá -> tmavo zelenkavá
+            const t = (p - 0.5) / 0.25;
+            const hue = 60 + (30 * t);
+            return {
+                bg: `hsl(${hue}, 65%, 20%)`,
+                text: `hsl(${hue}, 85%, 85%)`,
+                border: `hsl(${hue}, 65%, 35%)`
+            };
+        } else {
+            // Tmavo zelenkavá -> tmavo zelená
+            const t = (p - 0.75) / 0.25;
+            const hue = 90 + (30 * t);
+            return {
+                bg: `hsl(${hue}, 65%, 18%)`,
+                text: `hsl(${hue}, 85%, 85%)`,
+                border: `hsl(${hue}, 65%, 32%)`
+            };
+        }
+    }
+}
+
+// Funkcia pre zobrazenie detailu vzoru
+function showPatternDetail(filename, position, sequence, similarityMatrix) {
+    const modal = document.getElementById('patternDetailModal');
+    if (!modal) return;
+    
+    const t = translations[currentLanguage];
+
+    // Nájdeme pattern podľa filename
+    const pattern = allPatternsData[filename];
+    if (!pattern) {
+        showToast('Nepodarilo sa načítať dáta vzoru', 'error');
+        return;
+    }
+
+    // Uložíme dáta pre neskoršie použitie vo filtroch
+    modal.dataset.currentFilename = filename;
+    modal.dataset.currentPosition = position;
+    modal.dataset.currentSequence = JSON.stringify(sequence.map(p => p.filename));
+    
+    // RESET FILTRA - vždy nastavíme na "Všetky" pri otvorení
+    const filterAllBtn = document.getElementById('filterAllPatternsBtn');
+    const filterSeqBtn = document.getElementById('filterSequenceBtn');
+    
+    // Reset štýlov na predvolené
+    const resetButtonsStyle = () => {
+        filterAllBtn.className = 'px-3 py-1 text-xs rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600 font-medium transition-all duration-200';
+        filterSeqBtn.className = 'px-3 py-1 text-xs rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600 font-medium transition-all duration-200';
+    };
+    
+    resetButtonsStyle();
+    // Nastavíme "Všetky" ako aktívne
+    filterAllBtn.className = 'px-3 py-1 text-xs rounded-full bg-indigo-600 text-white font-medium transition-all duration-200';
+    
+    // Aktualizácia textov tlačidiel
+    if (filterAllBtn) filterAllBtn.textContent = t.patternDetailFilterAll || 'Všetky';
+    if (filterSeqBtn) filterSeqBtn.textContent = t.patternDetailFilterSequence || 'Len sekvencia';
+
+    // Aktualizácia nadpisov - používame ID, nie querySelector
+    document.getElementById('patternDetailName').textContent = pattern.name;
+    
+    const headers = modal.querySelectorAll('h4');
+    if (headers.length >= 3) {
+        if (headers[0]) headers[0].textContent = t.patternDetailBasicInfo || 'Základné informácie';
+        if (headers[1]) headers[1].textContent = t.patternDetailFullText || 'Celý text vzoru';
+        if (headers[2]) headers[2].textContent = t.patternDetailSimilarities || 'Podobnosti s ostatnými vzormi';
+    }
+
+    // Základné informácie
+    document.getElementById('patternDetailFullName').textContent = pattern.name;
+    document.getElementById('patternDetailFilename').textContent = pattern.filename;
+    document.getElementById('patternDetailPosition').textContent = `#${position + 1} z ${sequence.length}`;
+    document.getElementById('patternDetailContent').textContent = pattern.content;
+
+    // Badges (katalóg a jazyk)
+    const badgesContainer = document.getElementById('patternDetailBadges');
+    badgesContainer.innerHTML = '';
+
+    // Zistenie katalógu
+    let catalogName = 'C & H';
+    let isUserCatalog = false;
+    let languageName = '';
+
+    if (pattern.language) {
+        if (Object.keys(userCatalogs).includes(pattern.language)) {
+            catalogName = pattern.language;
+            isUserCatalog = true;
+        } else {
+            languageName = pattern.language.replace(/_/g, ' ');
+        }
+    }
+
+    // Katalóg badge
+    const catalogBadge = document.createElement('span');
+    catalogBadge.className = `px-3 py-1 rounded-full text-xs font-medium ${
+        !isUserCatalog 
+            ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200' 
+            : 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
+    }`;
+    catalogBadge.textContent = catalogName;
+    badgesContainer.appendChild(catalogBadge);
+
+    // Jazyk badge (ak existuje)
+    if (languageName) {
+        const langBadge = document.createElement('span');
+        langBadge.className = 'px-3 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200';
+        langBadge.textContent = languageName;
+        badgesContainer.appendChild(langBadge);
+    }
+
+    // Podobnosť s predchádzajúcim vzorom
+    const prevSimilaritySpan = document.getElementById('patternDetailPreviousSimilarity');
+    if (position > 0) {
+        const prevPattern = sequence[position - 1];
+        const similarity = similarityMatrix[prevPattern.filename]?.[filename] || 0;
+        const percent = similarity * 100;
+        const colors = getConfidenceColor(percent);
+        prevSimilaritySpan.innerHTML = `<span style="background: ${colors.bg}; color: ${colors.text}; border: 1px solid ${colors.border};" class="px-2 py-1 rounded text-xs">${percent.toFixed(1)}%</span>`;
+    } else {
+        prevSimilaritySpan.innerHTML = `<span class="text-gray-500 dark:text-gray-400 text-xs">${t.patternDetailFirstPattern || 'Prvý vzor v sekvencii'}</span>`;
+    }
+
+    // Funkcia na zobrazenie podobností podľa filtra
+    function renderSimilarities(filterType) {
+        // ZÍSKAME VŠETKY VYBRANÉ VZORY (z globCheckedPatterns)
+        const allSelectedPatterns = [];
+        Object.keys(globalCheckedPatterns).forEach(catalogName => {
+            Object.keys(globalCheckedPatterns[catalogName] || {}).forEach(f => {
+                if (globalCheckedPatterns[catalogName][f] && allPatternsData[f]) {
+                    allSelectedPatterns.push(allPatternsData[f]);
+                }
+            });
+        });
+
+        // Filtrovanie podľa typu
+        let patternsToShow = [];
+        if (filterType === 'sequence') {
+            // Iba vzory v sekvencii
+            patternsToShow = sequence;
+        } else {
+            // Všetky vybrané vzory
+            patternsToShow = allSelectedPatterns;
+        }
+
+        const similaritiesContainer = document.getElementById('patternDetailSimilarities');
+        similaritiesContainer.innerHTML = '';
+
+        const similarities = [];
+        patternsToShow.forEach((p, idx) => {
+            if (p.filename !== filename) {
+                const sim = similarityMatrix[filename]?.[p.filename] || 0;
+                
+                // Zistíme, či je vzor v sekvencii
+                const seqIndex = sequence.findIndex(s => s.filename === p.filename);
+                
+                // Určíme, či je pred/po LEN AK je v sekvencii
+                let isNext = false;
+                let isPrev = false;
+                if (seqIndex !== -1) {
+                    isNext = seqIndex === position + 1;
+                    isPrev = seqIndex === position - 1;
+                }
+                
+                similarities.push({
+                    name: p.name,
+                    similarity: sim,
+                    filename: p.filename,
+                    isNext: isNext,
+                    isPrev: isPrev,
+                    inSequence: seqIndex !== -1
+                });
+            }
+        });
+
+        // Zoradenie podľa podobnosti (od najväčšej)
+        similarities.sort((a, b) => b.similarity - a.similarity);
+
+        if (similarities.length === 0) {
+            const emptyMsg = document.createElement('div');
+            emptyMsg.className = 'text-gray-500 dark:text-gray-400 text-sm italic text-center py-4';
+            emptyMsg.textContent = t.patternDetailNoSimilarities || 'Žiadne podobnosti s ostatnými vzormi';
+            similaritiesContainer.appendChild(emptyMsg);
+        } else {
+            similarities.forEach(sim => {
+                const percent = sim.similarity * 100;
+                const colors = getConfidenceColor(percent);
+                
+                const item = document.createElement('div');
+                item.className = `flex justify-between items-center p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors`;
+                
+                const nextLabel = t.patternDetailNextLabel || '(nasledujúci)';
+                const prevLabel = t.patternDetailPrevLabel || '(predchádzajúci)';
+                
+                // Zobrazíme označenie LEN AK je vzor v sekvencii a je pred/po
+                let labelHtml = '';
+                if (sim.inSequence) {
+                    if (sim.isNext) labelHtml = `<span class="text-xs text-indigo-600 dark:text-indigo-400 ml-2">${nextLabel}</span>`;
+                    if (sim.isPrev) labelHtml = `<span class="text-xs text-indigo-600 dark:text-indigo-400 ml-2">${prevLabel}</span>`;
+                }
+                
+                // Pre lepšiu prehľadnosť môžeme pridať indikátor, že vzor nie je v sekvencii
+                let notInSequenceHtml = '';
+                if (!sim.inSequence && filterType === 'all') {
+                    notInSequenceHtml = `<span class="text-xs text-gray-400 dark:text-gray-500 ml-2">${t.patternDetailNotInSequence || '(mimo sekvencie)'}</span>`;
+                }
+                
+                item.innerHTML = `
+                    <div class="flex items-center gap-2">
+                        <span class="text-sm text-gray-700 dark:text-gray-300">${sim.name}</span>
+                        ${labelHtml}
+                        ${notInSequenceHtml}
+                    </div>
+                    <span class="text-sm font-medium similarity-badge px-2 py-1 rounded" 
+                        style="background: ${colors.bg}; color: ${colors.text}; border: 1px solid ${colors.border};">
+                        ${percent.toFixed(1)}%
+                    </span>
+                `;
+                
+                similaritiesContainer.appendChild(item);
+            });
+        }
+    }
+
+    // Štandardne zobrazíme všetky
+    renderSimilarities('all');
+
+    // Event listenery pre tlačidlá
+    const allBtn = document.getElementById('filterAllPatternsBtn');
+    const seqBtn = document.getElementById('filterSequenceBtn');
+
+    allBtn.onclick = () => {
+        resetButtonsStyle();
+        allBtn.className = 'px-3 py-1 text-xs rounded-full bg-indigo-600 text-white font-medium transition-all duration-200';
+        renderSimilarities('all');
+    };
+
+    seqBtn.onclick = () => {
+        resetButtonsStyle();
+        seqBtn.className = 'px-3 py-1 text-xs rounded-full bg-indigo-600 text-white font-medium transition-all duration-200';
+        renderSimilarities('sequence');
+    };
+
+    // Zobrazenie modálu
+    modal.classList.remove('hidden');
+
+    // Event listener pre zatvorenie
+    const closeModal = () => modal.classList.add('hidden');
+    
+    document.getElementById('closePatternDetailModal').onclick = closeModal;
+    
+    // Zatvorenie kliknutím mimo modál
+    modal.onclick = (e) => {
+        if (e.target === modal) closeModal();
+    };
+
+    // ESC klávesa
+    const escHandler = (e) => {
+        if (e.key === 'Escape') {
+            closeModal();
+            document.removeEventListener('keydown', escHandler);
+        }
+    };
+    document.addEventListener('keydown', escHandler);
 }
