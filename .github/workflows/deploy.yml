@@ -1,0 +1,43 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ "main" ]  # Spustí sa pri pusli do main vetvy
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Create config file with API key
+        run: |
+          # Vytvoríme priečinok scripts ak neexistuje
+          mkdir -p scripts
+          
+          # Vygenerujeme config.js s API kľúčom z Secrets
+          echo "// Tento súbor je automaticky generovaný pri nasadení" > scripts/config.js
+          echo "window.APP_CONFIG = {" >> scripts/config.js
+          echo "  GEMINI_API_KEY: '${{ secrets.GEMINI_API_KEY }}'" >> scripts/config.js
+          echo "};" >> scripts/config.js
+          
+          # Pre kontrolu vypíšeme, že súbor bol vytvorený (bez obsahu)
+          echo "✅ config.js vytvorený"
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./
+          publish_branch: gh-pages  # Vetva pre GitHub Pages
+          keep_files: false
+          full_commit_message: "Deploy: ${{ github.event.head_commit.message }}"
+          
+      - name: Notify completion
+        run: echo "✅ Deployment completed successfully"
