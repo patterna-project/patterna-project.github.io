@@ -339,9 +339,11 @@ function delay(ms) {
 
 async function generateSequence() {  // Odstráň parameter selectedFiles
 
-    // Zrušíme všetky predchádzajúce AI volania - HNED NA ZAČIATKU!
+    // 1. ZRUŠÍME STARÉ AI VOLANIE
     if (typeof window.cancelAICall === 'function') {
         window.cancelAICall();
+        // Počkáme na dokončenie zrušenia
+        await new Promise(resolve => setTimeout(resolve, 100));
     }
 
     updateLoadingIndicator(0, 'Spúšťam analýzu...');
