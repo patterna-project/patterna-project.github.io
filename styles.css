@@ -1,0 +1,2996 @@
+dark {
+    color-scheme: dark;
+}
+
+/* Light mode - pozadie s gradientom */
+html:not(.dark) body {
+    background-color: #f3f4f6;
+    color: #1f2937;
+}
+
+/* Dark mode - pozadie s gradientom */
+.dark body {
+    background-color: #111827;
+    color: #e5e7eb;
+}
+
+.dark .bg-white {
+    background-color: #1f2937;
+}
+
+.dark .text-gray-800 {
+    color: #e5e7eb;
+}
+
+.dark .border-gray-300 {
+    border-color: #4b5563;
+}
+
+.dark .bg-indigo-600 {
+    background-color: #4338ca;
+}
+
+.dark .bg-red-500 {
+    background-color: #dc2626;
+}
+
+.dark .bg-green-600 {
+    background-color: #16a34a;
+}
+
+.dark .bg-yellow-50 {
+    background-color: #78350f;
+}
+
+.dark .border-yellow-400 {
+    border-color: #d97706;
+}
+
+.dark .text-gray-600 {
+    color: #9ca3af;
+}
+
+.dark .bg-gray-100 {
+    background-color: #111827;
+}
+
+.dark .border-gray-700 {
+    border-color: #374151;
+}
+
+.dark .bg-gray-800 {
+    background-color: #1f2937;
+}
+
+.dark .text-gray-400 {
+    color: #9ca3af;
+}
+
+.dark .bg-gray-700 {
+    background-color: #374151;
+}
+
+.dark .bg-indigo-100 {
+    background-color: #3730a3;
+}
+
+.pattern-language-section {
+    width: 100%;
+}
+
+.pattern-language-header {
+    transition: background-color 0.2s ease;
+    width: 100%;
+}
+
+.pattern-language-header:hover {
+    background-color: #e5e7eb;
+}
+
+.dark .pattern-language-header:hover {
+    background-color: #4b5563;
+    /* gray-600 */
+}
+
+.pattern-language-content {
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.patterns-grid {
+    max-height: 12rem;
+    /* 48px * 3 = 144px */
+    overflow-y: auto;
+}
+
+.patterns-grid label {
+    width: 100%;
+    margin-bottom: 0.25rem;
+    /* gap-1 equivalent */
+}
+
+.patterns-grid::-webkit-scrollbar {
+    width: 6px;
+}
+
+.patterns-grid::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+.patterns-grid::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 3px;
+}
+
+.patterns-grid::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+.dark .patterns-grid::-webkit-scrollbar-track {
+    background: #374151;
+}
+
+.dark .patterns-grid::-webkit-scrollbar-thumb {
+    background: #6b7280;
+}
+
+.dark .patterns-grid::-webkit-scrollbar-thumb:hover {
+    background: #9ca3af;
+}
+
+.patterns-grid label {
+    transition: all 0.2s ease;
+    border-left: 3px solid transparent;
+}
+
+.patterns-grid label:hover {
+    background-color: #eef2ff !important;
+    border-left-color: #4f46e5;
+    transform: translateX(2px);
+}
+
+.dark .patterns-grid label:hover {
+    background-color: #374151 !important;
+    border-left-color: #818cf8;
+}
+
+.pattern-language-header svg {
+    transition: transform 0.3s ease;
+}
+
+/* Loading indicator styles */
+.loading-bar {
+    width: 100%;
+    height: 4px;
+    background-color: #e5e7eb;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.loading-progress {
+    height: 100%;
+    background-color: #4f46e5;
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+html:not(.dark) {
+    color-scheme: light;
+}
+
+html:not(.dark) .bg-white {
+    background-color: #ffffff;
+}
+
+html:not(.dark) .bg-gray-100 {
+    background-color: #f3f4f6;
+}
+
+html:not(.dark) .text-gray-600 {
+    color: #4b5563;
+}
+
+html:not(.dark) .text-gray-400 {
+    color: #9ca3af;
+}
+
+html:not(.dark) input,
+html:not(.dark) textarea,
+html:not(.dark) select {
+    background-color: #ffffff;
+    color: #1f2937;
+    border-color: #d1d5db;
+}
+
+html:not(.dark) input:focus,
+html:not(.dark) textarea:focus,
+html:not(.dark) select:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.5);
+}
+
+html:not(.dark) input::placeholder,
+html:not(.dark) textarea::placeholder {
+    color: #9ca3af;
+}
+
+html:not(.dark) #examplesMenu button {
+    color: #1f2937;
+}
+
+html:not(.dark) .text-gray-100 {
+    color: #1f2937;
+}
+
+html:not(.dark) .bg-gray-800 {
+    background-color: #ffffff;
+}
+
+html:not(.dark) .border-gray-700 {
+    border-color: #d1d5db;
+}
+
+html:not(.dark) .bg-gray-700 {
+    background-color: #e5e7eb;
+}
+
+html:not(.dark) .bg-indigo-100 {
+    background-color: #eef2ff;
+}
+
+html:not(.dark) .bg-red-500 {
+    background-color: #ef4444;
+}
+
+html:not(.dark) .bg-green-600 {
+    background-color: #16a34a;
+}
+
+html:not(.dark) .bg-yellow-50 {
+    background-color: #fefce8;
+}
+
+html:not(.dark) .border-yellow-400 {
+    border-color: #facc15;
+}
+
+html:not(.dark) #aboutModal,
+html:not(.dark) #faqModal {
+    background-color: rgba(0, 0, 0, 0.5) !important;
+}
+
+html:not(.dark) #aboutModal>div,
+html:not(.dark) #faqModal>div {
+    background-color: #ffffff !important;
+    color: #1f2937;
+}
+
+html:not(.dark) #aboutModal h3,
+html:not(.dark) #faqModal h3 {
+    color: #1f2937;
+}
+
+html:not(.dark) #closeAboutModal svg,
+html:not(.dark) #closeFaqModal svg {
+    stroke: #1f2937;
+}
+
+#mainNav.scrolled {
+    padding-top: 0.5rem !important;
+    padding-bottom: 0.5rem !important;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    width: calc(100% - 4rem) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    left: 0;
+    right: 0;
+    transition: all 0.3s ease;
+}
+
+/* Make logo smaller when scrolled */
+#mainNav.scrolled img {
+    height: 2rem !important;
+    transition: height 0.3s ease;
+}
+
+/* Make buttons smaller when scrolled */
+#mainNav.scrolled button {
+    padding-top: 0.375rem !important;
+    padding-bottom: 0.375rem !important;
+    font-size: 0.875rem !important;
+}
+
+/* Adjust main content padding when header is scrolled */
+#mainNav.scrolled~main {
+    padding-top: 8rem;
+}
+
+
+/* Light mode footer styles */
+html:not(.dark) footer {
+    background-color: #f9fafb;
+    border-top-color: #e5e7eb;
+}
+
+html:not(.dark) footer h3 {
+    color: #111827;
+}
+
+html:not(.dark) footer a {
+    color: #4b5563;
+}
+
+html:not(.dark) footer a:hover {
+    color: #1e40af;
+}
+
+html:not(.dark) footer .text-gray-600 {
+    color: #4b5563;
+}
+
+html:not(.dark) footer .text-indigo-600 {
+    color: #4f46e5;
+}
+
+html:not(.dark) footer .border-t {
+    border-top-color: #e5e7eb;
+}
+
+/* Dark mode footer styles */
+.dark footer {
+    background-color: #1f2937;
+    border-top-color: #374151;
+}
+
+.dark footer h3 {
+    color: #f3f4f6;
+}
+
+.dark footer a {
+    color: #9ca3af;
+}
+
+.dark footer a:hover {
+    color: #818cf8;
+}
+
+
+/* Light mode -  pattern language sections */
+html:not(.dark) .pattern-language-header {
+    background-color: #f8fafc !important;
+    color: #1f2937 !important;
+}
+
+html:not(.dark) #similarityInfo h3,
+html:not(.dark) #mdpSolution h3 {
+    color: #1f2937 !important;
+}
+
+html:not(.dark) .pattern-language-header h3 {
+    color: #1f2937 !important;
+}
+
+html:not(.dark) .pattern-language-content {
+    border-color: #d1d5db !important;
+    background-color: #ffffff !important;
+}
+
+html:not(.dark) .patterns-grid label {
+    color: #374151 !important;
+}
+
+/* Oprava hover pre patterny v light mode */
+html:not(.dark) .patterns-grid label:hover {
+    background-color: #e0f2fe !important;
+    /* Svetlo modrá (cyan-50) */
+    border-left-color: #0284c7 !important;
+    /* Modrá (sky-600) */
+    transform: translateX(2px);
+}
+
+html:not(.dark) .language-counter {
+    color: #6b7280 !important;
+}
+
+html:not(.dark) .select-all-btn:hover {
+    color: #374151 !important;
+}
+
+html:not(.dark) .patterns-grid span {
+    color: #374151 !important;
+}
+
+html:not(.dark) #catalogModal>div {
+    background-color: #ffffff !important;
+    color: #1f2937 !important;
+}
+
+html:not(.dark) #catalogModal h3 {
+    color: #1f2937 !important;
+}
+
+html:not(.dark) #catalogModal label {
+    color: #374151 !important;
+}
+
+html:not(.dark) #catalogModal input {
+    background-color: #ffffff !important;
+    color: #1f2937 !important;
+    border-color: #d1d5db !important;
+}
+
+html:not(.dark) #suggestionsSection {
+    background-color: #ffffff !important;
+    color: #1f2937 !important;
+}
+
+html:not(.dark) .pattern-item {
+    background-color: #f8fafc !important;
+    border-color: #e5e7eb !important;
+    color: #374151 !important;
+}
+
+html:not(.dark) .pattern-item .font-semibold {
+    color: #4f46e5 !important;
+}
+
+html:not(.dark) .pattern-item .text-xs {
+    background-color: #e5e7eb !important;
+    color: #374151 !important;
+}
+
+html:not(.dark) .pattern-item .bg-blue-100 {
+    background-color: #dbeafe !important;
+    color: #1e40af !important;
+}
+
+html:not(.dark) .pattern-item .text-gray-500 {
+    color: #6b7280 !important;
+}
+
+html:not(.dark) .pattern-item .text-sm.text-gray-600 {
+    color: #4b5563 !important;
+}
+
+html:not(.dark) #termsModal {
+    background-color: rgba(0, 0, 0, 0.5) !important;
+}
+
+html:not(.dark) #termsModal>div {
+    background-color: #ffffff !important;
+    color: #1f2937;
+}
+
+html:not(.dark) #termsModal h3 {
+    color: #1f2937;
+}
+
+html:not(.dark) #closeTermsModal svg {
+    stroke: #1f2937;
+}
+
+html:not(.dark) .terms-question {
+    color: #1f2937 !important;
+}
+
+html:not(.dark) .terms-question:hover {
+    color: #1e40af !important;
+}
+
+html:not(.dark) .terms-question svg {
+    stroke: #1f2937;
+}
+
+html:not(.dark) .terms-answer p {
+    color: #4b5563;
+}
+
+html:not(.dark) #faqModal {
+    background-color: rgba(0, 0, 0, 0.5) !important;
+}
+
+html:not(.dark) #faqModal>div {
+    background-color: #ffffff !important;
+    color: #1f2937;
+}
+
+html:not(.dark) #faqModal h3 {
+    color: #1f2937;
+}
+
+html:not(.dark) #closeFaqModal svg {
+    stroke: #1f2937;
+}
+
+html:not(.dark) .faq-question {
+    color: #1f2937 !important;
+}
+
+html:not(.dark) .faq-question:hover {
+    color: #1e40af !important;
+}
+
+html:not(.dark) .faq-question svg {
+    stroke: #1f2937;
+}
+
+html:not(.dark) .faq-answer p {
+    color: #4b5563;
+}
+
+main {
+    padding-top: 10rem;
+}
+
+.container.mx-auto.p-6 {
+    margin-top: 6rem;
+}
+
+footer {
+    transition: all 0.3s ease;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    min-height: 60px;
+    overflow: hidden;
+}
+
+footer h3 {
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+    margin: 0;
+    transition: opacity 0.3s ease;
+}
+
+footer:hover h3 {
+    opacity: 1;
+    height: auto;
+    margin-bottom: 1rem;
+}
+
+footer .border-t {
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+    transition: opacity 0.3s ease;
+}
+
+footer:hover .border-t {
+    opacity: 1;
+    height: auto;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+footer .container {
+    opacity: 1 !important;
+    transform: none !important;
+}
+
+footer:not(:hover) .container>.grid {
+    gap: 1rem;
+}
+
+footer:hover .container>.grid {
+    gap: 2rem;
+}
+
+footer.force-expand {
+    max-height: 500px !important;
+}
+
+footer.force-expand h3,
+footer.force-expand .border-t {
+    opacity: 1 !important;
+    height: auto !important;
+    overflow: visible !important;
+}
+
+footer.force-expand h3 {
+    margin-bottom: 1rem !important;
+}
+
+footer.force-expand .border-t {
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+}
+
+footer.force-expand:hover h3,
+footer.force-expand:hover .border-t {
+    opacity: 1 !important;
+    transform: none !important;
+}
+
+footer:hover .container>.grid {
+    gap: 2rem;
+}
+
+footer.force-expand .container>.grid,
+footer.force-expand:hover .container>.grid {
+    gap: 2rem !important;
+}
+
+footer .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+footer .grid {
+    width: 100%;
+    justify-content: center;
+}
+
+footer .grid>div {
+    min-width: 250px;
+    max-width: 350px;
+}
+
+footer .border-t {
+    width: 100%;
+    padding: 1rem 0;
+}
+
+footer ul,
+footer .flex.items-center {
+    justify-content: flex-start;
+}
+
+@media (max-width: 768px) {
+    footer .grid>div {
+        max-width: 100%;
+        text-align: center;
+    }
+
+    footer ul,
+    footer .flex.items-center {
+        justify-content: center;
+    }
+}
+
+/* Footer Centering */
+footer .container {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+footer .flex.justify-center {
+    width: 100%;
+}
+
+footer .grid>div {
+    flex: 1;
+    min-width: 0;
+}
+
+@media (min-width: 768px) {
+    footer .grid>div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    footer ul {
+        align-items: center;
+    }
+}
+
+footer .border-t {
+    width: 100%;
+}
+
+footer {
+    pointer-events: auto !important;
+}
+
+footer * {
+    pointer-events: auto !important;
+}
+
+footer,
+footer .container,
+footer .grid>div {
+    transition: opacity 0.3s ease, padding 0.3s ease;
+}
+
+#patternCheckboxes {
+    max-height: 16rem;  
+    overflow-y: auto;
+}
+   
+
+#patternCheckboxes::-webkit-scrollbar {
+    width: 8px;
+}
+
+#patternCheckboxes::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+#patternCheckboxes::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+
+#patternCheckboxes::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+.dark #patternCheckboxes::-webkit-scrollbar-track {
+    background: #374151;
+}
+
+.dark #patternCheckboxes::-webkit-scrollbar-thumb {
+    background: #6b7280;
+}
+
+.dark #patternCheckboxes::-webkit-scrollbar-thumb:hover {
+    background: #9ca3af;
+}
+
+/* Logo slide-in animation */
+#mainNav img {
+    transform: translateX(50px);
+    opacity: 0;
+    animation: slideInLogo 0.8s ease-out 0.3s forwards;
+}
+
+@keyframes slideInLogo {
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+#resetSequenceBtn,
+#copySequenceBtn {
+    transition: all 0.3s ease;
+}
+
+#copySequenceBtn.bg-green-600 {
+    background-color: #16a34a;
+}
+
+#copySequenceBtn.bg-green-600:hover {
+    background-color: #15803d;
+}
+
+
+/* Dark mode for language dropdown */
+.dark #languageMenu {
+    background-color: #1f2937;
+    border-color: #374151;
+}
+
+.dark #languageMenu button {
+    color: #e5e7eb;
+}
+
+.dark #languageMenu button:hover {
+    background-color: #374151;
+}
+
+/* Light mode for language dropdown */
+html:not(.dark) #languageMenu {
+    background-color: #ffffff;
+    border-color: #d1d5db;
+}
+
+html:not(.dark) #languageMenu button {
+    color: #1f2937;
+}
+
+html:not(.dark) #languageMenu button:hover {
+    background-color: #eef2ff;
+    color: #1f2937;
+}
+
+/* Moon icon positioning - RIGHT SIDE */
+#moonIcon.moon-icon {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    z-index: 60;
+    pointer-events: none;
+    top: 0;
+    right: 0;
+    left: auto;
+    margin-right: 8px;
+    margin-top: -8px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+a.flex.items-center.relative {
+    position: relative !important;
+}
+
+.dark #moonIcon.moon-icon {
+    opacity: 1 !important;
+}
+
+html:not(.dark) #moonIcon.moon-icon {
+    opacity: 0 !important;
+}
+
+#mainNav.scrolled #moonIcon.moon-icon {
+    width: 16px !important;
+    height: 16px !important;
+    transition: opacity 0.3s ease, width 0.3s ease, height 0.3s ease;
+}
+
+#languageToggle img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+#languageMenu img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+#mainNav.scrolled #languageToggle {
+    height: 2.25rem !important;
+    min-height: 2.25rem !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+#mainNav.scrolled button:not(#darkModeToggle) {
+    height: 2.25rem !important;
+    min-height: 2.25rem !important;
+    box-sizing: border-box !important;
+}
+
+#mainNav.scrolled #examplesToggle,
+#mainNav.scrolled #loadCatalogBtn,
+#mainNav.scrolled #clearBtn {
+    height: 2.25rem !important;
+    min-height: 2.25rem !important;
+}
+
+#loadCatalogBtn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+#loadCatalogBtn span {
+    display: inline !important;
+    font-weight: bold !important;
+    font-size: 1.1em !important;
+}
+
+#loadCatalogBtn.flex.items-center {
+    display: flex !important;
+    align-items: center !important;
+}
+
+#mainNav.scrolled #loadCatalogBtn {
+    height: 2.25rem !important;
+    min-height: 2.25rem !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+html:not(.dark) #examplesToggle:hover,
+html:not(.dark) #loadCatalogBtn:hover,
+html:not(.dark) #clearBtn:hover,
+html:not(.dark) #languageToggle:hover {
+    color: #1e40af !important;
+}
+
+html:not(.dark) #examplesToggle:hover,
+html:not(.dark) #loadCatalogBtn:hover,
+html:not(.dark) #languageToggle:hover {
+    background-color: #6f86b6 !important;
+}
+
+html:not(.dark) #clearBtn:hover {
+    background-color: #dc2626 !important;
+    color: white !important;
+}
+
+.dark #clearBtn:hover {
+    background-color: #560000 !important;
+}
+
+.dark #darkModeToggle:hover {
+    background-color: #3730a3 !important; 
+}
+
+#aboutModal>div::-webkit-scrollbar,
+#faqModal>div::-webkit-scrollbar,
+#termsModal>div::-webkit-scrollbar,
+#catalogModal>div::-webkit-scrollbar {
+    width: 8px;
+}
+
+#aboutModal>div::-webkit-scrollbar-track,
+#faqModal>div::-webkit-scrollbar-track,
+#termsModal>div::-webkit-scrollbar-track,
+#catalogModal>div::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+#aboutModal>div::-webkit-scrollbar-thumb,
+#faqModal>div::-webkit-scrollbar-thumb,
+#termsModal>div::-webkit-scrollbar-thumb,
+#catalogModal>div::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+
+#aboutModal>div::-webkit-scrollbar-thumb:hover,
+#faqModal>div::-webkit-scrollbar-thumb:hover,
+#termsModal>div::-webkit-scrollbar-thumb:hover,
+#catalogModal>div::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+/* Dark mode styles for modal scrollbars */
+.dark #aboutModal>div::-webkit-scrollbar-track,
+.dark #faqModal>div::-webkit-scrollbar-track,
+.dark #termsModal>div::-webkit-scrollbar-track,
+.dark #catalogModal>div::-webkit-scrollbar-track {
+    background: #374151;
+}
+
+.dark #aboutModal>div::-webkit-scrollbar-thumb,
+.dark #faqModal>div::-webkit-scrollbar-thumb,
+.dark #termsModal>div::-webkit-scrollbar-thumb,
+.dark #catalogModal>div::-webkit-scrollbar-thumb {
+    background: #6b7280;
+}
+
+.dark #aboutModal>div::-webkit-scrollbar-thumb:hover,
+.dark #faqModal>div::-webkit-scrollbar-thumb:hover,
+.dark #termsModal>div::-webkit-scrollbar-thumb:hover,
+.dark #catalogModal>div::-webkit-scrollbar-thumb:hover {
+    background: #9ca3af;
+}
+
+#mdpSteps table {
+    min-width: 300px;
+}
+
+#mdpSteps .bg-white {
+    transition: all 0.3s ease;
+}
+
+#mdpSteps .bg-white:hover {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.dark #mdpSteps .bg-white:hover {
+    box-shadow: 0 4px 6px -1px rgba(255, 255, 255, 0.1);
+}
+
+
+.mdp-collapsible {
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.mdp-collapsible .mdp-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    cursor: pointer;
+    user-select: none;
+    padding: 0.5rem 0.75rem;
+}
+
+.mdp-collapsible .mdp-header .mdp-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex: 1;
+    min-width: 0;
+}
+
+.mdp-collapsible .mdp-header .mdp-summary {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex: 1;
+    min-width: 0;
+    font-size: 0.875rem;
+    color: #374151; 
+}
+
+.dark .mdp-collapsible .mdp-header .mdp-summary {
+    color: #e5e7eb; 
+}
+
+.mdp-collapsible .mdp-arrow {
+    transition: transform 0.25s ease;
+    transform-origin: center;
+    display: inline-block;
+    transform: rotate(180deg);
+}
+
+.mdp-collapsible[aria-expanded="true"] .mdp-arrow {
+    transform: rotate(0deg);
+}
+
+.mdp-content {
+    transition: max-height 0.28s ease, padding 0.25s ease;
+    overflow: hidden;
+    max-height: 0;
+    padding: 0 0.75rem;
+}
+
+.mdp-content.expanded {
+    padding: 0.75rem;
+    max-height: 2000px;
+}
+
+.mdp-collapsed-summary {
+    font-size: 0.9rem;
+    color: #6b7280; 
+}
+.dark .mdp-collapsed-summary {
+    color: #9ca3af; 
+}
+
+#mdpSteps .bg-white {
+    transition: box-shadow 0.2s ease;
+}
+#mdpSteps .bg-white:hover {
+    box-shadow: 0 6px 16px -6px rgba(0,0,0,0.2);
+}
+
+/* Loading indicator animations */
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.7;
+    }
+}
+
+.loading-pulse {
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* Back to top button */
+#backToTopBtn {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
+}
+
+#backToTopBtn.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+#backToTopBtn:hover {
+    transform: scale(1.1);
+}
+
+/* Dark mode styles for back to top button */
+.dark #backToTopBtn {
+    background-color: #4f46e5;
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+}
+
+.dark #backToTopBtn:hover {
+    background-color: #6366f1;
+}
+
+/* Light mode styles - svetlejšia modrá */
+html:not(.dark) #backToTopBtn {
+    background-color: #3b82f6;
+    /* Svetlejšia modrá (tailwind blue-500) */
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+}
+
+html:not(.dark) #backToTopBtn:hover {
+    background-color: #2563eb;
+    /* O niečo tmavšia pri hoveri (blue-600) */
+}
+
+/* Ensure button is above other elements */
+#backToTopBtn {
+    z-index: 9999;
+}
+
+/* Smooth scroll behavior */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Search container hidden state */
+.search-container.search-hidden {
+    display: none;
+}
+
+/* Search input styles */
+.search-container {
+    position: relative;
+    display: inline-block;
+}
+
+.search-input {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' class='h-4 w-4' fill='none' viewBox='0 0 24 24' stroke='%239ca3af'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z'%3E%3C/path%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: 8px center;
+    background-size: 14px;
+}
+
+.dark .search-input {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' class='h-4 w-4' fill='none' viewBox='0 0 24 24' stroke='%236b7280'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z'%3E%3C/path%3E%3C/svg%3E");
+}
+
+.search-input:focus {
+    width: 12rem !important;
+}
+
+.pattern-language-header {
+    user-select: none;
+}
+
+.pattern-language-header .search-container {
+    user-select: text;
+}
+
+.bg-white.rounded-2xl.shadow {
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.bg-white.rounded-2xl.shadow:hover {
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Pre sekciu s navrhnutou sekvenciou */
+#suggestionsSection {
+    border: 1px solid #e5e7eb;
+    background-color: white;
+    max-width: 100%;
+    word-wrap: break-word;
+    height: fit-content;
+    /* Výška presne podľa obsahu */
+    /* Odstránené všetky sticky a height obmedzenia */
+}
+
+/* Dark mode podpora */
+.dark #suggestionsSection {
+    border-color: #374151;
+    background-color: #1f2937;
+}
+
+/* Animácia pre postupné zobrazenie vzorov v sekvencii */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.pattern-item {
+    animation: slideIn 0.3s ease forwards;
+}
+
+/* Postupné oneskorenie pre každý vzor - pekne jeden po druhom */
+.pattern-item:nth-child(1) {
+    animation-delay: 0.05s;
+}
+
+.pattern-item:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.pattern-item:nth-child(3) {
+    animation-delay: 0.15s;
+}
+
+.pattern-item:nth-child(4) {
+    animation-delay: 0.2s;
+}
+
+.pattern-item:nth-child(5) {
+    animation-delay: 0.25s;
+}
+
+.pattern-item:nth-child(6) {
+    animation-delay: 0.3s;
+}
+
+.pattern-item:nth-child(7) {
+    animation-delay: 0.35s;
+}
+
+.pattern-item:nth-child(8) {
+    animation-delay: 0.4s;
+}
+
+.pattern-item:nth-child(9) {
+    animation-delay: 0.45s;
+}
+
+.pattern-item:nth-child(10) {
+    animation-delay: 0.5s;
+}
+
+
+/* Catalog badge - fix pre plynulé zobrazenie */
+.catalog-badge {
+    animation: fadeIn 0.2s ease;
+    z-index: 10;
+    transform: translateY(-50%) !important;
+    /* Vynútime pozíciu hneď */
+    top: 50% !important;
+    right: -0.5rem !important;
+    /* -right-2 = -0.5rem */
+    position: absolute;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50%) scale(0.8);
+        /* Zachováme translateY */
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(-50%) scale(1);
+    }
+}
+
+/* Light mode pre catalog badge */
+html:not(.dark) .catalog-badge {
+    background-color: #8c87ed !important;
+    /* Indigo-600 */
+    color: white !important;
+    box-shadow: 0 2px 4px rgba(79, 70, 229, 0.3);
+}
+
+/* Dark mode pre catalog badge (už máš, ale pre istotu) */
+.dark .catalog-badge {
+    background-color: #4f46e5;
+    /* indigo-600 */
+    color: white;
+}
+
+html:not(.dark) .select-all-btn:hover {
+    color: #374151 !important;
+    /* gray-700 */
+}
+
+/* Light mode pre search input */
+html:not(.dark) .search-input {
+    background-color: #ffffff;
+    border-color: #d1d5db;
+    color: #1f2937;
+}
+
+html:not(.dark) .search-input:focus {
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 1px #4f46e5;
+}
+
+html:not(.dark) .search-input::placeholder {
+    color: #9ca3af;
+}
+
+/* Light mode pre MDP steps */
+html:not(.dark) .mdp-collapsible .mdp-header .mdp-summary {
+    color: #4b5563;
+}
+
+html:not(.dark) .mdp-collapsible .mdp-header:hover {
+    background-color: #f3f4f6;
+}
+
+html:not(.dark) .mdp-content {
+    background-color: #ffffff;
+}
+
+/* Light mode pre loading indicator */
+html:not(.dark) .loading-bar {
+    background-color: #e5e7eb;
+}
+
+html:not(.dark) .loading-progress {
+    background-color: #4f46e5;
+}
+
+/* Light mode pre similarity matrix */
+html:not(.dark) #similarityMatrix td {
+    background-color: #ffffff;
+}
+
+html:not(.dark) #similarityMatrix th {
+    background-color: #f3f4f6;
+    color: #1f2937;
+}
+
+html:not(.dark) .text-indigo-600 {
+    color: #4f46e5;
+}
+
+html:not(.dark) .text-green-600 {
+    color: #16a34a;
+}
+
+.dark .text-indigo-400 {
+    color: #818cf8;
+}
+
+.dark .text-green-400 {
+    color: #4ade80;
+}
+
+html:not(.dark) .text-gray-500 {
+    color: #6b7280;
+}
+
+.dark .text-gray-300 {
+    color: #d1d5db;
+}
+
+html:not(.dark) .bg-gray-50 {
+    background-color: #f9fafb;
+}
+
+.dark .bg-gray-600 {
+    background-color: #4b5563;
+}
+
+html:not(.dark) .bg-green-50 {
+    background-color: #f0fdf4;
+}
+
+.dark .bg-green-900 {
+    background-color: #14532d;
+}
+
+html:not(.dark) .border-green-200 {
+    border-color: #bbf7d0;
+}
+
+.dark .border-green-600 {
+    border-color: #16a34a;
+}
+
+html:not(.dark) .bg-blue-50 {
+    background-color: #eff6ff;
+}
+
+.dark .bg-blue-900 {
+    background-color: #1e3a8a;
+}
+
+html:not(.dark) .border-gray-200 {
+    border-color: #e5e7eb;
+}
+
+/* Export dropdown */
+#exportDropdown {
+    right: 0;
+    min-width: 120px;
+    transform-origin: top right;
+    animation: dropdownFade 0.2s ease;
+}
+
+@keyframes dropdownFade {
+    from {
+        opacity: 0;
+        transform: translateY(-10px) scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(3rem) scale(1);
+    }
+}
+
+/* Dark mode pre dropdown */
+.dark #exportDropdown {
+    background-color: #1f2937;
+    border-color: #374151;
+}
+
+.dark .export-option:hover {
+    background-color: #374151;
+}
+
+/* Prepojenie tlačidla s parametrami */
+.flex.items-center.gap-4.mt-6 {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* Skupina tlačidiel (generate + šípka) */
+.flex.items-center:first-child {
+    position: relative;
+    z-index: 2;
+}
+
+/* ===== PARAMETRE - VIDITEĽNOSŤ A PREPOJENIE ===== */
+
+/* Hlavný kontajner parametrov - spojenie oboch štýlov */
+#paramsContainer {
+    background-color: #f3f4f6 !important;  /* Svetlé pozadie v light mode */
+    border: 1px solid #e5e7eb !important;  /* Jemný okraj */
+    margin-left: -5px !important;          /* Jemné prisunutie k šípke */
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    border-left: 2px solid rgba(79, 70, 229, 0.2) !important; /* Jemný indigo pruh */
+    padding-left: 12px !important;         /* Odsadenie obsahu od pruhu */
+    box-shadow: 2px 0 8px -4px rgba(0, 0, 0, 0.1) !important; /* Jemný tieň pre prepojenie */
+}
+
+/* Dark mode pre kontajner */
+.dark #paramsContainer {
+    background-color: #2d3748 !important;  /* Tmavšie pozadie */
+    border-color: #4a5568 !important;      /* Tmavší okraj */
+    border-left-color: rgba(129, 140, 248, 0.3) !important;
+    box-shadow: 2px 0 8px -4px rgba(255, 255, 255, 0.05) !important;
+}
+
+/* Keď sú parametre schované */
+#paramsContainer[style*="max-width: 0px"] {
+    border-left: none !important;
+    margin-left: 0 !important;
+    box-shadow: none !important;
+    background-color: transparent !important; /* Skryjeme aj pozadie */
+    border-color: transparent !important;
+}
+
+/* Štýly pre inputy */
+#paramsContainer input {
+    background-color: white !important;
+    border: 1px solid #d1d5db !important;
+    color: #1f2937 !important;
+    font-weight: 500 !important;
+    transition: all 0.2s ease;
+}
+
+/* Dark mode pre inputy */
+.dark #paramsContainer input {
+    background-color: #1f2937 !important;
+    border-color: #4b5563 !important;
+    color: #e5e7eb !important;
+}
+
+/* Hover efekt pre inputy */
+#paramsContainer input:hover {
+    border-color: #9ca3af !important;
+}
+
+.dark #paramsContainer input:hover {
+    border-color: #6b7280 !important;
+}
+
+/* Focus efekt pre inputy */
+#paramsContainer input:focus {
+    outline: none !important;
+    border-color: #4f46e5 !important;
+    box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2) !important;
+}
+
+.dark #paramsContainer input:focus {
+    border-color: #818cf8 !important;
+    box-shadow: 0 0 0 2px rgba(129, 140, 248, 0.2) !important;
+}
+
+/* Štýly pre labely */
+#paramsContainer label {
+    color: #4b5563 !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.025em !important;
+}
+
+.dark #paramsContainer label {
+    color: #9ca3af !important;
+}
+
+/* Šípka - už existuje samostatne */
+#paramsArrow {
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Tlačidlo Generovať a rozbaľovacie tlačidlo ako jeden celok */
+#generateBtn {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    height: 42px; /* Pridaná pevná výška - prispôsobte podľa potreby */
+    line-height: 1; /* Pre lepšie vertikálne zarovnanie textu */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#toggleParamsBtn {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    background-color: #4f46e5; /* indigo-600 */
+    height: 42px; /* Rovnaká výška ako generateBtn */
+    width: 42px; /* Pevná šírka pre štvorcový tvar */
+    padding: 0; /* Odstránime padding pre presné rozmery */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Dark mode pre tlačidlo */
+.dark #toggleParamsBtn {
+    background-color: #4338ca; /* indigo-600 v dark mode */
+}
+
+.dark #toggleParamsBtn:hover {
+    background-color: #3730a3; /* indigo-700 v dark mode */
+}
+
+/* Loading bar */
+#loadingIndicatorBtn {
+    transition: opacity 0.2s ease;
+}
+
+/* ===== CHECKBOXY - ÚPLNÁ KONTROLA ===== */
+
+/* Reset pre všetky checkboxy */
+input[type="checkbox"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+/* Light mode - nezaškrtnuté */
+html:not(.dark) input[type="checkbox"]:not(:checked) {
+    background-color: #ffffff;
+    border: 1px solid #d1d5db;
+}
+
+/* Light mode - zaškrtnuté */
+html:not(.dark) input[type="checkbox"]:checked {
+    background-color: #4f46e5;
+    border-color: #4f46e5;
+}
+
+/* Light mode - fajka pre zaškrtnuté */
+html:not(.dark) input[type="checkbox"]:checked::after {
+    content: "✓";
+    color: #1f2937;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 0.75rem;
+    font-weight: bold;
+}
+
+/* Dark mode - nezaškrtnuté - TMAVÉ */
+.dark input[type="checkbox"]:not(:checked) {
+    background-color: #1f2937;
+    border: 1px solid #4b5563;
+}
+
+/* Dark mode - zaškrtnuté */
+.dark input[type="checkbox"]:checked {
+    background-color: #818cf8;
+    border-color: #818cf8;
+}
+
+/* Dark mode - fajka pre zaškrtnuté */
+.dark input[type="checkbox"]:checked::after {
+    content: "✓";
+    color: #ffffff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 0.75rem;
+    font-weight: bold;
+}
+
+/* Focus štýl */
+input[type="checkbox"]:focus {
+    outline: 2px solid rgba(79, 70, 229, 0.3);
+    outline-offset: 2px;
+}
+
+.dark input[type="checkbox"]:focus {
+    outline-color: rgba(129, 140, 248, 0.5);
+}
+
+/* Oprava pre catalog badge - vždy vpravo v strede */
+.catalog-badge {
+    position: absolute !important;
+    top: 50% !important;
+    right: -0.5rem !important;
+    transform: translateY(-50%) !important;
+    z-index: 20 !important;
+    width: 1.25rem !important;
+    height: 1.25rem !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: 9999px !important;
+    font-size: 0.75rem !important;
+    line-height: 1 !important;
+}
+
+/* Pre user katalógy - kontajner musí mať relatívnu pozíciu */
+.relative.group {
+    position: relative !important;
+    margin-right: 0.5rem !important;
+}
+
+/* Krížik - vpravo hore */
+.relative.group .absolute.-top-2.-right-2 {
+    position: absolute !important;
+    top: -0.5rem !important;
+    right: -0.5rem !important;
+    z-index: 30 !important; /* Vyššie z-index aby bol nad badge */
+}
+
+/* Badge pre user katalógy - vpravo v strede */
+.relative.group .catalog-badge {
+    position: absolute !important;
+    top: 50% !important;
+    right: -0.5rem !important; /* Zmenené z 1.5rem na -0.5rem - úplne vpravo */
+    transform: translateY(-50%) !important;
+    z-index: 20 !important;
+}
+
+/* ===== TOAST NOTIFICATIONS ===== */
+.toast-container {
+    position: fixed;
+    top: 80px; /* Umiestnenie pod navbar */
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    pointer-events: none;
+}
+
+.toast {
+    min-width: 280px;
+    max-width: 380px;
+    background-color: white;
+    color: #1f2937;
+    border-radius: 8px;
+    padding: 12px 16px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transform: translateX(120%);
+    transition: transform 0.3s ease-in-out, opacity 0.2s ease;
+    opacity: 0;
+    pointer-events: auto;
+    border-left: 4px solid transparent;
+}
+
+.toast.show {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.toast.hide {
+    transform: translateX(120%);
+    opacity: 0;
+}
+
+/* Typy toastov */
+.toast-info {
+    border-left-color: #3b82f6; /* modrá */
+}
+.toast-info .toast-icon { color: #3b82f6; }
+
+.toast-success {
+    border-left-color: #10b981; /* zelená */
+}
+.toast-success .toast-icon { color: #10b981; }
+
+.toast-warning {
+    border-left-color: #f59e0b; /* oranžová */
+}
+.toast-warning .toast-icon { color: #f59e0b; }
+
+.toast-error {
+    border-left-color: #ef4444; /* červená */
+}
+.toast-error .toast-icon { color: #ef4444; }
+
+.toast-icon {
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+}
+
+.toast-content {
+    flex: 1;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.toast-close {
+    background: none;
+    border: none;
+    color: #9ca3af;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 0 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s;
+}
+.toast-close:hover {
+    color: #4b5563;
+}
+
+/* Dark mode pre toast */
+.dark .toast {
+    background-color: #1f2937;
+    color: #e5e7eb;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+}
+
+.dark .toast-close {
+    color: #6b7280;
+}
+.dark .toast-close:hover {
+    color: #d1d5db;
+}
+
+/* Responsivita */
+@media (max-width: 640px) {
+    .toast-container {
+        left: 20px;
+        right: 20px;
+        align-items: stretch;
+    }
+    .toast {
+        min-width: auto;
+        max-width: 100%;
+    }
+}
+
+/* ===== CONFIRM TOAST ===== */
+.toast-confirm {
+    border-left-color: #f59e0b; /* oranžová ako warning */
+    max-width: 400px;
+}
+
+.toast-confirm .toast-icon { color: #f59e0b; }
+
+.toast-confirm .toast-content {
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.toast-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    justify-content: flex-end;
+}
+
+.toast-btn {
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s ease;
+}
+
+.toast-btn-confirm {
+    background-color: #ef4444;
+    color: white;
+}
+.toast-btn-confirm:hover {
+    background-color: #dc2626;
+}
+
+.toast-btn-cancel {
+    background-color: #e5e7eb;
+    color: #374151;
+}
+.toast-btn-cancel:hover {
+    background-color: #d1d5db;
+}
+
+/* Dark mode pre confirm toast */
+.dark .toast-btn-cancel {
+    background-color: #4b5563;
+    color: #e5e7eb;
+}
+.dark .toast-btn-cancel:hover {
+    background-color: #6b7280;
+}
+
+/* ===== SIMILARITY GRAPH STYLES ===== */
+
+/* Kontajner pre graf */
+#similarityGraph {
+    background-color: #f8fafc;
+    border-radius: 0.75rem;
+    border: 1px solid #e5e7eb;
+    transition: all 0.3s ease;
+    min-height: 500px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Dark mode pre kontajner grafu */
+.dark #similarityGraph {
+    background-color: #1f2937;
+    border-color: #374151;
+}
+
+/* SVG v grafe */
+#similarityGraph svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+}
+
+/* Čiary (hrany) v grafe */
+#similarityGraph line {
+    transition: stroke-opacity 0.2s ease;
+    pointer-events: none;
+}
+
+/* Texty na čiarach */
+#similarityGraph .link-percentage {
+    font-size: 10px;
+    font-weight: 600;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+}
+
+.dark #similarityGraph .link-percentage {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Uzly v grafe */
+#similarityGraph g {
+    cursor: pointer;
+    transition: filter 0.2s ease;
+}
+
+#similarityGraph g:hover {
+    filter: brightness(1.1);
+}
+
+/* Kruhy uzlov */
+#similarityGraph circle {
+    transition: r 0.2s ease, filter 0.2s ease;
+}
+
+#similarityGraph g:hover circle {
+    r: 27;
+    filter: drop-shadow(0 4px 6px -1px rgba(0, 0, 0, 0.1));
+}
+
+.dark #similarityGraph g:hover circle {
+    filter: drop-shadow(0 4px 6px -1px rgba(255, 255, 255, 0.1));
+}
+
+/* Text v uzloch */
+#similarityGraph text {
+    user-select: none;
+    font-family: system-ui, -apple-system, sans-serif;
+}
+
+/* Info panel pre uzly */
+#nodeInfoPanel {
+    backdrop-filter: blur(8px);
+    background-color: rgba(255, 255, 255, 0.95);
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    max-width: 280px;
+    width: 100%;
+    transition: all 0.2s ease;
+    z-index: 100;
+}
+
+.dark #nodeInfoPanel {
+    background-color: rgba(31, 41, 55, 0.95);
+    border-color: #374151;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+}
+
+#nodeInfoTitle {
+    font-weight: 600;
+    font-size: 0.875rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #e5e7eb;
+    color: #1f2937;
+}
+
+.dark #nodeInfoTitle {
+    border-bottom-color: #374151;
+    color: #e5e7eb;
+}
+
+#nodeInfoContent {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+#nodeInfoContent div {
+    font-size: 0.75rem;
+    padding: 0.25rem 0;
+}
+
+/* Animácia pre zobrazenie panelu */
+#nodeInfoPanel:not(.hidden) {
+    animation: slideIn 0.2s ease-out;
+}
+
+/* Hlavný text v uzloch (skratka) - v light mode biela */
+html:not(.dark) #similarityGraph g text:first-of-type {
+    fill: #ffffff !important;  /* Biela farba pre text v kruhu */
+    font-weight: bold;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); /* Jemný tieň pre lepšiu čitateľnosť */
+}
+
+/* Popisky pod uzlami (celý názov) - v light mode tmavé */
+html:not(.dark) #similarityGraph g text:last-of-type {
+    fill: #1f2937 !important;  /* Tmavá farba (gray-800) */
+    font-weight: 500;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5); /* Svetlý tieň pre kontrast */
+}
+
+/* Info panel v light mode */
+html:not(.dark) #nodeInfoPanel {
+    background-color: rgba(255, 255, 255, 0.98);
+    border-color: #d1d5db;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Percentá na hranách - v light mode tmavé */
+html:not(.dark) .link-percentage {
+    fill: #1f2937 !important;  /* gray-800 */
+    font-weight: 600;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+/* Dark mode pre percentá */
+.dark .link-percentage {
+    fill: #e5e7eb !important;  /* gray-200 */
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Responzivita pre malé obrazovky */
+@media (max-width: 640px) {
+    #nodeInfoPanel {
+        max-width: calc(100% - 2rem);
+        left: 1rem;
+        right: 1rem;
+        bottom: 1rem;
+    }
+}
+
+/* Vyhľadávanie v grafe */
+#graphSearchResults {
+    scrollbar-width: thin;
+    scrollbar-color: #c1c1c1 #f1f1f1;
+}
+
+#graphSearchResults::-webkit-scrollbar {
+    width: 6px;
+}
+
+#graphSearchResults::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+#graphSearchResults::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 3px;
+}
+
+#graphSearchResults::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+.dark #graphSearchResults {
+    scrollbar-color: #6b7280 #374151;
+}
+
+.dark #graphSearchResults::-webkit-scrollbar-track {
+    background: #374151;
+}
+
+.dark #graphSearchResults::-webkit-scrollbar-thumb {
+    background: #6b7280;
+}
+
+.dark #graphSearchResults::-webkit-scrollbar-thumb:hover {
+    background: #9ca3af;
+}
+
+/* Animácia pre zvýraznenie uzlov */
+@keyframes pulse {
+    0%, 100% {
+        filter: brightness(1) drop-shadow(0 0 2px rgba(79, 70, 229, 0.5));
+    }
+    50% {
+        filter: brightness(1.3) drop-shadow(0 0 8px rgba(79, 70, 229, 0.8));
+    }
+}
+
+.highlight-pulse {
+    animation: pulse 1s ease-in-out;
+}
+
+/* Stop words tagy - light mode */
+.stop-word-tag {
+    transition: all 0.2s ease;
+    background-color: #eef2ff;  /* indigo-50 pre light mode */
+    border-color: #c7d2fe;      /* indigo-200 pre light mode */
+}
+
+.dark .stop-word-tag {
+    background-color: rgba(67, 56, 202, 0.3); /* indigo-900/30 pre dark mode */
+    border-color: #4338ca;       /* indigo-700 pre dark mode */
+}
+
+.stop-word-tag .remove-stopword {
+    opacity: 0.7;
+    transition: all 0.2s ease;
+}
+
+.stop-word-tag:hover .remove-stopword {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.stop-word-tag .remove-stopword:hover {
+    background-color: #ef4444 !important;
+    color: white !important;
+}
+
+.dark .stop-word-tag .remove-stopword:hover {
+    background-color: #dc2626 !important;
+}
+
+/* Custom scrollbar pre stop words container - presne ako ostatné */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+.dark .custom-scrollbar::-webkit-scrollbar-track {
+    background: #374151;
+}
+
+.dark .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #6b7280;
+}
+
+.dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #9ca3af;
+}
+
+/* Light mode pre text v stop slovách */
+.stop-word-tag span {
+    color: #1f2937;  /* gray-800 pre light mode */
+}
+
+.dark .stop-word-tag span {
+    color: #e5e7eb;  /* gray-200 pre dark mode */
+}
+
+html:not(.dark) #stopWordsModal h3 {
+    color: #111827 !important;  /* gray-900 */
+}
+
+/* ===== STOP WORDS BUTTON - LEN EMOJI S HOVER EFEKTOM ===== */
+
+/* Základný štýl - žiadne pozadie, žiadny border, len emoji */
+#stopWordsBtn {
+    background: transparent !important;
+    border: none !important;
+    padding: 0.25rem 0.5rem !important;
+    font-size: 1rem !important;  /* Väčšie emoji */
+    line-height: 1 !important;
+    min-height: 32px;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: all 0.2s ease !important;
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+/* Light mode - hover efekt */
+html:not(.dark) #stopWordsBtn:hover {
+    transform: scale(1.1) !important;  /* Zväčšenie emoji */
+    filter: drop-shadow(0 2px 4px rgba(79, 70, 229, 0.3)) !important;
+}
+
+/* Dark mode - hover efekt */
+.dark #stopWordsBtn:hover {
+    transform: scale(1.1) !important;  /* Zväčšenie emoji */
+    filter: drop-shadow(0 2px 4px rgba(129, 140, 248, 0.5)) !important;
+}
+
+/* Active/press efekt */
+#stopWordsBtn:active {
+    transform: scale(0.95) !important;
+}
+
+
+
+
+
+
+
+/* ===== MOBILE OPTIMIZATIONS ===== */
+
+@media (max-width: 640px) {
+    /* Navbar - zabalenie a zmenšenie */
+    #mainNav .container {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+    #mainNav .flex.items-center {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.25rem;
+    }
+    #mainNav button {
+        font-size: 0.75rem !important;
+        padding: 0.25rem 0.5rem !important;
+    }
+    #mainNav #languageToggle {
+        padding: 0.25rem 0.5rem;
+    }
+    #mainNav img {
+        height: 2rem !important;
+    }
+    #mainNav.scrolled img {
+        height: 1.5rem !important;
+    }
+    #mainNav.scrolled {
+        width: calc(100% - 2rem) !important;
+    }
+
+    /* Hlavný obsah – odsadenie pod navbar */
+    main {
+        padding-top: 8rem !important;
+    }
+    #mainNav.scrolled ~ main {
+        padding-top: 6rem !important;
+    }
+
+    /* Sekcia s parametrami – zalamovanie a plná šírka */
+    .flex.items-center.gap-4.mt-6 {
+        flex-wrap: wrap;
+    }
+    #paramsContainer {
+        max-width: 100% !important;
+        width: 100%;
+        margin-left: 0 !important;
+        margin-top: 0.5rem;
+    }
+    #paramsContainer .flex.items-center {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        width: 100%;
+    }
+    #paramsContainer .group {
+        width: calc(50% - 0.25rem);
+    }
+    #paramsContainer input[type="number"] {
+        width: 100% !important;
+    }
+    #paramsContainer .w-20 {
+        width: 100% !important;
+    }
+    #stopWordsBtn {
+        width: auto !important;
+    }
+
+    /* Skupina tlačidiel Generovať */
+    .flex.items-center:first-child {
+        width: 100%;
+    }
+    #generateBtn {
+        flex: 1;
+    }
+
+    /* Prepínač matica/graf – na celú šírku */
+    #similarityInfo .flex.gap-2 {
+        flex-wrap: wrap;
+    }
+    #matrixViewBtn, #graphViewBtn {
+        width: 100%;
+        text-align: center;
+    }
+
+    /* Loading indikátor */
+    #loadingIndicatorBtn {
+        width: 100%;
+    }
+
+    /* Sekcia navrhnutej sekvencie */
+    #suggestionsSection {
+        padding: 1rem !important;
+    }
+
+    /* Modály – okraje a plná šírka */
+    #aboutModal > div,
+    #faqModal > div,
+    #termsModal > div,
+    #catalogModal > div,
+    #stopWordsModal > div {
+        margin: 1rem;
+        max-width: calc(100% - 2rem);
+    }
+
+    /* Info panel v grafe */
+    #nodeInfoPanel {
+        max-width: calc(100% - 2rem);
+        left: 1rem;
+        right: 1rem;
+        bottom: 1rem;
+    }
+
+    /* Vyhľadávanie v grafe – zmenšené */
+    #graphSearchContainer {
+        width: 2.5rem !important;
+    }
+    #graphSearchContainer.expanded {
+        width: 16rem !important;
+    }
+
+    /* Checkboxy – menšie písmo */
+    #patternCheckboxes label span {
+        font-size: 0.8rem;
+    }
+    .pattern-language-header h3 {
+        font-size: 0.9rem;
+    }
+    .pattern-language-header .search-input {
+        width: 6rem !important;
+    }
+    .pattern-language-header .search-input:focus {
+        width: 10rem !important;
+    }
+}
+
+/* Úprava pre menšie tablety */
+@media (min-width: 641px) and (max-width: 1024px) {
+    #paramsContainer {
+        max-width: 400px !important;
+    }
+    #paramsContainer .group {
+        width: auto;
+    }
+}
+
+/* ===== DOPLNKOVÉ VYLEPŠENIA ===== */
+
+/* Jemný gradient na pozadí pre light mode */
+html:not(.dark) body {
+    background: linear-gradient(145deg, #f3f4f6 0%, #f9fafb 100%);
+}
+
+/* Jemný gradient na pozadí pre dark mode */
+.dark body {
+    background: linear-gradient(145deg, #111827 0%, #1a1f2e 100%);
+}
+
+/* Karty vzorov v sekvencii - jemný tieň */
+.pattern-item {
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.02),
+                0 1px 2px 0 rgba(0, 0, 0, 0.01) !important;
+    transition: all 0.2s ease;
+}
+
+.pattern-item:hover {
+    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.03),
+                0 2px 4px 0 rgba(0, 0, 0, 0.02) !important;
+    transform: translateY(-1px);
+}
+
+.dark .pattern-item {
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2),
+                0 1px 2px 0 rgba(0, 0, 0, 0.1) !important;
+}
+
+.dark .pattern-item:hover {
+    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.3),
+                0 2px 4px 0 rgba(0, 0, 0, 0.2) !important;
+}
+
+
+/* ===== OVERALL CONFIDENCE STYLES ===== */
+
+/* Light mode - základný štýl pre kontajner */
+html:not(.dark) #confidenceLabel {
+    color: #1f2937;  /* gray-800 */
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+html:not(.dark) #confidenceValue {
+    font-weight: 600;
+    padding: 0.35rem 0.9rem;  /* menší padding */
+    border-radius: 9999px;
+    font-size: 0.95rem;        /* menšie písmo */
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 70px;           /* minimálna šírka pre konzistenciu */
+    text-align: center;
+    border: 1px solid transparent;
+    line-height: 1.2;
+}
+
+/* Dark mode - základný štýl pre kontajner */
+.dark #confidenceLabel {
+    color: #e5e7eb;  /* gray-200 */
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.dark #confidenceValue {
+    font-weight: 600;
+    padding: 0.35rem 0.9rem;
+    border-radius: 9999px;
+    font-size: 0.95rem;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 70px;
+    text-align: center;
+    border: 1px solid transparent;
+    line-height: 1.2;
+}
+
+/* Kontajner pre celkovú spoľahlivosť */
+#suggestionsSection .mt-4.flex.justify-between {
+    background-color: #f8fafc;
+    border-color: #cbd5e1;
+    border-width: 1px;
+    border-radius: 9999px;      /* rounded-full ako export button */
+    padding: 0.5rem 1rem;        /* menší padding */
+    min-height: 42px;            /* rovnaká výška ako export button */
+    align-items: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.dark #suggestionsSection .mt-4.flex.justify-between {
+    background-color: #1f2937;
+    border-color: #4b5563;
+}
+
+/* Export button štýly pre porovnanie */
+#exportBtn {
+    height: 42px;
+    font-size: 0.95rem;
+    padding: 0 1.25rem;
+}
+
+#exportDropdownBtn {
+    height: 42px;
+    width: 42px;
+}
+
+/* Tooltip pre otáznik spoľahlivosti */
+#confidenceTooltip {
+    cursor: help;
+    transition: opacity 0.2s ease;
+    opacity: 0.8;
+}
+#confidenceTooltip:hover {
+    opacity: 1;
+}
+
+/* ===== PATTERN DETAIL MODAL - LIGHT MODE OPRAVY ===== */
+
+/* Light mode pre nadpisy v modáli */
+html:not(.dark) #patternDetailModal h3 {
+    color: #111827 !important;  /* gray-900 */
+}
+
+html:not(.dark) #patternDetailModal h4 {
+    color: #1f2937 !important;  /* gray-800 */
+}
+
+/* Light mode pre texty v modáli */
+html:not(.dark) #patternDetailModal .text-gray-500 {
+    color: #6b7280 !important;  /* gray-500 */
+}
+
+html:not(.dark) #patternDetailModal .text-gray-600 {
+    color: #4b5563 !important;  /* gray-600 */
+}
+
+html:not(.dark) #patternDetailModal .text-gray-700 {
+    color: #374151 !important;  /* gray-700 */
+}
+
+html:not(.dark) #patternDetailModal .text-gray-800 {
+    color: #1f2937 !important;  /* gray-800 */
+}
+
+html:not(.dark) #patternDetailModal .bg-gray-50 {
+    background-color: #f9fafb !important;  /* gray-50 */
+}
+
+/* Light mode pre hodnoty v grid-e */
+html:not(.dark) #patternDetailModal .grid span:last-child {
+    color: #111827 !important;  /* čierna pre hodnoty */
+}
+
+/* Light mode pre podobnosti */
+html:not(.dark) #patternDetailSimilarities .text-gray-700 {
+    color: #374151 !important;
+}
+
+
+/* ===== DETAIL BUTTON - SÚČASŤ BUNKY ===== */
+
+/* Kontajner pre zoznam vzorov */
+#patternsList {
+    width: 100%;
+    position: relative;
+}
+
+/* Každá bunka vzoru - celok aj s tlačidlom */
+.pattern-item {
+    display: flex !important;
+    align-items: stretch !important;
+    width: 100% !important;
+    margin-bottom: 0.75rem;
+    padding: 0 !important;
+    border: 1px solid;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    background-color: #f8fafc;
+    border-color: #e5e7eb;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.02), 0 1px 2px 0 rgba(0, 0, 0, 0.01);
+    transition: all 0.2s ease;
+}
+
+.pattern-item:hover {
+    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.03), 0 2px 4px 0 rgba(0, 0, 0, 0.02);
+    transform: translateY(-1px);
+}
+
+.dark .pattern-item {
+    background-color: #1f2937;
+    border-color: #374151;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2), 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+}
+
+.dark .pattern-item:hover {
+    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.3), 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Obsahová časť - zaberá všetok dostupný priestor */
+.pattern-item .pattern-content {
+    flex: 1 1 auto;
+    padding: 0.75rem;
+    min-width: 0;
+}
+
+/* Tlačidlo - pevná šírka, po celej výške */
+.pattern-item .view-pattern-btn {
+    flex: 0 0 2rem;
+    width: 2rem;
+    height: auto;
+    border: none;
+    border-left: 1px solid;
+    background-color: #f1f5f9;
+    color: #4f46e5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    border-radius: 0 0.5rem 0.5rem 0;
+    border-left-color: #e2e8f0;
+}
+
+/* Light mode hover */
+html:not(.dark) .pattern-item .view-pattern-btn:hover {
+    background-color: #e0f2fe;
+    border-left-color: #94a3b8;
+}
+
+/* Dark mode */
+.dark .pattern-item .view-pattern-btn {
+    background-color: rgba(67, 56, 202, 0.3);
+    color: #818cf8;
+    border-left-color: #4b5563;
+}
+
+.dark .pattern-item .view-pattern-btn:hover {
+    background-color: rgba(67, 56, 202, 0.5);
+}
+
+/* Šípka */
+.pattern-item .view-pattern-btn svg {
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
+/* Horný riadok - názov a percentá */
+.pattern-item .pattern-content .flex.justify-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.5rem;
+}
+
+/* Názov a číslo */
+.pattern-item .pattern-content .flex.items-center.gap-2 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+/* Názov vzoru */
+.pattern-item .pattern-content .font-semibold {
+    font-size: 1rem;
+    line-height: 1.25rem;
+    color: #4f46e5;
+}
+
+.dark .pattern-item .pattern-content .font-semibold {
+    color: #818cf8;
+}
+
+/* Číslo vzoru */
+.pattern-item .pattern-content .bg-gray-200 {
+    background-color: #e5e7eb;
+    color: #374151;
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+}
+
+.dark .pattern-item .pattern-content .bg-gray-200 {
+    background-color: #4b5563;
+    color: #e5e7eb;
+}
+
+/* Similarity badge */
+.pattern-item .pattern-content .similarity-badge {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-weight: 500;
+}
+
+/* Badge container */
+.pattern-item .pattern-content .flex.flex-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+/* Katalóg a jazyk badge */
+.pattern-item .pattern-content .rounded-full {
+    border-radius: 9999px;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    display: inline-block;
+}
+
+/* Light mode pre katalóg badge */
+html:not(.dark) .pattern-item .pattern-content .bg-blue-100 {
+    background-color: #dbeafe;
+    color: #1e40af;
+}
+
+html:not(.dark) .pattern-item .pattern-content .bg-green-100 {
+    background-color: #dcfce7;
+    color: #166534;
+}
+
+html:not(.dark) .pattern-item .pattern-content .bg-purple-100 {
+    background-color: #f3e8ff;
+    color: #6b21a8;
+}
+
+/* Dark mode pre katalóg badge */
+.pattern-item .pattern-content .bg-blue-900 {
+    background-color: #1e3a8a;
+    color: #bfdbfe;
+}
+
+.pattern-item .pattern-content .bg-green-900 {
+    background-color: #14532d;
+    color: #bbf7d0;
+}
+
+.pattern-item .pattern-content .bg-purple-900 {
+    background-color: #581c87;
+    color: #e9d5ff;
+}
+
+/* Kurzor pre drag & drop - move */
+.pattern-item {
+    cursor: move !important;
+}
+
+/* Alebo ak chceš ten s rukou */
+.pattern-item {
+    cursor: grab !important;
+}
+
+.pattern-item:active {
+    cursor: grabbing !important;
+}
+
+/* ===== BADGE FARBY - JEDNOTNÉ PRE LIGHT AJ DARK MODE ===== */
+
+/* Force dark mode farby pre všetky režimy */
+.pattern-item .pattern-content .bg-blue-100,
+.pattern-item .pattern-content .bg-blue-900 {
+    background-color: #1e3a8a !important;
+    color: #bfdbfe !important;
+}
+
+.pattern-item .pattern-content .bg-green-100,
+.pattern-item .pattern-content .bg-green-900 {
+    background-color: #14532d !important;
+    color: #bbf7d0 !important;
+}
+
+.pattern-item .pattern-content .bg-purple-100,
+.pattern-item .pattern-content .bg-purple-900 {
+    background-color: #581c87 !important;
+    color: #e9d5ff !important;
+}
+
+/* ===== FILTER BUTTONS - LIGHT MODE OPRAVA ===== */
+
+/* Light mode pre neaktívne tlačidlá */
+html:not(.dark) #filterAllPatternsBtn,
+html:not(.dark) #filterSequenceBtn {
+    background-color: #f3f4f6 !important;  /* gray-100 */
+    color: #4b5563 !important;             /* gray-600 */
+    border: 1px solid #e5e7eb !important;   /* gray-200 */
+}
+
+html:not(.dark) #filterAllPatternsBtn:hover,
+html:not(.dark) #filterSequenceBtn:hover {
+    background-color: #e5e7eb !important;  /* gray-200 */
+    color: #1f2937 !important;              /* gray-800 */
+}
+
+/* Light mode pre aktívne tlačidlo */
+html:not(.dark) #filterAllPatternsBtn.bg-indigo-600,
+html:not(.dark) #filterSequenceBtn.bg-indigo-600 {
+    background-color: #4f46e5 !important;  /* indigo-600 */
+    color: white !important;
+    border: 1px solid #4f46e5 !important;
+}
+
+.dark #filterAllPatternsBtn,
+.dark #filterSequenceBtn {
+    background-color: #374151 !important;  /* gray-700 */
+    color: #d1d5db !important;              /* gray-300 */
+    border: 1px solid #4b5563 !important;   /* gray-600 */
+}
+
+.dark #filterAllPatternsBtn:hover,
+.dark #filterSequenceBtn:hover {
+    background-color: #4b5563 !important;  /* gray-600 */
+    color: white !important;
+}
+
+.dark #filterAllPatternsBtn.bg-indigo-600,
+.dark #filterSequenceBtn.bg-indigo-600 {
+    background-color: #4f46e5 !important;
+    color: white !important;
+    border: 1px solid #4f46e5 !important;
+}
+
+/* AI hodnotenie - light mode oprava */
+html:not(.dark) [data-i18n="aiConfidence"] {
+    color: #1f2937 !important;  /* gray-800 */
+}
+
+/* Nadpis v AI modali - light mode */
+html:not(.dark) #aiExplanationModal h3 {
+    color: #111827 !important;  /* gray-900 - rovnaká farba ako v patternDetailModal */
+}
+
+/* Loading spinner pre AI hodnotenie */
+.loading-spinner {
+    display: inline-block;
+    animation: spin 1s ease-in-out infinite;
+    font-size: 1.2rem;
+    line-height: 1;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Pre plynulé zastavenie po dokončení */
+.loading-active {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Keď sa loading skončí, odstránime animáciu */
+.loading-spinner.stop {
+    animation: none;
+}
+
+/* What's New Modal - light mode oprava */
+html:not(.dark) #whatsNewModal h3 {
+    color: #111827 !important;  /* gray-900 */
+}
+
+/* Štýly pre posuvník */
+input[type=range] {
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 6px;
+    background: #e5e7eb;
+    border-radius: 3px;
+}
+
+.dark input[type=range]::-webkit-slider-runnable-track {
+    background: #4b5563;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    background: #4f46e5;
+    border-radius: 50%;
+    margin-top: -5px;
+    cursor: pointer;
+    transition: transform 0.1s ease;
+}
+
+.dark input[type=range]::-webkit-slider-thumb {
+    background: #818cf8;
+}
+
+input[type=range]::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+}
+
+/* ===== STATISTICS STYLES ===== */
+
+.statistics-section {
+    transition: all 0.2s ease;
+}
+
+.stat-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.dark .stat-card:hover {
+    box-shadow: 0 4px 6px -1px rgba(255, 255, 255, 0.1);
+}
+
+/* Distribúcia - pruhy */
+#similarityMatrix .h-full.bg-indigo-500 {
+    transition: width 0.5s ease-in-out;
+}
+
+/* ===== STATISTICS - LIGHT MODE OPRAVY ===== */
+
+/* Nadpisy štatistík */
+html:not(.dark) .statistics-section h4 {
+    color: #1f2937 !important;  /* gray-800 */
+}
+
+html:not(.dark) .statistics-section h5 {
+    color: #374151 !important;  /* gray-700 */
+}
+
+/* Karty štatistík */
+html:not(.dark) .stat-card {
+    background-color: #ffffff !important;
+    border-color: #e5e7eb !important;
+}
+
+html:not(.dark) .stat-card .text-gray-800 {
+    color: #1f2937 !important;  /* gray-800 pre hodnoty */
+}
+
+html:not(.dark) .stat-card .text-gray-500 {
+    color: #6b7280 !important;  /* gray-500 pre popisky */
+}
+
+/* Top spojenia - text */
+html:not(.dark) #similarityMatrix .bg-white {
+    background-color: #ffffff !important;
+    border-color: #e5e7eb !important;
+}
+
+html:not(.dark) #similarityMatrix .text-gray-800 {
+    color: #1f2937 !important;
+}
+
+html:not(.dark) #similarityMatrix .text-gray-500 {
+    color: #6b7280 !important;
+}
+
+html:not(.dark) #similarityMatrix .text-gray-400 {
+    color: #9ca3af !important;
+}
+
+/* Centralita - text */
+html:not(.dark) .bg-white.p-3 {
+    background-color: #ffffff !important;
+    border-color: #e5e7eb !important;
+}
+
+html:not(.dark) .bg-white.p-3 .text-gray-700 {
+    color: #374151 !important;  /* gray-700 */
+}
+
+/* Distribúcia - text */
+html:not(.dark) .text-gray-600 {
+    color: #4b5563 !important;  /* gray-600 pre popisky */
+}
+
+html:not(.dark) .text-gray-700 {
+    color: #374151 !important;  /* gray-700 pre počty */
+}
+
+/* Špecificky pre statistiky - zvýraznenie */
+html:not(.dark) .statistics-section {
+    background-color: #f9fafb !important;  /* gray-50 */
+    border: 1px solid #e5e7eb !important;
+}
+
+html:not(.dark) .statistics-section .text-gray-800 {
+    color: #1f2937 !important;
+}
+
+html:not(.dark) .statistics-section .text-gray-600 {
+    color: #4b5563 !important;
+}
+
+/* Pre istotu - všetky texty v štatistikách - ale necháme farebné badge-y na pokoji */
+html:not(.dark) #statisticsContainer span:not([class*="bg-"]):not([style*="background"]) {
+    color: #374151 !important;
+}
+
+html:not(.dark) #statisticsContainer div:not([class*="bg-"]):not([style*="background"]) {
+    color: #1f2937;
+}
+
+/* Zachováme farby pre badge-y (tie s inline style) */
+html:not(.dark) #statisticsContainer span[style*="background"] {
+    color: inherit !important;  /* necháme farbu z inline štýlu */
+}
+
+/* ===== VIEW TOGGLE BUTTONS - LIGHT MODE OPRAVA ===== */
+
+/* Neaktívne tlačidlá v light mode */
+html:not(.dark) #matrixViewBtn:not(.bg-indigo-600),
+html:not(.dark) #graphViewBtn:not(.bg-indigo-600),
+html:not(.dark) #statisticsViewBtn:not(.bg-indigo-600) {
+    background-color: #f3f4f6 !important;  /* gray-100 */
+    color: #4b5563 !important;             /* gray-600 */
+    border: 1px solid #e5e7eb !important;   /* gray-200 */
+}
+
+/* Hover efekt pre neaktívne tlačidlá v light mode */
+html:not(.dark) #matrixViewBtn:not(.bg-indigo-600):hover,
+html:not(.dark) #graphViewBtn:not(.bg-indigo-600):hover,
+html:not(.dark) #statisticsViewBtn:not(.bg-indigo-600):hover {
+    background-color: #e5e7eb !important;  /* gray-200 */
+    color: #1f2937 !important;              /* gray-800 */
+}
