@@ -1,7 +1,3 @@
-# Ignorovať vygenerované config súbory
-scripts/config.js
-config.js
-
 # Ostatné
 .DS_Store
 *.log
