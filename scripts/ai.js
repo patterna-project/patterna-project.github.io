@@ -10,7 +10,17 @@ if (!GEMINI_API_KEY) {
 let aiEvaluationInProgress = false;
 
 async function evaluateWithAI(sequence, similarityMatrix) {
-    if (aiEvaluationInProgress) return;
+    // DEBUG: Vypíšeme, ktorú sekvenciu práve hodnotíme
+    console.log('🔍 AI EVALUUJE TÚTO SEKVENCIU:');
+    sequence.forEach((p, i) => {
+        console.log(`  ${i+1}. ${p.name}`);
+    });
+    console.log('---');
+    
+    if (aiEvaluationInProgress) {
+        console.log('⏳ AI už beží, preskakujem...');
+        return;
+    }
     
     const aiContainer = document.getElementById('aiConfidenceContainer');
     const aiValue = document.getElementById('aiConfidenceValue');
