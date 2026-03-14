@@ -9,6 +9,18 @@ if (!GEMINI_API_KEY) {
 
 let aiEvaluationInProgress = false;
 
+// Na začiatok súboru, k ostatným premenným
+let currentAIController = null;
+
+// Funkcia na zrušenie AI volania
+window.cancelAICall = function() {
+    if (currentAIController) {
+        currentAIController.abort();
+        currentAIController = null;
+        console.log('🛑 Zrušené predchádzajúce AI volanie');
+    }
+};
+
 async function evaluateWithAI(sequence, similarityMatrix) {
     // DEBUG: Vypíšeme, ktorú sekvenciu práve hodnotíme
     console.log('🔍 AI EVALUUJE TÚTO SEKVENCIU:');
@@ -134,12 +146,15 @@ Your evaluation:`;
         
         console.log('Volám Gemini API s promptom (dĺžka:', prompt.length, 'znakov)');
         
-        // POUŽIJEME MAXIMÁLNY OUTPUT - 8192 tokenov
+        // Vytvoríme nový controller pre toto volanie
+        currentAIController = new AbortController();
+
         const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
+            signal: currentAIController.signal,  // Pridáme signal
             body: JSON.stringify({
                 contents: [{
                     parts: [{
@@ -326,7 +341,8 @@ Your evaluation:`;
                 : 'AI evaluation is currently unavailable',
             'warning'
         );
-    } finally {
+    }  finally {
+        currentAIController = null;
         aiEvaluationInProgress = false;
     }
 }
