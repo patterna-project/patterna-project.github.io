@@ -421,11 +421,18 @@ async function generateSequence() {  // Odstráň parameter selectedFiles
         updateLoadingIndicator(100, 'Hotovo! Sekvencia vygenerovaná');
         
         
+        // Zrušíme všetky predchádzajúce AI volania
+        if (typeof window.cancelAICall === 'function') {
+            window.cancelAICall();
+        }
+
         // Spustíme AI evaluáciu (ak je funkcia dostupná)
         if (typeof evaluateWithAI === 'function') {
-            evaluateWithAI(result.sequence, similarityMatrix);
+            // Počkáme 500ms, aby sa stihla zobraziť sekvencia
+            setTimeout(() => {
+                evaluateWithAI(result.sequence, similarityMatrix);
+            }, 500);
         }
-        await delay(1000);
 
     } catch (error) {
         showToast((translations[currentLanguage]?.sequenceGenerationError || 'Chyba pri generovaní sekvencie: ') + error.message, 'error');
