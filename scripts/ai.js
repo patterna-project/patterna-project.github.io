@@ -1,5 +1,5 @@
 // ai.js - NA ZAČIATOK SÚBORU
-// Proxy URL pre Vercel (bez API kľúča!) vvv
+// Proxy URL pre Vercel (bez API kľúča!)
 const GEMINI_API_PROXY = 'https://patterna-project-github-io.vercel.app/api/gemini';
 
 let aiEvaluationInProgress = false;
@@ -7,11 +7,11 @@ let aiEvaluationInProgress = false;
 // Na začiatok súboru, k ostatným premenným
 let currentAIController = null;
 
-// Funkcia na zrušenie AI volania
 window.cancelAICall = function() {
     if (currentAIController) {
         currentAIController.abort();
         currentAIController = null;
+        aiEvaluationInProgress = false;
         console.log('🛑 Zrušené predchádzajúce AI volanie');
     }
 };
