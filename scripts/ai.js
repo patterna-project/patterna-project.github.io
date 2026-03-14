@@ -1,11 +1,6 @@
 // ai.js - NA ZAČIATOK SÚBORU
-// API kľúč sa načíta z config.js (vytvoreného pri nasadení)
-const GEMINI_API_KEY = window.APP_CONFIG?.GEMINI_API_KEY || '';
-
-// Ak nie je kľúč, vypíšeme warning
-if (!GEMINI_API_KEY) {
-    console.warn('⚠️ API kľúč nie je nastavený. AI hodnotenie nebude fungovať.');
-}
+// Proxy URL pre Vercel (bez API kľúča!)
+const GEMINI_API_PROXY = 'https://patterna-project-github-io.vercel.app/api/gemini';
 
 let aiEvaluationInProgress = false;
 
@@ -144,17 +139,18 @@ EXPLANATION: (your detailed explanation)"
 
 Your evaluation:`;
         
-        console.log('Volám Gemini API s promptom (dĺžka:', prompt.length, 'znakov)');
+        console.log('Volám Vercel proxy s promptom (dĺžka:', prompt.length, 'znakov)');
         
         // Vytvoríme nový controller pre toto volanie
         currentAIController = new AbortController();
 
-        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
+        // Voláme Vercel proxy namiesto priameho Gemini API
+        const response = await fetch(GEMINI_API_PROXY, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            signal: currentAIController.signal,  // Pridáme signal
+            signal: currentAIController.signal,
             body: JSON.stringify({
                 contents: [{
                     parts: [{
@@ -170,48 +166,21 @@ Your evaluation:`;
         
         if (!response.ok) {
             const errorText = await response.text();
-            console.error('API error response:', errorText);
-            
-            // Fallback
-            console.log('Skúšam fallback na gemini-2.5-flash-lite...');
-            const fallbackResponse = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key=${GEMINI_API_KEY}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    contents: [{
-                        parts: [{
-                            text: prompt
-                        }]
-                    }],
-                    generationConfig: {
-                        temperature: 0.7,
-                        maxOutputTokens: 8192,
-                    }
-                })
-            });
-            
-            if (!fallbackResponse.ok) {
-                throw new Error(`API error: ${response.status}`);
-            }
-            
-            var data = await fallbackResponse.json();
-        } else {
-            var data = await response.json();
+            console.error('Proxy error response:', errorText);
+            throw new Error(`Proxy error: ${response.status}`);
         }
         
-        console.log('Gemini response received');
+        const data = await response.json();
         
-        // --- NOVÉ, ROBUSTNEJŠIE PARCOVANIE ODPOVEDE ---
+        console.log('Proxy response received');
+        
+        // --- PARSOVANIE ODPOVEDE ---
         let aiResponse = '';
         
-        // Skúsime rôzne možné štruktúry odpovede
         if (data.candidates && data.candidates[0]) {
             if (data.candidates[0].content && data.candidates[0].content.parts && data.candidates[0].content.parts[0]) {
                 aiResponse = data.candidates[0].content.parts[0].text;
             } else if (data.candidates[0].output) {
-                // Alternatívny formát
                 aiResponse = data.candidates[0].output;
             }
         }
@@ -221,33 +190,28 @@ Your evaluation:`;
             throw new Error('Nepodarilo sa načítať odpoveď od AI');
         }
         
-        console.log('AI response:', aiResponse); // Pre debug
+        console.log('AI response:', aiResponse);
         
-        // --- JEDNODUCHÉ PARCOVANIE ---
+        // --- PARSOVANIE SKÓRE ---
         let score = 50;
         let explanation = aiResponse;
         
-        // Nájdeme skóre (prvé číslo v odpovedi)
         const scoreMatch = aiResponse.match(/\b(\d{1,3})\b/);
         if (scoreMatch) {
             score = parseInt(scoreMatch[0]);
             
-            // Skúsime nájsť časť za "VYSVETLENIE:" alebo "EXPLANATION:"
             const explanationMatch = aiResponse.match(/(?:VYSVETLENIE|EXPLANATION):\s*([\s\S]*)/i);
             if (explanationMatch && explanationMatch[1]) {
                 explanation = explanationMatch[1].trim();
             } else {
-                // Ak nie je explicitné označenie, vezmeme všetko za prvým riadkom
                 const lines = aiResponse.split('\n');
                 if (lines.length > 1) {
-                    // Odstránime prvý riadok (kde je skóre)
                     lines.shift();
                     explanation = lines.join('\n').trim();
                 }
             }
         }
         
-        // Ak je vysvetlenie prázdne, použijeme celú odpoveď
         if (!explanation || explanation.length < 10) {
             explanation = aiResponse;
         }
@@ -255,9 +219,9 @@ Your evaluation:`;
         score = Math.min(100, Math.max(0, score));
         
         console.log(`Parsed score: ${score}`);
-        console.log(`Explanation length: ${explanation.length} znakov`); // Debug
+        console.log(`Explanation length: ${explanation.length} znakov`);
         
-        // Odstránime spinner a zobrazíme skóre
+        // Odstránime spinner
         if (aiValue) {
             aiValue.classList.remove('loading-active');
         }
@@ -265,7 +229,6 @@ Your evaluation:`;
         // ROVNAKÝ ŠTÝL AKO PRE CELKOVÚ SPOĽAHLIVOSŤ
         const colors = getConfidenceColor(score);
         
-        // Aplikujeme štýly na tlačidlo
         aiValue.textContent = score + '%';
         if (aiValueButton) {
             aiValueButton.style.background = colors.bg;
@@ -282,7 +245,7 @@ Your evaluation:`;
             aiValueButton.style.lineHeight = '1.2';
         }
         
-        // Uložíme vysvetlenie pre modal (ako HTML s <br> pre zachovanie riadkov)
+        // Formátovanie pre modal
         const formattedExplanation = explanation
             .replace(/&/g, '&amp;')
             .replace(/</g, '&lt;')
@@ -295,7 +258,6 @@ Your evaluation:`;
         
         // Event listener pre otvorenie modalu
         if (aiValueButton) {
-            // Odstránime starý listener a pridáme nový
             const newButton = aiValueButton.cloneNode(true);
             aiValueButton.parentNode.replaceChild(newButton, aiValueButton);
             
@@ -307,7 +269,6 @@ Your evaluation:`;
                 const modalContent = document.getElementById('aiExplanationModalContent');
                 
                 if (modal && modalContent) {
-                    // Rovnaké formátovanie pre modal
                     modalContent.innerHTML = `
                         <div class="prose dark:prose-invert max-w-none custom-scrollbar" style="max-height: 60vh; overflow-y: auto; padding-right: 10px;">
                             ${formattedExplanation}
@@ -327,9 +288,14 @@ Your evaluation:`;
         }
         
     } catch (error) {
+        // Ak bolo volanie zrušené, ticho to ignorujeme
+        if (error.name === 'AbortError') {
+            console.log('⏹️ AI volanie bolo zrušené');
+            return;
+        }
+        
         console.error('AI evaluation failed:', error);
         
-        // V prípade chyby odstránime spinner a schováme container
         if (aiValue) {
             aiValue.classList.remove('loading-active');
         }
@@ -341,7 +307,7 @@ Your evaluation:`;
                 : 'AI evaluation is currently unavailable',
             'warning'
         );
-    }  finally {
+    } finally {
         currentAIController = null;
         aiEvaluationInProgress = false;
     }
