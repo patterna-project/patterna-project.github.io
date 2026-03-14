@@ -1,0 +1,48 @@
+FEATURE ASSIGNMENT *
+ Day laborers waiting to be assigned work, Raymondville, Texas, 1939. 
+...in a multi-person project of medium size or larger, one gets to the
+ point that the work must be partitioned among team members. The
+ initial architecture is complete; where do we go from here? 
+✥ ✥ ✥ 
+For every non-trivial project, it is impossible to partition the work
+ cleanly. 
+You have to get the work done; you need to get the new release out
+ the door. And you need everyone working on it. Yet no matter how
+ you slice the work, people will find themselves working on the same
+ piece of code. The essential complexity of the problem (see
+ [Brooks1995]) means this will happen in all but the most trivial developments. 
+The partitioning of the problem through the architecture is mainly
+ for people’s benefit — the code doesn’t care. We maintain the integrity
+ of the architecture in order to attempt to maintain the comprehensibility of the problem, and we do this through CODE OWNERSHIP (5.2.13).
+ But to a greater or lesser extent, features cut across the architecture. So
+ CODE OWNERSHIP is not the right model for developing the features. 
+Take, for example, the canonical example of an automatic teller.
+ There are natural architectural entities such as the display subsystem,
+ the input subsystem, and the communication layer, among others. Yet
+ the feature “Display Account Balance” cuts across all of them. 
+ Therefore: 
+Assign features to people for development. A feature development has a finite duration, and is therefore an assignment, not a role. 
+Feature assignment works together with the role of CODE OWNERSHIP
+ (5.2.13) to develop the product and maintain its architectural integrity.
+ The developer of a feature will consult with the code owner about
+ changes. 
+The owner of the code affected most by a particular feature is often
+ the natural person to receive the assignment of that feature, although it
+ doesn’t have to be. 
+Features may be assigned to more than one person, or better still,
+ developers may choose to work together to accomplish it (see DEVELOPING IN PAIRS (4.2.28).) 
+There is some danger that FEATURE ASSIGNMENT (5.2.14) and CODE
+ OWNERSHIP (5.2.13) together will tend to encourage excessive management bureaucracy, but that doesn’t need to be the case. Features are a
+ natural unit of project tracking, and CODE OWNERSHIP (5.2.13) need not
+ add anything substantial to the project overhead. 
+✥ ✥ ✥ 
+The temporary nature of FEATURE ASSIGNMENT (5.2.14), coupled with
+ the role nature of CODE OWNERSHIP (5.2.13) strikes a balance between
+ maintaining architectural integrity and getting the work done. Note
+ how they together complete DEPLOY ALONG THE GRAIN (5.2.8). 
+Note that some project methodologies advocate making assignments every day, with chunks of work that can be completed in a
+ single day. If the project is small, and the work can be appropriately
+ partitioned, this approach may work well. FEATURE ASSIGNMENT (5.2.14)
+ is broader; it encompasses this approach, but extends to large complex
+ projects, and those where work is so complex that it cannot be broken
+ into such small chunks.

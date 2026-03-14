@@ -1,0 +1,57 @@
+ ENGAGE QUALITY ASSURANCE **
+ FSA (Farm Security Administration) supervisor and farmer-client examining quality of silage from trench silo. Sheridan County, Kansas 
+...you have a development organization mature enough that roles
+ have been congealed and a customer has been engaged (ENGAGE CUSTOMERS (4.2.6)). You need some filter between the two to both facilitate
+ and regulate interactions between them. 
+✥ ✥ ✥ 
+Customer engagement is a key element of quality assurance.
+ Though developers feel they get everything right, a good dose of customer reality helps bring the perspective that perfect software is hard. 
+Too many organizations defer quality until “later” or equate quality
+ assurance with the late activity of testing. Yet success depends on high
+ quality, and early feedback is important to address fundamental
+ quality problems. 
+It’s important to do testing, and most developers do their own
+ testing. But individuals easily get blindsided by their own design
+ thinking in terms of what needs to be tested. And they may use testing
+ as their quality criterion; yet, you can’t test quality into a product: you
+ can only build a product and test its quality. 
+Therefore: 
+Make QA a central role. Couple it tightly to development as soon
+ as development has something to test. Test plan development can
+ proceed in parallel with coding, but Developers declare the system
+ ready for test. 
+Quality Assurance (QA) was central to the development of Borland’s Quattro Pro for Windows: 
+The QA organization should be outside the context of the project:
+ the planning and reporting of tests should not be accountable to the
+ development organization. The development organization develops a
+ sense of accountability for delivering quality product, since their own
+ view of their reputation is linked to minimizing the bugs that “those
+ people in QA” find. 
+QA should be engaged with marketing to understand the needs
+ and challenges a system will face. 
+QA people have skills and perspectives that allow them to view
+ customer needs from a perspective that may not be reflected in
+ requirements or other articulations of needs. A good example is security companies that develop security software utilities for commercial
+ operating; their own probing of the operating system often uncovers
+ security holes, and then they work with the vendor to fix the problems. 
+ ✥ ✥ ✥ 
+Having engaged QA, the project will be ready to approach the Customer. With QA and the Customer engaged, the quality assurance process can be put in place (use cases gathered, etc.). 
+There are at least two reasons for making QA a separate organization from that holding Developers’ allegiance. First, test development
+ shouldn’t be blind-sided by the Developer perspective. If both the
+ Developer and QA perform their own tests, testing becomes a doubleblind experiment with the software as a subject. Second, QA should be
+ put outside the domain of influence by the development organization
+ in the interest of objectivity. This is an obvious pattern in QPW. 
+Indeed, ENGAGE QUALITY ASSURANCE requires a separate QA organization. This is in contrast to the ideals espoused in Extreme Programming. XP advocates extensive unit testing, but in the words of Kent
+ Beck, “documentation, design, formal review, separate QA; it’s all a
+ waste of our time.” [Waters2000] This may be a reaction to organizations that have a separate QA organization, but do not engage it.
+ That’s a recipe for disaster: you have the overhead of a separate organization, but not the benefits. In order for a separate QA organization
+ to be effective, it must have frequent and positive interaction with
+ development. 
+Note that quality assurance should be engaged early in the project;
+ by the time testing starts it is too late to build the trust needed for
+ quality assurance to happen smoothly. This is spelled out in GET
+ INVOLVED EARLY (10.5.13) [Delano1998]. It is not just the developers’
+ responsibility to engage the testers; the testers must reach out to the
+ developers as well (see DESIGNERS ARE OUR FRIENDS (10.5.10)
+ [Delano1998].) 
+See also APPLICATION DESIGN IS BOUNDED BY TEST DESIGN (4.2.30).

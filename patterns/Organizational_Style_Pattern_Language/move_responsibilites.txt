@@ -1,0 +1,42 @@
+MOVE RESPONSIBILITIES *
+ Moving responsibilities among roles is a delicate balancing act. 
+...you want to change the communication patterns of the organization as a whole, not in a way that depends on a specific role, but in a
+ way that optimizes the effectiveness of communication of an entire
+ organization. 
+✥ ✥ ✥ 
+Unscrutinized relationships between roles can lead to poor
+ overall patterns of coupling in the greater organization. 
+In the spirit of CONWAY’S LAW (5.1.7), organizations tend to form
+ around loci of communication; that is, the roles tend to communicate
+ chiefly with each other, rather than to other (small) organizations in
+ the larger enterprise. But some roles find themselves pulled in two different directions: they have substantial communication needs outside
+ the organization. 
+You want cohesive roles. And you want cohesive organizations. Decoupled organizations are more important than cohesive roles. And
+ there may be fundamental trade-offs between coupling and cohesion.
+ Moving an entire role from one process or organization to another
+ doesn’t reduce the overall coupling, but only moves the source. You
+ could move a person from one organization to another organization to
+ make things more balanced, but responsibilities don’t always align
+ with individuals. You could replicate responsibilities across multiple
+ roles or organizations to increase locality; however, that tends to confuse ownership and coordination, and is not guaranteed to decrease
+ the coupling, anyway. 
+Therefore: 
+Move responsibilities from the role that creates the most undesirable coupling, to the roles coupled to it from other processes. Simply
+ said, this is load balancing. The responsibilities should not be shifted
+ arbitrarily; a chief programmer team organization is one good way to
+ implement this pattern (in the context for Developer role responsibilities). 
+✥ ✥ ✥ 
+The new process may exhibit more highly de-coupled groups. It is
+ important to balance group cohesion with the de-coupling, so this pattern must be applied with care. For example, the Developer role is
+ often the locus of a large fraction of project responsibilities, so the role
+ appears overloaded. Arbitrarily shifting Developer responsibilities to
+ other roles can introduce communication overhead. A chief pro
+grammer team approach to the solution helps balance these forces. 
+HALLWAY CHATTER (5.1.15) is an alternative load-balancing pattern;
+ RESPONSIBILITIES ENGAGE (5.1.14) can be seen as a refinement of this pattern that evens load. UPSIDE DOWN MATRIX MANAGEMENT (5.1.19) is a
+ refinement of this pattern that’s particularly applicable across enterprise boundaries. 
+Most of the design rationale follows from the forces themselves. 
+This is isomorphic to Mackenzie’s model that task interdependencies, together with the interdependencies of task resources and their
+ characteristics, define project roles [Mackenzie1986]. 
+ This organization can be improved by redistributing some of the
+ responsibilities of Tester at the bottom center.

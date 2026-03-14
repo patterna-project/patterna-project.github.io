@@ -1,0 +1,64 @@
+FEW ROLES **
+ Actors rehearsing a new play by Langston Hughes, Chicago, Illinois, 1942. 
+...as an organization establishes its identity, the roles that the members of the project assume begin to take shape. The roles emerge from
+ project needs as well as from individual preferences. Project members,
+ playing these roles, pass information among themselves.. 
+✥ ✥ ✥ 
+People in a project must communicate with each other for the
+ project to make progress. Yet the overhead of this communication
+ can hinder the very progress it should facilitate. 
+The number of possible communication paths among roles
+ increases quadratically with respect to the number of roles. Five roles
+ have ten communication paths, but ten roles have 45 paths. And
+ twenty roles have 190 possible communication paths. It is clearly not
+ possible to have every role communicate with every other. Therefore,
+ information often reaches roles indirectly; through other roles. But this
+ increases both latency (delay) and overhead. 
+It is true that individuals may play several roles and receive information destined for one role that is useful for other roles. Our experience, however, is that in such cases, there are enough different
+ communication needs in the different roles that it does not appreciably
+ decrease the number of communication paths required. The source of
+ information is sometimes as important as the information content
+ itself. 
+Therefore: 
+Identify the roles in the organization. Try to keep the number of
+ roles to about sixteen or less. If you have more, try to reduce the
+ number of roles by identifying the value of various roles, and consolidating or eliminating roles that add less value. 
+We have found that the healthiest and most productive organizations tend to have around sixteen to twenty roles. Aiming for the lower
+ bound gives one space to allow additional roles to emerge as needed. 
+The combinatorics of communication encourages few roles. Fewer
+ roles means that communication becomes more efficient, both in
+ resources consumed and in speed. 
+Roles tend to be stable in an organization over time, more so than
+ processes, and even personnel. Roles are a reflection of the culture and
+ the values of the organization. Keeping the number of roles low makes
+ it easier for new people to assimilate the organizational culture, and
+ become part of it. 
+Roles are not the same as people. Several people may play the same
+ role; most organizations have several people in the Developer role, for
+ example. Conversely, one person may fill more than one role. For
+ example, a person may be mainly a developer, but may function part
+ time as the project manager. Multiple roles per person is common in
+ small teams, but is often seen in large organizations as well. 
+How do you determine what the roles of an organization are? In
+ particular, how do you know whether certain tasks are responsibilities
+ of a role, or whether those tasks form a new role? One can examine the
+ collaborations that emanate from those tasks, and see whether they
+ correspond to the role in question, or have a different pattern of communication. In practice, though, it is simpler than that. Just ask the
+ organization to identify their own roles. Every organization we have
+ ever studied knew what their roles were. Organizational health seems
+ to closely track the crispness with which project members can delineate roles. 
+✥ ✥ ✥ 
+ Large organizations may find themselves with large numbers of
+ roles. One can then approximate FEW ROLES (5.1.2) by applying DIVIDE
+ AND CONQUER (5.1.6). 
+After you have identified the roles, it may not be obvious which
+ roles can be combined or eliminated. Use PRODUCER ROLES (5.1.3) to
+ characterize the roles. 
+As you keep the roles down, communication saturation will stay
+ high, and communication patterns will resemble RESPONSIBILITIES
+ ENGAGE (5.1.14). 
+Note that this is different from SIZE THE ORGANIZATION (4.2.2). It deals
+ with the number of people on the project; FEW ROLES (5.1.2) is about the
+ number of roles, regardless of the number of people. 
+This is closely tied to PRODUCER ROLES (5.1.3). It also makes DISTRIBUTE
+ WORK EVENLY (5.1.13) possible.

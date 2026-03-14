@@ -1,0 +1,124 @@
+STAND UP MEETING **
+ Alias: DAILY MEETING 
+...a project is in the early architecture stage, a period of high stress,
+ or a period of quick change. Or it might just be a period of high stakes,
+ even though you don’t expect things to change rapidly—but change
+ must be dealt with responsively, as during the end game. 
+✥ ✥ ✥ 
+At times of fast change or high stress, it is essential that all members of the organization receive the same information. 
+When a project is changing quickly, information gets out of date
+ almost instantly. People must have the latest information, or else they
+ risk making obsolete or incorrect decisions. Early in a project; during
+ initial architecture, decisions are made that have lasting impact on the
+ product. These decisions tend to be based on incomplete information;
+ on assumptions which must be validated with others. Because these
+ architectural decisions tend to build on each other, an early incorrect
+ assumption can cause significant directional errors. 
+ At times, the change is dictated by stress or a crisis. Crisis management demands quick response. But quick response demands a coordinated effort—things can go terribly wrong if people don’t have the
+ latest information. Architects as well as individual developers can
+ develop tunnel vision, and the low-level decisions can be just as
+ important as the more visible “architectural” ones. As Ed Yourdon
+ said, all things are deeply interwingled. Interdependencies affect both
+ the long-term integrity of the product functionality and structure, as
+ well as the smooth day-to-day functioning of a team that has a shared
+ vision. 
+Some organizations simply operate at a high change velocity. This
+ requires very tight communication coupling, or else chaos ensues. The
+ most productive organizations we have seen operate this way,
+ although this not their only distinguishing characteristic. 
+Yet in all these cases, because the need for communication is high,
+ the communication overhead will also be high. And this overhead
+ detracts from the very thing you are trying to accomplish. How can
+ you balance this? 
+Therefore: 
+Hold short daily meetings with the entire team to exchange critical information, update status, and/or make assignments. The meetings should last no more than 15 minutes, and generally happen first
+ thing in the morning. 
+The focus of the meetings is on the technical progress in the architecture and the work plan. Obviously, these work best with small
+ teams comprising mostly developers and architects. If the project is
+ too large for a single meeting, sub-teams may meet instead. The
+ project is probably already partitioned appropriately. However, the
+ STAND UP MEETING is as much an opportunity to revisit the organizational structure as to revisit the system architecture, after CONWAY’S
+ LAW (5.1.7). For this reason—and because resource reallocation is also
+ a concern in these meetings—regular management presence at these
+ meetings is also important. 
+Early in the project, these meetings may be held for the purpose of
+ reviewing the architecture. Architectural decisions may be examined,
+ tweaked, and re-reviewed very quickly. If the architecture team is
+ “sequestered” with LOCK ’EM UP TOGETHER (5.2.5), the daily reviews can
+ be used as a sanity check, and to allow them to come up for air. Or it
+ can be used instead of LOCK ’EM UP TOGETHER (5.2.5), if the team prefers.
+ Near the end of the delivery cycle, these meetings can keep the team
+ focused on the delivery, and they can help the project to shift assignments quickly to meet project needs. Near the beginning of a project,
+ the code changes quickly; near the end, you may want to be able to
+ shift assignments quickly as the product starts to move toward the
+ shipping dock and out the door, and roles may shift accordingly
+ (developers become testers, connections with beta sites intensify, etc.) 
+Such meetings can be used for other technical decisions as well.
+ One team reported having meetings almost daily with human factors
+ engineers and SURROGATE CUSTOMERS (4.2.7) as part of an iterative
+ approach to user interface design. 
+✥ ✥ ✥ 
+Other daily meetings are used for status and assignments. Beedle et
+ al. describe these as “SCRUM” Meetings [Beedle1999, 644-649], daily
+ meetings to report progress, make assignments, and replan if necessary [Rising2000, 147]: 
+To control an empirical and unpredictable development process, meet with the team in a short daily meeting where participants say: (1) what they have done since the last meeting, 
+(2) what roadblocks were encountered, and (3) what they will 
+be doing until the next meeting. 
+SCRUM meetings mention technical issues as forces, but provide
+ only project management solutions. A STAND UP MEETING deals with all
+ these issues as inseparable, but its first focus is on the most volatile element of change and the project component closest to the largest numbers of technical staff: the artifact being delivered to the customer. 
+This is reiterated almost exactly in Extreme Programming
+ [Beck1999]. In the Borland Quattro Pro For Windows project
+ [Coplien1994b], the architecture team met in the morning to socialize
+ problems from the previous day. The system was updated to reflect the
+ meeting decisions and implementation and testing proceeded the
+ remainder of the day in preparation for the next morning’s meeting. 
+This is similar to the meetings held at the beginning of every shift in
+ hospitals and police stations. (“... be careful out there...”) Note, though,
+ that in these cases, there is an explicit hand off of work from one shift
+ to the next. It might exactly match meetings of the postulated interna
+ tional software teams, where teams in different locations in the world
+ take advantage of time zones, and work on a piece of software 24
+ hours a day. However, the authors are unaware of any team where this
+ has actually worked (and see, for example, Architecture—and ORGANI
+ZATION FOLLOWS LOCATION (5.1.8).) 
+A short daily meeting is an efficient way of transmitting information to the entire team with the minimum communication overhead.
+ This helps overcome some of the tunnel vision problems that can come
+ from CODE OWNERSHIP (5.2.13). 
+Beyond the benefits of communication, it has a salutary effect on
+ morale. It is a slightly institutionalized form of HALLWAY CHATTER
+ (5.1.15), while being an informal form of GROUP VALIDATION (4.2.32),
+ and helps maintain UNITY OF PURPOSE (4.2.12). 
+But there is a potential danger with such meetings. In some organizations, particularly where such tight communication is not the norm,
+ daily meetings are instituted in response to a crisis. While the meetings
+ give morale a temporary lift, they are subject to — and contribute to —
+ burnout. Conversely, one must be careful that the purpose of regular
+ daily meetings is to exchange information, and not to create an artificial crisis mentality in order to elevate performance. Such a purpose is
+ not only unsustainable, it is a little bit dishonest. 
+When should the meeting take place? In California shops, where
+ people can wander into work any time from 8:00 A.M. until noon, you
+ want to schedule the meeting carefully. 
+Use MERCENARY ANALYSTS (4.1.24) to make a record of the fast-paced
+ changing decisions. 
+Ward Cunningham’s Episodes pattern language
+ [Cunningham1996] suggests weekly, personal interviews over the full
+ meeting format. The pattern WORK QUEUE REPORT suggests “Collect
+ status in regular personal interviews conducted at weekly intervals.
+ Solicit days of remaining effort estimates using contrasts with Comparable Work.” It presents the following example: 
+“I put two full days into the new tax calculations, and one day with 
+Joe on his U/I.” 
+“How many uninterrupted days do you think you need to finish the 
+calculations?” 
+“Oh, say two. It’s no different from the accruals.” 
+ “And, working with Joe?” 
+“Well, we didn’t get to the real work. I had three down last week? 
+Must still be three days.” 
+Ward then goes on to say: 
+Use these estimates along with individual dilution factors 
+(how many uninterrupted days of development does the 
+individual have access to a week) to predict elapsed days to 
+completion for each assigned deliverable. Compute and publish COMPLETION HEADROOM (4.1.10) from this data. Include a 
+cover page with a few sentences explaining numbers that 
+might have shifted in an interesting way. 
+This pattern derives from the above citations as well as from REVIEW THE ARCHITECTURE [Coplien1995]. Luke Hohmann’s input in particular
+ is greatly appreciated.

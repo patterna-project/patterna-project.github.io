@@ -1,0 +1,41 @@
+COMPLETION HEADROOM **
+ Speaking of headroom... 
+...work is progressing as the software unfolds and the team learns
+ more about the system from the customer and from the behavior of the
+ system itself. Things are far enough along to start thinking about
+ delivery, and about delivering what can be delivered to the customer
+ on the agreed delivery date. 
+✥ ✥ ✥ 
+Every project must commit to delivery on a few hard and fast
+ dates. This is actually fortunate because it is about the only way to get
+ out of work that is going poorly. It’s also important because it’s usually
+ more important to deliver something on a specified date even than to
+ deliver everything that was anticipated: when is often more important
+ than what. A WORK SPLIT (4.1.11) provides the graceful exit by allowing
+ one to defer the portion of work that is not understood or going poorly
+ while saving the part that does work or will save face. A WORK SPLIT
+ does require some advance notice since some portion of the work must
+ still be completed before deadline. 
+Therefore:  
+ Project work group completion dates from remaining effort estimates in the WORK QUEUE REPORT [Cunningham1996]. Take the largest
+ of the earliest completion dates for each work group and compare it to
+ any hard delivery date that may apply. The difference is your COMPLETION HEADROOM. 
+Any group has an obligation to make their efforts visible through
+ what becomes the ultimate trouble signal, low COMPLETION HEADROOM
+ (4.1.10). Headroom disappears when developmental activities fail to
+ match those of COMPARABLE WORK [Cunningham1996]. 
+✥ ✥ ✥ 
+In order for COMPLETION HEADROOM to work, it is vital to calculate it
+ from the beginning, and recalculate it often, at least weekly. Watch for
+ trends. Headroom will often jitter plus or minus a day or two from
+ week to week. But steady evaporation of headroom for any WORK
+ GROUP is a sure indicator for management attention. You have at your
+ disposal reordering the WORK QUEUE (4.1.13), possibly deferring whole
+ items to later release, the WORK SPLIT already mentioned, or the public
+ embarrassment of a RECOMMITMENT MEETING (4.1.12). 
+A common problem is the well-meaning escalation of requirements
+ by people too close to a problem. If you track COMPLETION HEADROOM
+ (4.1.10), you are better in a position to assess the impact of adding
+ these requirements to the project. 
+See also TAKE NO SMALL SLIPS (4.1.9). 
+A version of this pattern first appeared in [Cunningham1996].

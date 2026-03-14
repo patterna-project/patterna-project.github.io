@@ -1,0 +1,101 @@
+HIERARCHY OF FACTORIES
+ Alias: COMPOSITE FACTORY 
+Making cheese in a small rural cheese factory. 
+Cheeses in a larger cheese factory. 
+...once we decide that the PARSER BUILDER (5.2.20) is the right way to
+ create objects, we need to partition the details of how to construct
+ objects of various classes into the various groups responsible for this
+ construction, in other words we need to have LOOSE INTERFACES (5.2.17).
+ We want to complete FORM FOLLOWS FUNCTION (5.1.11) or ORGANIZATION
+ FOLLOWS LOCATION (5.1.8). On a lower level we want to implement
+ DEVELOPER CONTROLS PROCESS (4.1.17) for a system which creates objects
+ of various types. 
+✥ ✥ ✥ 
+In a distributed work group it is important to divide responsibilities for creational systems as cleanly as possible and reduce coupling. 
+Sometimes the secrets of classifying elements in a data stream are
+ divided between various groups. The reasons for this partitioning can
+ involve company politics, or simply that the knowledge of the telemetry formats is distributed and there is a strong desire to reduce coupling. We need a way to partition the responsibilities for classifying
+ the telemetry packets, while maintaining a centralized client interface,
+ and keeping VARIATION BEHIND INTERFACE (5.2.15). 
+In a telemetry application, various instruments can generate telemetry which is then fed into one stream. The instruments are developed
+ by different teams (at different institutions, for example), and these
+ teams have control over the format of the telemetry that they generate
+ (after taking some standard headers into account). 
+We want a way to isolate the details for identifying each team’s
+ objects, while at the same time allowing the objects to be identified and
+ created in a single application. The scheme that we develop should be
+ layered so that the main factory needs to know only of the existence of
+ a class of objects, but need not know how deep the hierarchy below
+ that class is. Packets created from the hierarchy are processed in a
+ generic way, perhaps by using virtual functions. 
+One way to address the classification problem is to put all the classification/dispatch logic into a single PARSER BUILDER (5.2.20) (combining
+ the Interpreter [GOF1995] pattern with a Builder [GOF1995])—perhaps
+ by using a big switch statement—and rely on communications
+ between groups to ensure that the details make it into the master code
+ through some communications method. This is error prone, and subject to delays. We could also divide the processing into a number of
+ factories and have the client call each in turn. This violates our requirement of transparency, and the client needs to know when a new class
+ of object is added. 
+It would be useful to have a way to have the client interface emulate
+ a single Factory, but hide the details of the construction hierarchy. 
+To summarize the forces: 
+• Division of responsibilities (ORGANIZATION FOLLOWS LOCATION
+ (5.1.8)). 
+• A need for a central interface for parsing data streams and building objects. 
+• A need to add objects to the construction hierarchy in a manner
+ transparent to clients. 
+• The ability (or requirement) to process entities by virtual functions. 
+ • Each class of object can know about its immediate derived
+ classes. 
+Therefore: 
+Use a hierarchy of factories, each of which understands the criteria for making a packet of its type, and knows about the immediate subtypes. The client invokes the make method with the base
+ class factory instance. That factory checks to see that there is indeed an
+ object of class packet in the stream, based on some attributes. The factory then passes the data stream to the factories of each of its immediate subclasses, which check the appropriate data fields in the
+ manner of the PARSER BUILDER (5.2.20) pattern. 
+The Singleton pattern [GOF1995] can be used to access the factories
+ for the derived classes, or the members of the hierarchy can be registered with the master factory at run time. 
+While this pattern violates encapsulation to some extent by
+ requiring that a base class know about its immediate subclasses, it can
+ be made acceptable by agreeing on generic interface classes (say, one
+ per team) and allow each team free reign to subclass these interface
+ classes. Also in this application this requirement is not terribly limiting, since the top level operations team knows about the basic instrument team interfaces and the number of instrument teams is fixed by
+ contract when the project begins. 
+Hierarchy of Factories 
+An example implementation in C++ is: 
+//Base class factory method 
+Packet* PacketFactory::make(Stream* dataStream){ 
+Packet* pkt=0; 
+if(isAPacket(dataStream) { 
+if(! pkt = APacket::factory()->make(dataStream)) 
+if(!pkt = BPacket::factory()->make(dataStream)) { 
+ pkt = new Packet(dataStream); 
+} 
+return pkt; 
+} 
+The result of applying this pattern is that each class needs to know
+ only: 
+• The criteria for what constitutes a member of that class in terms
+ of elements in the data stream. 
+• The immediate subclasses. 
+It is possible to use a Registration mechanism to inform the base
+ class of what the subclasses are rather than hard coding the relationship. (This pattern is not yet written, but would specify a mechanism
+ for notifying a base class factory that a derived class factory has been
+ created. The basic idea would be similar to the View/Model connection in a Model/View/Controller mechanism, but would also address
+ issues of uniqueness (only one instance of each derived class can
+ notify a base class) and guaranteed notification: The construction of
+ any object/factory of the derived classes would generate a registration
+ event automatically). 
+It is also possible to implement this pattern using containment
+ rather than inheritance. 
+Other uses: 
+This pattern is also useful for isolating the definition of packets for
+ which a single team is responsible, so the information can be encapsulated, making it easier to work on a project with large or widely distributed teams. 
+Related Patterns 
+This is similar to the Builder [GOF1995] pattern in that it has a hierarchy of “factories.” It is different in that the data stream defines what
+ is made rather than the application explicitly specifying what objects
+ to construct by arguments to the factory. 
+It is also similar to CHAIN OF RESPONSIBILITY [GOF1995]. This pattern
+ specializes CHAIN OF RESPONSIBILITY for a creational system, and uses the
+ different handlers to facilitate separation of design responsibilities. 
+This pattern helps us realize ORGANIZATION FOLLOWS LOCATION (5.1.8)
+ and CODE OWNERSHIP (5.2.13) [Coplien1995]. This pattern implements
+ SUBCLASS PER TEAM (5.2.18) for a creational system.

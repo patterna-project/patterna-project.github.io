@@ -1,0 +1,67 @@
+ TEAM PRIDE **
+ Problems worthy 
+of attack 
+prove their worth 
+by hitting back. 
+—Piet Hein (1905-1996) 
+... you are about to embark on yet another challenging project. The
+ work will be technically difficult, or maybe it’s just that you have a
+ very short schedule. But at least you have some idea of what you want
+ to do — the beginning of UNITY OF PURPOSE (4.2.12). 
+✥ ✥ ✥ 
+ People are most successful when they feel good about their
+ project, and are confident. But there is a chicken and egg problem
+ here: Confidence breeds success, but success creates confidence. 
+Pride perhaps goeth before a fall, but so doth apathy. 
+Most software projects—sometimes even the fun ones—demand a
+ lot of work. And the ones that aren’t fun don’t have much of a chance
+ of seeing a victorious finish unless something pulls its people together
+ and draws them on towards completion. The hard work feels even
+ harder because of short schedules. Such projects demand the best
+ everyone can give, so motivation is often a key to success. 
+If people consider the work to be “just a job”, the results will reflect
+ it. 
+Teams tend to become self-fulfilling prophecies: everyone wants to
+ work on a winning team, so teams can pick the best people. On the
+ other hand, teams with low performance tend to be stuck with low
+ morale. People don’t join such teams willingly; they come in with a
+ bad attitude. 
+So how do you bring such a team out of the doldrums? Even better,
+ how do you give a team a winning attitude right from the start? 
+Therefore, 
+“We’re the best.” Instill a sense of elitism into the team. Teams
+ that have a certain arrogance tend to work hard and accomplish what
+ is put before them. 
+Really, one cannot open a team up and pour in a cup of team pride.
+ Team pride must come from within. But there are many things you can
+ do to help it come to pass: 
+• Start with a worthwhile problem. Team members are more likely
+ to feel elite if they have a challenging problem to tackle. It is
+ especially good if the problem involves new technology; nothing
+ excites a bunch of geeks more than working with the newest
+ stuff. 
+• Apply SELF SELECTING TEAM (4.2.11). If the team self-selects, they
+ will go for the best people, in their opinion. So they will believe
+ they are good. 
+• Find some important strength of the team, and make that a rallying point: teach the team that they are good in a particular area.
+ Be sure to find a real strength; people can easily see through a
+ manufactured strength. The strength should be a technical
+ strength; while a team might rally around “we party better than
+ anyone else”, it won’t get the software written. 
+• Provide some explicit separation from other projects. This can be
+ physical location (put people together away from others), organizational, or information (share secrets with the group.) It can also
+ be exemption from some of the rules that everyone else must follow. Just things to make it clear they are set apart from other
+ groups. 
+•COMPENSATE SUCCESS (4.2.25). 
+• The parent company must be doing well enough so that it isn’t a
+ concern. This author was once on a team that felt it was elite until
+ the company started doing very poorly. The company woes
+ diverted our attention and sapped our morale. 
+• FIRE WALLS (4.2.9). This generates an attitude of “Top teams
+ shouldn’t be bothered by bureaucratic crap.” 
+• As with UNITY OF PURPOSE (4.2.12), it helps to unite against a common enemy. 
+✥ ✥ ✥ 
+By itself, TEAM PRIDE does not guarantee the success of a project. But
+ Boehm and others have pointed out that people are the key success
+ element of any project, and TEAM PRIDE helps nurture and encourage
+ them. It may even be able to overcome poor overall morale in the company.

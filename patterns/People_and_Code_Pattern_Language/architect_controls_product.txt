@@ -1,0 +1,67 @@
+ARCHITECT CONTROLS PRODUCT **
+ ...an organization of developers exists and needs strategic technical
+ direction. 
+✥ ✥ ✥ 
+Even though a product is designed by many individuals, a project
+ must strive to give the product elegance and cohesiveness. One
+ might achieve this by centralizing control, but totalitarian control is
+ viewed by most development teams as a draconian measure. One
+ person can’t do everything, and no single person has perfect foresight.
+ However, the right information must flow through the right roles;
+ individual areas of competency and expertise must still be engaged. 
+Furthermore, there needs to be some level of architectural vision.
+ While some domain expertise is distributed through the ranks of the
+ development team (DOMAIN EXPERTISE IN ROLES (4.2.22)), the system
+ view — and in particular, the design principles that create a common
+ culture for dialogue and construction — usually benefit from the conceptual integrity we associate with a single mind or small group. 
+Therefore: 
+Create an Architect role as an embodiment of the architectural
+ principles that define an architectural style for the project, and of the
+ broad domain expertise that legitimizes such a style. The Architect
+ role should advise and influence Developer roles, and should communicate closely with them. The Architect doesn’t dictate interfaces
+ (except in cases where arbitration is necessary). Instead, the Architect
+ builds consensus with individual developers, developer sub-teams,
+ and if necessary with the entire development staff, commensurate
+ with the architectural style. The Architect is the principal bridgebuilder between development team members. 
+The Architect should also be in close touch with Customers so the
+ domain expertise is current, detailed, and relevant. 
+✥ ✥ ✥ 
+This does for the architecture what the PATRON ROLE (4.2.15) pattern
+ does for the organization: it provides technical focus, and a rallying
+ point for technical work as well as market-related work. 
+The architect doesn’t control the product in any dictatorial sense; it
+ is more inspirational guiding and leadership. We could have called
+ this “ARCHITECT LEADS PRODUCT” or “ARCHITECT GUIDES PRODUCT” but all
+ these words have their own problems. 
+Resentment can build against a totalitarian Architect; use patterns
+ like STAND UP MEETING (5.2.7) to temper this one. 
+Intellectually large projects can build an ARCHITECTURE TEAM (5.2.4). 
+We have no role called Designer because design is really the whole
+ task. Managers fill a supporting role; empirically, they are rarely seen
+ to control a process except during crises. 
+While the Architect controls the architectural direction, the DEVELOPER CONTROLS PROCESS (4.1.17), and there is still an OWNER PER DELIVERABLE (10.5.19). The Architect is a “chief Developer” (see pattern
+ ARCHITECT ALSO IMPLEMENTS (5.2.10)), or as Alexander thinks of himself,
+ a “master builder.” Their responsibilities include understanding
+ requirements, framing the major system structure, and guiding the
+ long-term evolution of that structure. The Architect controls the
+ product in the visualization accompanying the pattern ENGAGE QUALITY
+ ASSURANCE (4.2.29). 
+Because ORGANIZATION FOLLOWS LOCATION (5.1.8) and CONWAY’S LAW
+ (5.1.7), there should probably be an architect at each location. Architects can be the focus of local allegiance, which is one of the most powerful of cultural forces in geographically distributed development. 
+A more passive way of implementing this is to have the architect
+ review everything. We have seen this work in several projects. How
+ever, in most of these projects, we fear that it put the “truck number”
+ in danger (see MODERATE TRUCK NUMBER (4.2.24)). Also, if there is a conscious plan for the architect to review everything, the architect — in
+ capacity as a developer (see ARCHITECT ALSO IMPLEMENTS (5.2.10)) may
+ “swoop” and fix things that are the responsibility of others (see CODE
+ OWNERSHIP (5.2.13)). Such “swooping” can be demoralizing to the original code author. The architect can review everything if that role still
+ defers to the implementor for execution and even for the decision
+ about making the change. See, of course, STAND UP MEETING (5.2.7). 
+Architectural control must balance developer authority, and this
+ role of being “keeper of the flame” and of the principles should tread
+ neither on developers’ feelings of ownership of their code, nor on their
+ ownership of the code development processes. Architects intervene in
+ processes largely at the business level, and should meddle in implementation processes only in exceptional circumstances. 
+“Les oeuvres d’un seul architect sont plus belles...que ceux d’ont
+ plusiers ont taché de faire.” (“The works of a single architect are more
+ beautiful than those that several have tried to achieve”) — Pascal, Pensées.
