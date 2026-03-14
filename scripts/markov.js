@@ -338,6 +338,12 @@ function delay(ms) {
 }
 
 async function generateSequence() {  // Odstráň parameter selectedFiles
+
+    // Zrušíme všetky predchádzajúce AI volania - HNED NA ZAČIATKU!
+    if (typeof window.cancelAICall === 'function') {
+        window.cancelAICall();
+    }
+
     updateLoadingIndicator(0, 'Spúšťam analýzu...');
     await delay(100);
 
