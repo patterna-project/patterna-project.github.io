@@ -1,6 +1,6 @@
 AI HODNOTENIE SEKVENCIÍ
 - Umelá inteligencia (Gemini) teraz hodnotí logickú nadväznosť vašich sekvencií
-- Po vygenerovaní sekvencie sa automaticky zobrazí AI skóre (0-100%)
+- Po vygenerovaní sekvencie sa automaticky zobrazí AI skóre (0 až 100%)
 - Kliknutím na skóre otvoríte detailný modal s vysvetlením
 - Animovaný spinner počas analýzy (⏳)
 
