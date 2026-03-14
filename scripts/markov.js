@@ -420,18 +420,20 @@ async function generateSequence() {  // Odstráň parameter selectedFiles
 
         updateLoadingIndicator(100, 'Hotovo! Sekvencia vygenerovaná');
         
-        
         // Zrušíme všetky predchádzajúce AI volania
         if (typeof window.cancelAICall === 'function') {
             window.cancelAICall();
         }
 
+        // Počkáme 100ms, aby sa stihol zrušiť starý request
+        await delay(100);
+
         // Spustíme AI evaluáciu (ak je funkcia dostupná)
         if (typeof evaluateWithAI === 'function') {
-            // Počkáme 500ms, aby sa stihla zobraziť sekvencia
+            // Ešte počkáme, kým sa zobrazí sekvencia
             setTimeout(() => {
                 evaluateWithAI(result.sequence, similarityMatrix);
-            }, 500);
+            }, 300);
         }
 
     } catch (error) {
