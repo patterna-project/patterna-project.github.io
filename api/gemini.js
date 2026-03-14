@@ -1,7 +1,22 @@
 // api/gemini.js
 export default async function handler(req, res) {
-    // Povoliť CORS pre GitHub Pages
-    res.setHeader('Access-Control-Allow-Origin', 'https://patterna-project.github.io');
+    // Povoliť CORS pre všetky potrebné domény
+    const allowedOrigins = [
+        'https://patterna-project.github.io',
+        'https://patterna-project-github-io.vercel.app',
+        'http://localhost:5500',
+        'http://127.0.0.1:5500'
+    ];
+    
+    // Ak request prichádza z allowed origin, nastavíme ho
+    const origin = req.headers.origin;
+    if (allowedOrigins.includes(origin)) {
+        res.setHeader('Access-Control-Allow-Origin', origin);
+    } else {
+        // Pre prípad, že by prišiel z inej (napr. Vercel preview)
+        res.setHeader('Access-Control-Allow-Origin', '*'); // Dočasne
+    }
+    
     res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
