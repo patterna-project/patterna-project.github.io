@@ -1,0 +1,9 @@
+# Ignorovať vygenerované config súbory
+scripts/config.js
+config.js
+
+# Ostatné
+.DS_Store
+*.log
+node_modules/
+.env
