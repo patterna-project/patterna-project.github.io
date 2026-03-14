@@ -14,8 +14,8 @@ jobs:
     
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
-
+        uses: actions/checkout@v4  # ← Zmena na v4
+        
       - name: Create config file with API key
         run: |
           # Vytvoríme priečinok scripts ak neexistuje
@@ -32,14 +32,15 @@ jobs:
           ls -la scripts/
           
           echo "✅ config.js vytvorený"
-
+          
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4  # ← Zmena na v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./
           publish_branch: gh-pages
           keep_files: false
+          force_orphan: true  # ← Pridané pre čisté nasadenie
           
       - name: Notify completion
         run: echo "✅ Deployment completed successfully"
