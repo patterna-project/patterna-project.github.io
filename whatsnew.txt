@@ -1,14 +1,16 @@
-AI HODNOTENIE SEKVENCIÍ
+🤖 AI HODNOTENIE SEKVENCIÍ
 - Umelá inteligencia (Gemini) teraz hodnotí logickú nadväznosť vašich sekvencií
 - Po vygenerovaní sekvencie sa automaticky zobrazí AI skóre (0 až 100%)
 - Kliknutím na skóre otvoríte detailný modal s vysvetlením
 - Animovaný spinner počas analýzy (⏳)
+- API kľúč je bezpečne uložený a stránka beží na Vercel serveri
 
-VYLEPŠENÝ GRAF PODOBNOSTÍ
-- Pridaný posuvník (slider) na nastavenie prahu podobnosti – dynamicé zobrazenie podľa hodnoty tresholdu
+🕸️ VYLEPŠENÝ GRAF PODOBNOSTÍ
+- Pridaný posuvník (slider) na nastavenie prahu podobnosti – dynamické zobrazenie podľa hodnoty tresholdu
 - Nové tlačidlo 🔗 na zvýraznenie aktuálnej sekvencie priamo v grafe
+- Po kliknutí na uzol sa zobrazia jeho najsilnejšie spojenia
 
-ĎALŠIE NOVÉ FUNKCIE
+✨ ĎALŠIE NOVÉ FUNKCIE
 - Pridaná podpora pre vlastné katalógy s podpriečinkami (pôvodne sa dalo mať pri vlastných katalógoch len jeden jazyk/kategóriu)
 - Vylepšené vyhľadávanie v grafe podobností
 - Nové tooltipy pre lepšiu orientáciu (celková spoľahlivosť, priečinky)
@@ -16,8 +18,9 @@ VYLEPŠENÝ GRAF PODOBNOSTÍ
 - Kompletné preklady pre detail vzoru (SK/EN)
 - Aktualizované FAQ s novými otázkami
 - Vylepšený vzhľad sekvencie v dark/light mode
+- **Presúvateľné modály** – všetky modaly (O projekte, FAQ, Detail vzoru, AI hodnotenie a ďalšie) je teraz možné presúvať myšou (stačí chytiť za hornú lištu)
 
-OPRAVY CHÝB
+🐛 OPRAVY CHÝB
 - Správne zobrazovanie jazykov v user katalógoch
 - Funkčné tlačidlo pre vymazanie všetkých vzorov
 - Vylepšená stabilita pri veľkých katalógoch
