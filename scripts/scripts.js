@@ -264,17 +264,6 @@ document.getElementById('clearBtn').addEventListener('click', () => {
     showToast(t?.allPatternsCleared || 'Všetky vzory boli vymazané', 'info');
 });
 
-
-document.getElementById("generateBtn").addEventListener("click", async () => {
-    // Už nepotrebujeme zbierať selectedPatterns tu
-    try {
-        await generateSequence();  // Voláme bez parametra
-    } catch (error) {
-        alert('Chyba pri generovaní sekvencie. Skúste to znova.');
-    }
-});
-
-
 // ========== CATALOG BADGES ==========
 
 function updateCatalogBadges() {
