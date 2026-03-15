@@ -1,4 +1,5 @@
-// ai.js - NA ZAČIATOK SÚBORU
+// ai.js 
+
 // Proxy URL pre Vercel (bez API kľúča!    ...)
 const GEMINI_API_PROXY = 'https://patterna-project-github-io.vercel.app/api/gemini';
 
@@ -7,24 +8,8 @@ let aiEvaluationInProgress = false;
 // Na začiatok súboru, k ostatným premenným
 let currentAIController = null;
 
-window.cancelAICall = function() {
-    if (currentAIController) {
-        currentAIController.abort();
-        currentAIController = null;
-        aiEvaluationInProgress = false;
-        console.log('🛑 Zrušené predchádzajúce AI volanie');
-    }
-};
-
 async function evaluateWithAI(sequence, similarityMatrix) {
 
-
-    if (window.cancelAICall) {
-        window.cancelAICall();
-        // Počkáme na dokončenie zrušenia
-        await new Promise(resolve => setTimeout(resolve, 50));
-    }
-        
     const aiContainer = document.getElementById('aiConfidenceContainer');
     const aiValue = document.getElementById('aiConfidenceValue');
     const aiValueButton = document.getElementById('aiValueButton');
