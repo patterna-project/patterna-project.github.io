@@ -17,18 +17,21 @@ window.cancelAICall = function() {
 };
 
 async function evaluateWithAI(sequence, similarityMatrix) {
+
+
+    if (window.cancelAICall) {
+        window.cancelAICall();
+        // Počkáme na dokončenie zrušenia
+        await new Promise(resolve => setTimeout(resolve, 50));
+    }
+    
     // DEBUG: Vypíšeme, ktorú sekvenciu práve hodnotíme
     console.log('🔍 AI EVALUUJE TÚTO SEKVENCIU:');
     sequence.forEach((p, i) => {
         console.log(`  ${i+1}. ${p.name}`);
     });
     console.log('---');
-    
-    if (aiEvaluationInProgress) {
-        console.log('⏳ AI už beží, preskakujem...');
-        return;
-    }
-    
+        
     const aiContainer = document.getElementById('aiConfidenceContainer');
     const aiValue = document.getElementById('aiConfidenceValue');
     const aiValueButton = document.getElementById('aiValueButton');
