@@ -222,7 +222,7 @@ Your evaluation:`;
             aiValue.classList.remove('loading-active');
         }
         
-        // ROVNAKÝ ŠTÝL AKO PRE CELKOVÚ SPOĽAHLIVOSŤ
+        // ROVNAKÝ ŠTÝL AKO PRE CELKOVÚ SPOĽAHLIVOSŤ a tak
         const colors = getConfidenceColor(score);
         
         aiValue.textContent = score + '%';
