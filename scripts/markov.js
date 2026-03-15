@@ -337,14 +337,7 @@ function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-async function generateSequence() {  // Odstráň parameter selectedFiles
-
-    // 1. ZRUŠÍME STARÉ AI VOLANIE
-    if (typeof window.cancelAICall === 'function') {
-        window.cancelAICall();
-        // Počkáme na dokončenie zrušenia
-        await new Promise(resolve => setTimeout(resolve, 100));
-    }
+async function generateSequence() {  
 
     updateLoadingIndicator(0, 'Spúšťam analýzu...');
     await delay(100);
@@ -427,15 +420,8 @@ async function generateSequence() {  // Odstráň parameter selectedFiles
         document.getElementById("suggestionsSection").classList.remove("hidden");
 
         updateLoadingIndicator(100, 'Hotovo! Sekvencia vygenerovaná');
-        
-        // --- LEN JEDNO VOLANIE AI ---
-        // Spustíme AI evaluáciu až po zobrazení sekvencie
-        if (typeof evaluateWithAI === 'function') {
-            // Počkáme 500ms aby sa stihla zobraziť sekvencia
-            setTimeout(() => {
-                evaluateWithAI(result.sequence, similarityMatrix);
-            }, 500);
-        }
+
+        evaluateWithAI(result.sequence, similarityMatrix);
 
     } catch (error) {
         showToast((translations[currentLanguage]?.sequenceGenerationError || 'Chyba pri generovaní sekvencie: ') + error.message, 'error');
