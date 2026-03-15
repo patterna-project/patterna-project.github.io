@@ -227,8 +227,56 @@ function displaySimilarityMatrixWithToggle(sequence, similarityMatrix) {
         similarityInfo.classList.remove('hidden');
     }
     
+    // Skontrolujeme, či už tlačidlá existujú
     if (!document.getElementById('matrixViewBtn')) {
-        initSimilarityViewToggle(); // Toto by ste mali upraviť alebo nahradiť
+        // Vytvoríme tlačidlá
+        const t = window.translations?.[window.currentLanguage] || { 
+            similarityMatrix: "📊 Matica podobností",
+            similarityGraph: "🕸️ Graf podobností",
+            statistics: "📊 Štatistiky"
+        };
+        
+        // Vyčistíme similarityInfo a vytvoríme novú štruktúru
+        similarityInfo.innerHTML = `
+            <div class="flex justify-between items-center mb-4">
+                <div class="flex gap-2">
+                    <button id="matrixViewBtn" 
+                        class="px-4 py-2 rounded-lg transition-all duration-200 font-medium
+                               bg-indigo-600 text-white hover:bg-indigo-700
+                               dark:bg-indigo-500 dark:hover:bg-indigo-600">
+                        ${t.similarityMatrix}
+                    </button>
+                    <button id="graphViewBtn" 
+                        class="px-4 py-2 rounded-lg transition-all duration-200 font-medium
+                               bg-gray-200 text-gray-700 hover:bg-gray-300
+                               dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600">
+                        ${t.similarityGraph}
+                    </button>
+                    <button id="statisticsViewBtn" 
+                        class="px-4 py-2 rounded-lg transition-all duration-200 font-medium
+                               bg-gray-200 text-gray-700 hover:bg-gray-300
+                               dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600">
+                        ${t.statistics}
+                    </button>
+                </div>
+            </div>
+            <div id="similarityMatrix" class="text-sm overflow-x-auto"></div>
+            <div id="similarityGraph" class="w-full min-h-[500px] hidden relative"></div>
+        `;
+        
+        // Pridáme event listenery
+        document.getElementById('matrixViewBtn').addEventListener('click', () => {
+            window.switchView('matrix', sequence, similarityMatrix);
+        });
+        
+        document.getElementById('graphViewBtn').addEventListener('click', () => {
+            window.switchView('graph', sequence, similarityMatrix);
+        });
+        
+        document.getElementById('statisticsViewBtn').addEventListener('click', () => {
+            window.switchView('statistics', sequence, similarityMatrix);
+        });
+        
     } else {
         // Aktualizujeme texty tlačidiel
         const t = window.translations?.[window.currentLanguage] || { 
@@ -236,42 +284,14 @@ function displaySimilarityMatrixWithToggle(sequence, similarityMatrix) {
             similarityGraph: "🕸️ Graf podobností",
             statistics: "📊 Štatistiky"
         };
-        document.getElementById('matrixViewBtn').innerHTML = t.similarityMatrix;
-        document.getElementById('graphViewBtn').innerHTML = t.similarityGraph;
         
-        // Pridáme tlačidlo pre štatistiky, ak ešte neexistuje
-        if (!document.getElementById('statisticsViewBtn')) {
-            const btnContainer = document.querySelector('#similarityInfo .flex.gap-2');
-            if (btnContainer) {
-                const statsBtn = document.createElement('button');
-                statsBtn.id = 'statisticsViewBtn';
-                statsBtn.className = 'px-4 py-2 rounded-lg transition-all duration-200 font-medium bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600';
-                statsBtn.innerHTML = t.statistics || '📊 Štatistiky';
-                statsBtn.addEventListener('click', () => {
-                    window.switchView('statistics', sequence, similarityMatrix);
-                });
-                btnContainer.appendChild(statsBtn);
-            }
-        }
-        
-        // Aktualizujeme event listenery pre existujúce tlačidlá
         const matrixBtn = document.getElementById('matrixViewBtn');
         const graphBtn = document.getElementById('graphViewBtn');
+        const statsBtn = document.getElementById('statisticsViewBtn');
         
-        // Odstránime staré event listenery a pridáme nové
-        matrixBtn.replaceWith(matrixBtn.cloneNode(true));
-        graphBtn.replaceWith(graphBtn.cloneNode(true));
-        
-        const newMatrixBtn = document.getElementById('matrixViewBtn');
-        const newGraphBtn = document.getElementById('graphViewBtn');
-        
-        newMatrixBtn.addEventListener('click', () => {
-            window.switchView('matrix', sequence, similarityMatrix);
-        });
-        
-        newGraphBtn.addEventListener('click', () => {
-            window.switchView('graph', sequence, similarityMatrix);
-        });
+        if (matrixBtn) matrixBtn.innerHTML = t.similarityMatrix;
+        if (graphBtn) graphBtn.innerHTML = t.similarityGraph;
+        if (statsBtn) statsBtn.innerHTML = t.statistics;
     }
     
     // Predvolene zobrazíme maticu
