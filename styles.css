@@ -2994,3 +2994,42 @@ html:not(.dark) #statisticsViewBtn:not(.bg-indigo-600):hover {
     background-color: #e5e7eb !important;  /* gray-200 */
     color: #1f2937 !important;              /* gray-800 */
 }
+
+
+/* Indikátor že header je ťahací */
+.draggable-handle {
+    user-select: none;
+    -webkit-user-select: none;
+    cursor: grab;
+}
+
+.draggable-handle:active {
+    cursor: grabbing;
+}
+
+/* Jemný tieň počas ťahania pre lepší vizuálny feedback */
+.bg-white[dragging="true"],
+.dark\:bg-gray-800[dragging="true"] {
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+}
+
+/* Reset button - malý a nenápadný */
+#aiExplanationModal .text-gray-500.hover\:text-gray-700,
+#patternDetailModal .text-gray-500.hover\:text-gray-700 {
+    transition: transform 0.2s ease;
+}
+
+#aiExplanationModal .text-gray-500.hover\:text-gray-700:hover,
+#patternDetailModal .text-gray-500.hover\:text-gray-700:hover {
+    transform: scale(1.1);
+}
+
+/* Plynulý prechod pri zatváraní/otváraní */
+.bg-white, .dark\:bg-gray-800 {
+    transition: left 0.2s ease, top 0.2s ease;
+}
+
+/* Počas ťahania vypneme transition */
+.bg-white[dragging="true"], .dark\:bg-gray-800[dragging="true"] {
+    transition: none;
+}
