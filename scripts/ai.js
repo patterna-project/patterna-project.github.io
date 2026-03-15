@@ -119,9 +119,7 @@ Answer EXACTLY in this format:
 EXPLANATION: (your detailed explanation)"
 
 Your evaluation:`;
-        
-        console.log('Volám Vercel proxy s promptom (dĺžka:', prompt.length, 'znakov)');
-        
+                
         // Vytvoríme nový controller pre toto volanie
         currentAIController = new AbortController();
 
@@ -147,14 +145,11 @@ Your evaluation:`;
         
         if (!response.ok) {
             const errorText = await response.text();
-            console.error('Proxy error response:', errorText);
             throw new Error(`Proxy error: ${response.status}`);
         }
         
         const data = await response.json();
-        
-        console.log('Proxy response received');
-        
+                
         // --- PARSOVANIE ODPOVEDE ---
         let aiResponse = '';
         
@@ -167,12 +162,9 @@ Your evaluation:`;
         }
         
         if (!aiResponse) {
-            console.error('Neočakávaná štruktúra odpovede:', data);
             throw new Error('Nepodarilo sa načítať odpoveď od AI');
         }
-        
-        console.log('AI response:', aiResponse);
-        
+                
         // --- PARSOVANIE SKÓRE ---
         let score = 50;
         let explanation = aiResponse;
@@ -198,10 +190,7 @@ Your evaluation:`;
         }
         
         score = Math.min(100, Math.max(0, score));
-        
-        console.log(`Parsed score: ${score}`);
-        console.log(`Explanation length: ${explanation.length} znakov`);
-        
+                
         // Odstránime spinner
         if (aiValue) {
             aiValue.classList.remove('loading-active');
@@ -271,11 +260,9 @@ Your evaluation:`;
     } catch (error) {
         // Ak bolo volanie zrušené, ticho to ignorujeme
         if (error.name === 'AbortError') {
-            console.log('⏹️ AI volanie bolo zrušené');
             return;
         }
         
-        console.error('AI evaluation failed:', error);
         
         if (aiValue) {
             aiValue.classList.remove('loading-active');
