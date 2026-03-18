@@ -71,6 +71,33 @@ function renderSimilarityGraph(patterns, similarityMatrix) {
     selectedNodeId = null; // Reset vybraného uzla
     sequenceHighlightEnabled = false;
 
+    // ===== POUŽITIE GLOBÁLNYCH FARIEF =====
+    // Použijeme globálne farby, ktoré boli vygenerované pri generovaní sekvencie
+    let languageColors = window.languageColorMap || {};
+
+    // Ak náhodou nie sú farby k dispozícii (staré dáta, alebo nejaký edge case), vygenerujeme ich
+    if (Object.keys(languageColors).length === 0) {
+        console.warn('languageColorMap nebola nájdená, generujem farby v grafe');
+        const uniqueLanguages = [...new Set(patterns.map(p => p.language || 'C & H'))];
+        
+        // Funkcia na generovanie náhodnej farby v HSL formáte (sýte, ale nie príliš svetlé)
+        function getRandomColor(seed) {
+            let hash = 0;
+            for (let i = 0; i < seed.length; i++) {
+                hash = seed.charCodeAt(i) + ((hash << 5) - hash);
+            }
+            const hue = Math.abs(hash % 360);
+            return `hsl(${hue}, 75%, 55%)`;
+        }
+        
+        uniqueLanguages.forEach(lang => {
+            languageColors[lang] = getRandomColor(lang);
+        });
+        
+        // Uložíme ich pre prípad, že by sa graf prekresľoval
+        window.languageColorMap = languageColors;
+    }
+
     // Hranica pre zobrazenie hrany - Dynamický threshold podľa toho, či je zapnuté IDF
     const idfCheckbox = document.getElementById('idfCheckbox');
     const useIDF = idfCheckbox ? idfCheckbox.checked : false;
@@ -338,14 +365,18 @@ function renderSimilarityGraph(patterns, similarityMatrix) {
             selectNode(d, true); // true = kliknutie myšou
         });
     
-    // Pridáme kruhy pre uzly - JEDNOTNÁ INDIGO FARBA
+    // Pridáme kruhy pre uzly - FARBA PODĽA JAZYKA (používame languageColors z vonkajšieho scope)
     node.append('circle')
         .attr('r', 25)
-        .attr('fill', '#4f46e5') // Jednotná indigo farba pre všetky uzly
+        .attr('fill', d => {
+            // Zistíme jazyk pre daný uzol
+            const lang = d.language || 'C & H';
+            return languageColors[lang];
+        })
         .attr('stroke', '#fff')
         .attr('stroke-width', 2)
         .attr('class', 'dark:stroke-gray-800');
-    
+
     // Pridáme text do uzlov (skratka názvu)
     node.append('text')
         .text(d => {
@@ -884,9 +915,14 @@ function showNodeInfo(nodeData, patterns, similarityMatrix) {
     
     // Pre Coplien katalóg pridáme aj jazyk - kompaktne bez extra medzery
     if (languageName) {
+        const bgColor = window.languageColorMap?.[pattern.language] || '#8b5cf6';
+        const isDark = document.documentElement.classList.contains('dark');
+        const textColorClass = isDark ? 'text-gray-200' : 'text-white';
+        
         catalogHtml += `
             <div class="flex items-center gap-1 text-xs">
-                <span class="px-2 py-0.5 rounded-full bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200 text-xs font-medium">
+                <span class="px-2 py-0.5 rounded-full text-xs font-medium ${textColorClass}" 
+                    style="background-color: ${bgColor};">
                     ${languageName}
                 </span>
             </div>

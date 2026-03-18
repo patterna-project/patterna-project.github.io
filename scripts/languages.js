@@ -21,6 +21,10 @@ const translations = {
         selectPatterns: "Vyber vzory",
         generateSequence: "Generovať sekvenciu",
         loadingProgress: "Načítavam katalóg... {current}/{total}",
+        setAsStart: "Nastaviť ako štartovací vzor",
+        removeAsStart: "Zrušiť štartovací vzor",
+        setAsGoal: "Nastaviť ako cieľový vzor",
+        removeAsGoal: "Zrušiť cieľový vzor",
 
         // Suggestions section
         suggestedSequence: "Navrhnutá sekvencia",
@@ -55,6 +59,14 @@ const translations = {
         statisticsMostConnected: "Najprepojenejšie",
         statisticsLeastConnected: "Najizolovanejšie",
         statisticsDistribution: "Distribúcia podobností",
+        matrixViewNumbers: "Čísla",
+        matrixViewHeatmap: "Heatmapa",
+        matrixViewBoth: "Oboje",
+        matrixZoomIn: "Priblížiť",
+        matrixZoomOut: "Vzdialiť",
+        matrixView: "Zobraziť:",
+        matrixZoomReset: "Reset",
+
 
         // Footer
         quickLinks: "Rýchle odkazy",
@@ -166,6 +178,27 @@ const translations = {
         patternDetailFilterSequence: "Len sekvencia",
         patternDetailNotInSequence: "(mimo sekvencie)",
 
+        //Explanations modal
+        explainButton: "❓ Vysvetli",
+        explainButtonTooltip: "Vysvetlenie aktuálneho zobrazenia",
+        explainMatrixTitle: "📊 Ako vznikla matica podobností?",
+        explainMatrixText1: "<strong>Matica podobností</strong> zobrazuje numerické hodnoty podobnosti medzi každými dvoma vzormi.",
+        explainMatrixText2: "Hodnoty v matici sú výsledkom <strong>kosínusovej podobnosti</strong> medzi vektormi slov jednotlivých textov. Čím je hodnota vyššia (bližšie k 1), tým sú texty obsahovo podobnejšie.",
+        explainMatrixText3: "Diagonála je zámerne nastavená na 0, pretože nás nezaujíma podobnosť vzoru samého so sebou.",
+        explainMatrixNote: "Ak je zapnutý prepínač IDF, hodnoty sa počítajú s váhami, ktoré zvýrazňujú vzácne slová. Pri USE sa namiesto TF‑IDF používajú sémantické embeddingy.",
+        explainGraphTitle: "🕸️ Ako vznikol graf podobností?",
+        explainGraphText1: "<strong>Graf podobností</strong> vizualizuje vzťahy medzi vzormi ako sieť uzlov a hrán.",
+        explainGraphText2: "<strong>Uzly</strong> predstavujú jednotlivé vzory a sú farebne odlíšené podľa jazyka/katalógu.",
+        explainGraphText3: "<strong>Hrany</strong> spájajú vzory, ktorých podobnosť presahuje nastavený prah (posuvník vpravo hore). Hrúbka a farba čiary zodpovedá sile podobnosti.",
+        explainGraphText4: "Po kliknutí na uzol sa zobrazia jeho najsilnejšie spojenia a detailné informácie.",
+        explainGraphNote: "Tlačidlo 🔗 zvýrazní práve vygenerovanú sekvenciu.",
+        explainStatsTitle: "📊 Štatistiky podobností",
+        explainStatsText1: "<strong>Štatistiky</strong> poskytujú prehľad o celkovom rozložení hodnôt v matici.",
+        explainStatsText2: "• <strong>Základné štatistiky</strong> – priemer, medián a smerodajná odchýlka všetkých podobností.",
+        explainStatsText3: "• <strong>Top 5 najsilnejších spojení</strong> – dvojice vzorov s najvyššou podobnosťou.",
+        explainStatsText4: "• <strong>Centralita vzorov</strong> – ktoré vzory sú najviac a najmenej prepojené (priemerná podobnosť s ostatnými).",
+        explainStatsText5: "• <strong>Distribúcia podobností</strong> – ako sú hodnoty rozložené v intervaloch (0–20 %, 20–40 % atď.).",
+
 
         // OnHover info
         mdpParamGammaTitle: "γ: 0-1 | Diskontný faktor.Vyššia hodnota = preferencia dlhších ciest.",
@@ -173,7 +206,12 @@ const translations = {
         mdpParamOtherRewardTitle: "R(ostatné): ≥0 | Odmena za návštevu ostatných stavov. Vyššia hodnota = viac sa oplatí zdržiavať na ceste.",
         mdpParamEpsilonTitle: "ε: 0.0001-1 | Prah konvergencie. Menšia hodnota = presnejšie výpočty, ale viac iterácií.",
         idfTitle: "IDF (Inverzná Frekvencia Dokumentu) - zvýrazňuje vzácne slová.",
+        sentimentTitle: "🎭 Analýza sentimentu - upravuje odmeny v MDP podľa emocionálneho tónu textov. Pozitívne vzory sú zvýhodnené, negatívne potlačené.",
         stopWordsTitle: "Stop slová - slová, ktoré sa ignorujú pri analýze",
+        useTooltip: "Universal Sentence Encoder – neurónová sieť na sémantickú analýzu celých viet. Výrazne pomalšie, ale presnejšie ako TF-IDF. Prvé spustenie načíta model (~30s).",
+        matrixTooltip: "Zobrazenie matice podobností medzi vzormi. Čím tmavšia farba, tým vyššia podobnosť. Hodnoty sú normalizované na škále 0-1.",
+        graphTooltip: "Interaktívny graf vzťahov medzi vzormi. Hrubšia čiara = vyššia podobnosť. Kliknutím na uzol zobrazíš detaily a top spojenia. Môžeš meniť prah zobrazenia posuvníkom.",
+        statisticsTooltip: "Základné štatistiky o podobnostiach medzi vzormi – počet vzorov, priemerná podobnosť, medián, smerodajná odchýlka, top 5 najsilnejších spojení a distribúcia hodnôt.",
 
         // MDP steps
         mdpTitle: "Postup riešenia Markov Decision Process (MDP):",
@@ -187,6 +225,7 @@ const translations = {
         mdpConvergence: "✓ Konvergencia",
         mdpGoalCalculation: "Výpočet celkových podobností pre každý vzor:",
         mdpGoalState: "Cieľový stav",
+        mdpForcedStartExcluded: 'Vynútený štartovací vzor "{pattern}" bol vylúčený z výberu cieľa',
         mdpGoalReward: "má okamžitú odmenu (reward)",
         mdpOtherReward: "Ostatné stavy majú okamžitú odmenu (reward)",
         mdpGamma: "Diskontný faktor: γ =",
@@ -226,6 +265,8 @@ const translations = {
         catalogDeletionCancelled: "Odstránenie katalógu bolo zrušené",
         catalogUploadSuccess: 'Katalóg "{catalogName}" bol úspešne nahraný',
         allPatternsCleared: 'Všetky vzory boli vymazané'
+    
+    
     },
     en: {
         // Navigation
@@ -247,6 +288,10 @@ const translations = {
         selectPatterns: "Select Patterns",
         generateSequence: "Generate Sequence",
         loadingProgress: "Loading catalog... {current}/{total}",
+        setAsStart: "Set as starting pattern",
+        removeAsStart: "Remove as starting pattern",
+        setAsGoal: "Set as goal pattern",
+        removeAsGoal: "Remove as goal pattern",
 
         // Suggestions section
         suggestedSequence: "Suggested Sequence",
@@ -282,6 +327,14 @@ const translations = {
         statisticsMostConnected: "Most connected",
         statisticsLeastConnected: "Least connected",
         statisticsDistribution: "Similarity distribution",
+        matrixViewNumbers: "Numbers",
+        matrixViewHeatmap: "Heatmap",
+        matrixViewBoth: "Both",
+        matrixZoomIn: "Zoom in",
+        matrixZoomOut: "Zoom out",
+        matrixView: "View:",
+        matrixZoomReset: "Reset",
+
 
 
         // Footer
@@ -395,14 +448,40 @@ const translations = {
         patternDetailFilterSequence: "Only sequence",
         patternDetailNotInSequence: "(outside sequence)",
 
+        //Explanations modal
+        explainButton: "❓ Explain",
+        explainButtonTooltip: "Explanation of the current view",
+        explainMatrixTitle: "📊 How is the similarity matrix created?",
+        explainMatrixText1: "The <strong>similarity matrix</strong> displays numerical similarity values between each pair of patterns.",
+        explainMatrixText2: "The values are the result of <strong>cosine similarity</strong> between word vectors of the texts. The higher the value (closer to 1), the more similar the texts are.",
+        explainMatrixText3: "The diagonal is intentionally set to 0, as we are not interested in a pattern's similarity with itself.",
+        explainMatrixNote: "If the IDF switch is on, values are weighted to highlight rare words. When USE is used, semantic embeddings are employed instead of TF‑IDF.",
+        explainGraphTitle: "🕸️ How is the similarity graph created?",
+        explainGraphText1: "The <strong>similarity graph</strong> visualizes relationships between patterns as a network of nodes and edges.",
+        explainGraphText2: "<strong>Nodes</strong> represent individual patterns and are color-coded by language/catalog.",
+        explainGraphText3: "<strong>Edges</strong> connect patterns whose similarity exceeds the set threshold (slider top right). Edge thickness and color correspond to similarity strength.",
+        explainGraphText4: "Clicking on a node shows its strongest connections and detailed information.",
+        explainGraphNote: "The 🔗 button highlights the currently generated sequence.",
+        explainStatsTitle: "📊 Similarity Statistics",
+        explainStatsText1: "<strong>Statistics</strong> provide an overview of the overall distribution of matrix values.",
+        explainStatsText2: "• <strong>Basic statistics</strong> – mean, median and standard deviation of all similarities.",
+        explainStatsText3: "• <strong>Top 5 strongest connections</strong> – pairs of patterns with the highest similarity.",
+        explainStatsText4: "• <strong>Pattern centrality</strong> – which patterns are most and least connected (average similarity with others).",
+        explainStatsText5: "• <strong>Similarity distribution</strong> – how values are distributed in intervals (0–20%, 20–40%, etc.).",
+
+
         // OnHover info
         mdpParamGammaTitle: "γ: 0-1 | Discount factor. Higher value = preference for longer paths.",
         mdpParamGoalRewardTitle: "R(goal): ≥0 | Reward for reaching the goal. Higher value = greater motivation to go directly to the goal.",
         mdpParamOtherRewardTitle: "R(other): ≥0 | Reward for visiting other states. Higher value = more benefit from detours.",
         mdpParamEpsilonTitle: "ε: 0.0001-1 | Convergence threshold. Smaller value = more precise calculations, but more iterations.",
         idfTitle: "IDF (Inverse Document Frequency) - highlights rare words.",
+        sentimentTitle: "🎭 Sentiment analysis - adjusts MDP rewards based on emotional tone of texts. Positive patterns are favored, negative ones are suppressed.",
         stopWordsTitle: "Stop words - words that are ignored during analysis",
-
+        useTooltip: "Universal Sentence Encoder – neural network for semantic analysis of entire sentences. Significantly slower but more accurate than TF-IDF. First run loads the model (~30s).",
+        matrixTooltip: "Display of similarity matrix between patterns. Darker color = higher similarity. Values are normalized to 0-1 scale.",
+        graphTooltip: "Interactive graph of relationships between patterns. Thicker line = higher similarity. Click on a node to see details and top connections. You can adjust the display threshold with the slider.",
+        statisticsTooltip: "Basic statistics about similarities between patterns – number of patterns, average similarity, median, standard deviation, top 5 strongest connections and value distribution.",
 
         // MDP steps
         mdpTitle: "Markov Decision Process (MDP) Solution Steps:",
@@ -416,6 +495,7 @@ const translations = {
         mdpConvergence: "✓ Convergence",
         mdpGoalCalculation: "Calculating total similarities for each pattern:",
         mdpGoalState: "Goal state",
+        mdpForcedStartExcluded: 'Forced start pattern "{pattern}" was excluded from goal selection',
         mdpGoalReward: "has immediate reward",
         mdpOtherReward: "Other states have immediate reward",
         mdpGamma: "Discount factor: γ =",
@@ -459,12 +539,7 @@ const translations = {
         failedToLoadFiles: 'Failed to load any txt files',
         catalogLoadError: 'Error loading catalog: ',
         allPatternsCleared: 'All patterns were cleared',
-                
-
-
-
-
-
+        
     }
 };
 
@@ -523,6 +598,40 @@ function updateTextContent() {
             '<path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.27a.75.75 0 01.02-1.06z" clip-rule="evenodd" />' +
             '</svg>';
     }
+    
+
+    // Aktualizácia matrix ovládacích prvkov - PRIAMA ZMENA TEXTU
+    const matrixNumbersBtn = document.getElementById('matrixViewNumbersBtn');
+    const matrixHeatmapBtn = document.getElementById('matrixViewHeatmapBtn');
+    const matrixBothBtn = document.getElementById('matrixViewBothBtn');
+    const matrixZoomIn = document.getElementById('matrixZoomInBtn');
+    const matrixZoomOut = document.getElementById('matrixZoomOutBtn');
+    const matrixZoomReset = document.getElementById('matrixZoomResetBtn');
+
+    if (matrixNumbersBtn) {
+        matrixNumbersBtn.textContent = t.matrixViewNumbers;
+        matrixNumbersBtn.title = t.matrixViewNumbers;
+    }
+    if (matrixHeatmapBtn) {
+        matrixHeatmapBtn.textContent = t.matrixViewHeatmap;
+        matrixHeatmapBtn.title = t.matrixViewHeatmap;
+    }
+    if (matrixBothBtn) {
+        matrixBothBtn.textContent = t.matrixViewBoth;
+        matrixBothBtn.title = t.matrixViewBoth;
+    }
+    if (matrixZoomIn) matrixZoomIn.title = t.matrixZoomIn;
+    if (matrixZoomOut) matrixZoomOut.title = t.matrixZoomOut;
+
+
+    const matrixViewLabel = document.querySelector('.matrix-controls .flex.items-center.gap-2 span.text-sm');
+    if (matrixViewLabel) {
+        matrixViewLabel.textContent = t.matrixView;
+    }
+
+
+
+
 
     const examplesHeader = document.querySelector("#examplesMenu li:first-child");
     if (examplesHeader) {
@@ -588,13 +697,17 @@ function updateTextContent() {
 
     const idfCheckbox = document.getElementById('idfCheckbox');
     if (idfCheckbox) idfCheckbox.title = t.idfTitle;
-    
+
+    const sentimentCheckbox = document.getElementById('sentimentCheckbox');
+    if (sentimentCheckbox) {
+        sentimentCheckbox.title = t.sentimentTitle;
+    }
+
+    const useCheckbox = document.getElementById('useCheckbox');
+    if (useCheckbox) useCheckbox.title = t.useTooltip;
+
     const stopWordsBtn = document.getElementById('stopWordsBtn');
     if (stopWordsBtn) stopWordsBtn.title = t.stopWordsTitle;
-
-    const matrixViewBtn = document.getElementById('matrixViewBtn');
-    const graphViewBtn = document.getElementById('graphViewBtn');
-    const statsViewBtn = document.getElementById('statisticsViewBtn');
 
     document.querySelectorAll('.view-pattern-btn').forEach(btn => {
         btn.setAttribute('title', t.patternDetailViewButton || 'Zobraziť podrobnosti');
@@ -614,19 +727,32 @@ function updateTextContent() {
     if (folderTooltip) {
         folderTooltip.title = t.folderWithTxtFilesTooltip;
     }
-    
-    
+
+    // Tooltips a texty pre tlačidlá zobrazenia
+    const matrixViewBtn = document.getElementById('matrixViewBtn');
+    const graphViewBtn = document.getElementById('graphViewBtn');
+    const statsViewBtn = document.getElementById('statisticsViewBtn');
+    const explainViewBtn = document.getElementById('explainViewBtn'); // ← toto je nové
+
     if (matrixViewBtn) {
         matrixViewBtn.innerHTML = t.similarityMatrix;
+        matrixViewBtn.title = t.matrixTooltip;
     }
-    
     if (graphViewBtn) {
         graphViewBtn.innerHTML = t.similarityGraph;
+        graphViewBtn.title = t.graphTooltip;
     }
-    
     if (statsViewBtn) {
         statsViewBtn.innerHTML = t.statistics;
+        statsViewBtn.title = t.statisticsTooltip;
     }
+    if (explainViewBtn) { // ← toto je nové
+        explainViewBtn.innerHTML = t.explainButton;
+        explainViewBtn.title = t.explainButtonTooltip;
+    }
+    
+    
+    
     
     // Ak je aktuálne zobrazenie štatistík, prekreslíme ich
     if (window.currentView === 'statistics' && currentStatisticsData) {

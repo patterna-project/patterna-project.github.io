@@ -1,21 +1,35 @@
 // ai.js 
 
-// Proxy URL pre Vercel (bez API kľúča!    ...)
+// Proxy URL pre Vercel (bez API kľúča!)
 const GEMINI_API_PROXY = 'https://patterna-project-github-io.vercel.app/api/gemini';
 
 let aiEvaluationInProgress = false;
-
-// Na začiatok súboru, k ostatným premenným
 let currentAIController = null;
+let lastAIRequestTime = 0;
+const AI_REQUEST_COOLDOWN = 5000; // 5 sekúnd pauza medzi requestami
 
 async function evaluateWithAI(sequence, similarityMatrix) {
-
     const aiContainer = document.getElementById('aiConfidenceContainer');
     const aiValue = document.getElementById('aiConfidenceValue');
     const aiValueButton = document.getElementById('aiValueButton');
     const aiExplanation = document.getElementById('aiExplanation');
     const aiTooltip = document.getElementById('aiConfidenceTooltip');
     const t = translations[currentLanguage];
+    
+    // Kontrola cooldownu
+    const now = Date.now();
+    if (now - lastAIRequestTime < AI_REQUEST_COOLDOWN) {
+        const secondsLeft = Math.ceil((AI_REQUEST_COOLDOWN - (now - lastAIRequestTime)) / 1000);
+        showToast(
+            currentLanguage === 'sk' 
+                ? `Počkajte ${secondsLeft} sekúnd pred ďalším AI hodnotením`
+                : `Please wait ${secondsLeft} seconds before next AI evaluation`,
+            'warning',
+            3000
+        );
+        aiContainer.classList.add('hidden');
+        return;
+    }
     
     try {
         aiEvaluationInProgress = true;
@@ -145,10 +159,33 @@ Your evaluation:`;
         
         if (!response.ok) {
             const errorText = await response.text();
-            throw new Error(`Proxy error: ${response.status}`);
+            
+            // Špecifické správy pre rôzne HTTP kódy
+            let errorMessage;
+            if (response.status === 429) {
+                errorMessage = currentLanguage === 'sk' 
+                    ? 'Príliš veľa požiadaviek na AI. Skúste to o chvíľu.'
+                    : 'Too many AI requests. Please try again later.';
+                
+                // Nastavíme cooldown
+                lastAIRequestTime = Date.now();
+            } else if (response.status === 503 || response.status === 504) {
+                errorMessage = currentLanguage === 'sk'
+                    ? 'AI služba je momentálne nedostupná. Skúste to neskôr.'
+                    : 'AI service is currently unavailable. Please try again later.';
+            } else {
+                errorMessage = currentLanguage === 'sk'
+                    ? `Chyba AI: ${response.status}`
+                    : `AI error: ${response.status}`;
+            }
+            
+            throw new Error(errorMessage);
         }
         
         const data = await response.json();
+        
+        // Aktualizujeme čas posledného úspešného requestu
+        lastAIRequestTime = Date.now();
                 
         // --- PARSOVANIE ODPOVEDE ---
         let aiResponse = '';
@@ -162,7 +199,9 @@ Your evaluation:`;
         }
         
         if (!aiResponse) {
-            throw new Error('Nepodarilo sa načítať odpoveď od AI');
+            throw new Error(currentLanguage === 'sk' 
+                ? 'Nepodarilo sa načítať odpoveď od AI'
+                : 'Failed to load AI response');
         }
                 
         // --- PARSOVANIE SKÓRE ---
@@ -263,18 +302,19 @@ Your evaluation:`;
             return;
         }
         
-        
         if (aiValue) {
             aiValue.classList.remove('loading-active');
         }
         aiContainer.classList.add('hidden');
         
-        showToast(
-            currentLanguage === 'sk' 
-                ? 'AI hodnotenie momentálne nie je dostupné'
-                : 'AI evaluation is currently unavailable',
-            'warning'
-        );
+        // Zobraziť konkrétnu chybu
+        showToast(error.message, 'error', 5000);
+        
+        // Pri 429 nastavíme dlhší cooldown
+        if (error.message.includes('429') || error.message.includes('Príliš veľa')) {
+            lastAIRequestTime = Date.now();
+        }
+        
     } finally {
         currentAIController = null;
         aiEvaluationInProgress = false;

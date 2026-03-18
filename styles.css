@@ -2995,7 +2995,6 @@ html:not(.dark) #statisticsViewBtn:not(.bg-indigo-600):hover {
     color: #1f2937 !important;              /* gray-800 */
 }
 
-
 /* Indikátor že header je ťahací */
 .draggable-handle {
     user-select: none;
@@ -3032,4 +3031,289 @@ html:not(.dark) #statisticsViewBtn:not(.bg-indigo-600):hover {
 /* Počas ťahania vypneme transition */
 .bg-white[dragging="true"], .dark\:bg-gray-800[dragging="true"] {
     transition: none;
+}
+
+/* ===== ŠTARTOVACIA VLAJKA - OPRAVENÁ VERZIA ===== */
+
+/* Základný štýl pre všetky vlajky */
+.start-flag {
+    display: inline-block;
+    transition: opacity 0.2s ease;
+    cursor: pointer;
+    user-select: none;
+    font-size: 1.25rem; /* o niečo väčšie pre lepšiu viditeľnosť */
+    line-height: 1;
+}
+
+/* Kontajner pre vlajku */
+.flag-container {
+    min-width: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 1. AKTÍVNA VLAJKA (nastavená ako štartovacia) - vždy plná */
+.start-flag.opacity-100 {
+    opacity: 1 !important;
+    filter: drop-shadow(0 0 2px rgba(239, 68, 68, 0.5));
+}
+
+/* 2. NEAKTÍVNA VLAJKA - predvolene úplne skrytá */
+.start-flag.opacity-0 {
+    opacity: 0 !important;
+}
+
+/* 2a. Pri hoveri na celý riadok (group) sa zobrazí na 50% */
+.group:hover .start-flag.opacity-0 {
+    opacity: 0.5 !important;
+}
+
+/* 2b. Pri hoveri priamo na vlajku (aj keď je inak skrytá) - ZVÝŠENÁ ŠPECIFICKOSŤ */
+.flag-container .start-flag.opacity-0:hover {
+    opacity: 1 !important;
+}
+
+/* Pre lepšie rozlíšenie v dark mode */
+.dark .start-flag.opacity-100 {
+    filter: drop-shadow(0 0 3px rgba(239, 68, 68, 0.8));
+}
+
+/* ===== CIEĽOVÝ TERČ - ROVNAKÉ AKO VLAJKA ===== */
+
+/* Základný štýl pre všetky terče */
+.goal-flag {
+    display: inline-block;
+    transition: opacity 0.2s ease;
+    cursor: pointer;
+    user-select: none;
+    font-size: 1.25rem;
+    line-height: 1;
+}
+
+/* Kontajner pre ikony */
+.icons-container {
+    min-width: 56px; /* 2*28px pre dve ikony */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+}
+
+/* 1. AKTÍVNY TERČ (nastavený ako cieľ) - vždy plný */
+.goal-flag.opacity-100 {
+    opacity: 1 !important;
+    filter: drop-shadow(0 0 2px rgba(16, 185, 129, 0.5)); /* zelený tieň */
+}
+
+/* 2. NEAKTÍVNY TERČ - predvolene úplne skrytý */
+.goal-flag.opacity-0 {
+    opacity: 0 !important;
+}
+
+/* 2a. Pri hoveri na celý riadok (group) sa zobrazí na 50% */
+.group:hover .goal-flag.opacity-0 {
+    opacity: 0.5 !important;
+}
+
+/* 2b. Pri hoveri priamo na terč (aj keď je inak skrytý) */
+.icons-container .goal-flag.opacity-0:hover {
+    opacity: 1 !important;
+}
+
+/* Pre lepšie rozlíšenie v dark mode */
+.dark .goal-flag.opacity-100 {
+    filter: drop-shadow(0 0 3px rgba(16, 185, 129, 0.8));
+}
+
+
+
+
+
+
+/* Pre lepšie zobrazenie ikoniek v MDP krokoch */
+.mdp-step-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 9999px;
+    font-size: 1rem;
+}
+
+.mdp-step-icon.start {
+    background-color: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+}
+
+.mdp-step-icon.goal {
+    background-color: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+}
+
+/* Pre zobrazenie v zozname */
+.mdp-step-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Pre ikonky v tabuľkách */
+.mdp-table-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-right: 0.25rem;
+}
+
+/* Pre zvýraznenie riadkov so štartom/cielom */
+tr:has(.start-icon) {
+    background-color: rgba(239, 68, 68, 0.05);
+}
+
+tr:has(.goal-icon) {
+    background-color: rgba(16, 185, 129, 0.05);
+}
+
+/* ===== HEATMAP CSS TRIEDY - AUTOMATICKY REAGUJÚ NA DARK/LIGHT MODE ===== */
+
+/* Light mode - jemné odtiene */
+.heatmap-0-10 {
+    background-color: #f9fafb !important;
+}
+.heatmap-10-30 {
+    background-color: #eef2ff !important;
+}
+.heatmap-30-50 {
+    background-color: #e0e7ff !important;
+}
+.heatmap-50-70 {
+    background-color: #c7d2fe !important;
+}
+.heatmap-70-100 {
+    background-color: #a5b4fc !important;
+}
+
+/* Dark mode - tmavšie odtiene */
+.dark .heatmap-0-10 {
+    background-color: #1f2937 !important;
+}
+.dark .heatmap-10-30 {
+    background-color: #1e1a4a !important;
+}
+.dark .heatmap-30-50 {
+    background-color: #2e2a6a !important;
+}
+.dark .heatmap-50-70 {
+    background-color: #3e3a8a !important;
+}
+.dark .heatmap-70-100 {
+    background-color: #4f4a9e !important;
+}
+
+/* ===== HEATMAP LEGEND - ROVNAKÉ FARBY AKO HEATMAP ===== */
+
+/* Light mode legend */
+.heatmap-legend-0-10 {
+    background-color: #f9fafb !important;
+}
+.heatmap-legend-10-30 {
+    background-color: #eef2ff !important;
+}
+.heatmap-legend-30-50 {
+    background-color: #e0e7ff !important;
+}
+.heatmap-legend-50-70 {
+    background-color: #c7d2fe !important;
+}
+.heatmap-legend-70-100 {
+    background-color: #a5b4fc !important;
+}
+
+/* Dark mode legend */
+.dark .heatmap-legend-0-10 {
+    background-color: #1f2937 !important;
+}
+.dark .heatmap-legend-10-30 {
+    background-color: #1e1a4a !important;
+}
+.dark .heatmap-legend-30-50 {
+    background-color: #2e2a6a !important;
+}
+.dark .heatmap-legend-50-70 {
+    background-color: #3e3a8a !important;
+}
+.dark .heatmap-legend-70-100 {
+    background-color: #4f4a9e !important;
+}
+
+/* ===== EXPLAIN BUTTON  ===== */
+
+/* Light mode - neaktívne tlačidlo (pred kliknutím) */
+html:not(.dark) #explainViewBtn {
+    background-color: #e0e7ff !important;  /* indigo-100 - svetlejšia, ale dobre viditeľná */
+    color: #4338ca !important;             /* indigo-700 - tmavý text pre kontrast */
+    border: 1px solid #c7d2fe !important;   /* indigo-200 */
+    font-weight: 600 !important;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Light mode - hover */
+html:not(.dark) #explainViewBtn:hover {
+    background-color: #c7d2fe !important;  /* indigo-200 - trochu tmavšia */
+    border-color: #a5b4fc !important;       /* indigo-300 */
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Light mode - active (pri kliknutí) */
+html:not(.dark) #explainViewBtn:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important;
+}
+
+.dark #explainViewBtn {
+    background-color: #312e81 !important;  /* indigo-900 */
+    color: #e0e7ff !important;              /* indigo-100 */
+    border: 1px solid #4338ca !important;    /* indigo-800 */
+    font-weight: 600 !important;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3) !important;
+}
+
+.dark #explainViewBtn:hover {
+    background-color: #4338ca !important;  /* indigo-800 */
+    border-color: #6366f1 !important;       /* indigo-500 */
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* ===== EXPLANATION MODAL - LIGHT MODE OPRAVY ===== */
+
+/* Light mode pre nadpis v Explanation modali */
+html:not(.dark) #explanationModal h3 {
+    color: #111827 !important;  /* gray-900 - tmavá, dobre viditeľná */
+    font-weight: 700;
+}
+
+/* Light mode pre text v Explanation modali */
+html:not(.dark) #explanationModal .text-gray-600 {
+    color: #374151 !important;  /* gray-700 - tmavšia pre lepší kontrast */
+}
+
+/* Light mode pre info panel (ℹ️) */
+html:not(.dark) #explanationModal .text-gray-500 {
+    color: #4b5563 !important;  /* gray-600 - tmavšie */
+}
+
+/* Light mode pre strong elementy (tučné písmo) */
+html:not(.dark) #explanationModal strong {
+    color: #1f2937 !important;  /* gray-800 */
+}
+
+/* Light mode pre odrážky (•) - ak sa nezobrazujú správne */
+html:not(.dark) #explanationModal p:contains('•') {
+    color: #1f2937 !important;
 }

@@ -10,7 +10,8 @@ function initDraggableModals() {
         'stopWordsModal',
         'patternDetailModal',
         'aiExplanationModal',
-        'whatsNewModal'
+        'whatsNewModal',
+        'explanationModal'
     ];
     
     modals.forEach(modalId => {
@@ -206,7 +207,7 @@ function setupCloseHandlers() {
     // ESC klávesa (už je vo footerlinks.js, ale pridáme aj sem pre istotu)
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
-            const modals = ['aboutModal', 'faqModal', 'termsModal', 'catalogModal', 'stopWordsModal', 'patternDetailModal', 'aiExplanationModal', 'whatsNewModal'];
+            const modals = ['aboutModal', 'faqModal', 'termsModal', 'catalogModal', 'stopWordsModal', 'patternDetailModal', 'aiExplanationModal', 'whatsNewModal', 'explanationModal'];
             modals.forEach(modalId => {
                 const modal = document.getElementById(modalId);
                 if (modal && !modal.classList.contains('hidden')) {

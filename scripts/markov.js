@@ -1,14 +1,16 @@
 //markov.js
 
 class MDPSequenceGenerator {
-    constructor(similarityMatrix, patterns, gamma = 0.9, goalReward = 10.0, otherReward = 1.0, epsilon = 0.1) {
+    constructor(similarityMatrix, patterns, gamma = 0.9, goalReward = 10.0, otherReward = 1.0, epsilon = 0.1, useSentiment = false, sentimentScores = {}) {
         this.similarityMatrix = similarityMatrix;
         this.patterns = patterns;
         this.states = patterns.map(p => p.filename);
-        this.gamma = gamma;                       // ← použije sa zadaná hodnota
-        this.goalReward = goalReward;              // ← nové
-        this.otherReward = otherReward;            // ← nové
-        this.epsilon = epsilon;                    // ← nové
+        this.gamma = gamma;
+        this.goalReward = goalReward;
+        this.otherReward = otherReward;
+        this.epsilon = epsilon;
+        this.useSentiment = useSentiment;
+        this.sentimentScores = sentimentScores;
         this.steps = [];
     }
 
@@ -50,6 +52,24 @@ class MDPSequenceGenerator {
     }
 
     determineGoalState() {
+
+         // Ak je nastavený vynútený cieľový vzor a je medzi stavmi, použijeme ho
+        if (forcedGoalPattern && this.states.includes(forcedGoalPattern)) {
+            const forcedIndex = this.states.indexOf(forcedGoalPattern);
+            
+            // Zaznamenáme krok pre zobrazenie v UI
+            this.steps.push({
+                type: 'goal_calculation',
+                totalSimilarities: {},
+                goalState: forcedGoalPattern,
+                forcedGoalUsed: true,
+                forcedStartExcluded: (forcedStartPattern && this.states.includes(forcedStartPattern)) ? forcedStartPattern : null
+            });
+            
+            return forcedGoalPattern;
+        }
+
+        // Vypočítame celkové podobnosti pre každý stav (súčet podobností so všetkými ostatnými)
         const totalSimilarities = this.states.map(state =>
             this.states.reduce((sum, other) => {
                 if (state === other) return sum;
@@ -57,27 +77,64 @@ class MDPSequenceGenerator {
             }, 0)
         );
 
-        const maxIndex = totalSimilarities.indexOf(Math.max(...totalSimilarities));
+        // Zoznam indexov všetkých stavov
+        let candidateIndices = this.states.map((_, idx) => idx);
 
-        // výpočet cieľového stavu
+        // Ak existuje forcedStartPattern a je medzi stavmi, vylúčime ho z kandidátov na cieľ
+        if (forcedStartPattern && this.states.includes(forcedStartPattern)) {
+            candidateIndices = candidateIndices.filter(idx => this.states[idx] !== forcedStartPattern);
+        }
+
+        // Ak by po vylúčení nezostal žiadny kandidát (napr. keby bol len jeden vzor), vrátime sa k všetkým
+        if (candidateIndices.length === 0) {
+            candidateIndices = this.states.map((_, idx) => idx);
+        }
+
+        // Nájdeme index s najväčšou celkovou podobnosťou spomedzi kandidátov
+        let maxIndex = candidateIndices[0];
+        let maxVal = totalSimilarities[maxIndex];
+        for (let i = 1; i < candidateIndices.length; i++) {
+            const idx = candidateIndices[i];
+            if (totalSimilarities[idx] > maxVal) {
+                maxVal = totalSimilarities[idx];
+                maxIndex = idx;
+            }
+        }
+
+        const goalState = this.states[maxIndex];
+
+        // Zaznamenáme krok pre zobrazenie v UI
         this.steps.push({
             type: 'goal_calculation',
             totalSimilarities: totalSimilarities.reduce((acc, similarity, index) => {
                 acc[this.states[index]] = similarity;
                 return acc;
             }, {}),
-            goalState: this.states[maxIndex]
+            goalState: goalState,
+            forcedStartExcluded: (forcedStartPattern && this.states.includes(forcedStartPattern)) ? forcedStartPattern : null
         });
 
-        return this.states[maxIndex];
+        return goalState;
     }
 
     valueIteration(transitionMatrix, goalState, maxIterations = 100) {
         // Definujeme pevnú odmenu pre každý stav (reward)
         const reward = {};
-        this.states.forEach(state => {
-            reward[state] = state === goalState ? this.goalReward : this.otherReward;
-        });
+                this.states.forEach(state => {
+                    // Základná odmena
+                    let baseReward = state === goalState ? this.goalReward : this.otherReward;
+                    
+                    // Ak je zapnutý sentiment, upravíme odmenu
+                    if (this.useSentiment && this.sentimentScores[state] !== undefined) {
+                        const sentiment = this.sentimentScores[state];
+                        // Sentiment upraví odmenu: pozitívny = vyššia odmena, negatívny = nižšia
+                        // Škálujeme sentiment (-1..1) na faktor (0.5..1.5)
+                        const sentimentFactor = 1.0 + (sentiment * 0.5);
+                        baseReward *= sentimentFactor;
+                    }
+                    
+                    reward[state] = baseReward;
+                });
 
         // Počiatočné utility (môžu byť 0)
         let utilities = {};
@@ -175,28 +232,22 @@ class MDPSequenceGenerator {
     }
 
     buildSequence(policy, goalState, utilities) {
-        /*
-        // 1. Nájdeme štartovací stav – ten s NAJNIŽŠOU utility (okrem cieľa)
-        let startState = null;
-        let minUtil = Infinity;
-        for (const state of this.states) {
-            if (state === goalState) continue;
-            if (utilities[state] < minUtil) {
-                minUtil = utilities[state];
-                startState = state;
-            }
-        }
-        // Ak existuje len jeden vzor, začneme cieľom
-        if (!startState) startState = goalState;   */
+        
 
-        // 1. Náhodný výber štartovacieho stavu (okrem cieľa)
+        // 1. Zistíme, či je vynútený štartovací vzor
         let startState = goalState; // predvolene
-        const nonGoalStates = this.states.filter(state => state !== goalState);
-
-        if (nonGoalStates.length > 0) {
-            // Náhodne vyberieme jeden z nich
-            const randomIndex = Math.floor(Math.random() * nonGoalStates.length);
-            startState = nonGoalStates[randomIndex];
+        
+        if (forcedStartPattern && forcedStartPattern !== goalState) {
+            // Použijeme vynútený štartovací vzor
+            startState = forcedStartPattern;
+            console.log('Používam vynútený štartovací vzor:', startState);
+        } else {
+            // Náhodný výber štartovacieho stavu (okrem cieľa)
+            const nonGoalStates = this.states.filter(state => state !== goalState);
+            if (nonGoalStates.length > 0) {
+                const randomIndex = Math.floor(Math.random() * nonGoalStates.length);
+                startState = nonGoalStates[randomIndex];
+            }
         }
 
         // 2. Pre každý stav si pripravíme zoradené prechody z policyCalculations
@@ -287,6 +338,7 @@ class MDPSequenceGenerator {
         this.steps = [];
 
         const goalState = this.determineGoalState();
+        window.currentGoalState = goalState;
         const transitionMatrix = this.createTransitionMatrix(goalState);
 
         this.transitionMatrix = transitionMatrix;
@@ -338,7 +390,6 @@ function delay(ms) {
 }
 
 async function generateSequence() {  
-
     updateLoadingIndicator(0, 'Spúšťam analýzu...');
     await delay(100);
 
@@ -348,6 +399,11 @@ async function generateSequence() {
         const goalReward = parseFloat(document.getElementById('goalRewardInput').value) || 10.0;
         const otherReward = parseFloat(document.getElementById('otherRewardInput').value) || 1.0;
         const epsilon = parseFloat(document.getElementById('epsilonInput').value) || 0.1;
+        const useSentiment = document.getElementById('sentimentCheckbox')?.checked || false;
+        
+        // ★ NOVÉ: Zistenie, či je zaškrtnutý USE checkbox
+        const useUSE = document.getElementById('useCheckbox')?.checked || false;
+        const useIDF = document.getElementById('idfCheckbox')?.checked || false;
 
         // Zozbierame všetky zaškrtnuté vzory z globálneho stavu
         const selectedFiles = [];
@@ -378,18 +434,51 @@ async function generateSequence() {
             throw new Error('Žiadne vybrané vzory (dáta nenájdené)');
         }
 
+        languageColorMap = generateLanguageColors(selectedPatterns);
+        window.languageColorMap = languageColorMap; // sprístupníme globálne
+
         // Fáza 1: Výpočet matice podobnosti
         updateLoadingIndicator(20, 'Načítavam vzory...');
         await delay(100);
 
-        updateLoadingIndicator(40, 'Analyzujem textové opisy...');
-        await delay(100);
-
-        // Zistíme, či je zaškrtnutý IDF checkbox
-        const useIDF = document.getElementById('idfCheckbox')?.checked || false;
-
         const similarityCalculator = new PatternSimilarity();
-        const similarityMatrix = similarityCalculator.calculateSimilarityMatrix(selectedPatterns, useIDF);
+        let similarityMatrix;
+
+        if (useUSE) {
+            // Detailný loading pre USE - 3 fázy
+            updateLoadingIndicator(30, 'Načítavam USE model...');
+            await delay(100);
+            
+            updateLoadingIndicator(50, 'Generujem sémantické embeddingy...');
+            await delay(100);
+            
+            // Overíme, či je USE model dostupný
+            if (typeof use === 'undefined' || !use) {
+                throw new Error('Universal Sentence Encoder nie je načítaný. Skontrolujte pripojenie k internetu.');
+            }
+            
+            // Vytvoríme callback pre aktualizáciu loading textu počas výpočtu
+            const updateUSEProgress = (msg) => {
+                updateLoadingIndicator(60 + Math.floor(Math.random() * 20), msg);
+            };
+            
+            similarityMatrix = await similarityCalculator.calculateUSESimilarityMatrix(selectedPatterns, updateUSEProgress);
+            
+            updateLoadingIndicator(80, 'Počítam maticu podobností...');
+            await delay(100);
+        } else {
+            updateLoadingIndicator(40, 'Analyzujem textové opisy (TF-IDF)...');
+            await delay(100);
+            similarityMatrix = similarityCalculator.calculateSimilarityMatrix(selectedPatterns, useIDF);
+        }
+
+        // Výpočet sentiment skóre (ak je checkbox zapnutý)
+        let sentimentScores = {};
+        if (useSentiment && typeof getSentimentScores === 'function') {
+            updateLoadingIndicator(50, 'Analyzujem sentiment...');
+            await delay(100);
+            sentimentScores = getSentimentScores(selectedPatterns);
+        }
 
         // Fáza 2: Generovanie sekvencie pomocou MDP
         updateLoadingIndicator(60, 'Vypočítavam podobnosti...');
@@ -404,14 +493,20 @@ async function generateSequence() {
             gamma,
             goalReward,
             otherReward,
-            epsilon
+            epsilon,
+            useSentiment,       
+            sentimentScores       
         );
 
         const result = mdpGenerator.generateSequence();
+        window.currentGoalState = result.goalState;
 
         // Fáza 3: Zobrazenie výsledkov
         updateLoadingIndicator(90, 'Pripravujem výsledky...');
         await delay(300);
+
+        window.useSentiment = useSentiment;
+        window.sentimentScores = sentimentScores;
 
         displayPatternSequence(result.sequence, similarityMatrix);
         displaySimilarityMatrixWithToggle(selectedPatterns, similarityMatrix);
@@ -434,6 +529,28 @@ async function generateSequence() {
     }
 }
 
+// event listenery pre vzájomnú elimináciu checkboxov
+document.addEventListener('DOMContentLoaded', () => {
+    const useCheckbox = document.getElementById('useCheckbox');
+    const idfCheckbox = document.getElementById('idfCheckbox');
+    
+    if (useCheckbox && idfCheckbox) {
+        // USE zmena
+        useCheckbox.addEventListener('change', function() {
+            if (this.checked) {
+                idfCheckbox.checked = false;
+            }
+        });
+        
+        // IDF zmena
+        idfCheckbox.addEventListener('change', function() {
+            if (this.checked) {
+                useCheckbox.checked = false;
+            }
+        });
+    }
+});
+
 function displayPatternSequence(sequence, similarityMatrix) {
     const patternsList = document.getElementById("patternsList");
     patternsList.innerHTML = "";
@@ -444,6 +561,7 @@ function displayPatternSequence(sequence, similarityMatrix) {
     originalSequence = [...sequence];
     originalSimilarityMatrix = JSON.parse(JSON.stringify(similarityMatrix));
     isSequenceReordered = false;
+    window.originalSimilarityMatrix = originalSimilarityMatrix; 
 
     sequence.forEach((pattern, index) => {
         const li = document.createElement("li");
@@ -501,11 +619,19 @@ function displayPatternSequence(sequence, similarityMatrix) {
             </span>
         `;
 
-        const languageBadge = languageName ? `
-            <span class="px-2 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200">
-                ${languageName}
-            </span>
-        ` : '';
+        let languageBadge = '';
+        if (languageName) {
+            const bgColor = window.languageColorMap?.[pattern.language] || '#8b5cf6';
+            const isDark = document.documentElement.classList.contains('dark');
+            const textColorClass = isDark ? 'text-gray-200' : 'text-white';
+            
+            languageBadge = `
+                <span class="px-2 py-1 rounded-full text-xs font-medium ${textColorClass}" 
+                    style="background-color: ${bgColor};">
+                    ${languageName}
+                </span>
+            `;
+        }
 
         // Obsahová časť - bez textu vzoru
         const contentDiv = document.createElement('div');
@@ -781,11 +907,24 @@ function showPatternDetail(filename, position, sequence, similarityMatrix) {
     catalogBadge.textContent = catalogName;
     badgesContainer.appendChild(catalogBadge);
 
-    // Jazyk badge (ak existuje)
+    // Jazyk badge (ak existuje) - s farbou podľa languageColorMap
     if (languageName) {
         const langBadge = document.createElement('span');
-        langBadge.className = 'px-3 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200';
+        
+        // Získame farbu z mapy, alebo použijeme predvolenú fialovú
+        const bgColor = window.languageColorMap?.[pattern.language] || '#8b5cf6'; // predvolená fialová
+        
+        // Pre dark mode použijeme svetlejší text
+        const isDark = document.documentElement.classList.contains('dark');
+        const textColorClass = isDark ? 'text-gray-200' : 'text-white';
+        
+        langBadge.className = `px-3 py-1 rounded-full text-xs font-medium ${textColorClass}`;
+        langBadge.style.backgroundColor = bgColor;
         langBadge.textContent = languageName;
+        
+        // Pridáme data attribute pre prípadnú neskoršiu manipuláciu
+        langBadge.setAttribute('data-language-badge', 'true');
+        
         badgesContainer.appendChild(langBadge);
     }
 

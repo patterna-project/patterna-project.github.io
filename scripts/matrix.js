@@ -1,15 +1,218 @@
 // matrix.js
 
+
+// Na začiatok matrix.js (za existujúce knižnice)
+let useModel = null;
+let useModelLoading = false;
+let useModelLoadPromise = null;
+
+async function loadUSEModel() {
+    if (useModel) return useModel;
+    if (useModelLoadPromise) return useModelLoadPromise;
+    
+    useModelLoading = true;
+    useModelLoadPromise = (async () => {
+        try {
+            // Načítanie modelu (Universal Sentence Encoder)
+            useModel = await use.load();
+            console.log('USE model loaded');
+            return useModel;
+        } catch (error) {
+            console.error('Failed to load USE model:', error);
+            useModel = null;
+            throw error;
+        } finally {
+            useModelLoading = false;
+            useModelLoadPromise = null;
+        }
+    })();
+    
+    return useModelLoadPromise;
+}
+
+// Pomocná funkcia na kosínusovú podobnosť dvoch vektorov
+function cosineSimilarityVectors(vecA, vecB) {
+    let dot = 0, magA = 0, magB = 0;
+    for (let k = 0; k < vecA.length; k++) {
+        dot += vecA[k] * vecB[k];
+        magA += vecA[k] * vecA[k];
+        magB += vecB[k] * vecB[k];
+    }
+    if (magA === 0 || magB === 0) return 0;
+    return dot / (Math.sqrt(magA) * Math.sqrt(magB));
+}
+
+// Porter stemmer in Javascript (based on Martin Porter's algorithm)
+// Source: https://tartarus.org/martin/PorterStemmer/
+const porterStemmer = (function() {
+    const step2list = {
+        "ational": "ate", "tional": "tion", "enci": "ence", "anci": "ance",
+        "izer": "ize", "bli": "ble", "alli": "al", "entli": "ent",
+        "eli": "e", "ousli": "ous", "ization": "ize", "ation": "ate",
+        "ator": "ate", "alism": "al", "iveness": "ive", "fulness": "ful",
+        "ousness": "ous", "aliti": "al", "iviti": "ive", "biliti": "ble",
+        "logi": "log"
+    };
+    const step3list = {
+        "icate": "ic", "ative": "", "alize": "al", "iciti": "ic",
+        "ical": "ic", "ful": "", "ness": ""
+    };
+    const c = "[^aeiou]";
+    const v = "[aeiouy]";
+    const C = c + "[^aeiouy]*";
+    const V = v + "[aeiou]*";
+    const mgr0 = "^(" + C + ")?" + V + C;
+    const meq1 = "^(" + C + ")?" + V + C + "(" + V + ")?$";
+    const mgr1 = "^(" + C + ")?" + V + C + V + C;
+    const s_v = "^(" + C + ")?" + v;
+
+    return function(w) {
+        let stem, suffix, firstch, re, re2, re3, re4;
+        if (w.length < 3) return w;
+
+        firstch = w.substr(0, 1);
+        if (firstch === "y") {
+            w = firstch.toUpperCase() + w.substr(1);
+        }
+
+        // Step 1a
+        re = /^(.+?)(ss|i)es$/;
+        re2 = /^(.+?)([^s])s$/;
+        if (re.test(w)) {
+            w = w.replace(re, "$1$2");
+        } else if (re2.test(w)) {
+            w = w.replace(re2, "$1$2");
+        }
+
+        // Step 1b
+        re = /^(.+?)eed$/;
+        re2 = /^(.+?)(ed|ing)$/;
+        if (re.test(w)) {
+            let fp = re.exec(w);
+            re = new RegExp(mgr0);
+            if (re.test(fp[1])) {
+                w = w.replace(/.$/, "");
+            }
+        } else if (re2.test(w)) {
+            let fp = re2.exec(w);
+            stem = fp[1];
+            re2 = new RegExp(s_v);
+            if (re2.test(stem)) {
+                w = stem;
+                re2 = /(at|bl|iz)$/;
+                re3 = new RegExp("([^aeiouylsz])\\1$");
+                re4 = new RegExp("^" + C + v + "[^aeiouwxy]$");
+                if (re2.test(w)) {
+                    w += "e";
+                } else if (re3.test(w)) {
+                    w = w.replace(/.$/, "");
+                } else if (re4.test(w)) {
+                    w += "e";
+                }
+            }
+        }
+
+        // Step 1c
+        re = /^(.+?)y$/;
+        if (re.test(w)) {
+            let fp = re.exec(w);
+            stem = fp[1];
+            re = new RegExp(s_v);
+            if (re.test(stem)) {
+                w = stem + "i";
+            }
+        }
+
+        // Step 2
+        re = /^(.+?)(ational|tional|enci|anci|izer|bli|alli|entli|eli|ousli|ization|ation|ator|alism|iveness|fulness|ousness|aliti|iviti|biliti|logi)$/;
+        if (re.test(w)) {
+            let fp = re.exec(w);
+            stem = fp[1];
+            suffix = fp[2];
+            re = new RegExp(mgr0);
+            if (re.test(stem)) {
+                w = stem + step2list[suffix];
+            }
+        }
+
+        // Step 3
+        re = /^(.+?)(icate|ative|alize|iciti|ical|ful|ness)$/;
+        if (re.test(w)) {
+            let fp = re.exec(w);
+            stem = fp[1];
+            suffix = fp[2];
+            re = new RegExp(mgr0);
+            if (re.test(stem)) {
+                w = stem + step3list[suffix];
+            }
+        }
+
+        // Step 4
+        re = /^(.+?)(al|ance|ence|er|ic|able|ible|ant|ement|ment|ent|ou|ism|ate|iti|ous|ive|ize)$/;
+        re2 = /^(.+?)(s|t)(ion)$/;
+        if (re.test(w)) {
+            let fp = re.exec(w);
+            stem = fp[1];
+            re = new RegExp(mgr1);
+            if (re.test(stem)) {
+                w = stem;
+            }
+        } else if (re2.test(w)) {
+            let fp = re2.exec(w);
+            stem = fp[1] + fp[2];
+            re2 = new RegExp(mgr1);
+            if (re2.test(stem)) {
+                w = stem;
+            }
+        }
+
+        // Step 5
+        re = /^(.+?)e$/;
+        if (re.test(w)) {
+            let fp = re.exec(w);
+            stem = fp[1];
+            re = new RegExp(mgr1);
+            re2 = new RegExp(meq1);
+            re3 = new RegExp("^" + C + v + "[^aeiouwxy]$");
+            if (re.test(stem) || (re2.test(stem) && !(re3.test(stem)))) {
+                w = stem;
+            }
+        }
+
+        re = /ll$/;
+        re2 = new RegExp(mgr1);
+        if (re.test(w) && re2.test(w)) {
+            w = w.replace(/.$/, "");
+        }
+
+        // turn initial Y back to y
+        if (firstch === "y") {
+            w = firstch.toLowerCase() + w.substr(1);
+        }
+
+        return w;
+    };
+})();
+
 class PatternSimilarity {
     constructor() {
-    this.stopWords = window.customStopWords || new Set([
-        'a', 'an', 'the', 'and', 'it', 'is', 'to', 'at', 'in', 'we', 'of', 'be'
-    ]);
-}
+        this.stopWords = window.customStopWords || new Set([
+            'a', 'an', 'the', 'and', 'it', 'is', 'to', 'at', 'in', 'we', 'of', 'be'
+        ]);
+    }
+
+    // Pomocná metóda pre stemming jednotlivého slova
+    stemWord(word) {
+        const stemmed = porterStemmer(word);
+        // console.log(`Stemming: "${word}" → "${stemmed}"`); logovanie
+        return stemmed;
+    }
 
     preprocessText(text) {
         return text
             .toLowerCase()
+            .normalize("NFD")               // normalizácia diakritiky
+            .replace(/[\u0300-\u036f]/g, "") // odstránenie diakritiky
             .replace(/[^\w\s]/g, ' ')
             .replace(/\s+/g, ' ')
             .trim()
@@ -18,7 +221,8 @@ class PatternSimilarity {
                 word.length > 2 &&
                 !this.stopWords.has(word) &&
                 !/\d/.test(word)
-            );
+            )
+            .map(word => this.stemWord(word));  // ← tu bude aj console.log
     }
 
     calculateTF(tokens) {
@@ -137,6 +341,36 @@ class PatternSimilarity {
 
         return matrix;
     }
+
+    async calculateUSESimilarityMatrix(patterns) {
+        // 1. Zabezpečíme načítanie modelu
+        const model = await loadUSEModel();
+        
+        // 2. Extrahujeme texty v poradí podľa patterns
+        const texts = patterns.map(p => p.content);
+        
+        // 3. Získame embeddingy (volanie modelu)
+        const embeddings = await model.embed(texts);
+        const vectors = await embeddings.array(); // premeníme na JS pole
+        
+        // 4. Vypočítame kosínusovú podobnosť pre všetky dvojice
+        const matrix = {};
+        for (let i = 0; i < patterns.length; i++) {
+            const p1 = patterns[i];
+            matrix[p1.filename] = {};
+            for (let j = 0; j < patterns.length; j++) {
+                const p2 = patterns[j];
+                if (i === j) {
+                    matrix[p1.filename][p2.filename] = 0.0;
+                } else {
+                    const sim = cosineSimilarityVectors(vectors[i], vectors[j]);
+                    matrix[p1.filename][p2.filename] = sim;
+                }
+            }
+        }
+        
+        return matrix;
+    }
 }
 
 function displaySimilarityMatrix(sequence, similarityMatrix) {
@@ -227,76 +461,126 @@ function displaySimilarityMatrixWithToggle(sequence, similarityMatrix) {
         similarityInfo.classList.remove('hidden');
     }
     
-    // Skontrolujeme, či už tlačidlá existujú
-    if (!document.getElementById('matrixViewBtn')) {
-        // Vytvoríme tlačidlá
-        const t = window.translations?.[window.currentLanguage] || { 
-            similarityMatrix: "📊 Matica podobností",
-            similarityGraph: "🕸️ Graf podobností",
-            statistics: "📊 Štatistiky"
-        };
-        
-        // Vyčistíme similarityInfo a vytvoríme novú štruktúru
-        similarityInfo.innerHTML = `
-            <div class="flex justify-between items-center mb-4">
-                <div class="flex gap-2">
-                    <button id="matrixViewBtn" 
-                        class="px-4 py-2 rounded-lg transition-all duration-200 font-medium
-                               bg-indigo-600 text-white hover:bg-indigo-700
-                               dark:bg-indigo-500 dark:hover:bg-indigo-600">
-                        ${t.similarityMatrix}
-                    </button>
-                    <button id="graphViewBtn" 
-                        class="px-4 py-2 rounded-lg transition-all duration-200 font-medium
-                               bg-gray-200 text-gray-700 hover:bg-gray-300
-                               dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600">
-                        ${t.similarityGraph}
-                    </button>
-                    <button id="statisticsViewBtn" 
-                        class="px-4 py-2 rounded-lg transition-all duration-200 font-medium
-                               bg-gray-200 text-gray-700 hover:bg-gray-300
-                               dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600">
-                        ${t.statistics}
-                    </button>
-                </div>
+    // Vždy vytvoríme tlačidlá nanovo (odstránime podmienku)
+    const t = window.translations?.[window.currentLanguage] || { 
+        similarityMatrix: "📊 Matica podobností",
+        similarityGraph: "🕸️ Graf podobností",
+        statistics: "📊 Štatistiky"
+    };
+    
+    // Vyčistíme similarityInfo a vytvoríme novú štruktúru
+    similarityInfo.innerHTML = `
+        <div class="flex justify-between items-center mb-4">
+            <div class="flex gap-2">
+                <button id="matrixViewBtn" 
+                    class="px-4 py-2 rounded-lg transition-all duration-200 font-medium
+                        bg-indigo-600 text-white hover:bg-indigo-700
+                        dark:bg-indigo-500 dark:hover:bg-indigo-600"
+                    title="${t.matrixTooltip || 'Zobrazenie matice podobností medzi vzormi. Čím tmavšia farba, tým vyššia podobnosť.'}">
+                    ${t.similarityMatrix}
+                </button>
+                <button id="graphViewBtn" 
+                    class="px-4 py-2 rounded-lg transition-all duration-200 font-medium
+                        bg-gray-200 text-gray-700 hover:bg-gray-300
+                        dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600"
+                    title="${t.graphTooltip || 'Interaktívny graf vzťahov medzi vzormi. Hrubšia čiara = vyššia podobnosť. Kliknutím na uzol zobrazíš detaily.'}">
+                    ${t.similarityGraph}
+                </button>
+                <button id="statisticsViewBtn" 
+                    class="px-4 py-2 rounded-lg transition-all duration-200 font-medium
+                        bg-gray-200 text-gray-700 hover:bg-gray-300
+                        dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600"
+                    title="${t.statisticsTooltip || 'Základné štatistiky o podobnostiach medzi vzormi – priemery, najsilnejšie spojenia, distribúcia.'}">
+                    ${t.statistics}
+                </button>
             </div>
-            <div id="similarityMatrix" class="text-sm overflow-x-auto"></div>
-            <div id="similarityGraph" class="w-full min-h-[500px] hidden relative"></div>
-        `;
-        
-        // Pridáme event listenery
-        document.getElementById('matrixViewBtn').addEventListener('click', () => {
-            window.switchView('matrix', sequence, similarityMatrix);
-        });
-        
-        document.getElementById('graphViewBtn').addEventListener('click', () => {
-            window.switchView('graph', sequence, similarityMatrix);
-        });
-        
-        document.getElementById('statisticsViewBtn').addEventListener('click', () => {
-            window.switchView('statistics', sequence, similarityMatrix);
-        });
-        
-    } else {
-        // Aktualizujeme texty tlačidiel
-        const t = window.translations?.[window.currentLanguage] || { 
-            similarityMatrix: "📊 Matica podobností",
-            similarityGraph: "🕸️ Graf podobností",
-            statistics: "📊 Štatistiky"
-        };
-        
-        const matrixBtn = document.getElementById('matrixViewBtn');
-        const graphBtn = document.getElementById('graphViewBtn');
-        const statsBtn = document.getElementById('statisticsViewBtn');
-        
-        if (matrixBtn) matrixBtn.innerHTML = t.similarityMatrix;
-        if (graphBtn) graphBtn.innerHTML = t.similarityGraph;
-        if (statsBtn) statsBtn.innerHTML = t.statistics;
-    }
+            <!-- NOVÉ TLAČIDLO VYSVETLI -->
+            <button id="explainViewBtn" 
+                class="px-4 py-2 rounded-lg transition-all duration-200 font-medium
+                    bg-indigo-100 text-indigo-700 hover:bg-indigo-200
+                    dark:bg-indigo-900 dark:text-indigo-300 dark:hover:bg-indigo-800"
+                title="${t.explainButtonTooltip}">
+                ${t.explainButton}
+            </button>
+        </div>
+        <div id="similarityMatrix" class="text-sm overflow-x-auto"></div>
+        <div id="similarityGraph" class="w-full min-h-[500px] hidden relative"></div>
+    `;
+    
+    // Pridáme event listenery s aktuálnymi dátami
+    document.getElementById('matrixViewBtn').addEventListener('click', () => {
+        window.switchView('matrix', sequence, similarityMatrix);
+    });
+    
+    document.getElementById('graphViewBtn').addEventListener('click', () => {
+        window.switchView('graph', sequence, similarityMatrix);
+    });
+    
+    document.getElementById('statisticsViewBtn').addEventListener('click', () => {
+        window.switchView('statistics', sequence, similarityMatrix);
+    });
+
+    document.getElementById('explainViewBtn').addEventListener('click', () => {
+        const currentView = window.currentView || 'matrix'; // 'matrix', 'graph', 'statistics'
+        openExplanationModal(currentView);
+    });
+
     
     // Predvolene zobrazíme maticu
     window.switchView('matrix', sequence, similarityMatrix);
     
-    // Uložíme dáta pre neskoršie použitie
+    // Uložíme dáta pre neskoršie použitie (napr. pre graf)
     currentGraphData = { patterns: sequence, matrix: similarityMatrix };
 }
+
+window.openExplanationModal = function(view) {
+    const modal = document.getElementById('explanationModal');
+    const title = document.getElementById('explanationModalTitle');
+    const content = document.getElementById('explanationModalContent');
+    const t = window.translations?.[window.currentLanguage] || window.translations?.sk;
+    
+    // Zistíme aktuálne nastavenia (pre maticu)
+    const useIDF = document.getElementById('idfCheckbox')?.checked || false;
+    const useUSE = document.getElementById('useCheckbox')?.checked || false;
+    const useSentiment = document.getElementById('sentimentCheckbox')?.checked || false;
+    
+    let extraInfo = '';
+    if (view === 'matrix' && (useIDF || useUSE)) {
+        extraInfo = `<p class="mt-3 p-2 bg-indigo-50 dark:bg-indigo-900/30 rounded text-sm">
+            <strong>⚙️ Aktuálne nastavenie:</strong> ${useUSE ? 'Universal Sentence Encoder' : 'TF-IDF'} 
+            ${useIDF ? '(IDF zapnutý)' : ''} ${useSentiment ? '· so sentimentom' : ''}
+        </p>`;
+    }
+    
+    // Nastavíme obsah podľa view s použitím prekladov
+    if (view === 'matrix') {
+        title.textContent = t.explainMatrixTitle;
+        content.innerHTML = `
+            <p class="mb-3">${t.explainMatrixText1}</p>
+            <p class="mb-3">${t.explainMatrixText2}</p>
+            <p class="mb-3">${t.explainMatrixText3}</p>
+            <p class="text-sm text-gray-500 dark:text-gray-400">ℹ️ ${t.explainMatrixNote}</p>
+            ${extraInfo}
+        `;
+    } else if (view === 'graph') {
+        title.textContent = t.explainGraphTitle;
+        content.innerHTML = `
+            <p class="mb-3">${t.explainGraphText1}</p>
+            <p class="mb-3">${t.explainGraphText2}</p>
+            <p class="mb-3">${t.explainGraphText3}</p>
+            <p class="mb-3">${t.explainGraphText4}</p>
+            <p class="text-sm text-gray-500 dark:text-gray-400">ℹ️ ${t.explainGraphNote}</p>
+        `;
+    } else if (view === 'statistics') {
+        title.textContent = t.explainStatsTitle;
+        content.innerHTML = `
+            <p class="mb-3">${t.explainStatsText1}</p>
+            <p class="mb-2">${t.explainStatsText2}</p>
+            <p class="mb-2">${t.explainStatsText3}</p>
+            <p class="mb-2">${t.explainStatsText4}</p>
+            <p class="mb-2">${t.explainStatsText5}</p>
+        `;
+    }
+    
+    modal.classList.remove('hidden');
+};

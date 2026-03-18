@@ -197,18 +197,27 @@ function initializeUserCatalogSections(catalogName, structure) {
             if (!pattern) return;
             
             const label = document.createElement("label");
-            label.classList.add("flex", "items-center", "space-x-2", "p-2", "hover:bg-gray-50", "dark:hover:bg-gray-700", "rounded");
+            label.classList.add("flex", "items-center", "space-x-2", "p-2", "hover:bg-gray-50", "dark:hover:bg-gray-700", "rounded", "group");
             label.dataset.patternName = pattern.name.toLowerCase();
+
+            // Vytvoríme kontajner pre celý riadok
+            const rowDiv = document.createElement('div');
+            rowDiv.className = "flex items-center justify-between w-full";
+
+            // Ľavá časť - checkbox a názov
+            const leftDiv = document.createElement('div');
+            leftDiv.className = "flex items-center space-x-2 flex-grow";
 
             const checkbox = document.createElement("input");
             checkbox.type = "checkbox";
             checkbox.value = filename;
             checkbox.classList.add("form-checkbox", "h-5", "w-5", "text-indigo-600", "flex-shrink-0");
-
-            // Nastav checked podľa globálneho stavu
             checkbox.checked = globalCheckedPatterns[catalogName]?.[filename] || false;
 
-            // Pridaj event listener pre zmenu
+            // PRIDANÉ: ID pre checkbox pre jednoduchšie prepojenie s vlajočkou
+            checkbox.id = `cb-${catalogName}-${filename.replace(/[^a-z0-9]/gi, '_')}`;
+
+            // Pridaj event listener pre zmenu checkboxu
             checkbox.addEventListener('change', (e) => {
                 if (!globalCheckedPatterns[catalogName]) {
                     globalCheckedPatterns[catalogName] = {};
@@ -216,15 +225,133 @@ function initializeUserCatalogSections(catalogName, structure) {
                 globalCheckedPatterns[catalogName][filename] = e.target.checked;
                 updateCatalogBadges();
                 updateSelectAllButtonsColor();
-                updateAllLanguageCounters(); // Pridané
+                updateAllLanguageCounters();
+                
+                // PRIDANÉ: Ak sa checkbox odškrtne, zrušíme vlajočku
+                if (!e.target.checked && forcedStartPattern === filename) {
+                    forcedStartPattern = null;
+                    updateStartFlags();
+                }
             });
 
             const span = document.createElement("span");
             span.textContent = pattern.name;
             span.classList.add("text-sm", "dark:text-gray-300", "flex-grow");
 
-            label.appendChild(checkbox);
-            label.appendChild(span);
+            leftDiv.appendChild(checkbox);
+            leftDiv.appendChild(span);
+
+            // Namiesto jedného flagDiv vytvoríme kontajner pre dve ikony
+            const iconsDiv = document.createElement('div');
+            iconsDiv.className = "icons-container ml-2 flex items-center gap-1";
+
+            // Terč (cieľ)
+            const goalSpan = document.createElement('span');
+            goalSpan.className = `goal-flag cursor-pointer text-lg hover:opacity-100 transition-opacity ${forcedGoalPattern === filename ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`;
+            goalSpan.setAttribute('data-filename', filename);
+            goalSpan.setAttribute('data-checkbox-id', checkbox.id);
+            goalSpan.setAttribute('title', translations[currentLanguage]?.setAsGoal || 'Nastaviť ako cieľový vzor');
+            goalSpan.innerHTML = '🎯';
+
+            // Vlajka (štart)
+            const flagSpan = document.createElement('span');
+            flagSpan.className = `start-flag cursor-pointer text-lg hover:opacity-100 transition-opacity ${forcedStartPattern === filename ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`;
+            flagSpan.setAttribute('data-filename', filename);
+            flagSpan.setAttribute('data-checkbox-id', checkbox.id);
+            flagSpan.setAttribute('title', translations[currentLanguage]?.setAsStart || 'Nastaviť ako štartovací vzor');
+            flagSpan.innerHTML = '🚩';
+
+            // 🔴 UPRAVENÝ EVENT LISTENER PRE VLAJKU
+            flagSpan.addEventListener('click', (e) => {
+                e.stopPropagation();
+                e.preventDefault();
+                
+                const clickedFilename = flagSpan.dataset.filename;
+                const checkboxId = flagSpan.dataset.checkboxId;
+                const targetCheckbox = document.getElementById(checkboxId);
+                
+                // Ak klikáme na už aktívnu vlajku, zrušíme štart
+                if (forcedStartPattern === clickedFilename) {
+                    forcedStartPattern = null;
+                } else {
+                    forcedStartPattern = clickedFilename;
+                    
+                    // Ak bol nastavený cieľ na rovnakom vzore, zrušíme ho
+                    if (forcedGoalPattern === clickedFilename) {
+                        forcedGoalPattern = null;
+                    }
+                    
+                    // Automaticky zaškrtneme checkbox
+                    if (targetCheckbox && !targetCheckbox.checked) {
+                        targetCheckbox.checked = true;
+                        
+                        // Aktualizujeme globálny stav
+                        if (!globalCheckedPatterns[catalogName]) {
+                            globalCheckedPatterns[catalogName] = {};
+                        }
+                        globalCheckedPatterns[catalogName][clickedFilename] = true;
+                        
+                        // Aktualizujeme UI
+                        updateCatalogBadges();
+                        updateSelectAllButtonsColor();
+                        updateAllLanguageCounters();
+                        updateGenerateButtonState();
+                    }
+                }
+                
+                // Aktualizujeme všetky vlajky a terče
+                updateStartFlags();
+                updateGoalFlags();
+            });
+
+            // PRE TERČ (cieľ)
+            goalSpan.addEventListener('click', (e) => {
+                e.stopPropagation();
+                e.preventDefault();
+                
+                const clickedFilename = goalSpan.dataset.filename;
+                const checkboxId = goalSpan.dataset.checkboxId;
+                const targetCheckbox = document.getElementById(checkboxId);
+                
+                // Ak klikáme na už aktívny terč, zrušíme cieľ
+                if (forcedGoalPattern === clickedFilename) {
+                    forcedGoalPattern = null;
+                } else {
+                    forcedGoalPattern = clickedFilename;
+                    
+                    // Ak bol nastavený štart na rovnakom vzore, zrušíme ho
+                    if (forcedStartPattern === clickedFilename) {
+                        forcedStartPattern = null;
+                    }
+                    
+                    // Automaticky zaškrtneme checkbox
+                    if (targetCheckbox && !targetCheckbox.checked) {
+                        targetCheckbox.checked = true;
+                        
+                        // Aktualizujeme globálny stav
+                        if (!globalCheckedPatterns[catalogName]) {
+                            globalCheckedPatterns[catalogName] = {};
+                        }
+                        globalCheckedPatterns[catalogName][clickedFilename] = true;
+                        
+                        // Aktualizujeme UI
+                        updateCatalogBadges();
+                        updateSelectAllButtonsColor();
+                        updateAllLanguageCounters();
+                        updateGenerateButtonState();
+                    }
+                }
+                
+                // Aktualizujeme všetky vlajky a terče
+                updateStartFlags();
+                updateGoalFlags();
+            });
+
+            iconsDiv.appendChild(goalSpan);
+            iconsDiv.appendChild(flagSpan);
+            rowDiv.appendChild(leftDiv);
+            rowDiv.appendChild(iconsDiv);
+            label.appendChild(rowDiv);
             patternsContainer.appendChild(label);
         });
 
@@ -247,10 +374,12 @@ function initializeUserCatalogSections(catalogName, structure) {
         const selectAllBtn = sectionHeader.querySelector('.select-all-btn');
         selectAllBtn.addEventListener('click', (e) => {
             e.stopPropagation();
-            // Custom select all pre tento folder
+            
+            // Zistíme všetky checkboxy v tejto sekcii
             const checkboxes = patternsContainer.querySelectorAll('input[type="checkbox"]');
             const allChecked = Array.from(checkboxes).every(cb => cb.checked);
             
+            // Prejdeme všetky checkboxy
             checkboxes.forEach(checkbox => {
                 checkbox.checked = !allChecked;
                 if (!globalCheckedPatterns[catalogName]) {
@@ -258,6 +387,25 @@ function initializeUserCatalogSections(catalogName, structure) {
                 }
                 globalCheckedPatterns[catalogName][checkbox.value] = checkbox.checked;
             });
+            
+            // ★ NOVÉ: Ak sme všetky odškrtli (allChecked bolo true, teraz sú všetky false)
+            if (allChecked) {
+                // Prejdeme všetky checkboxy v tejto sekcii a zistíme, či niektorý nebol štart alebo cieľ
+                checkboxes.forEach(checkbox => {
+                    // Ak bol tento vzor nastavený ako štart, zrušíme ho
+                    if (forcedStartPattern === checkbox.value) {
+                        forcedStartPattern = null;
+                    }
+                    // Ak bol tento vzor nastavený ako cieľ, zrušíme ho
+                    if (forcedGoalPattern === checkbox.value) {
+                        forcedGoalPattern = null;
+                    }
+                });
+                
+                // Aktualizujeme vlajky a terče
+                updateStartFlags();
+                updateGoalFlags();
+            }
             
             updateAllLanguageCounters();
             updateCatalogBadges();
@@ -399,21 +547,28 @@ function initializePatternSections() {
         patternsContainer.className = "patterns-grid grid grid-cols-1 md:grid-cols-2 gap-2 p-2 max-h-48 overflow-y-auto w-full";
         patternsContainer.dataset.language = language;
 
+
         files.forEach(file => {
             if (allPatternsData[file]) {
                 const label = document.createElement("label");
-                label.classList.add("flex", "items-center", "space-x-2", "p-2", "hover:bg-gray-50", "dark:hover:bg-gray-700", "rounded");
+                label.classList.add("flex", "items-center", "space-x-2", "p-2", "hover:bg-gray-50", "dark:hover:bg-gray-700", "rounded", "group");
                 label.dataset.patternName = allPatternsData[file].name.toLowerCase();
+
+                // Vytvoríme kontajner pre celý riadok
+                const rowDiv = document.createElement('div');
+                rowDiv.className = "flex items-center justify-between w-full";
+
+                // Ľavá časť - checkbox a názov
+                const leftDiv = document.createElement('div');
+                leftDiv.className = "flex items-center space-x-2 flex-grow";
 
                 const checkbox = document.createElement("input");
                 checkbox.type = "checkbox";
                 checkbox.value = file;
                 checkbox.classList.add("form-checkbox", "h-5", "w-5", "text-indigo-600", "flex-shrink-0");
-
-                // Nastav checked podľa globálneho stavu
                 checkbox.checked = globalCheckedPatterns[language]?.[file] || false;
+                checkbox.id = `cb-${language}-${file.replace(/[^a-z0-9]/gi, '_')}`;
 
-                // Pridaj event listener pre zmenu
                 checkbox.addEventListener('change', (e) => {
                     if (!globalCheckedPatterns[language]) {
                         globalCheckedPatterns[language] = {};
@@ -421,14 +576,115 @@ function initializePatternSections() {
                     globalCheckedPatterns[language][file] = e.target.checked;
                     updateCatalogBadges();
                     updateSelectAllButtonsColor();
+                    updateAllLanguageCounters();
+                    
+                    if (!e.target.checked && forcedStartPattern === file) {
+                        forcedStartPattern = null;
+                        updateStartFlags();
+                    }
+                    if (!e.target.checked && forcedGoalPattern === file) {
+                        forcedGoalPattern = null;
+                        updateGoalFlags();
+                    }
                 });
 
                 const span = document.createElement("span");
                 span.textContent = allPatternsData[file].name;
                 span.classList.add("text-sm", "dark:text-gray-300", "flex-grow");
 
-                label.appendChild(checkbox);
-                label.appendChild(span);
+                leftDiv.appendChild(checkbox);
+                leftDiv.appendChild(span);
+
+                // KONTAJNER PRE DVE IKONY
+                const iconsDiv = document.createElement('div');
+                iconsDiv.className = "icons-container ml-2 flex items-center gap-1";
+
+                // TERČ (cieľ)
+                const goalSpan = document.createElement('span');
+                goalSpan.className = `goal-flag cursor-pointer text-lg hover:opacity-100 transition-opacity ${forcedGoalPattern === file ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`;
+                goalSpan.setAttribute('data-filename', file);
+                goalSpan.setAttribute('data-checkbox-id', checkbox.id);
+                goalSpan.setAttribute('title', translations[currentLanguage]?.setAsGoal || 'Nastaviť ako cieľový vzor');
+                goalSpan.innerHTML = '🎯';
+
+                // VLAJKA (štart)
+                const flagSpan = document.createElement('span');
+                flagSpan.className = `start-flag cursor-pointer text-lg hover:opacity-100 transition-opacity ${forcedStartPattern === file ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`;
+                flagSpan.setAttribute('data-filename', file);
+                flagSpan.setAttribute('data-checkbox-id', checkbox.id);
+                flagSpan.setAttribute('title', translations[currentLanguage]?.setAsStart || 'Nastaviť ako štartovací vzor');
+                flagSpan.innerHTML = '🚩';
+
+                // EVENT LISTENER PRE VLAJKU
+                flagSpan.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    e.preventDefault();
+                    
+                    const clickedFilename = flagSpan.dataset.filename;
+                    const checkboxId = flagSpan.dataset.checkboxId;
+                    const targetCheckbox = document.getElementById(checkboxId);
+                    
+                    if (forcedStartPattern === clickedFilename) {
+                        forcedStartPattern = null;
+                    } else {
+                        forcedStartPattern = clickedFilename;
+                        if (forcedGoalPattern === clickedFilename) {
+                            forcedGoalPattern = null;
+                        }
+                        if (targetCheckbox && !targetCheckbox.checked) {
+                            targetCheckbox.checked = true;
+                            if (!globalCheckedPatterns[language]) {
+                                globalCheckedPatterns[language] = {};
+                            }
+                            globalCheckedPatterns[language][clickedFilename] = true;
+                            updateCatalogBadges();
+                            updateSelectAllButtonsColor();
+                            updateAllLanguageCounters();
+                            updateGenerateButtonState();
+                        }
+                    }
+                    updateStartFlags();
+                    updateGoalFlags();
+                });
+
+                // EVENT LISTENER PRE TERČ
+                goalSpan.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    e.preventDefault();
+                    
+                    const clickedFilename = goalSpan.dataset.filename;
+                    const checkboxId = goalSpan.dataset.checkboxId;
+                    const targetCheckbox = document.getElementById(checkboxId);
+                    
+                    if (forcedGoalPattern === clickedFilename) {
+                        forcedGoalPattern = null;
+                    } else {
+                        forcedGoalPattern = clickedFilename;
+                        if (forcedStartPattern === clickedFilename) {
+                            forcedStartPattern = null;
+                        }
+                        if (targetCheckbox && !targetCheckbox.checked) {
+                            targetCheckbox.checked = true;
+                            if (!globalCheckedPatterns[language]) {
+                                globalCheckedPatterns[language] = {};
+                            }
+                            globalCheckedPatterns[language][clickedFilename] = true;
+                            updateCatalogBadges();
+                            updateSelectAllButtonsColor();
+                            updateAllLanguageCounters();
+                            updateGenerateButtonState();
+                            
+                        }
+                    }
+                    updateStartFlags();
+                    updateGoalFlags();
+                });
+
+                iconsDiv.appendChild(goalSpan);
+                iconsDiv.appendChild(flagSpan);
+                rowDiv.appendChild(leftDiv);
+                rowDiv.appendChild(iconsDiv);
+                label.appendChild(rowDiv);
                 patternsContainer.appendChild(label);
             }
         });
@@ -528,6 +784,7 @@ function selectAllPatternsInLanguage(languageName) {
     const checkboxes = document.querySelectorAll('#patternCheckboxes input[type="checkbox"]');
     let allChecked = true;
 
+    // Zistíme, či sú všetky checkboxy v tejto sekcii zaškrtnuté
     checkboxes.forEach(checkbox => {
         const pattern = allPatternsData[checkbox.value];
         if (pattern && pattern.language === languageName && !checkbox.checked) {
@@ -535,6 +792,7 @@ function selectAllPatternsInLanguage(languageName) {
         }
     });
 
+    // Prejdeme všetky checkboxy v tejto sekcii
     checkboxes.forEach(checkbox => {
         const pattern = allPatternsData[checkbox.value];
         if (pattern && pattern.language === languageName) {
@@ -548,6 +806,28 @@ function selectAllPatternsInLanguage(languageName) {
         }
     });
 
+    // ★ NOVÉ: Ak sme všetky odškrtli (allChecked bolo true, teraz sú všetky false)
+    if (allChecked) {
+        // Prejdeme všetky checkboxy v tejto sekcii a zistíme, či niektorý nebol štart alebo cieľ
+        checkboxes.forEach(checkbox => {
+            const pattern = allPatternsData[checkbox.value];
+            if (pattern && pattern.language === languageName) {
+                // Ak bol tento vzor nastavený ako štart, zrušíme ho
+                if (forcedStartPattern === checkbox.value) {
+                    forcedStartPattern = null;
+                }
+                // Ak bol tento vzor nastavený ako cieľ, zrušíme ho
+                if (forcedGoalPattern === checkbox.value) {
+                    forcedGoalPattern = null;
+                }
+            }
+        });
+        
+        // Aktualizujeme vlajky a terče
+        updateStartFlags();
+        updateGoalFlags();
+    }
+
     updateAllLanguageCounters();
     updateCatalogBadges(); 
     updateGenerateButtonState();
@@ -556,6 +836,7 @@ function selectAllPatternsInLanguage(languageName) {
 
 
 // ========== SELECT ALL BUTTONS COLOR ==========
+
 
 function updateSelectAllButtonsColor() {
     // Prejdeme všetky sekcie
@@ -573,15 +854,42 @@ function updateSelectAllButtonsColor() {
         const allChecked = Array.from(checkboxes).every(cb => cb.checked);
         
         if (allChecked && checkboxes.length > 0) {
-            // Všetky vybraté -> zelená
-            selectAllBtn.classList.add('text-green-600', 'dark:text-green-400');
-            selectAllBtn.classList.remove('text-gray-600', 'dark:text-gray-400', 'hover:text-indigo-600', 'dark:hover:text-indigo-400');
+            // Všetky vybraté -> VÝRAZNÁ ZELENÁ
+            selectAllBtn.classList.add(
+                'text-green-600', 
+                'dark:text-green-400',
+                'font-bold',           // pridané tučné písmo
+                'scale-110'             // pridané zväčšenie
+            );
+            selectAllBtn.classList.remove(
+                'text-gray-600', 
+                'dark:text-gray-400', 
+                'hover:text-indigo-600', 
+                'dark:hover:text-indigo-400'
+            );
             selectAllBtn.title = 'Všetky vybraté';
+            
+            // Pridáme inline style pre ešte väčšiu výraznosť (voliteľné)
+            selectAllBtn.style.textShadow = '0 2px 4px rgba(0,128,0,0.3)';
+            selectAllBtn.style.transition = 'all 0.2s ease';
         } else {
             // Nie všetky vybraté -> pôvodná farba
-            selectAllBtn.classList.remove('text-green-600', 'dark:text-green-400');
-            selectAllBtn.classList.add('text-gray-600', 'dark:text-gray-400', 'hover:text-indigo-600', 'dark:hover:text-indigo-400');
+            selectAllBtn.classList.remove(
+                'text-green-600', 
+                'dark:text-green-400',
+                'font-bold',
+                'scale-110'
+            );
+            selectAllBtn.classList.add(
+                'text-gray-600', 
+                'dark:text-gray-400', 
+                'hover:text-indigo-600', 
+                'dark:hover:text-indigo-400'
+            );
             selectAllBtn.title = 'Vybrať všetky';
+            
+            // Odstránime inline style
+            selectAllBtn.style.textShadow = '';
         }
     });
 }

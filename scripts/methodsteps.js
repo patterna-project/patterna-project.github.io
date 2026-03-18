@@ -15,6 +15,7 @@ function refreshMDPSteps() {
 function displayMDPSolution(result, patterns) {
     // Uložíme pre budúce použitie
     lastMDPResult = result;
+    window.lastMDPResult = result; 
     lastMDPPatterns = patterns;
 
     const mdpSolution = document.getElementById("mdpSolution");
@@ -180,14 +181,34 @@ function createCompleteTransitionMatrixStep(step, patterns) {
     return stepDiv;
 }
 
-// Pomocné funkcie pre vytváranie jednotlivých krokov
 function createGoalCalculationStep(step, patterns) {
     const t = translations[currentLanguage];
     const stepDiv = document.createElement("div");
     stepDiv.className = "bg-white dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600";
 
     let content = `<h4 class="font-semibold mb-2 text-indigo-600 dark:text-indigo-400">${t.mdpStep1}</h4>`;
+
+    // Ak bol použitý vynútený cieľový vzor
+    if (step.forcedGoalUsed) {
+        const goalPattern = patterns.find(p => p.filename === step.goalState);
+        content += `<p class="mb-2 text-green-600 dark:text-green-400">🎯 Používateľom vynútený cieľový vzor: <strong>${goalPattern ? goalPattern.name : step.goalState}</strong></p>`;
+        content += `<p class="mb-2 text-sm text-gray-600 dark:text-gray-400">Štandardný výpočet celkových podobností bol preskočený.</p>`;
+        stepDiv.innerHTML = content;
+        return stepDiv;
+    }
+
+    // Ak bol vylúčený forcedStartPattern, zobrazíme správu s vlajočkou
+    if (step.forcedStartExcluded) {
+        const excludedPattern = patterns.find(p => p.filename === step.forcedStartExcluded);
+        const excludedName = excludedPattern ? excludedPattern.name : step.forcedStartExcluded;
+        content += `<p class="mb-2 text-amber-600 dark:text-amber-400 text-xs flex items-center gap-1">⚠️ <span class="text-red-500">🚩</span> ${t.mdpForcedStartExcluded?.replace('{pattern}', excludedName) || 'Vynútený štartovací vzor bol vylúčený z výberu cieľa'}</p>`;
+    }
+
     content += `<p class="mb-2">${t.mdpGoalCalculation}</p>`;
+
+    // ZORADENIE: Prevedieme Object.entries na pole a zoradíme podľa podobnosti (od najväčšej)
+    const sortedEntries = Object.entries(step.totalSimilarities)
+        .sort((a, b) => b[1] - a[1]);  // Zoradenie zostupne podľa hodnoty
 
     const table = document.createElement("table");
     table.className = "w-full text-xs border-collapse mb-2";
@@ -197,22 +218,63 @@ function createGoalCalculationStep(step, patterns) {
     headerRow.innerHTML = `
         <th class="p-2 bg-gray-100 dark:bg-gray-600 text-left">${t.mdpCurrentState}</th>
         <th class="p-2 bg-gray-100 dark:bg-gray-600 text-right">${t.mdpUtility}</th>
+        <th class="p-2 bg-gray-100 dark:bg-gray-600 text-center">#</th>
     `;
     table.appendChild(headerRow);
 
-    // Riadky s údajmi
-    Object.entries(step.totalSimilarities).forEach(([filename, similarity]) => {
+    // Riadky s údajmi - TERAZ ZORADENÉ
+    sortedEntries.forEach(([filename, similarity], index) => {
         const pattern = patterns.find(p => p.filename === filename);
         const row = document.createElement("tr");
+        
+        // Zvýrazníme vybraný cieľový vzor
+        const isGoal = (filename === step.goalState);
+        const isExcluded = (filename === step.forcedStartExcluded);
+        
+        // Pridáme ikonky
+        let nameHtml = pattern.name;
+        let iconHtml = '';
+        
+        if (isExcluded) {
+            iconHtml = '<span class="text-red-500 mr-1" title="Vynútený štartovací vzor (vylúčený z výberu cieľa)">🚩</span>';
+        } else if (isGoal) {
+            iconHtml = '<span class="text-green-600 mr-1" title="Cieľový vzor (vybraný)">🎯</span>';
+        }
+        
+        nameHtml = `<span class="inline-flex items-center gap-1">${iconHtml}${pattern.name}</span>`;
+        
+        // Pridáme poradie (1., 2., 3., ...)
+        const rank = index + 1;
+        const rankDisplay = rank === 1 ? '🥇' : (rank === 2 ? '🥈' : (rank === 3 ? '🥉' : `${rank}.`));
+        
         row.innerHTML = `
-            <td class="p-2 border-b border-gray-200 dark:border-gray-600">${pattern.name}</td>
-            <td class="p-2 border-b border-gray-200 dark:border-gray-600 text-right">${similarity.toFixed(3)}</td>
+            <td class="p-2 border-b border-gray-200 dark:border-gray-600 ${isGoal ? 'font-bold bg-green-50 dark:bg-green-900/20' : ''}">${nameHtml}</td>
+            <td class="p-2 border-b border-gray-200 dark:border-gray-600 text-right ${isGoal ? 'font-bold text-green-600 dark:text-green-400' : ''}">${similarity.toFixed(3)}</td>
+            <td class="p-2 border-b border-gray-200 dark:border-gray-600 text-center">${rankDisplay}</td>
         `;
         table.appendChild(row);
     });
 
+    // Pridáme štatistiku - rozdiel medzi 1. a 2. miestom (len ak existujú)
+    if (sortedEntries.length >= 2) {
+        const first = sortedEntries[0];
+        const second = sortedEntries[1];
+        const difference = (first[1] - second[1]) * 100;
+        
+        content += `<p class="mt-2 text-xs text-gray-600 dark:text-gray-400">
+            📊 Rozdiel medzi 1. a 2. miestom: <span class="font-semibold ${difference > 5 ? 'text-green-600' : 'text-amber-600'}">${difference.toFixed(1)}%</span>
+            ${difference > 5 ? '(výrazný rozdiel)' : '(tesný rozdiel)'}
+        </p>`;
+    }
+
     const goalPattern = patterns.find(p => p.filename === step.goalState);
-    content += `<p class="mt-2 font-semibold">${t.mdpGoalState}: <span class="text-green-600">${goalPattern.name}</span> (${currentLanguage === 'sk' ? 'najvyššia celková podobnosť' : 'highest total similarity'})</p>`;
+    let similarityInfo = '';
+    if (sortedEntries.length > 0) {
+        similarityInfo = `(${currentLanguage === 'sk' ? 'najvyššia celková podobnosť' : 'highest total similarity'} = ${sortedEntries[0][1].toFixed(3)})`;
+    } else {
+        similarityInfo = `(${currentLanguage === 'sk' ? 'používateľom definovaný cieľ' : 'user-defined goal'})`;
+    }
+    content += `<p class="mt-2 font-semibold flex items-center gap-1">${t.mdpGoalState}: <span class="text-green-600 flex items-center gap-1 text-base"><span>🎯</span>${goalPattern.name}</span> ${similarityInfo}</p>`;
 
     stepDiv.innerHTML = content;
     stepDiv.appendChild(table);
@@ -224,14 +286,19 @@ function createGoalStateStep(step, patterns) {
     const stepDiv = document.createElement("div");
     stepDiv.className = "bg-white dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600";
 
-    stepDiv.innerHTML = `
-        <h4 class="font-semibold mb-2 text-indigo-600 dark:text-indigo-400">${t.mdpStep2}</h4>
-        <p>${t.mdpGoalState} <strong>${step.goalPattern.name}</strong> ${t.mdpGoalReward} = ${step.goalReward?.toFixed(1) ?? '10.0'}</p>
-        <p>${t.mdpOtherReward} = ${step.otherReward?.toFixed(1) ?? '1.0'}</p>
-        <p class="mt-2">${t.mdpGamma} ${step.gamma?.toFixed(2) ?? '0.9'}</p>
-        <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">${t.mdpEpsilon} ${step.epsilon?.toFixed(4) ?? '0.001'}</p>
-    `;
+    let content = `<h4 class="font-semibold mb-2 text-indigo-600 dark:text-indigo-400">${t.mdpStep2}</h4>`;
+    content += `<p>${t.mdpGoalState} <strong class="inline-flex items-center gap-1"><span class="text-green-600">🎯</span>${step.goalPattern.name}</strong> ${t.mdpGoalReward} = ${step.goalReward?.toFixed(1) ?? '10.0'}</p>`;
+    content += `<p>${t.mdpOtherReward} = ${step.otherReward?.toFixed(1) ?? '1.0'}</p>`;
+    
+    // Ak je zapnutý sentiment, zobrazíme ho
+    if (window.useSentiment && window.sentimentScores) {
+        content += `<p class="mt-2 text-xs text-gray-500 dark:text-gray-400">🎭 Sentiment analysis je aktívny - odmeny budú upravené podľa sentimentu vzorov</p>`;
+    }
+    
+    content += `<p class="mt-2">${t.mdpGamma} ${step.gamma?.toFixed(2) ?? '0.9'}</p>`;
+    content += `<p class="text-xs text-gray-500 dark:text-gray-400 mt-1">${t.mdpEpsilon} ${step.epsilon?.toFixed(4) ?? '0.001'}</p>`;
 
+    stepDiv.innerHTML = content;
     return stepDiv;
 }
 
@@ -281,26 +348,59 @@ function createInitialUtilitiesStep(step, patterns) {
     stepDiv.className = "bg-white dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600";
 
     let content = `<h4 class="font-semibold mb-2 text-indigo-600 dark:text-indigo-400">${t.mdpStep4}</h4>`;
+    
+    // Potrebujeme získať goalState - skúsime ho nájsť z result (ale nemáme ho priamo)
+    // Preto ho odovzdáme cez window.goalState pri generovaní
+    const goalState = window.currentGoalState || null;
+    
+    // Ak je sentiment aktívny, zobrazíme aj základné odmeny a sentiment
+    if (window.useSentiment && window.sentimentScores) {
+        content += `<p class="mb-2 text-xs text-gray-500 dark:text-gray-400">🎭 Odmeny upravené sentimentom (faktor: 0.5-1.5 podľa sentimentu)</p>`;
+    }
 
     const table = document.createElement("table");
     table.className = "w-full text-xs border-collapse";
 
-    // Hlavička tabuľky
+    // Hlavička tabuľky - dynamická podľa toho, či je sentiment
+    let headerHtml = '<th class="p-2 bg-gray-100 dark:bg-gray-600 text-left">' + t.mdpCurrentState + '</th>';
+    if (window.useSentiment && window.sentimentScores) {
+        headerHtml += '<th class="p-2 bg-gray-100 dark:bg-gray-600 text-right">🎭 Sentiment</th>';
+    }
+    headerHtml += '<th class="p-2 bg-gray-100 dark:bg-gray-600 text-right">' + t.mdpUtility + '</th>';
+    
     const headerRow = document.createElement("tr");
-    headerRow.innerHTML = `
-        <th class="p-2 bg-gray-100 dark:bg-gray-600 text-left">${t.mdpCurrentState}</th>
-        <th class="p-2 bg-gray-100 dark:bg-gray-600 text-right">${t.mdpUtility}</th>
-    `;
+    headerRow.innerHTML = headerHtml;
     table.appendChild(headerRow);
 
     // Riadky s údajmi
     Object.entries(step.utilities).forEach(([filename, utility]) => {
         const pattern = patterns.find(p => p.filename === filename);
         const row = document.createElement("tr");
-        row.innerHTML = `
-            <td class="p-2 border-b border-gray-200 dark:border-gray-600">${pattern.name}</td>
-            <td class="p-2 border-b border-gray-200 dark:border-gray-600 text-right">${utility.toFixed(3)}</td>
-        `;
+        
+        // Pridáme ikonky pre štart a cieľ
+        let nameHtml = pattern.name;
+        let iconHtml = '';
+        
+        if (filename === forcedStartPattern) {
+            iconHtml = '<span class="text-red-500 mr-1" title="Štartovací vzor">🚩</span>';
+        } else if (filename === goalState) {
+            iconHtml = '<span class="text-green-600 mr-1" title="Cieľový vzor">🎯</span>';
+        }
+        
+        nameHtml = `<span class="inline-flex items-center gap-1">${iconHtml}${pattern.name}</span>`;
+        
+        let rowHtml = `<td class="p-2 border-b border-gray-200 dark:border-gray-600">${nameHtml}</td>`;
+        
+        // Pridáme sentiment ak je aktívny
+        if (window.useSentiment && window.sentimentScores) {
+            const sentiment = window.sentimentScores[filename] || 0;
+            const sentimentClass = sentiment > 0.1 ? 'text-green-600' : (sentiment < -0.1 ? 'text-red-600' : 'text-gray-500');
+            rowHtml += `<td class="p-2 border-b border-gray-200 dark:border-gray-600 text-right ${sentimentClass}">${(sentiment * 100).toFixed(0)}%</td>`;
+        }
+        
+        rowHtml += `<td class="p-2 border-b border-gray-200 dark:border-gray-600 text-right">${utility.toFixed(3)}</td>`;
+        
+        row.innerHTML = rowHtml;
         table.appendChild(row);
     });
 
@@ -317,25 +417,51 @@ function createIterationStep(step, patterns) {
     let content = `<h4 class="font-semibold mb-2 text-indigo-600 dark:text-indigo-400">${t.mdpStep5} ${step.iteration}</h4>`;
     content += `<p class="mb-2 text-xs text-gray-600 dark:text-gray-400">${t.mdpMaxChange} ${step.maxChange.toFixed(4)}</p>`;
 
+    // Potrebujeme získať goalState
+    const goalState = window.currentGoalState || null;
+
     const table = document.createElement("table");
     table.className = "w-full text-xs border-collapse";
 
-    // Hlavička tabuľky
+    // Hlavička
+    let headerHtml = '<th class="p-2 bg-gray-100 dark:bg-gray-600 text-left">' + t.mdpCurrentState + '</th>';
+    if (window.useSentiment && window.sentimentScores) {
+        headerHtml += '<th class="p-2 bg-gray-100 dark:bg-gray-600 text-right">🎭 Sentiment</th>';
+    }
+    headerHtml += '<th class="p-2 bg-gray-100 dark:bg-gray-600 text-right">' + t.mdpUtility + '</th>';
+    
     const headerRow = document.createElement("tr");
-    headerRow.innerHTML = `
-        <th class="p-2 bg-gray-100 dark:bg-gray-600 text-left">${t.mdpCurrentState}</th>
-        <th class="p-2 bg-gray-100 dark:bg-gray-600 text-right">${t.mdpUtility}</th>
-    `;
+    headerRow.innerHTML = headerHtml;
     table.appendChild(headerRow);
 
-    // Riadky s údajmi
+    // Riadky
     Object.entries(step.utilities).forEach(([filename, utility]) => {
         const pattern = patterns.find(p => p.filename === filename);
         const row = document.createElement("tr");
-        row.innerHTML = `
-            <td class="p-2 border-b border-gray-200 dark:border-gray-600">${pattern.name}</td>
-            <td class="p-2 border-b border-gray-200 dark:border-gray-600 text-right">${utility.toFixed(3)}</td>
-        `;
+        
+        // Pridáme ikonky pre štart a cieľ
+        let nameHtml = pattern.name;
+        let iconHtml = '';
+        
+        if (filename === forcedStartPattern) {
+            iconHtml = '<span class="text-red-500 mr-1" title="Štartovací vzor">🚩</span>';
+        } else if (filename === goalState) {
+            iconHtml = '<span class="text-green-600 mr-1" title="Cieľový vzor">🎯</span>';
+        }
+        
+        nameHtml = `<span class="inline-flex items-center gap-1">${iconHtml}${pattern.name}</span>`;
+        
+        let rowHtml = `<td class="p-2 border-b border-gray-200 dark:border-gray-600">${nameHtml}</td>`;
+        
+        if (window.useSentiment && window.sentimentScores) {
+            const sentiment = window.sentimentScores[filename] || 0;
+            const sentimentClass = sentiment > 0.1 ? 'text-green-600' : (sentiment < -0.1 ? 'text-red-600' : 'text-gray-500');
+            rowHtml += `<td class="p-2 border-b border-gray-200 dark:border-gray-600 text-right ${sentimentClass}">${(sentiment * 100).toFixed(0)}%</td>`;
+        }
+        
+        rowHtml += `<td class="p-2 border-b border-gray-200 dark:border-gray-600 text-right">${utility.toFixed(3)}</td>`;
+        
+        row.innerHTML = rowHtml;
         table.appendChild(row);
     });
 
@@ -365,6 +491,9 @@ function createPolicyCalculationStep(step, patterns) {
     let content = `<h4 class="font-semibold mb-2 text-indigo-600 dark:text-indigo-400">${t.mdpStep6}</h4>`;
     content += `<p class="mb-2">${t.mdpPolicyCalculation}</p>`;
 
+    // Potrebujeme získať goalState
+    const goalState = window.currentGoalState || null;
+
     const table = document.createElement("table");
     table.className = "w-full text-xs border-collapse";
 
@@ -383,9 +512,34 @@ function createPolicyCalculationStep(step, patterns) {
 
         if (actionPattern) {
             const row = document.createElement("tr");
+            
+            // Pridáme ikonky pre štart a cieľ v stĺpci "Current State"
+            let stateNameHtml = statePattern.name;
+            let stateIconHtml = '';
+            
+            if (state === forcedStartPattern) {
+                stateIconHtml = '<span class="text-red-500 mr-1" title="Štartovací vzor">🚩</span>';
+            } else if (state === goalState) {
+                stateIconHtml = '<span class="text-green-600 mr-1" title="Cieľový vzor">🎯</span>';
+            }
+            
+            stateNameHtml = `<span class="inline-flex items-center gap-1">${stateIconHtml}${statePattern.name}</span>`;
+            
+            // Pridáme ikonky pre štart a cieľ v stĺpci "Optimal Action"
+            let actionNameHtml = actionPattern.name;
+            let actionIconHtml = '';
+            
+            if (calc.bestAction === forcedStartPattern) {
+                actionIconHtml = '<span class="text-red-500 mr-1" title="Štartovací vzor">🚩</span>';
+            } else if (calc.bestAction === goalState) {
+                actionIconHtml = '<span class="text-green-600 mr-1" title="Cieľový vzor">🎯</span>';
+            }
+            
+            actionNameHtml = `<span class="inline-flex items-center gap-1">${actionIconHtml}${actionPattern.name}</span>`;
+            
             row.innerHTML = `
-                <td class="p-2 border-b border-gray-200 dark:border-gray-600">${statePattern.name}</td>
-                <td class="p-2 border-b border-gray-200 dark:border-gray-600">${actionPattern.name}</td>
+                <td class="p-2 border-b border-gray-200 dark:border-gray-600">${stateNameHtml}</td>
+                <td class="p-2 border-b border-gray-200 dark:border-gray-600">${actionNameHtml}</td>
             `;
             table.appendChild(row);
         }
@@ -404,17 +558,50 @@ function createSequenceBuildStep(step, patterns) {
     let content = `<h4 class="font-semibold mb-2 text-indigo-600 dark:text-indigo-400">${t.mdpStep7}</h4>`;
     content += `<p class="mb-2">${t.mdpSequenceBuild}</p>`;
 
+    // Zistíme, ktorý vzor je cieľový (posledný v sekvencii)
+    const goalPattern = step.steps[step.steps.length - 1].pattern;
+    
+    // Zistíme, ktorý vzor je štartovací (prvý v sekvencii) - ak je forcedStartPattern nastavený, použijeme ho
+    const startPattern = step.steps[0].pattern;
+
     const list = document.createElement("ol");
     list.className = "list-decimal pl-5 space-y-1";
 
     step.steps.forEach((buildStep, index) => {
         const item = document.createElement("li");
-        item.className = "text-sm";
-        item.innerHTML = `<strong>${buildStep.pattern.name}</strong> (${t.mdpUtility}: ${buildStep.utility.toFixed(3)})`;
+        item.className = "text-sm flex items-center gap-2";
+        
+        // Pridáme ikonky pre štart a cieľ
+        let iconHtml = '';
+        if (buildStep.pattern.filename === startPattern.filename && forcedStartPattern === startPattern.filename) {
+            // Štartovací vzor (len ak je forcedStartPattern nastavený)
+            iconHtml = '<span class="text-red-500 mr-1" title="Štartovací vzor">🚩</span>';
+        } else if (buildStep.pattern.filename === goalPattern.filename) {
+            // Cieľový vzor
+            iconHtml = '<span class="text-green-600 mr-1" title="Cieľový vzor">🎯</span>';
+        }
+        
+        item.innerHTML = `${iconHtml} <strong>${buildStep.pattern.name}</strong> (${t.mdpUtility}: ${buildStep.utility.toFixed(3)})`;
         list.appendChild(item);
     });
 
-    content += `<p class="mt-2 font-semibold">${t.mdpFinalSequence} ${step.finalSequence.join(' → ')}</p>`;
+    // Pridáme aj do finálnej sekvencie v texte
+    let finalSequenceHtml = '';
+    step.finalSequence.forEach((name, index) => {
+        const pattern = patterns.find(p => p.name === name);
+        if (index === 0 && forcedStartPattern === pattern?.filename) {
+            finalSequenceHtml += `<span class="inline-flex items-center"><span class="text-red-500 mr-1">🚩</span>${name}</span>`;
+        } else if (index === step.finalSequence.length - 1) {
+            finalSequenceHtml += `<span class="inline-flex items-center"><span class="text-green-600 mr-1">🎯</span>${name}</span>`;
+        } else {
+            finalSequenceHtml += name;
+        }
+        if (index < step.finalSequence.length - 1) {
+            finalSequenceHtml += ' → ';
+        }
+    });
+
+    content += `<p class="mt-2 font-semibold">${t.mdpFinalSequence} ${finalSequenceHtml}</p>`;
 
     stepDiv.innerHTML = content;
     stepDiv.appendChild(list);

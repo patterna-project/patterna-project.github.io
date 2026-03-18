@@ -70,6 +70,9 @@ document.querySelectorAll("#examplesMenu button[data-index]").forEach(btn => {
             // 5. Aktualizujeme všetky počítadlá a badge
             updateAllLanguageCounters();
             updateCatalogBadges();
+            updateSelectAllButtonsColor();
+            forcedStartPattern = null;
+            forcedGoalPattern = null; 
         }
         document.getElementById("examplesMenu").classList.add("hidden");
     });

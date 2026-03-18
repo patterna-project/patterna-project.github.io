@@ -10,6 +10,9 @@ let isSequenceReordered = false;
 let currentView = 'matrix';
 // Na začiatok súboru, k existujúcim premenným
 let globalCheckedPatterns = {}; // { "catalogName": { "filename1": true, "filename2": true } }
+let forcedStartPattern = null; // filename vzoru, ktorý má byť štartovací
+let forcedGoalPattern = null;
+let languageColorMap = {};
 
 
 const patternLanguages = {
@@ -218,6 +221,10 @@ document.getElementById('clearBtn').addEventListener('click', () => {
     // 1. Zruší všetky zvolené checkboxy
     const checkboxes = document.querySelectorAll('#patternCheckboxes input[type="checkbox"]');
     checkboxes.forEach(cb => cb.checked = false);
+    forcedStartPattern = null;
+    forcedGoalPattern = null;
+    updateStartFlags(); // Aktualizujeme vlajočky
+    updateGoalFlags();
 
     // 2. Vymaže navrhnutú sekvenciu
     const patternsList = document.getElementById('patternsList');
@@ -580,12 +587,19 @@ function toggleParams(expand) {
     }
     
     if (expand) {
-        // ROZBALIŤ - parametre sú viditeľné
-        paramsContainer.style.maxWidth = '520px';
+        // Dynamický výpočet šírky podľa počtu checkboxov
+        const checkboxes = paramsContainer.querySelectorAll('.group');
+        // Každý checkbox group má cca 80px šírku (vrátane medzier)
+        const estimatedWidth = checkboxes.length * 85;
+        // Minimálne 520px, maximálne 800px
+        const newWidth = Math.min(800, Math.max(520, estimatedWidth));
+        
+        paramsContainer.style.maxWidth = newWidth + 'px';
         paramsContainer.style.opacity = '1';
         paramsContainer.style.padding = '0.5rem';
-        paramsArrow.style.transform = 'rotate(180deg)'; // Šípka doľava = parametre sú otvorené
+        paramsArrow.style.transform = 'rotate(180deg)';
         paramsExpanded = true;
+
     } else {
         // ZBALIŤ - parametre sú skryté
         paramsContainer.style.maxWidth = '0';
@@ -738,5 +752,81 @@ window.updateCatalogSearchPlaceholders = function() {
 };
 
 
+function updateStartFlags() {
+    document.querySelectorAll('.start-flag').forEach(flag => {
+        const filename = flag.dataset.filename;
+        const checkboxId = flag.dataset.checkboxId;
+        const checkbox = checkboxId ? document.getElementById(checkboxId) : null;
+        
+        // Ak je nastavený forcedStartPattern a zodpovedá tomuto filename
+        if (forcedStartPattern === filename) {
+            // Skontrolujeme, či je checkbox zaškrtnutý (ak existuje)
+            if (checkbox && !checkbox.checked) {
+                // Checkbox nie je zaškrtnutý - zrušíme forcedStartPattern
+                forcedStartPattern = null;
+                flag.classList.remove('opacity-100');
+                flag.classList.add('opacity-0', 'group-hover:opacity-100');
+                flag.title = translations[currentLanguage]?.setAsStart || 'Nastaviť ako štartovací vzor';
+            } else {
+                // Všetko OK - zobrazíme vlajočku
+                flag.classList.remove('opacity-0');
+                flag.classList.add('opacity-100');
+                flag.title = translations[currentLanguage]?.removeAsStart || 'Zrušiť štartovací vzor';
+            }
+        } else {
+            flag.classList.remove('opacity-100');
+            flag.classList.add('opacity-0', 'group-hover:opacity-100');
+            flag.title = translations[currentLanguage]?.setAsStart || 'Nastaviť ako štartovací vzor';
+        }
+    });
+}
 
+function updateGoalFlags() {
+    document.querySelectorAll('.goal-flag').forEach(flag => {
+        const filename = flag.dataset.filename;
+        const checkboxId = flag.dataset.checkboxId;
+        const checkbox = checkboxId ? document.getElementById(checkboxId) : null;
+        
+        // Ak je nastavený forcedGoalPattern a zodpovedá tomuto filename
+        if (forcedGoalPattern === filename) {
+            // Skontrolujeme, či je checkbox zaškrtnutý
+            if (checkbox && !checkbox.checked) {
+                // Checkbox nie je zaškrtnutý - zrušíme forcedGoalPattern
+                forcedGoalPattern = null;
+                flag.classList.remove('opacity-100');
+                flag.classList.add('opacity-0', 'group-hover:opacity-100');
+                flag.title = translations[currentLanguage]?.setAsGoal || 'Nastaviť ako cieľový vzor';
+            } else {
+                // Všetko OK - zobrazíme terč
+                flag.classList.remove('opacity-0');
+                flag.classList.add('opacity-100');
+                flag.title = translations[currentLanguage]?.removeAsGoal || 'Zrušiť cieľový vzor';
+            }
+        } else {
+            flag.classList.remove('opacity-100');
+            flag.classList.add('opacity-0', 'group-hover:opacity-100');
+            flag.title = translations[currentLanguage]?.setAsGoal || 'Nastaviť ako cieľový vzor';
+        }
+    });
+}
 
+// Funkcia na generovanie farieb pre jazyky (rovnaká ako v grafe)
+function generateLanguageColors(patterns) {
+    const uniqueLanguages = [...new Set(patterns.map(p => p.language || 'C & H'))];
+    const colors = {};
+    
+    function getRandomColor(seed) {
+        let hash = 0;
+        for (let i = 0; i < seed.length; i++) {
+            hash = seed.charCodeAt(i) + ((hash << 5) - hash);
+        }
+        const hue = Math.abs(hash % 360);
+        return `hsl(${hue}, 75%, 55%)`;
+    }
+    
+    uniqueLanguages.forEach(lang => {
+        colors[lang] = getRandomColor(lang);
+    });
+    
+    return colors;
+}

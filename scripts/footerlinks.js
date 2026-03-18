@@ -47,8 +47,10 @@ document.addEventListener('DOMContentLoaded', () => {
     safeAttach('closeFaqModal', () => document.getElementById('faqModal')?.classList.add('hidden'));
     safeAttach('closeTermsModal', () => document.getElementById('termsModal')?.classList.add('hidden'));
     safeAttach('closeCatalogModal', () => document.getElementById('catalogModal')?.classList.add('hidden'));
+    safeAttach('closeExplanationModal', () => document.getElementById('explanationModal')?.classList.add('hidden'));
 
-    ['aboutModal', 'faqModal', 'termsModal', 'catalogModal'].forEach(modalId => {
+
+    ['aboutModal', 'faqModal', 'termsModal', 'catalogModal', 'explanationModal'].forEach(modalId => {
         const modal = document.getElementById(modalId);
         if (!modal) return;
         modal.addEventListener('click', (e) => {
@@ -115,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function closeAllModals() {
-        const modals = ['aboutModal', 'faqModal', 'termsModal', 'catalogModal'];
+        const modals = ['aboutModal', 'faqModal', 'termsModal', 'catalogModal', 'explanationModal'];
         modals.forEach(modalId => {
             const modal = document.getElementById(modalId);
             if (modal && !modal.classList.contains('hidden')) {
