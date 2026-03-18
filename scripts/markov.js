@@ -565,9 +565,20 @@ function displayPatternSequence(sequence, similarityMatrix) {
 
     sequence.forEach((pattern, index) => {
         const li = document.createElement("li");
-        li.className = "pattern-item";
+        li.className = "pattern-item group";
         li.draggable = true;
         li.dataset.patternName = pattern.filename;
+
+        const removeBtn = document.createElement('button');
+        removeBtn.className = 'remove-pattern-btn';
+        removeBtn.innerHTML = '✕';
+        removeBtn.setAttribute('aria-label', 'Odstrániť vzor zo sekvencie');
+        removeBtn.setAttribute('data-filename', pattern.filename);
+        removeBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            removePatternFromSequence(removeBtn);
+        });
+        li.appendChild(removeBtn);
 
         // Výpočet podobnosti s predchádzajúcim vzorom
         let similarityHTML = '';
@@ -704,6 +715,51 @@ function displayPatternSequence(sequence, similarityMatrix) {
     initializeSortable();
     document.getElementById('resetSequenceBtn').classList.add('hidden');
     document.getElementById('copySequenceBtn').classList.remove('hidden');
+}
+
+function removePatternFromSequence(btn) {
+    const li = btn.closest('.pattern-item');
+    if (!li) return;
+    
+    li.remove();
+    
+    const remainingItems = document.querySelectorAll('#patternsList .pattern-item');
+    document.getElementById('patternCount').textContent = remainingItems.length;
+    
+    updateSimilaritiesAfterRemoval();
+    updateOverallConfidenceFromDOM();
+    
+    isSequenceReordered = true;
+    document.getElementById('resetSequenceBtn').classList.remove('hidden');
+}
+
+function updateSimilaritiesAfterRemoval() {
+    const items = document.querySelectorAll('#patternsList .pattern-item');
+    for (let i = 1; i < items.length; i++) {
+        const prevFilename = items[i-1].dataset.patternName;
+        const currFilename = items[i].dataset.patternName;
+        const similarity = originalSimilarityMatrix[prevFilename]?.[currFilename] || 0;
+        const percent = similarity * 100;
+        const colors = getConfidenceColor(percent);
+        
+        const badgeSpan = items[i].querySelector('.similarity-badge');
+        if (badgeSpan) {
+            badgeSpan.textContent = percent.toFixed(0) + '%';
+            badgeSpan.style.background = colors.bg;
+            badgeSpan.style.color = colors.text;
+            badgeSpan.style.borderColor = colors.border;
+        }
+    }
+    // Prvý vzor má pomlčku
+    if (items.length > 0) {
+        const firstBadge = items[0].querySelector('.similarity-badge');
+        if (firstBadge) {
+            firstBadge.textContent = '-';
+            firstBadge.style.background = '';
+            firstBadge.style.color = '';
+            firstBadge.style.borderColor = '';
+        }
+    }
 }
 
 function updateOverallConfidenceFromDOM() {

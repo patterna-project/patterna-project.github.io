@@ -8,10 +8,11 @@
 - Vyhľadávanie v grafe – nájdi vzor podľa názvu
 
 ## ⚙️ NOVÉ PARAMETRE A FUNKCIE
-- Prepínač **USE** (Universal Sentence Encoder) – neurónová sieť na sémantickú analýzu viet (pomalšie, ale presnejšie)
+- Prepínač **USE** (Universal Sentence Encoder) – neurónová sieť na sémantickú analýzu viet (pomalšie, ale malo bt byť presnejšie)
 - Vzájomná eliminácia USE a IDF (nemôžu byť zapnuté súčasne)
 - Detailnejší loading text pre pomalšie operácie (USE, veľké katalógy)
 - Tooltipy pre všetky parametre (stačí podržať myš)
+- Nová funckia - vymazanie vzoru zo sekvencie
 
 ## 🎯 MANUÁLNY VÝBER ŠTARTU A CIEĽA
 - Každý vzor má teraz dve ikonky: **🚩 (štart)** a **🎯 (cieľ)**

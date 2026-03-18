@@ -3317,3 +3317,49 @@ html:not(.dark) #explanationModal strong {
 html:not(.dark) #explanationModal p:contains('•') {
     color: #1f2937 !important;
 }
+
+/* Tlačidlo na odstránenie vzoru v sekvencii */
+#patternsList .pattern-item {
+    position: relative;
+}
+
+.remove-pattern-btn {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 1.5rem;
+    height: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    border-radius: 9999px;
+    font-size: 1rem;
+    line-height: 1;
+    cursor: pointer;
+    color: #ef4444; /* red-500 */
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    z-index: 10;
+    margin: 0;
+    padding: 0;
+}
+
+/* Hover efekty */
+.group:hover .remove-pattern-btn {
+    opacity: 0.3;
+}
+
+.remove-pattern-btn:hover {
+    opacity: 1 !important;
+    background-color: rgba(239, 68, 68, 0.1);
+}
+
+.dark .remove-pattern-btn {
+    color: #f87171; /* red-400 */
+}
+
+.dark .remove-pattern-btn:hover {
+    background-color: rgba(248, 113, 113, 0.2);
+}
