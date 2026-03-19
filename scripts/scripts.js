@@ -77,16 +77,7 @@ document.getElementById('loadCatalogBtn').addEventListener('click', () => {
     confirmBtn.disabled = true;
     confirmBtn.classList.add('opacity-50', 'cursor-not-allowed');
     confirmBtn.classList.remove('hover:bg-indigo-700');
-
-    document.getElementById('catalogModal').classList.remove('hidden');
-});
-
-document.getElementById('closeCatalogModal').addEventListener('click', () => {
-    document.getElementById('catalogModal').classList.add('hidden');
-});
-
-document.getElementById('cancelCatalog').addEventListener('click', () => {
-    document.getElementById('catalogModal').classList.add('hidden');
+    openModal('catalogModal');
 });
 
 document.getElementById('confirmCatalog').addEventListener('click', async () => {
@@ -181,8 +172,7 @@ document.getElementById('confirmCatalog').addEventListener('click', async () => 
         const successMsg = (t.catalogUploadSuccess || 'Katalóg "{catalogName}" bol úspešne nahraný')
             .replace('{catalogName}', catalogName);
         showToast(successMsg, 'success', 4000);
-
-        document.getElementById('catalogModal').classList.add('hidden');
+        closeModal('catalogModal');
         document.getElementById('catalogName').value = '';
         folderInput.value = '';
 
@@ -363,29 +353,14 @@ function updateSequenceOrder() {
     }
 }
 
-function escapeHtml(unsafe) {
-    return unsafe.replace(/[&<"'>]/g, function (m) {
-        switch (m) {
-            case '&': return '&amp;';
-            case '<': return '&lt;';
-            case '>': return '&gt;';
-            case '"': return '&quot;';
-            case "'": return '&#039;';
-            default: return m;
-        }
-    });
-}
-
 // ========== INITIALIZE APP ==========
 
-// Pridajte volanie pri inicializácii
 document.addEventListener('DOMContentLoaded', () => {
-    loadAllPatterns();
+    loadCatalog('coplien');  // ← namiesto loadAllPatterns()
     updateCatalogButtons();
     setupCheckboxChangeListeners();
     initExportDropdown();
     
-    // Inicializácia stavu šípky - parametre sú na začiatku viditeľné
     setTimeout(() => {
         const paramsArrow = document.getElementById('paramsArrow');
         if (paramsArrow) {
@@ -393,7 +368,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }, 100);
     
-    // PRIDANÉ: Inicializácia stavu tlačidla
     setTimeout(updateGenerateButtonState, 500);
 });
 
@@ -438,21 +412,6 @@ function updateLanguageCounter(languageName, checkedCount, totalPatterns) {
             counter.textContent = `(${checkedCount}/${totalPatterns})`;
         }
     });
-}
-
-// Funkcia na počítanie zakliknutých vzorov v jazyku
-function countCheckedPatternsInLanguage(languageName) {
-    const checkboxes = document.querySelectorAll('#patternCheckboxes input[type="checkbox"]');
-    let count = 0;
-
-    checkboxes.forEach(checkbox => {
-        const pattern = allPatternsData[checkbox.value];
-        if (pattern && pattern.language === languageName && checkbox.checked) {
-            count++;
-        }
-    });
-
-    return count;
 }
 
 function updateAllLanguageCounters() {
@@ -538,39 +497,6 @@ function copySequenceToClipboard() {
 
 document.getElementById('resetSequenceBtn').addEventListener('click', resetSequenceToOriginal);
 document.getElementById('copySequenceBtn').addEventListener('click', copySequenceToClipboard);
-
-    function makePatternsDraggable() {
-        document.querySelectorAll('#patternCheckboxes label').forEach(label => {
-            label.draggable = true;
-            label.addEventListener('dragstart', (e) => {
-                const checkbox = label.querySelector('input');
-                e.dataTransfer.setData('text/plain', checkbox.value);
-                e.dataTransfer.effectAllowed = 'copy';
-            });
-        });
-
-        const sequenceArea = document.getElementById('patternsList');
-        sequenceArea.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            sequenceArea.classList.add('bg-blue-50', 'border-2', 'border-dashed', 'border-blue-300');
-        });
-
-        sequenceArea.addEventListener('dragleave', () => {
-            sequenceArea.classList.remove('bg-blue-50', 'border-2', 'border-dashed', 'border-blue-300');
-        });
-
-        sequenceArea.addEventListener('drop', (e) => {
-            e.preventDefault();
-            sequenceArea.classList.remove('bg-blue-50', 'border-2', 'border-dashed', 'border-blue-300');
-
-            const patternName = e.dataTransfer.getData('text/plain');
-            const checkbox = document.querySelector(`#patternCheckboxes input[value="${patternName}"]`);
-            if (checkbox && !checkbox.checked) {
-                checkbox.checked = true;
-                updateSelectionInfo();
-            }
-        });
-    }
 
 // ========== PARAMETRE ROZBALOVANIE ==========
 
@@ -765,7 +691,7 @@ function updateStartFlags() {
                 // Checkbox nie je zaškrtnutý - zrušíme forcedStartPattern
                 forcedStartPattern = null;
                 flag.classList.remove('opacity-100');
-                flag.classList.add('opacity-0', 'group-hover:opacity-100');
+                flag.classList.add('opacity-0');
                 flag.title = translations[currentLanguage]?.setAsStart || 'Nastaviť ako štartovací vzor';
             } else {
                 // Všetko OK - zobrazíme vlajočku
@@ -794,7 +720,7 @@ function updateGoalFlags() {
                 // Checkbox nie je zaškrtnutý - zrušíme forcedGoalPattern
                 forcedGoalPattern = null;
                 flag.classList.remove('opacity-100');
-                flag.classList.add('opacity-0', 'group-hover:opacity-100');
+                flag.classList.add('opacity-0');
                 flag.title = translations[currentLanguage]?.setAsGoal || 'Nastaviť ako cieľový vzor';
             } else {
                 // Všetko OK - zobrazíme terč

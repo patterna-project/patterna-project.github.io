@@ -18,19 +18,6 @@ function updateHeaderOnScroll() {
     lastScrollY = currentScrollY;
 }
 
-function throttle(func, limit) {
-    let inThrottle;
-    return function () {
-        const args = arguments;
-        const context = this;
-        if (!inThrottle) {
-            func.apply(context, args);
-            inThrottle = true;
-            setTimeout(() => inThrottle = false, limit);
-        }
-    }
-}
-
 document.addEventListener('DOMContentLoaded', () => {
     updateHeaderOnScroll();
 
@@ -81,20 +68,4 @@ document.addEventListener('DOMContentLoaded', function () {
     // Also check on page load (in case page loads scrolled down)
     setTimeout(toggleBackToTopButton, 100);
 });
-
-// Throttle function (if not already defined)
-if (typeof throttle === 'undefined') {
-    function throttle(func, limit) {
-        let inThrottle;
-        return function () {
-            const args = arguments;
-            const context = this;
-            if (!inThrottle) {
-                func.apply(context, args);
-                inThrottle = true;
-                setTimeout(() => inThrottle = false, limit);
-            }
-        }
-    }
-}
 

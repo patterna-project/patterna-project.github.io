@@ -189,11 +189,21 @@ class MDPSequenceGenerator {
         return utilities;
     }
 
-    calculateOptimalPolicy(transitionMatrix, utilities) {
+    calculateOptimalPolicy(transitionMatrix, utilities, goalState) { 
         const policy = {};
         const policyCalculations = {};
 
         this.states.forEach(state => {
+            if (state === goalState) {
+                policy[state] = null; // žiadna akcia v cieli
+                policyCalculations[state] = {
+                    calculations: {},
+                    bestAction: null,
+                    bestValue: 0
+                };
+                return;
+            }
+
             let bestAction = null;
             let bestValue = -Infinity;
             const calculations = {};
@@ -222,7 +232,6 @@ class MDPSequenceGenerator {
             };
         });
 
-        // výpočet politiky
         this.steps.push({
             type: 'policy_calculation',
             calculations: policyCalculations
@@ -232,52 +241,52 @@ class MDPSequenceGenerator {
     }
 
     buildSequence(policy, goalState, utilities) {
+        // 1. Zistíme, ktoré stavy sú životaschopné
+        const reachableFromState = this.isStateReachable(goalState, policy);
         
+        // 2. Určíme štartovací stav
+        let startState = goalState;
 
-        // 1. Zistíme, či je vynútený štartovací vzor
-        let startState = goalState; // predvolene
-        
         if (forcedStartPattern && forcedStartPattern !== goalState) {
-            // Použijeme vynútený štartovací vzor
-            startState = forcedStartPattern;
-            console.log('Používam vynútený štartovací vzor:', startState);
+            if (reachableFromState[forcedStartPattern]) {
+                startState = forcedStartPattern;
+            } else {
+                console.warn('Vynútený štart nie je životaschopný, sekvencia sa nedá vytvoriť');
+                if (typeof showToast === 'function') {
+                    showToast('Vynútený štartovací vzor nie je dosiahnuteľný podľa MDP politiky', 'warning');
+                }
+                return []; 
+            }
         } else {
-            // Náhodný výber štartovacieho stavu (okrem cieľa)
-            const nonGoalStates = this.states.filter(state => state !== goalState);
-            if (nonGoalStates.length > 0) {
-                const randomIndex = Math.floor(Math.random() * nonGoalStates.length);
-                startState = nonGoalStates[randomIndex];
+            const viableNonGoal = this.states.filter(s => s !== goalState && reachableFromState[s]);
+            if (viableNonGoal.length > 0) {
+                startState = viableNonGoal[Math.floor(Math.random() * viableNonGoal.length)];
+            } else {
+                console.error('Neexistuje žiadny životaschopný stav!');
+                return [];
             }
         }
 
-        // 2. Pre každý stav si pripravíme zoradené prechody z policyCalculations
-        //    Tieto dáta už máme z calculateOptimalPolicy!
+        // 3. Zoradené prechody
         const sortedTransitions = {};
-        
-        // Nájdeme policyCalculations z posledného kroku
         const policyStep = this.steps.find(step => step.type === 'policy_calculation');
         if (policyStep && policyStep.calculations) {
             Object.entries(policyStep.calculations).forEach(([state, calc]) => {
-                // Zoradíme podľa hodnoty (value = prob * utility)
                 const transitions = Object.entries(calc.calculations)
-                    .map(([nextState, data]) => ({
-                        nextState,
-                        value: data.value
-                    }))
-                    .filter(t => t.value > 0.001) // len zmysluplné prechody
+                    .map(([nextState, data]) => ({ nextState, value: data.value }))
+                    .filter(t => t.value > 0.001)
                     .sort((a, b) => b.value - a.value)
                     .map(t => t.nextState);
-                
                 sortedTransitions[state] = transitions;
             });
         }
 
+        // 4. Kráčame podľa politiky
         const sequence = [];
         const visited = new Set();
         let currentState = startState;
         const sequenceSteps = [];
 
-        // 3. Kráčame podľa politiky, ale ak narazíme na cyklus, skúsime ďalšiu najlepšiu možnosť
         while (currentState && !visited.has(currentState)) {
             visited.add(currentState);
             const pattern = this.patterns.find(p => p.filename === currentState);
@@ -285,18 +294,16 @@ class MDPSequenceGenerator {
 
             sequenceSteps.push({
                 state: currentState,
-                pattern: pattern,
+                pattern,
                 utility: utilities[currentState],
                 similarityToGoal: this.similarityMatrix[goalState][currentState] || 0
             });
 
             if (currentState === goalState) break;
 
-            // Hľadáme najbližší nenavštívený stav podľa priority
-            const possibleNextStates = sortedTransitions[currentState] || [];
+            const possibleNext = sortedTransitions[currentState] || [];
             let nextState = null;
-            
-            for (const candidate of possibleNextStates) {
+            for (const candidate of possibleNext) {
                 if (!visited.has(candidate)) {
                     nextState = candidate;
                     break;
@@ -306,31 +313,59 @@ class MDPSequenceGenerator {
             if (nextState) {
                 currentState = nextState;
             } else {
-                // Ak už nie je žiadny nenavštívený prechod, skončíme
+                // Nenašli sme ďalší krok, končíme
                 break;
             }
         }
 
-        // 4. Ak sme nedošli do cieľa, pridáme ho
-        if (!visited.has(goalState)) {
-            const goalPattern = this.patterns.find(p => p.filename === goalState);
-            sequence.push(goalPattern);
-            sequenceSteps.push({
-                state: goalState,
-                pattern: goalPattern,
-                utility: utilities[goalState],
-                similarityToGoal: 1.0
-            });
-        }
-
-        // Zaznamenáme kroky pre zobrazenie
+        // KONTROLA: Dostali sme sa do cieľa?
+        const reachedGoal = visited.has(goalState);
+        
         this.steps.push({
             type: 'sequence_build',
             steps: sequenceSteps,
-            finalSequence: sequence.map(p => p.name)
+            finalSequence: sequence.map(p => p.name),
+            reachedGoal: reachedGoal,
+            message: reachedGoal ? 
+                'Sekvencia úspešne dosiahla cieľ' : 
+                'Sekvencia nedosiahla cieľ (možno izolovaný komponent grafu)'
         });
 
         return sequence;
+    }
+
+    isStateReachable(goalState, policy) {
+        // Nepoužívame policy, prejdeme graf podľa transitionMatrix
+        const reachable = {};
+        this.states.forEach(s => reachable[s] = false);
+        reachable[goalState] = true;
+
+        // BFS od cieľa smerom dozadu (alebo od každého stavu dopredu, jednoduchšie je prejsť všetky stavy a hľadať cestu)
+        // Pre každý stav spustíme DFS/BFS s využitím transitionMatrix
+        this.states.forEach(state => {
+            if (state === goalState) return;
+            const visited = new Set();
+            const queue = [state];
+            while (queue.length > 0) {
+                const current = queue.shift();
+                if (visited.has(current)) continue;
+                visited.add(current);
+                if (current === goalState) {
+                    reachable[state] = true;
+                    break;
+                }
+                // Prejdeme všetkých susedov s nenulovou pravdepodobnosťou
+                const neighbors = this.states.filter(next => 
+                    next !== current && (this.transitionMatrix[current]?.[next] || 0) > 0
+                );
+                for (const next of neighbors) {
+                    if (!visited.has(next)) {
+                        queue.push(next);
+                    }
+                }
+            }
+        });
+        return reachable;
     }
 
     generateSequence() {
@@ -350,7 +385,7 @@ class MDPSequenceGenerator {
         });
 
         const utilities = this.valueIteration(transitionMatrix, goalState);
-        const policy = this.calculateOptimalPolicy(transitionMatrix, utilities);
+        const policy = this.calculateOptimalPolicy(transitionMatrix, utilities, goalState);
         const sequence = this.buildSequence(policy, goalState, utilities);
 
         return {
@@ -385,8 +420,39 @@ function updateLoadingIndicator(progress, text) {
     }
 }
 
-function delay(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
+function cleanupGeneration(success = false) {
+    if (success) {
+        // Pri úspechu necháme loading bar dokončiť a potom schovať
+        setTimeout(() => {
+            document.getElementById('loadingIndicatorBtn').classList.add('hidden');
+            document.getElementById('loadingProgress').style.width = '0%';
+            toggleParams(true);
+        }, 1000);
+    } else {
+        // Pri neúspechu schováme loading bar hneď a rozbalíme parametre
+        updateLoadingIndicator(0, '');
+        setTimeout(() => {
+            document.getElementById('loadingIndicatorBtn').classList.add('hidden');
+            document.getElementById('loadingProgress').style.width = '0%';
+            toggleParams(true);
+        }, 500);
+    }
+}
+
+// Pomocná funkcia na kontrolu, či existuje aspoň jedna nenulová podobnosť
+function canGenerateSequence(similarityMatrix, patterns) {
+    // Prejdeme všetky dvojice vzorov
+    for (let i = 0; i < patterns.length; i++) {
+        for (let j = 0; j < patterns.length; j++) {
+            if (i !== j) {
+                const sim = similarityMatrix[patterns[i].filename][patterns[j].filename];
+                if (sim && sim > 0) {
+                    return true; // Našli sme aspoň jedno spojenie
+                }
+            }
+        }
+    }
+    return false; // Žiadne spojenie
 }
 
 async function generateSequence() {  
@@ -414,12 +480,6 @@ async function generateSequence() {
                 }
             });
         });
-
-        if (selectedFiles.length === 0) {
-            showToast(translations[currentLanguage]?.selectAtLeastOnePattern || 'Vyber aspoň jeden vzor!', 'warning');
-            updateLoadingIndicator(0, '');
-            return;
-        }
 
         // Skontrolujeme a vyfiltrujeme existujúce dáta
         const selectedPatterns = selectedFiles.map(file => {
@@ -498,6 +558,13 @@ async function generateSequence() {
             sentimentScores       
         );
 
+        // Je vôbec možné vytvoriť sekvenciu?
+        if (!canGenerateSequence(similarityMatrix, selectedPatterns)) {
+            showToast('Nie je možné vytvoriť sekvenciu - vzory nemajú žiadne spojenia', 'warning', 5000);
+            cleanupGeneration(false);
+            return;
+        }
+
         const result = mdpGenerator.generateSequence();
         window.currentGoalState = result.goalState;
 
@@ -515,17 +582,13 @@ async function generateSequence() {
         document.getElementById("suggestionsSection").classList.remove("hidden");
 
         updateLoadingIndicator(100, 'Hotovo! Sekvencia vygenerovaná');
+        cleanupGeneration(true);
 
         evaluateWithAI(result.sequence, similarityMatrix);
 
     } catch (error) {
         showToast((translations[currentLanguage]?.sequenceGenerationError || 'Chyba pri generovaní sekvencie: ') + error.message, 'error');
-        updateLoadingIndicator(0, 'Chyba - skúste znova');
-
-        setTimeout(() => {
-            document.getElementById('loadingIndicatorBtn').classList.add('hidden');
-            document.getElementById('loadingProgress').style.width = '0%';
-        }, 2000);
+        cleanupGeneration(false);
     }
 }
 
@@ -790,95 +853,6 @@ function updateOverallConfidenceFromDOM() {
     confidenceValue.style.borderStyle = 'solid';
 }
 
-function getConfidenceColor(percent) {
-    // percent je 0-100
-    // HSL pre plynulý prechod: červená (0°), oranžová (30°), žltá (60°), zelená (120°)
-    
-    const p = Math.min(100, Math.max(0, percent)) / 100; // 0-1
-    
-    // Pre light mode
-    if (!document.documentElement.classList.contains('dark')) {
-        // Prechod cez HSL pre plynulé farby
-        if (p < 0.25) {
-            // Červená -> oranžová (0-25%)
-            const t = p / 0.25; // 0-1
-            const hue = 0 + (30 * t); // 0° -> 30°
-            return {
-                bg: `hsl(${hue}, 100%, 95%)`,
-                text: `hsl(${hue}, 80%, 30%)`,
-                border: `hsl(${hue}, 80%, 70%)`
-            };
-        } else if (p < 0.5) {
-            // Oranžová -> žltá (25-50%)
-            const t = (p - 0.25) / 0.25; // 0-1
-            const hue = 30 + (30 * t); // 30° -> 60°
-            return {
-                bg: `hsl(${hue}, 100%, 92%)`,
-                text: `hsl(${hue}, 80%, 30%)`,
-                border: `hsl(${hue}, 80%, 65%)`
-            };
-        } else if (p < 0.75) {
-            // Žltá -> svetlozelená (50-75%)
-            const t = (p - 0.5) / 0.25; // 0-1
-            const hue = 60 + (30 * t); // 60° -> 90°
-            return {
-                bg: `hsl(${hue}, 90%, 90%)`,
-                text: `hsl(${hue}, 80%, 25%)`,
-                border: `hsl(${hue}, 70%, 60%)`
-            };
-        } else {
-            // Svetlozelená -> zelená (75-100%)
-            const t = (p - 0.75) / 0.25; // 0-1
-            const hue = 90 + (30 * t); // 90° -> 120°
-            return {
-                bg: `hsl(${hue}, 85%, 88%)`,
-                text: `hsl(${hue}, 80%, 25%)`,
-                border: `hsl(${hue}, 70%, 55%)`
-            };
-        }
-    } 
-    // Pre dark mode
-    else {
-        if (p < 0.25) {
-            // Tmavo červená -> tmavo oranžová
-            const t = p / 0.25;
-            const hue = 0 + (30 * t);
-            return {
-                bg: `hsl(${hue}, 70%, 20%)`,
-                text: `hsl(${hue}, 90%, 85%)`,
-                border: `hsl(${hue}, 70%, 35%)`
-            };
-        } else if (p < 0.5) {
-            // Tmavo oranžová -> tmavo žltá
-            const t = (p - 0.25) / 0.25;
-            const hue = 30 + (30 * t);
-            return {
-                bg: `hsl(${hue}, 70%, 22%)`,
-                text: `hsl(${hue}, 90%, 85%)`,
-                border: `hsl(${hue}, 70%, 38%)`
-            };
-        } else if (p < 0.75) {
-            // Tmavo žltá -> tmavo zelenkavá
-            const t = (p - 0.5) / 0.25;
-            const hue = 60 + (30 * t);
-            return {
-                bg: `hsl(${hue}, 65%, 20%)`,
-                text: `hsl(${hue}, 85%, 85%)`,
-                border: `hsl(${hue}, 65%, 35%)`
-            };
-        } else {
-            // Tmavo zelenkavá -> tmavo zelená
-            const t = (p - 0.75) / 0.25;
-            const hue = 90 + (30 * t);
-            return {
-                bg: `hsl(${hue}, 65%, 18%)`,
-                text: `hsl(${hue}, 85%, 85%)`,
-                border: `hsl(${hue}, 65%, 32%)`
-            };
-        }
-    }
-}
-
 // Funkcia pre zobrazenie detailu vzoru
 function showPatternDetail(filename, position, sequence, similarityMatrix) {
     const modal = document.getElementById('patternDetailModal');
@@ -1117,24 +1091,5 @@ function showPatternDetail(filename, position, sequence, similarityMatrix) {
     };
 
     // Zobrazenie modálu
-    modal.classList.remove('hidden');
-
-    // Event listener pre zatvorenie
-    const closeModal = () => modal.classList.add('hidden');
-    
-    document.getElementById('closePatternDetailModal').onclick = closeModal;
-    
-    // Zatvorenie kliknutím mimo modál
-    modal.onclick = (e) => {
-        if (e.target === modal) closeModal();
-    };
-
-    // ESC klávesa
-    const escHandler = (e) => {
-        if (e.key === 'Escape') {
-            closeModal();
-            document.removeEventListener('keydown', escHandler);
-        }
-    };
-    document.addEventListener('keydown', escHandler);
+    openModal('patternDetailModal');
 }

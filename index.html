@@ -124,9 +124,8 @@
                         </button>
                     </div>
                 </div>
-            
-                <div id="patternCheckboxes"
-                    class="grid grid-cols-1 md:grid-cols-2 gap-2 max-h-64 overflow-y-auto p-2 border border-gray-300 rounded-lg dark:border-gray-600">
+
+                <div id="patternCheckboxes" class="grid grid-cols-1 md:grid-cols-2 gap-2 max-h-64 overflow-y-auto p-2 border border-gray-300 rounded-lg dark:border-gray-600 custom-scrollbar">
                     <!-- Checkboxy sa naplnia dynamicky JS -->
                 </div>
             
@@ -281,6 +280,14 @@
                             </button>
                         </div>
                         <div id="aiExplanation" class="mt-2 text-sm text-gray-600 dark:text-gray-400 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg hidden"></div>
+                    </div>
+
+                    <!-- Sequence Explanation Button -->
+                    <div id="sequenceExplanationContainer" class="mt-2">
+                        <button id="explainSequenceBtn" 
+                            class="w-full bg-indigo-100 text-indigo-700 px-4 py-2 rounded-lg hover:bg-indigo-200 dark:bg-indigo-900 dark:text-indigo-300 dark:hover:bg-indigo-800 transition font-medium flex items-center justify-center gap-2">
+                            Vysvetli sekvenciu
+                        </button>
                     </div>
 
                     <!-- Export button with dropdown a nové tlačidlo Export PRO -->
@@ -870,8 +877,7 @@
                                     </svg>
                                 </button>
                             </div>
-                            <div id="stopWordsContainer" 
-                                class="flex flex-wrap gap-2 min-h-[120px] max-h-[250px] overflow-y-auto p-3 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-600 custom-scrollbar">
+                            <div id="stopWordsContainer" class="flex flex-wrap gap-2 min-h-[120px] max-h-[250px] overflow-y-auto p-3 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-600 custom-scrollbar">
                                 <!-- Sem sa dynamicky pridajú stop words -->
                             </div>
                         </div>
@@ -982,6 +988,8 @@
                         </svg>
                     </button>
                 </div>
+
+
                 
                 <div id="aiExplanationModalContent" class="text-gray-600 dark:text-gray-300 space-y-4">
                     <!-- Obsah sa naplní dynamicky -->
@@ -1002,10 +1010,11 @@
                         </svg>
                     </button>
                 </div>
-                
-                <div id="explanationModalContent" class="text-gray-600 dark:text-gray-300 space-y-4">
+
+                <div id="explanationModalContent" class="text-gray-600 dark:text-gray-300 space-y-4 custom-scrollbar" style="max-height: 60vh; overflow-y: auto; padding-right: 10px;">
                     <!-- Obsah sa naplní dynamicky -->
                 </div>
+                
             </div>
         </div>
     </div>
@@ -1022,7 +1031,7 @@
                         </svg>
                     </button>
                 </div>
-                
+
                 <div id="whatsNewContent" class="text-gray-600 dark:text-gray-300 whitespace-pre-wrap custom-scrollbar" style="max-height: 60vh; overflow-y: auto; padding-right: 10px;">
                     <!-- Obsah sa načíta zo whatsnew.txt -->
                 </div>
@@ -1037,6 +1046,7 @@
         ▲
     </button>
 
+        <script src="scripts/utils/utils.js"></script>
         <script src="scripts/scripts.js"></script>
         <script src="scripts/catalog.js"></script>
         <script src="scripts/matrix.js"></script>
@@ -1046,7 +1056,7 @@
         <script src="scripts/markov.js"></script>     
         <script src="scripts/methodsteps.js"></script>
         <script src="scripts/header.js"></script>
-        <script src="scripts/footerlinks.js"></script>
+        <script src="scripts/modals.js"></script>
         <script src="scripts/languages.js"></script>
         <script src="scripts/nightmode.js"></script>
         <script src="scripts/examples.js"></script>
@@ -1054,8 +1064,8 @@
         <script src="scripts/toast.js"></script>
         <script src="scripts/stopwords.js"></script>
         <script src="scripts/ai.js"></script>
+        <script src="scripts/explain.js"></script>
         <script src="scripts/whatsnew.js"></script>
-        <script src="scripts/draggable.js"></script>
 
     </body>
 

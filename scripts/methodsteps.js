@@ -126,12 +126,15 @@ function createCompleteTransitionMatrixStep(step, patterns) {
     let content = `<h4 class="font-semibold mb-2 text-indigo-600 dark:text-indigo-400">${t.mdpStep3}</h4>`;
     content += `<p class="mb-2 text-sm text-gray-600 dark:text-gray-400">${t.mdpTransitionMatrix}</p>`;
 
-    // Vytvoríme wrapper pre tabuľku so scrollbarom
+    // Vytvoríme wrapper pre tabuľku so scrollbarom - DÔLEŽITÉ: nastavíme max-width a overflow
     const tableWrapper = document.createElement("div");
-    tableWrapper.className = "text-sm overflow-x-auto";
+    tableWrapper.className = "text-sm overflow-x-auto custom-scrollbar";
+    tableWrapper.style.maxWidth = "100%"; // Zabezpečíme, že nepresahuje
+    tableWrapper.style.overflowX = "auto"; // Explicitne nastavíme horizontálne scrollovanie
 
     const table = document.createElement("table");
     table.className = "w-full text-xs border-collapse";
+    table.style.minWidth = "600px"; // Minimálna šírka, aby sa scrollbar ukázal pri zúžení
 
     // Hlavička tabuľky
     const headerRow = document.createElement("tr");
@@ -302,46 +305,6 @@ function createGoalStateStep(step, patterns) {
     return stepDiv;
 }
 
-function createTransitionCalculationStep(step, patterns) {
-    const t = translations[currentLanguage];
-    const stepDiv = document.createElement("div");
-    stepDiv.className = "bg-white dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600";
-
-    let content = `<h4 class="font-semibold mb-2 text-indigo-600 dark:text-indigo-400">${t.mdpStep3} - ${currentLanguage === 'sk' ? 'výpočet pre' : 'calculation for'} ${step.statePattern.name}</h4>`;
-    content += `<p class="mb-2">${currentLanguage === 'sk' ? 'Súčet podobností:' : 'Sum of similarities:'} ${step.sum.toFixed(3)}</p>`;
-
-    const table = document.createElement("table");
-    table.className = "w-full text-xs border-collapse mb-2";
-
-    // Hlavička tabuľky
-    const headerRow = document.createElement("tr");
-    headerRow.innerHTML = `
-        <th class="p-2 bg-gray-100 dark:bg-gray-600 text-left">${currentLanguage === 'sk' ? 'Cieľový vzor' : 'Target pattern'}</th>
-        <th class="p-2 bg-gray-100 dark:bg-gray-600 text-right">${currentLanguage === 'sk' ? 'Podobnosť' : 'Similarity'}</th>
-        <th class="p-2 bg-gray-100 dark:bg-gray-600 text-right">${currentLanguage === 'sk' ? 'Pravdepodobnosť' : 'Probability'}</th>
-    `;
-    table.appendChild(headerRow);
-
-    // Riadky s údajmi
-    Object.entries(step.transitionProbabilities).forEach(([filename, probability]) => {
-        if (filename !== step.state) {
-            const pattern = patterns.find(p => p.filename === filename);
-            const similarity = step.similarities[patterns.findIndex(p => p.filename === filename)];
-            const row = document.createElement("tr");
-            row.innerHTML = `
-                <td class="p-2 border-b border-gray-200 dark:border-gray-600">${pattern.name}</td>
-                <td class="p-2 border-b border-gray-200 dark:border-gray-600 text-right">${similarity.toFixed(3)}</td>
-                <td class="p-2 border-b border-gray-200 dark:border-gray-600 text-right">${probability.toFixed(3)}</td>
-            `;
-            table.appendChild(row);
-        }
-    });
-
-    stepDiv.innerHTML = content;
-    stepDiv.appendChild(table);
-    return stepDiv;
-}
-
 function createInitialUtilitiesStep(step, patterns) {
     const t = translations[currentLanguage];
     const stepDiv = document.createElement("div");
@@ -508,9 +471,9 @@ function createPolicyCalculationStep(step, patterns) {
     // Riadky s údajmi
     Object.entries(step.calculations).forEach(([state, calc]) => {
         const statePattern = patterns.find(p => p.filename === state);
-        const actionPattern = patterns.find(p => p.filename === calc.bestAction);
-
-        if (actionPattern) {
+        
+        // Ak je bestAction null (cieľový stav), zobrazíme pomlčku
+        if (calc.bestAction === null) {
             const row = document.createElement("tr");
             
             // Pridáme ikonky pre štart a cieľ v stĺpci "Current State"
@@ -525,23 +488,47 @@ function createPolicyCalculationStep(step, patterns) {
             
             stateNameHtml = `<span class="inline-flex items-center gap-1">${stateIconHtml}${statePattern.name}</span>`;
             
-            // Pridáme ikonky pre štart a cieľ v stĺpci "Optimal Action"
-            let actionNameHtml = actionPattern.name;
-            let actionIconHtml = '';
-            
-            if (calc.bestAction === forcedStartPattern) {
-                actionIconHtml = '<span class="text-red-500 mr-1" title="Štartovací vzor">🚩</span>';
-            } else if (calc.bestAction === goalState) {
-                actionIconHtml = '<span class="text-green-600 mr-1" title="Cieľový vzor">🎯</span>';
-            }
-            
-            actionNameHtml = `<span class="inline-flex items-center gap-1">${actionIconHtml}${actionPattern.name}</span>`;
-            
             row.innerHTML = `
                 <td class="p-2 border-b border-gray-200 dark:border-gray-600">${stateNameHtml}</td>
-                <td class="p-2 border-b border-gray-200 dark:border-gray-600">${actionNameHtml}</td>
+                <td class="p-2 border-b border-gray-200 dark:border-gray-600 text-gray-400 italic">—</td>
             `;
             table.appendChild(row);
+        } else {
+            const actionPattern = patterns.find(p => p.filename === calc.bestAction);
+            
+            if (actionPattern) {
+                const row = document.createElement("tr");
+                
+                // Pridáme ikonky pre štart a cieľ v stĺpci "Current State"
+                let stateNameHtml = statePattern.name;
+                let stateIconHtml = '';
+                
+                if (state === forcedStartPattern) {
+                    stateIconHtml = '<span class="text-red-500 mr-1" title="Štartovací vzor">🚩</span>';
+                } else if (state === goalState) {
+                    stateIconHtml = '<span class="text-green-600 mr-1" title="Cieľový vzor">🎯</span>';
+                }
+                
+                stateNameHtml = `<span class="inline-flex items-center gap-1">${stateIconHtml}${statePattern.name}</span>`;
+                
+                // Pridáme ikonky pre štart a cieľ v stĺpci "Optimal Action"
+                let actionNameHtml = actionPattern.name;
+                let actionIconHtml = '';
+                
+                if (calc.bestAction === forcedStartPattern) {
+                    actionIconHtml = '<span class="text-red-500 mr-1" title="Štartovací vzor">🚩</span>';
+                } else if (calc.bestAction === goalState) {
+                    actionIconHtml = '<span class="text-green-600 mr-1" title="Cieľový vzor">🎯</span>';
+                }
+                
+                actionNameHtml = `<span class="inline-flex items-center gap-1">${actionIconHtml}${actionPattern.name}</span>`;
+                
+                row.innerHTML = `
+                    <td class="p-2 border-b border-gray-200 dark:border-gray-600">${stateNameHtml}</td>
+                    <td class="p-2 border-b border-gray-200 dark:border-gray-600">${actionNameHtml}</td>
+                `;
+                table.appendChild(row);
+            }
         }
     });
 

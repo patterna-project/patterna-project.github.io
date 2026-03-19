@@ -195,12 +195,6 @@ const porterStemmer = (function() {
 })();
 
 class PatternSimilarity {
-    constructor() {
-        this.stopWords = window.customStopWords || new Set([
-            'a', 'an', 'the', 'and', 'it', 'is', 'to', 'at', 'in', 'we', 'of', 'be'
-        ]);
-    }
-
     // Pomocná metóda pre stemming jednotlivého slova
     stemWord(word) {
         const stemmed = porterStemmer(word);
@@ -209,20 +203,21 @@ class PatternSimilarity {
     }
 
     preprocessText(text) {
+        
         return text
             .toLowerCase()
-            .normalize("NFD")               // normalizácia diakritiky
-            .replace(/[\u0300-\u036f]/g, "") // odstránenie diakritiky
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "")
             .replace(/[^\w\s]/g, ' ')
             .replace(/\s+/g, ' ')
             .trim()
             .split(' ')
             .filter(word =>
                 word.length > 2 &&
-                !this.stopWords.has(word) &&
+                !window.customStopWords.has(word) &&  
                 !/\d/.test(word)
             )
-            .map(word => this.stemWord(word));  // ← tu bude aj console.log
+            .map(word => this.stemWord(word));
     }
 
     calculateTF(tokens) {
@@ -503,7 +498,7 @@ function displaySimilarityMatrixWithToggle(sequence, similarityMatrix) {
                 ${t.explainButton}
             </button>
         </div>
-        <div id="similarityMatrix" class="text-sm overflow-x-auto"></div>
+        <div id="similarityMatrix" class="text-sm overflow-x-auto custom-scrollbar"></div>
         <div id="similarityGraph" class="w-full min-h-[500px] hidden relative"></div>
     `;
     
@@ -582,5 +577,5 @@ window.openExplanationModal = function(view) {
         `;
     }
     
-    modal.classList.remove('hidden');
+    openModal('explanationModal');
 };

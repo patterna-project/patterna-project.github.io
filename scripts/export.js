@@ -63,19 +63,6 @@ function exportWithFeedback() {
     }, 2000);
 }
 
-function getFormattedDateTime() {
-    const now = new Date();
-
-    const year = now.getFullYear();
-    const month = String(now.getMonth() + 1).padStart(2, '0');
-    const day = String(now.getDate()).padStart(2, '0');
-    const hours = String(now.getHours()).padStart(2, '0');
-    const minutes = String(now.getMinutes()).padStart(2, '0');
-    const seconds = String(now.getSeconds()).padStart(2, '0');
-
-    return `${year}-${month}-${day}_${hours}-${minutes}-${seconds}`;
-}
-
 function exportAsTxt(sequenceData) {
     const text = generateExportText(sequenceData);
     const dateTime = getFormattedDateTime();
@@ -276,16 +263,6 @@ function exportAsPng(sequenceData) {
     }, 100);
 }
 
-function downloadAsFile(content, filename, mimeType) {
-    const blob = new Blob([content], { type: mimeType });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = filename;
-    a.click();
-    URL.revokeObjectURL(url);
-}
-
 function generateExportText(sequenceData) {
     const t = translations[currentLanguage];
     let text = 'SEKVENCIA ORGANIZAČNÝCH VZOROV\n';
@@ -304,34 +281,22 @@ function generateExportText(sequenceData) {
 function initExportDropdown() {
     window.exportDropdownInitialized = true;
     const exportBtn = document.getElementById('exportBtn');
-    const dropdownBtn = document.getElementById('exportDropdownBtn');
-    const dropdown = document.getElementById('exportDropdown');
     const options = document.querySelectorAll('.export-option');
 
     // Nastavíme počiatočný text tlačidla
     updateExportButtonText();
 
-    // Toggle dropdown
-    dropdownBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        dropdown.classList.toggle('hidden');
-    });
-
-    // Výber formátu
+    // Výber formátu - toto ponechaj
     options.forEach(option => {
         option.addEventListener('click', (e) => {
             e.stopPropagation();
             currentExportFormat = option.dataset.format;
-            updateExportButtonText(); // Aktualizujeme text pri zmene formátu
-            dropdown.classList.add('hidden');
+            updateExportButtonText();
+            
+            // Dropdown sa zatvorí automaticky cez modals.js, ale pre istotu:
+            const dropdown = document.getElementById('exportDropdown');
+            if (dropdown) dropdown.classList.add('hidden');
         });
-    });
-
-    // Zatvorenie dropdownu pri kliknutí mimo
-    document.addEventListener('click', (e) => {
-        if (!exportBtn.contains(e.target) && !dropdownBtn.contains(e.target) && !dropdown.contains(e.target)) {
-            dropdown.classList.add('hidden');
-        }
     });
 
     exportBtn.addEventListener('click', exportWithFeedback);   
@@ -355,9 +320,6 @@ async function exportPro() {
         showToast(translations[currentLanguage]?.noSequenceToExport || 'Žiadna sekvencia na export', 'warning');
         return;
     }
-
-    // Zobraziť loading indikátor
-    updateLoadingIndicator(10, 'Pripravujem PRO export...');
     
     try {
         // 1. Zozbierame všetky potrebné dáta
@@ -373,8 +335,6 @@ async function exportPro() {
                 catalog: pattern.catalogName || 'C & H'
             };
         });
-
-        updateLoadingIndicator(20, 'Získavam parametre...');
         
         // 2. Parametre generovania
         const params = {
@@ -388,15 +348,11 @@ async function exportPro() {
             timestamp: new Date().toISOString()
         };
 
-        updateLoadingIndicator(30, 'Spracovávam maticu podobností...');
-
         // 3. Matica podobností (ak existuje)
         let similarityMatrix = {};
         if (window.originalSimilarityMatrix && Object.keys(window.originalSimilarityMatrix).length > 0) {
             similarityMatrix = window.originalSimilarityMatrix;
         }
-
-        updateLoadingIndicator(40, 'Spracovávam MDP výpočty...');
 
         // 4. MDP výsledky (ak existujú)
         let mdpResults = null;
@@ -409,15 +365,11 @@ async function exportPro() {
             };
         }
 
-        updateLoadingIndicator(50, 'Pripravujem JSON metadáta...');
-
         // 5. Sentiment skóre (ak existuje)
         let sentimentScores = null;
         if (window.sentimentScores && Object.keys(window.sentimentScores).length > 0) {
             sentimentScores = window.sentimentScores;
         }
-
-        updateLoadingIndicator(60, 'Vytváram ZIP archív...');
 
         // 6. Vytvoríme metadata.json
         const metadata = {
@@ -439,8 +391,6 @@ async function exportPro() {
 
         // 7. Vytvoríme obsah README.txt
         const readmeContent = generateProReadme(sequenceData, params, metadata.statistics);
-
-        updateLoadingIndicator(70, 'Balím súbory...');
 
         // 8. Vytvoríme ZIP archív pomocou JSZip (treba pridať knižnicu)
         // Skontrolujeme, či je JSZip dostupný, ak nie, dynamicky ho načítame
@@ -480,8 +430,6 @@ async function exportPro() {
             outputsFolder.file("mdp_steps.txt", generateMDPStepsText(mdpResults, sequenceData));
         }
 
-        updateLoadingIndicator(80, 'Komprimujem...');
-
         // 9. Vygenerujeme ZIP a stiahneme
         const zipContent = await zip.generateAsync({ 
             type: "blob",
@@ -489,19 +437,14 @@ async function exportPro() {
             compressionOptions: { level: 6 }
         });
 
-        updateLoadingIndicator(90, 'Finalizujem...');
-
         const dateTime = getFormattedDateTime();
         downloadAsFile(zipContent, `Patterna_PRO_${dateTime}.zip`, 'application/zip');
-
-        updateLoadingIndicator(100, 'Hotovo! PRO export dokončený');
 
         showToast('PRO export bol úspešne vytvorený', 'success');
 
     } catch (error) {
         console.error('Chyba pri PRO exporte:', error);
         showToast('Chyba pri vytváraní PRO exportu: ' + error.message, 'error');
-        updateLoadingIndicator(0, '');
     }
 }
 

@@ -53,30 +53,11 @@ function initStopWordsSettings() {
 
     // Otvorenie modalu
     stopWordsBtn.addEventListener('click', () => {
-        stopWordsModal.classList.remove('hidden');
+        openModal('stopWordsModal');
         renderStopWords();
         updateButtonStates();
         // Focus na input po otvorení
         setTimeout(() => newStopWordInput?.focus(), 100);
-    });
-
-    // Zatvorenie modalu
-    closeBtn.addEventListener('click', () => {
-        stopWordsModal.classList.add('hidden');
-    });
-
-    // Kliknutie mimo modal
-    stopWordsModal.addEventListener('click', (e) => {
-        if (e.target === stopWordsModal) {
-            stopWordsModal.classList.add('hidden');
-        }
-    });
-
-    // ESC klávesa
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && !stopWordsModal.classList.contains('hidden')) {
-            stopWordsModal.classList.add('hidden');
-        }
     });
 
     // Pridanie stop slova (iba jedno slovo, bez medzier)

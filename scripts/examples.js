@@ -8,12 +8,6 @@ const examples = [
     ["someone_always_makes_progress.txt", "work_split.txt", "take_no_small_slips.txt"] // E
 ];
 
-// Examples dropdown
-document.getElementById("examplesToggle").addEventListener("click", (e) => {
-    e.stopPropagation();
-    document.getElementById("examplesMenu").classList.toggle("hidden");
-});
-
 document.querySelectorAll("#examplesMenu button[data-index]").forEach(btn => {
     btn.addEventListener("click", (e) => {
         e.stopPropagation();
@@ -71,36 +65,10 @@ document.querySelectorAll("#examplesMenu button[data-index]").forEach(btn => {
             updateAllLanguageCounters();
             updateCatalogBadges();
             updateSelectAllButtonsColor();
+            updateGenerateButtonState(); 
             forcedStartPattern = null;
             forcedGoalPattern = null; 
         }
         document.getElementById("examplesMenu").classList.add("hidden");
     });
-});
-
-// Close examples dropdown when clicking outside
-document.addEventListener('click', (e) => {
-    const examplesMenu = document.getElementById('examplesMenu');
-    const examplesToggle = document.getElementById('examplesToggle');
-
-    if (examplesMenu && !examplesMenu.classList.contains('hidden') &&
-        !examplesToggle.contains(e.target) &&
-        !examplesMenu.contains(e.target)) {
-        examplesMenu.classList.add('hidden');
-    }
-});
-
-// Also close when pressing Escape key
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-        const examplesMenu = document.getElementById('examplesMenu');
-        if (examplesMenu && !examplesMenu.classList.contains('hidden')) {
-            examplesMenu.classList.add('hidden');
-        }
-
-        const languageMenu = document.getElementById('languageMenu');
-        if (languageMenu && !languageMenu.classList.contains('hidden')) {
-            languageMenu.classList.add('hidden');
-        }
-    }
 });

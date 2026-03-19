@@ -10,52 +10,6 @@ let currentGraphData = null;
 let selectedNodeId = null; // Sledujeme vybraný uzol
 let sequenceHighlightEnabled = false; // Stav zvýraznenia sekvencie
 
-// Funkcia na inicializáciu prepínacích tlačidiel
-function initSimilarityViewToggle() {
-    const similarityInfo = document.getElementById('similarityInfo');
-    if (!similarityInfo) return;
-    
-    // Získame preklady
-    const t = window.translations?.[window.currentLanguage] || { 
-        similarityMatrix: "📊 Matica podobností",
-        similarityGraph: "🕸️ Graf podobností"
-    };
-    
-    // Najprv odstránime hidden class, aby bolo vidieť
-    similarityInfo.classList.remove('hidden');
-    
-    similarityInfo.innerHTML = `
-        <div class="flex justify-between items-center mb-4">
-            <div class="flex gap-2">
-                <button id="matrixViewBtn" 
-                    class="px-4 py-2 rounded-lg transition-all duration-200 font-medium
-                           bg-indigo-600 text-white hover:bg-indigo-700
-                           dark:bg-indigo-500 dark:hover:bg-indigo-600">
-                    ${t.similarityMatrix}
-                </button>
-                <button id="graphViewBtn" 
-                    class="px-4 py-2 rounded-lg transition-all duration-200 font-medium
-                           bg-gray-200 text-gray-700 hover:bg-gray-300
-                           dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600">
-                    ${t.similarityGraph}
-                </button>
-            </div>
-        </div>
-        <div id="similarityMatrix" class="text-sm overflow-x-auto"></div>
-        <div id="similarityGraph" class="w-full min-h-[500px] hidden relative">
-            <div id="nodeInfoPanel" class="absolute bottom-4 right-4 bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 max-w-xs hidden border border-gray-200 dark:border-gray-700">
-                <h4 class="font-semibold text-sm mb-2 text-gray-700 dark:text-gray-300" id="nodeInfoTitle"></h4>
-                <div id="nodeInfoContent" class="text-xs space-y-1"></div>
-            </div>
-        </div>
-    `;
-
-    document.getElementById('matrixViewBtn').addEventListener('click', () => switchView('matrix'));
-    document.getElementById('graphViewBtn').addEventListener('click', () => switchView('graph'));
-}
-
-
-
 function displaySimilarityGraph(patterns, similarityMatrix) {
     currentGraphData = { patterns, matrix: similarityMatrix };
     const graphDiv = document.getElementById('similarityGraph');
@@ -122,7 +76,7 @@ function renderSimilarityGraph(patterns, similarityMatrix) {
                     class="w-0 opacity-0 px-0 py-2 text-sm bg-transparent border-none focus:outline-none focus:ring-0 transition-all duration-300"
                     autocomplete="off">
             </div>
-            <div id="graphSearchResults" class="absolute left-0 w-64 mt-2 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 max-h-60 overflow-y-auto hidden z-30"></div>
+            <div id="graphSearchResults" class="absolute left-0 w-64 mt-2 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 max-h-60 overflow-y-auto hidden z-30 custom-scrollbar">
         </div>
                 
         <div id="similarityGraphSvg" class="w-full h-full"></div>

@@ -283,7 +283,7 @@ Your evaluation:`;
                             ${formattedExplanation}
                         </div>
                     `;
-                    modal.classList.remove('hidden');
+                    openModal('aiExplanationModal');
                 }
             });
         }
@@ -320,23 +320,3 @@ Your evaluation:`;
         aiEvaluationInProgress = false;
     }
 }
-
-// Event listener pre zatvorenie modalu
-document.addEventListener('DOMContentLoaded', () => {
-    const aiModal = document.getElementById('aiExplanationModal');
-    const closeBtn = document.getElementById('closeAiExplanationModal');
-    
-    if (closeBtn) {
-        closeBtn.addEventListener('click', () => {
-            aiModal?.classList.add('hidden');
-        });
-    }
-    
-    if (aiModal) {
-        aiModal.addEventListener('click', (e) => {
-            if (e.target === aiModal) {
-                aiModal.classList.add('hidden');
-            }
-        });
-    }
-});

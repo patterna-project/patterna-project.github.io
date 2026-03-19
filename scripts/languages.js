@@ -96,7 +96,7 @@ const translations = {
         researchSources: "Výskumné zdroje",
         researchSource1: "Článok o používaní podobnosti medzi opismi vzorov",
         researchSource2: "Techniky analýzy podobnosti textových opisov",
-        footerText: "FIIT STU Bratislava | Ústav informatiky a softvérového inžinierstva | Verzia 1.0.0",
+        footerText: "FIIT STU Bratislava | Ústav informatiky a softvérového inžinierstva | Verzia 1.0.4",
 
         // FAQ Modal
         frequentlyAskedQuestions: "Často kladené otázky",
@@ -198,6 +198,26 @@ const translations = {
         explainStatsText3: "• <strong>Top 5 najsilnejších spojení</strong> – dvojice vzorov s najvyššou podobnosťou.",
         explainStatsText4: "• <strong>Centralita vzorov</strong> – ktoré vzory sú najviac a najmenej prepojené (priemerná podobnosť s ostatnými).",
         explainStatsText5: "• <strong>Distribúcia podobností</strong> – ako sú hodnoty rozložené v intervaloch (0–20 %, 20–40 % atď.).",
+
+        //Sequence explanation modal
+        explainSequenceButton: "📝 Vysvetli sekvenciu",
+        explainSequenceTitle: "📝 Vysvetlenie sekvencie",
+        explainSequenceOverall: "Celkové zhrnutie",
+        explainSequenceContains: "Sekvencia obsahuje <strong>{count} vzorov</strong>, pričom začína vzorom <span class='font-medium text-indigo-600 dark:text-indigo-400'>{start}</span> a smeruje k cieľovému vzoru <span class='font-medium text-green-600 dark:text-green-400'>{goal}</span>.",
+        explainSequenceAvgSim: "Priemerná podobnosť medzi po sebe idúcimi vzormi je <span class='font-semibold' style='color: {color}'>{sim}%</span>.",
+        explainSequenceConsistent: "Sekvencia pôsobí konzistentne.",
+        explainSequenceWeak: "Prechody medzi vzormi sú menej výrazné.",
+        explainSequenceStep: "Krok {step}: {from} → {to}",
+        explainSimilarity: "Podobnosť {percent}%",
+        explainStrong: "✨ Veľmi silné prepojenie – vzory spolu úzko súvisia.",
+        explainMedium: "🔗 Stredne silné prepojenie – vzory zdieľajú niekoľko dôležitých konceptov.",
+        explainWeak: "📎 Slabšie prepojenie – vzory sú skôr komplementárne.",
+        explainCommonTopics: "Spoločné témy:",
+        explainNoCommon: "Žiadne výrazne spoločné kľúčové slová.",
+        explainDirectReference: "📖 Text priamo odkazuje na „{name}“.",
+        explainTakeaway: "💡 Čo si z toho odniesť?",
+        explainGoalWellConnected: "Cieľový vzor <span class='font-medium text-green-600 dark:text-green-400'>{name}</span> je dobre prepojený s ostatnými vzormi (priemerná podobnosť {sim}%), čo potvrdzuje jeho vhodnosť ako záverečného bodu.",
+        explainGoalSpecific: "Cieľový vzor <span class='font-medium text-green-600 dark:text-green-400'>{name}</span> je skôr špecifický – jeho sila spočíva v unikátnom zameraní, nie v priamom prepojení so všetkými vzormi.",
 
 
         // OnHover info
@@ -365,7 +385,7 @@ const translations = {
         researchSources: "Research Sources",
         researchSource1: "Article on using similarity between pattern descriptions",
         researchSource2: "Techniques for analyzing similarity of textual descriptions",
-        footerText: "FIIT STU Bratislava | Institute of Informatics and Software Engineering | Version 1.0.0",
+        footerText: "FIIT STU Bratislava | Institute of Informatics and Software Engineering | Version 1.0.4",
 
         // FAQ Modal
         frequentlyAskedQuestions: "Frequently Asked Questions",
@@ -469,6 +489,25 @@ const translations = {
         explainStatsText4: "• <strong>Pattern centrality</strong> – which patterns are most and least connected (average similarity with others).",
         explainStatsText5: "• <strong>Similarity distribution</strong> – how values are distributed in intervals (0–20%, 20–40%, etc.).",
 
+        //Sequence explain modal
+        explainSequenceButton: "📝 Explain Sequence",
+        explainSequenceTitle: "📝 Sequence Explanation",
+        explainSequenceOverall: "Overall Summary",
+        explainSequenceContains: "The sequence contains <strong>{count} patterns</strong>, starting with <span class='font-medium text-indigo-600 dark:text-indigo-400'>{start}</span> and aiming for the goal pattern <span class='font-medium text-green-600 dark:text-green-400'>{goal}</span>.",
+        explainSequenceAvgSim: "The average similarity between consecutive patterns is <span class='font-semibold' style='color: {color}'>{sim}%</span>.",
+        explainSequenceConsistent: "The sequence appears consistent.",
+        explainSequenceWeak: "Transitions between patterns are less pronounced.",
+        explainSequenceStep: "Step {step}: {from} → {to}",
+        explainSimilarity: "Similarity {percent}%",
+        explainStrong: "✨ Very strong connection – patterns are closely related.",
+        explainMedium: "🔗 Moderate connection – patterns share several important concepts.",
+        explainWeak: "📎 Weaker connection – patterns are rather complementary.",
+        explainCommonTopics: "Common topics:",
+        explainNoCommon: "No significant common keywords.",
+        explainDirectReference: "📖 The text directly references „{name}“.",
+        explainTakeaway: "💡 What to take away?",
+        explainGoalWellConnected: "The goal pattern <span class='font-medium text-green-600 dark:text-green-400'>{name}</span> is well connected to the other patterns (average similarity {sim}%), confirming its suitability as the final point.",
+        explainGoalSpecific: "The goal pattern <span class='font-medium text-green-600 dark:text-green-400'>{name}</span> is rather specific – its strength lies in its unique focus, not in direct connection to all patterns.",
 
         // OnHover info
         mdpParamGammaTitle: "γ: 0-1 | Discount factor. Higher value = preference for longer paths.",
@@ -721,6 +760,11 @@ function updateTextContent() {
     const aiConfidenceSpan = document.querySelector('[data-i18n="aiConfidence"]');
     if (aiConfidenceSpan) {
         aiConfidenceSpan.textContent = t.aiConfidence;
+    }
+
+    const explainSequenceBtn = document.getElementById('explainSequenceBtn');
+    if (explainSequenceBtn) {
+        explainSequenceBtn.innerHTML = `${t.explainSequenceButton}`;
     }
 
     const folderTooltip = document.getElementById('folderTooltip');
@@ -1022,23 +1066,3 @@ document.addEventListener('DOMContentLoaded', () => {
 window.currentLanguage = currentLanguage;
 window.translations = translations;
 window.switchLanguage = switchLanguage;
-
-document.addEventListener('click', (e) => {
-    const languageMenu = document.getElementById('languageMenu');
-    const languageToggle = document.getElementById('languageToggle');
-
-    if (languageMenu && !languageMenu.classList.contains('hidden') &&
-        !languageToggle.contains(e.target) &&
-        !languageMenu.contains(e.target)) {
-        languageMenu.classList.add('hidden');
-    }
-});
-
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-        const languageMenu = document.getElementById('languageMenu');
-        if (languageMenu && !languageMenu.classList.contains('hidden')) {
-            languageMenu.classList.add('hidden');
-        }
-    }
-});

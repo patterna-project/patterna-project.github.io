@@ -57,17 +57,6 @@ async function checkAndShowWhatsNew() {
     }
 }
 
-// Jednoduchá hash funkcia pre obsah
-function simpleHash(str) {
-    let hash = 0;
-    for (let i = 0; i < str.length; i++) {
-        const char = str.charCodeAt(i);
-        hash = ((hash << 5) - hash) + char;
-        hash = hash & hash; // Convert to 32-bit integer
-    }
-    return hash.toString(36);
-}
-
 // Formátovanie obsahu - podpora odstavcov
 function formatWhatsNewContent(content) {
     // Rozdelíme podľa prázdnych riadkov
@@ -99,16 +88,6 @@ function formatWhatsNewContent(content) {
             return `<div class="mb-3">${formattedLines}</div>`;
         }
     }).join('');
-}
-
-// Escape HTML pre bezpečnosť
-function escapeHtml(unsafe) {
-    return unsafe
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
 }
 
 // Inicializácia pri načítaní stránky
