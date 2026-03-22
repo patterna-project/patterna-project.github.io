@@ -1,42 +1,38 @@
-# NOVINKY VO VERZII 1.0.4
+# NOVINKY VO VERZII 1.0.4c
 
-## 🕸️ VYLEPŠENÝ GRAF PODOBNOSTÍ
+## VYLEPŠENÝ GRAF PODOBNOSTÍ
 - Pridaný posuvník (slider) na nastavenie prahu podobnosti – dynamické zobrazenie podľa hodnoty
 - Nové tlačidlo 🔗 na zvýraznenie aktuálnej sekvencie priamo v grafe
 - Po kliknutí na uzol sa zobrazia jeho najsilnejšie spojenia
 - **Farebné odlíšenie uzlov podľa jazyka/katalógu** (každý jazyk má vlastnú, unikátnu farbu)
 - Vyhľadávanie v grafe – nájdi vzor podľa názvu
 
-## ⚙️ NOVÉ PARAMETRE A FUNKCIE
+## NOVÉ PARAMETRE A FUNKCIE
 - Prepínač **USE** (Universal Sentence Encoder) – neurónová sieť na sémantickú analýzu viet (pomalšie, ale malo bt byť presnejšie)
 - Vzájomná eliminácia USE a IDF (nemôžu byť zapnuté súčasne)
 - Detailnejší loading text pre pomalšie operácie (USE, veľké katalógy)
 - Tooltipy pre všetky parametre (stačí podržať myš)
 - Nová funckia - vymazanie vzoru zo sekvencie
 
-## 🎯 MANUÁLNY VÝBER ŠTARTU A CIEĽA
+## MANUÁLNY VÝBER ŠTARTU A CIEĽA
 - Každý vzor má teraz dve ikonky: **🚩 (štart)** a **🎯 (cieľ)**
 - Hoverom sa zobrazia (ak nie sú aktívne), kliknutím sa nastavia/zrušia
 - Vzájomná výlučnosť – vzor nemôže byť súčasne štart aj cieľ
 - Automatické zaškrtnutie checkboxu pri nastavení ikonky
 - V MDP sa použije používateľom definovaný cieľ (ak je nastavený)
 
-## 📊 VYLEPŠENÉ ŠTATISTIKY A VIZUALIZÁCIE
+## VYLEPŠENÉ ŠTATISTIKY A VIZUALIZÁCIE
 - **Farebné odlíšenie jazykov vo všetkých badge-och** (jednotné s grafom – v sekvencii, v detaile vzoru, v info paneli)
 - Nové štatistiky: centralita vzorov, distribúcia podobností
 - Tlačidlo **"Vysvetli"** pre každý typ zobrazenia (matica/graf/štatistiky) – otvorí modal s vysvetlením
 - Vylepšený vzhľad sekvencie v dark/light mode
 
-## 🖱️ PRESÚVATEĽNÉ MODÁLY
+## PRESÚVATEĽNÉ MODÁLY
 - Všetky modaly (O projekte, FAQ, Detail vzoru, AI hodnotenie a ďalšie) je teraz možné **presúvať myšou**
 - Stačí chytiť za hornú lištu (vedľa názvu)
 - Pozícia sa ukladá počas celého sedenia
 
-## ✨ ĎALŠIE NOVÉ FUNKCIE
-- Tlačidlo **"Vybrať všetky"** sa po zaškrtnutí všetkých vzorov zmení na výraznú zelenú (font-bold, scale-110, zelený tieň)
-- Vylepšené počítadlá v user katalógoch
-
-## 🐛 OPRAVY CHÝB
+## OPRAVY CHÝB
 - Pri odškrtnutí všetkých vzorov v sekcii sa zrušia aj príslušné štart/cieľ ikonky
 - Tlačidlo "Generovať" sa správne aktivuje po kliknutí na ikonky štart/cieľ
 - Opravené zobrazenie jazykov v user katalógoch
@@ -46,7 +42,7 @@
 
 # NOVINKY VO VERZII 1.0.3
 
-## 🤖 AI HODNOTENIE SEKVENCIÍ
+## AI HODNOTENIE SEKVENCIÍ
 - Umelá inteligencia (Gemini) teraz hodnotí logickú nadväznosť vašich sekvencií
 - Po vygenerovaní sekvencie sa automaticky zobrazí AI skóre (0 až 100%)
 - Kliknutím na skóre otvoríte detailný modal s vysvetlením

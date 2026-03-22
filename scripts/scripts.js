@@ -7,8 +7,6 @@ let userCatalogs = {};
 let originalSequence = []; 
 let originalSimilarityMatrix = {}; 
 let isSequenceReordered = false; 
-let currentView = 'matrix';
-// Na začiatok súboru, k existujúcim premenným
 let globalCheckedPatterns = {}; // { "catalogName": { "filename1": true, "filename2": true } }
 let forcedStartPattern = null; // filename vzoru, ktorý má byť štartovací
 let forcedGoalPattern = null;
@@ -579,8 +577,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // ========== VALIDÁCIA HODNÔT V PARAMETROCH ==========
 
-// ========== VALIDÁCIA HODNÔT V PARAMETROCH ==========
-
 function validateInputs() {
     // Gamma input - rozsah 0-1
     const gammaInput = document.getElementById('gammaInput');
@@ -597,7 +593,7 @@ function validateInputs() {
         });
     }
 
-    // Epsilon input - rozsah 0.0001-1 (opravené)
+    // Epsilon input - rozsah 0.0001-1
     const epsilonInput = document.getElementById('epsilonInput');
     if (epsilonInput) {
         epsilonInput.addEventListener('blur', function() {
@@ -637,8 +633,6 @@ function validateInputs() {
 }
 
 // ========== DISABLE GENERATE BUTTON WHEN NO PATTERNS SELECTED ==========
-
-// ========== DISABLE GENERATE BUTTON WHEN LESS THAN 2 PATTERNS SELECTED ==========
 
 function updateGenerateButtonState() {
     const generateBtn = document.getElementById('generateBtn');

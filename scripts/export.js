@@ -476,9 +476,7 @@ function loadJSZip() {
  * Vygeneruje README.txt pre PRO export
  */
 function generateProReadme(sequenceData, params, statistics) {
-    const t = translations[currentLanguage];
     const lines = [];
-    
     lines.push('='.repeat(60));
     lines.push('PATTERNA - PRO EXPORT'.padCenter(60));
     lines.push('='.repeat(60));

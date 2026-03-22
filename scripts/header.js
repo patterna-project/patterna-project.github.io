@@ -2,7 +2,6 @@
 
 // ========== HEADER SCROLL EFFECT ==========
 
-let lastScrollY = window.scrollY;
 const nav = document.getElementById('mainNav');
 const SCROLL_THRESHOLD = 100;
 
@@ -15,7 +14,6 @@ function updateHeaderOnScroll() {
         nav.classList.remove('scrolled');
     }
 
-    lastScrollY = currentScrollY;
 }
 
 document.addEventListener('DOMContentLoaded', () => {

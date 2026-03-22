@@ -1,10 +1,7 @@
 // statistics.js
 
-let currentStatisticsData = null;
-
 // Funkcia na zobrazenie štatistík
 function displayStatistics(patterns, similarityMatrix) {
-    currentStatisticsData = { patterns, matrix: similarityMatrix };
     
     const similarityInfo = document.getElementById('similarityInfo');
     const matrixDiv = document.getElementById('similarityMatrix');

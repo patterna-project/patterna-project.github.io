@@ -3,7 +3,6 @@
 // Proxy URL pre Vercel (bez API kľúča!)
 const GEMINI_API_PROXY = 'https://patterna-project-github-io.vercel.app/api/gemini';
 
-let aiEvaluationInProgress = false;
 let currentAIController = null;
 let lastAIRequestTime = 0;
 const AI_REQUEST_COOLDOWN = 5000; // 5 sekúnd pauza medzi requestami

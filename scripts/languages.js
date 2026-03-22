@@ -59,14 +59,6 @@ const translations = {
         statisticsMostConnected: "Najprepojenejšie",
         statisticsLeastConnected: "Najizolovanejšie",
         statisticsDistribution: "Distribúcia podobností",
-        matrixViewNumbers: "Čísla",
-        matrixViewHeatmap: "Heatmapa",
-        matrixViewBoth: "Oboje",
-        matrixZoomIn: "Priblížiť",
-        matrixZoomOut: "Vzdialiť",
-        matrixView: "Zobraziť:",
-        matrixZoomReset: "Reset",
-
 
         // Footer
         quickLinks: "Rýchle odkazy",
@@ -347,15 +339,6 @@ const translations = {
         statisticsMostConnected: "Most connected",
         statisticsLeastConnected: "Least connected",
         statisticsDistribution: "Similarity distribution",
-        matrixViewNumbers: "Numbers",
-        matrixViewHeatmap: "Heatmap",
-        matrixViewBoth: "Both",
-        matrixZoomIn: "Zoom in",
-        matrixZoomOut: "Zoom out",
-        matrixView: "View:",
-        matrixZoomReset: "Reset",
-
-
 
         // Footer
         quickLinks: "Quick Links",
@@ -637,31 +620,6 @@ function updateTextContent() {
             '<path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.27a.75.75 0 01.02-1.06z" clip-rule="evenodd" />' +
             '</svg>';
     }
-    
-
-    // Aktualizácia matrix ovládacích prvkov - PRIAMA ZMENA TEXTU
-    const matrixNumbersBtn = document.getElementById('matrixViewNumbersBtn');
-    const matrixHeatmapBtn = document.getElementById('matrixViewHeatmapBtn');
-    const matrixBothBtn = document.getElementById('matrixViewBothBtn');
-    const matrixZoomIn = document.getElementById('matrixZoomInBtn');
-    const matrixZoomOut = document.getElementById('matrixZoomOutBtn');
-    const matrixZoomReset = document.getElementById('matrixZoomResetBtn');
-
-    if (matrixNumbersBtn) {
-        matrixNumbersBtn.textContent = t.matrixViewNumbers;
-        matrixNumbersBtn.title = t.matrixViewNumbers;
-    }
-    if (matrixHeatmapBtn) {
-        matrixHeatmapBtn.textContent = t.matrixViewHeatmap;
-        matrixHeatmapBtn.title = t.matrixViewHeatmap;
-    }
-    if (matrixBothBtn) {
-        matrixBothBtn.textContent = t.matrixViewBoth;
-        matrixBothBtn.title = t.matrixViewBoth;
-    }
-    if (matrixZoomIn) matrixZoomIn.title = t.matrixZoomIn;
-    if (matrixZoomOut) matrixZoomOut.title = t.matrixZoomOut;
-
 
     const matrixViewLabel = document.querySelector('.matrix-controls .flex.items-center.gap-2 span.text-sm');
     if (matrixViewLabel) {

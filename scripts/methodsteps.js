@@ -211,7 +211,7 @@ function createGoalCalculationStep(step, patterns) {
 
     // ZORADENIE: Prevedieme Object.entries na pole a zoradíme podľa podobnosti (od najväčšej)
     const sortedEntries = Object.entries(step.totalSimilarities)
-        .sort((a, b) => b[1] - a[1]);  // Zoradenie zostupne podľa hodnoty
+        .sort((a, b) => b[1] - a[1]);
 
     const table = document.createElement("table");
     table.className = "w-full text-xs border-collapse mb-2";
@@ -220,10 +220,19 @@ function createGoalCalculationStep(step, patterns) {
     const headerRow = document.createElement("tr");
     headerRow.innerHTML = `
         <th class="p-2 bg-gray-100 dark:bg-gray-600 text-left">${t.mdpCurrentState}</th>
-        <th class="p-2 bg-gray-100 dark:bg-gray-600 text-right">${t.mdpUtility}</th>
+        <th class="p-2 bg-gray-100 dark:bg-gray-600 text-right">Celková podobnosť</th>
+        <th class="p-2 bg-gray-100 dark:bg-gray-600 text-right">Rozptyl</th>
         <th class="p-2 bg-gray-100 dark:bg-gray-600 text-center">#</th>
     `;
     table.appendChild(headerRow);
+
+    // Vytvoríme mapu pre rýchle zistenie, či je vzor v top kandidátoch a jeho variance
+    const topCandidatesMap = new Map();
+    if (step.selectionInfo && step.selectionInfo.topCandidates) {
+        step.selectionInfo.topCandidates.forEach(c => {
+            topCandidatesMap.set(c.state, c.variance);
+        });
+    }
 
     // Riadky s údajmi - TERAZ ZORADENÉ
     sortedEntries.forEach(([filename, similarity], index) => {
@@ -233,6 +242,8 @@ function createGoalCalculationStep(step, patterns) {
         // Zvýrazníme vybraný cieľový vzor
         const isGoal = (filename === step.goalState);
         const isExcluded = (filename === step.forcedStartExcluded);
+        const isInTopCandidates = topCandidatesMap.has(filename);
+        const variance = topCandidatesMap.get(filename) || 0;
         
         // Pridáme ikonky
         let nameHtml = pattern.name;
@@ -242,21 +253,60 @@ function createGoalCalculationStep(step, patterns) {
             iconHtml = '<span class="text-red-500 mr-1" title="Vynútený štartovací vzor (vylúčený z výberu cieľa)">🚩</span>';
         } else if (isGoal) {
             iconHtml = '<span class="text-green-600 mr-1" title="Cieľový vzor (vybraný)">🎯</span>';
+        } else if (isInTopCandidates && step.selectionInfo?.selectedByVariance) {
+            iconHtml = '<span class="text-amber-500 mr-1" title="Top kandidát (bol v užšom výbere)">⭐</span>';
         }
         
         nameHtml = `<span class="inline-flex items-center gap-1">${iconHtml}${pattern.name}</span>`;
         
         // Pridáme poradie (1., 2., 3., ...)
         const rank = index + 1;
-        const rankDisplay = rank === 1 ? '🥇' : (rank === 2 ? '🥈' : (rank === 3 ? '🥉' : `${rank}.`));
+        let rankDisplay = rank === 1 ? '🥇' : (rank === 2 ? '🥈' : (rank === 3 ? '🥉' : `${rank}.`));
+        
+        // Ak je vzor v top kandidátoch ale nebol vybraný, dáme mu iný symbol
+        if (isInTopCandidates && !isGoal && step.selectionInfo?.selectedByVariance && rank > 3) {
+            rankDisplay = `(${rank}.)`;
+        }
+        
+        // Formátovanie rozptylu
+        const varianceDisplay = variance > 0 ? variance.toFixed(4) : '0.0000';
+        const varianceClass = isGoal && step.selectionInfo?.selectedWeightedRandom ? 'font-bold text-blue-600 dark:text-blue-400' : '';
         
         row.innerHTML = `
             <td class="p-2 border-b border-gray-200 dark:border-gray-600 ${isGoal ? 'font-bold bg-green-50 dark:bg-green-900/20' : ''}">${nameHtml}</td>
             <td class="p-2 border-b border-gray-200 dark:border-gray-600 text-right ${isGoal ? 'font-bold text-green-600 dark:text-green-400' : ''}">${similarity.toFixed(3)}</td>
+            <td class="p-2 border-b border-gray-200 dark:border-gray-600 text-right ${varianceClass}">${varianceDisplay}</td>
             <td class="p-2 border-b border-gray-200 dark:border-gray-600 text-center">${rankDisplay}</td>
         `;
         table.appendChild(row);
     });
+
+    // Informácia o výbere (upravená pre náhodný výber s váhou)
+    if (step.selectionInfo && step.selectionInfo.selectedByVariance && step.selectionInfo.topCandidates) {
+        const topCount = step.selectionInfo.topCandidates.length;
+        
+        if (step.selectionInfo.selectedWeightedRandom) {
+            content += `<p class="mt-2 text-xs text-blue-600 dark:text-blue-400">
+                🎲 Výber cieľa: Z <strong>${topCount}</strong> najlepších kandidátov (top 30%) bol náhodne vybraný vzor s <strong>pravdepodobnosťou úmernou rozptylu</strong> (špecifickejšie vzory majú vyššiu šancu).
+            </p>`;
+        } else {
+            content += `<p class="mt-2 text-xs text-blue-600 dark:text-blue-400">
+                🔍 Výber cieľa: Z <strong>${topCount}</strong> najlepších kandidátov (top 30%) bol vybraný vzor s <strong>najväčším rozptylom</strong> podobností (najšpecifickejší).
+            </p>`;
+        }
+        
+        // Zobrazíme aj zoznam top kandidátov s rozptylmi
+        const topList = step.selectionInfo.topCandidates.map((c, idx) => {
+            const pattern = patterns.find(p => p.filename === c.state);
+            const isSelected = c.state === step.goalState;
+            const varianceDisplay = c.variance ? c.variance.toFixed(4) : '0.0000';
+            return `<span class="${isSelected ? 'font-bold text-green-600 dark:text-green-400' : ''}">${pattern?.name || c.state} (sim:${c.totalSim.toFixed(3)}, σ²:${varianceDisplay})</span>`;
+        }).join(', ');
+        
+        content += `<p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
+            📋 Top kandidáti: ${topList}
+        </p>`;
+    }
 
     // Pridáme štatistiku - rozdiel medzi 1. a 2. miestom (len ak existujú)
     if (sortedEntries.length >= 2) {
@@ -273,9 +323,17 @@ function createGoalCalculationStep(step, patterns) {
     const goalPattern = patterns.find(p => p.filename === step.goalState);
     let similarityInfo = '';
     if (sortedEntries.length > 0) {
-        similarityInfo = `(${currentLanguage === 'sk' ? 'najvyššia celková podobnosť' : 'highest total similarity'} = ${sortedEntries[0][1].toFixed(3)})`;
-    } else {
-        similarityInfo = `(${currentLanguage === 'sk' ? 'používateľom definovaný cieľ' : 'user-defined goal'})`;
+        const topSim = sortedEntries[0][1];
+        const goalSim = step.totalSimilarities[step.goalState];
+        const goalVariance = topCandidatesMap.get(step.goalState) || 0;
+        
+        if (goalSim === topSim && sortedEntries[0][0] === step.goalState) {
+            similarityInfo = `(najvyššia celková podobnosť = ${topSim.toFixed(3)})`;
+        } else if (step.selectionInfo?.selectedWeightedRandom) {
+            similarityInfo = `(náhodne vybraný z top 30% s váhou rozptylu ${goalVariance.toFixed(4)}, celková podobnosť = ${goalSim.toFixed(3)})`;
+        } else {
+            similarityInfo = `(vybraný podľa rozptylu z top 30%, rozptyl = ${goalVariance.toFixed(4)}, celková podobnosť = ${goalSim.toFixed(3)})`;
+        }
     }
     content += `<p class="mt-2 font-semibold flex items-center gap-1">${t.mdpGoalState}: <span class="text-green-600 flex items-center gap-1 text-base"><span>🎯</span>${goalPattern.name}</span> ${similarityInfo}</p>`;
 

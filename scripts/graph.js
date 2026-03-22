@@ -5,8 +5,6 @@ if (typeof window.currentView === 'undefined') {
     window.currentView = 'matrix'; // 'matrix' alebo 'graph'
 }
 
-let similarityGraph = null;
-let currentGraphData = null;
 let selectedNodeId = null; // Sledujeme vybraný uzol
 let sequenceHighlightEnabled = false; // Stav zvýraznenia sekvencie
 

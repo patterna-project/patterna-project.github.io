@@ -1,5 +1,4 @@
-// ========== UTILS.JS ==========
-// Zdieľané užitočné funkcie pre celú aplikáciu
+//utils.js
 
 /**
  * Escapuje HTML špeciálne znaky pre bezpečné zobrazenie používateľského vstupu

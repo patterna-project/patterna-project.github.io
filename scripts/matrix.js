@@ -3,14 +3,12 @@
 
 // Na začiatok matrix.js (za existujúce knižnice)
 let useModel = null;
-let useModelLoading = false;
 let useModelLoadPromise = null;
 
 async function loadUSEModel() {
     if (useModel) return useModel;
     if (useModelLoadPromise) return useModelLoadPromise;
     
-    useModelLoading = true;
     useModelLoadPromise = (async () => {
         try {
             // Načítanie modelu (Universal Sentence Encoder)
@@ -22,7 +20,6 @@ async function loadUSEModel() {
             useModel = null;
             throw error;
         } finally {
-            useModelLoading = false;
             useModelLoadPromise = null;
         }
     })();

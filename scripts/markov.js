@@ -52,12 +52,8 @@ class MDPSequenceGenerator {
     }
 
     determineGoalState() {
-
-         // Ak je nastavený vynútený cieľový vzor a je medzi stavmi, použijeme ho
+        // 1. Ak je vynútený cieľ, použijeme ho priamo
         if (forcedGoalPattern && this.states.includes(forcedGoalPattern)) {
-            const forcedIndex = this.states.indexOf(forcedGoalPattern);
-            
-            // Zaznamenáme krok pre zobrazenie v UI
             this.steps.push({
                 type: 'goal_calculation',
                 totalSimilarities: {},
@@ -65,11 +61,10 @@ class MDPSequenceGenerator {
                 forcedGoalUsed: true,
                 forcedStartExcluded: (forcedStartPattern && this.states.includes(forcedStartPattern)) ? forcedStartPattern : null
             });
-            
             return forcedGoalPattern;
         }
 
-        // Vypočítame celkové podobnosti pre každý stav (súčet podobností so všetkými ostatnými)
+        // 2. Vypočítame celkové podobnosti pre všetky stavy
         const totalSimilarities = this.states.map(state =>
             this.states.reduce((sum, other) => {
                 if (state === other) return sum;
@@ -77,41 +72,74 @@ class MDPSequenceGenerator {
             }, 0)
         );
 
-        // Zoznam indexov všetkých stavov
+        // 3. Vylúčime vynútený štartovací vzor (ak existuje a je medzi stavmi)
         let candidateIndices = this.states.map((_, idx) => idx);
-
-        // Ak existuje forcedStartPattern a je medzi stavmi, vylúčime ho z kandidátov na cieľ
         if (forcedStartPattern && this.states.includes(forcedStartPattern)) {
             candidateIndices = candidateIndices.filter(idx => this.states[idx] !== forcedStartPattern);
         }
 
-        // Ak by po vylúčení nezostal žiadny kandidát (napr. keby bol len jeden vzor), vrátime sa k všetkým
-        if (candidateIndices.length === 0) {
-            candidateIndices = this.states.map((_, idx) => idx);
-        }
+        // 4. Zoradenie podľa celkovej podobnosti
+        const candidates = candidateIndices.map(idx => ({
+            index: idx,
+            totalSim: totalSimilarities[idx],
+            state: this.states[idx]
+        }));
+        candidates.sort((a, b) => b.totalSim - a.totalSim);
 
-        // Nájdeme index s najväčšou celkovou podobnosťou spomedzi kandidátov
-        let maxIndex = candidateIndices[0];
-        let maxVal = totalSimilarities[maxIndex];
-        for (let i = 1; i < candidateIndices.length; i++) {
-            const idx = candidateIndices[i];
-            if (totalSimilarities[idx] > maxVal) {
-                maxVal = totalSimilarities[idx];
-                maxIndex = idx;
+        // 5. Vyberieme top 30 % kandidátov (aspoň 1)
+        const topCount = Math.max(1, Math.floor(candidates.length * 0.3));
+        const topCandidates = candidates.slice(0, topCount);
+
+        // 6. Pre každého kandidáta vypočítame rozptyl (variance) jeho podobností
+        const computeVariance = (stateIdx) => {
+            const similarities = [];
+            this.states.forEach((other, j) => {
+                if (j !== stateIdx) {
+                    similarities.push(this.similarityMatrix[this.states[stateIdx]][other] || 0);
+                }
+            });
+            const n = similarities.length;
+            if (n === 0) return 0;
+            const mean = similarities.reduce((a, b) => a + b, 0) / n;
+            const variance = similarities.reduce((acc, val) => acc + Math.pow(val - mean, 2), 0) / n;
+            return variance;
+        };
+
+        // Pridáme variance ku kandidátom
+        topCandidates.forEach(c => {
+            c.variance = computeVariance(c.index);
+        });
+
+        // 7. Náhodný výber s váhou = variance (pripočítame malú konštantu, aby sme umožnili výber aj nulovej variance)
+        const totalWeight = topCandidates.reduce((sum, c) => sum + (c.variance + 0.01), 0);
+        let rand = Math.random() * totalWeight;
+        let selected = null;
+        for (const c of topCandidates) {
+            rand -= (c.variance + 0.01);
+            if (rand <= 0) {
+                selected = c;
+                break;
             }
         }
+        // Z bezpečnosti
+        if (!selected) selected = topCandidates[0];
 
-        const goalState = this.states[maxIndex];
+        const goalState = selected.state;
 
-        // Zaznamenáme krok pre zobrazenie v UI
+        // 8. Zaznamenáme krok pre UI
         this.steps.push({
             type: 'goal_calculation',
-            totalSimilarities: totalSimilarities.reduce((acc, similarity, index) => {
-                acc[this.states[index]] = similarity;
+            totalSimilarities: totalSimilarities.reduce((acc, sim, idx) => {
+                acc[this.states[idx]] = sim;
                 return acc;
             }, {}),
             goalState: goalState,
-            forcedStartExcluded: (forcedStartPattern && this.states.includes(forcedStartPattern)) ? forcedStartPattern : null
+            forcedStartExcluded: (forcedStartPattern && this.states.includes(forcedStartPattern)) ? forcedStartPattern : null,
+            selectionInfo: {
+                topCandidates: topCandidates.map(c => ({ state: c.state, totalSim: c.totalSim, variance: c.variance })),
+                selectedByVariance: true,
+                selectedWeightedRandom: true
+            }
         });
 
         return goalState;
