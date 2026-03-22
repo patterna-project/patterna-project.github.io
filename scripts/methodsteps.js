@@ -24,21 +24,22 @@ function displayMDPSolution(result, patterns) {
 
     mdpSolution.classList.remove("hidden");
 
-    // Pridaj nadpis s prekladom
+    // nadpis s prekladom
     const title = document.querySelector('#mdpSolution h3');
     if (title) {
         title.textContent = translations[currentLanguage].mdpTitle;
     }
 
-    // Pomocná: vytvor jednoduchý summary text podľa typu kroku
+    // jednoduchý summary text podľa typu kroku
     function summaryForStep(step) {
         const t = translations[currentLanguage];
         switch (step.type) {
             case 'goal_calculation': {
-                const entries = Object.entries(step.totalSimilarities || {});
-                const sorted = entries.sort((a, b) => b[1] - a[1]);
-                const top = sorted[0] || [];
-                return `${t.mdpGoalState}: ${top[0] ? patterns.find(p => p.filename === top[0]).name : '—'} (${(top[1] || 0).toFixed(3)})`;
+                // Zobrazí SKUTOČNÝ vybraný cieľ, nie len ten s najvyššou podobnosťou
+                const goalPattern = patterns.find(p => p.filename === step.goalState);
+                const goalName = goalPattern ? goalPattern.name : step.goalState;
+                const goalSim = step.totalSimilarities[step.goalState] || 0;
+                return `${t.mdpGoalState}: ${goalName} (${goalSim.toFixed(3)})`;
             }
             case 'goal_state':
                 return `${t.mdpGoalState}: ${step.goalPattern ? step.goalPattern.name : step.goalState}`;
@@ -262,11 +263,6 @@ function createGoalCalculationStep(step, patterns) {
         // Pridáme poradie (1., 2., 3., ...)
         const rank = index + 1;
         let rankDisplay = rank === 1 ? '🥇' : (rank === 2 ? '🥈' : (rank === 3 ? '🥉' : `${rank}.`));
-        
-        // Ak je vzor v top kandidátoch ale nebol vybraný, dáme mu iný symbol
-        if (isInTopCandidates && !isGoal && step.selectionInfo?.selectedByVariance && rank > 3) {
-            rankDisplay = `(${rank}.)`;
-        }
         
         // Formátovanie rozptylu
         const varianceDisplay = variance > 0 ? variance.toFixed(4) : '0.0000';
