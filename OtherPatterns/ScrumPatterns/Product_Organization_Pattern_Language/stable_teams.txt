@@ -1,5 +1,48 @@
-Stable Teams
+Stable Teams**
 
-============================================================
 
-TODO: Vložiť popis vzoru z https://scrumbook.org/
+
+…teams have been producing product for some time. An ever-changing business landscape raises questions about staff adjustment, growth, and optimal team composition.
+
+✥       ✥       ✥ 
+
+Stakeholders are happiest with teams who can meet their expectations in a timely fashion, so the team wants to do what is necessary to reduce variance in its predictions.
+
+In project management there is a tendency to confuse human beings with human resources. It leads to “resource management,” lining up demand with each team’s capacity (or, sometimes, each team member’s capacity) to contribute to the deliverable.
+
+
+It often results in moving people from team to team when starting projects, or crisis to crisis during delivery, and leads to an unstable environment with added costs of:
+
+administration to keep track of what people are working on,
+reduced efficiency, as teams need to integrate a new member (effectively creating a new team) and the new member needs to learn about the team and its product,
+exposure to Brooks’ Law (“adding manpower to a late software project makes it later” ([1], p. 25)).
+When teams are formed from a resource pool, the resource utilization often leads to multitasking with people distributed across several teams and often on several products. Add in changing requirements and the instability becomes unbearable. So we need to fix something—the stable and unstable parts must be balanced. For years the response has been to freeze the requirements so our ever-changing resources are able to deliver at a (hopefully) predictable time. Locking down the requirements of our products prevents us from learning, and ignores product changes that could create the Greatest Value, so this is not a good solution.
+
+Therefore,
+
+Keep teams stable and avoid shuffling people around between teams. Stable Teams tend to get to know their capacity, which makes it possible for the business to have some predictability. Dedicate team members to a single team whenever possible.
+
+✥       ✥       ✥ 
+
+Members of Stable Teams get to know each other. The team members experience each other’s work style and learn how much work they can do together. A Stable Team grows in familiarity and consistency of meeting mutual expectations and starts developing a community of trust (see Community of Trust).
+
+
+Research has shown that fatigued NASA crews that had worked extensively together made about half as many mistakes as teams of rested pilots with no prior joint work experience ([2]). This is because many of the factors that relate to effective teamwork (such as shared mental models, cohesion, climate, and psychological safety) come about only in teams that have consistently worked together (see [3], pp. 77–124; and [4]). People that work together for only a short period of time will probably not invest much energy in improving their work processes or social interactions with each other—in a couple of months (or less) they will be working with other people. On the other hand, if people understand that they will stay with the same colleagues for longer periods of time, they are more likely to invest energy in creating an enjoyable team environment and improving their work processes.
+
+A team can use its velocity (see Notes on Velocity) to measure improvement in its capacity for work. Many Scrum Teams use velocity as a key to predictability. Velocity is currently the most-proven praxis to increase the level of predictability. But what is often forgotten, when measuring a team’s velocity, is that the only way a team can get to know its velocity is by having the same team members over a longer period of time.
+
+Cross-Functional Teams will benefit the most from long-term stability because there are more opportunities to share knowledge and experience. Specialized teams (e.g., that provide services for specialized skill sets or technologies) will also yield some benefits but have broader negative consequences for the organization—for example, creating queues and requiring extra administrative overhead for work.
+
+Stable Teams will create pressure on the work pipeline. The workflow now must structure work to fit with the teams, rather than restructuring teams to fit with work—or to handle crises. This will, in turn, highlight capability issues that the organization must address. For example, constantly reshuffling a specialist between teams will make it visible that some skill set is missing across several teams. As you transition to Stable Teams, temporarily assign specialists where they are needed with the stipulation that they cross-train team members in their area of expertise, to reduce risk in the long term.
+
+Start using Stable Teams by committing to keeping teams together, potentially using self-selecting teams (see Self-Selecting Teams). Then follow up by managing the work to fit this structure, and make an effort to accommodate gaps in capability in the teams. Let the teams self-organize to spread competencies and to explore the best team compositions; you will find that a structure converges quickly.
+
+The organization replaces the “flexibility” of shifting people from crisis to crisis with flexible work assignment. Such flexibility lets teams take on work in accordance within their current capability and capacity, which in turn leads to more accurate forecasting. Moving people between teams to be “flexible” instead leads to higher cost and uncertainty.
+
+This pattern helps the team grow and share its expertise over time to reduce the risk of losing a team member; see Moderate Truck Number.
+
+A stable team that uses Estimation Points and lets the Pigs Estimate can get a realistic number for their velocity after a few Sprints; see Running Average Velocity.
+
+Having Stable Teams allows an individual to master the work of the team. When there are multiple Development Teams or multiple Scrum Teams, using Birds of a Feather can support team members in furthering their mastery.
+
+A Stable Team builds a collective identity that can be a foundation of a shared sense of pride, both in the product and in belonging to the team (see Product Pride and Team Pride).

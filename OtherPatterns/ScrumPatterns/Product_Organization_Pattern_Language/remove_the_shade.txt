@@ -1,5 +1,43 @@
-Remove the Shade
+Remove the Shade*
+Alias: Let the Light In
 
-============================================================
 
-TODO: Vložiť popis vzoru z https://scrumbook.org/
+...you have Stable Teams and have tried to balance the workload across team members (see Distribute Work Evenly), develop in pairs (Developing in Pairs), and have a good apprenticeship program (see  Apprenticeship).
+
+✥       ✥       ✥ 
+
+You notice that team members always postpone decisions and important work until one especially skilled Development Team member is present, but as the ScrumMaster you want all team members to perform optimally according to their abilities.
+
+
+The skilled team member is always the one the organization calls for when particularly important work looms, because everyone knows that individual will likely drive such decisions in the end. This team member often ends up playing a Hero role, being the one called in when the business needs a fast solution. The other Development Team members tend to give up on complicated assignments because they know the Hero can do it better and the organization will ask for the Hero’s opinion anyway.
+
+Sometimes a Hero can act like a busy parent who finds it easier to do things alone instead of helping others to learn. So the Hero will be very productive while the other team members work in the shade without the necessary light to grow. At the same time the Hero risks burning out.
+
+These scenarios create a lack of courage and motivation in the Development Team members. They will stop growing and the team becomes more like a one-man army with supporters than a self-organizing team where everyone contributes something of value.
+
+Therefore:
+
+Remove the Hero from the team so the rest of the team can grow, like flowers getting light after a big tree falls in the storm. Find another outlet for the Hero’s talents, perhaps elsewhere in the company or organization.
+
+
+✥       ✥       ✥ 
+
+It is not an easy solution to implement. Management can be upset if they are close to the Hero. The Hero could be upset by the removal because it could feel like a degradation. Productivity will go down while the team is learning to take over.
+
+We can relate an experience from a Danish company where a team had a Scrum team member that did five times more work than any other team member—and didn’t have time to go to the Daily Scrum. After the ScrumMaster removed this productive team member  from the team, the team’s velocity doubled. This is just one example out of many where the overall velocity in a Scrum Team increases after removing “a hero.”
+
+It may be unpopular, and therefore harder, to remove the shading team member if the Product Owner has come to depend too much on that individual. That makes it harder to remove him or her. On the other hand, it also exposes that the team is vulnerable to losing a single individual, and that perhaps the team should work harder on raising its truck number to reduce the risk of dependency on a single individual (see Moderate Truck Number).
+
+Normally it is the ScrumMaster, as owner of process issues, who owns this issue. Good ScrumMasters will try to mitigate the problem by coaching the individual or by taking other measures short of removing the person from the team. However, in the end, it is the ScrumMaster who has the authority to remove a shading member from the team. A good ScrumMaster may decide what course of action to take after consultation with all team members. If the individual causing the shade is the ScrumMaster, the rest of the Scrum Team has the power to dismiss the individual.
+
+The ScrumMaster of a team that shrank from 20 to 5 said in an interview:
+
+Those who wanted to try something else were allowed to leave the team. But sometimes there was an outcry when I presented it for the team. “Now we will die, we can’t do it. If he leaves we will have to give up” they said. I told them that I believed that the rest of the team will grow. If there is a strong architect then there will be a small flower behind him. When we cut down this tree just wait and see I believe that you will grow. And that is what I have seen happening.
+
+This pattern goes along with Moderate Truck Number.
+
+Letting everyone on the team share the work and have a sense of key contribution elevates the team’s sense of self-worth (see Team Pride). Giving the key jobs to just one person, or having a team member who otherwise demoralizes the rest of the team, can destroy it.
+
+In some cases, there may be room elsewhere for the Hero to add value, perhaps as an individual contributor (see Solo Virtuoso).
+
+A lighter-weight version of this pattern is to limit the work of the Hero to only within his or her realm of expertise. The ScrumMaster can agree with the Hero that the Hero will avoid the kind of work at which he or she typically excels or in areas where the team has come to depend on them, and to take on other work instead. The Hero can still be valuable as a coach or resource to others in areas of expertise provided that the role is limited to advising. Developing in Pairs is often a good transition.

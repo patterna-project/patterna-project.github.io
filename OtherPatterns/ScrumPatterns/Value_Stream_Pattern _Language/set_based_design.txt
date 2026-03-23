@@ -1,0 +1,66 @@
+Set-Based Design**
+
+As a young Toyota engineer, you attack a problem with relish. You carefully identify the cause of the problem, taking care to do a thorough five-why analysis. You then think and think and come up with a brilliant solution. You detail the solution and run in to share it with your mentor. Instead of evaluating the idea on its merits and congratulating you, he asks, “What other alternatives have you considered? How does this solution compare with those alternatives?” You are stopped dead in your tracks, as you were convinced you had the best approach. (From [1], p. 263.)
+
+...a Scrum Team has come together as a Community of Trust (see Community of Trust). The Scrum Team is working from a Product Backlog that they refine continuously. Some Product Backlog Items (PBIs) near the top of the Product Backlog are Ready (see Definition of Ready) to go into a Production Episode, while others nearer the bottom of the backlog are far beyond the current horizon of concern. In between we find PBIs that may be likely candidates for Product Increments. Several of them may be alternatives for other PBIs on the backlog. Sometimes the Scrum Team may have alternative PBIs in mind for those listed on the backlog. Yet other PBIs are Ready (see Definition of Ready), and the team is confident of what to build, but is exploring the “how” of building those PBIs with several ideas in mind for each of them.
+
+✥       ✥       ✥ 
+
+There may be many possible solutions to a complex problem. It is often impossible to predict which is best.
+
+Selecting a single option and developing it aggressively now adds additional work later when new information emerges that forces team members to reconsider their initial decision. In a large system, with many subsystems and many teams, this rework causes delays by forcing work to stop while the Scrum Team deliberates the new decision and works out consequences for other parts of the system.
+
+While we value embracing change, we also value eliminating wasteful rework. It is easy to see in hindsight where we were stuck in analysis paralysis or how we initially lunged headstrong in the wrong direction. The challenge is to find the middle path.
+
+Consider this graph from a classic article on Iterative User Interface Design by Jakob Nielsen, a father of UI and UX design ([2]):
+
+
+Interface quality as a function of the number of design iterations: Measured usability will normally go up for each additional iteration, until the design potentially reaches a point where it plateaus. [2]
+
+In this article, which makes a strong case for using iteration to improve product quality, Nielsen states, “we do not really know what leads to the creative insights necessary for a fundamentally novel and better interface design.” Consequently, we can say that iteration is insufficient for innovation. Customer feedback on regular product increments will improve the product, but it will not fundamentally reshape the conception of the product itself. Development organizations need an alternative solution to guide them as they work to differentiate critical new business features from existing offerings.
+
+Therefore: develop many options in parallel, fixing only the critical constraints up front.
+To accomplish this, each development episode proceeds to develop a chosen set of design alternatives in parallel. Developers working on the feature continuously maintain current estimates for each alternative in the set. When all alternatives reach the halfway point, there is a meeting to trade notes and to evaluate which options to eliminate, and to discuss new options that they may have discovered. If a clear winner has emerged, the parallel work stops and the plan of record adopts the winner. If not, the team (always with input from the Product Owner) will budget itself an additional work increment to gain additional understanding. The process of reducing options over time looks like this:
+
+
+Intentional phases of convergence and divergence [3].
+
+As team members develop each option through successive iterations, they gradually increase the fidelity of the work output ([3]). An initial work increment may only produce a hand-wavy sketch, a second might produce a throw-away prototype, and a final work increment would produce an initial real implementation. So each time the Product Owner and Development Team members decide to eliminate some options, they also increase the level of detail of the remaining options.
+
+A single option will vary multiple parameters (e.g., algorithm selection, data structure, screen layout) to explore different design alternatives. The team should be particularly attentive to the number of parameters they vary across the multiple options. As the teams grows in understanding of how to run Set-Based Design, they can increase the number of parameters being varied. Be thoughtful about the degree of overlap between the options. Independent options will cover more of the design space, but fixing a parameter will increase robustness of the result. When done well, a team can minimize the lead time by reducing the number of experiments. The point here is that you can design your learning, rather than proceed from surprise to surprise.
+
+
+The number of options increases with each iteration, while the number of exploration sets decreases.
+
+✥       ✥       ✥ 
+
+Depending on the scope and the extent of the Set-Based Design exercise, the results can feed directly into a Sprint or their insights can inform decisions as the team builds a Refined Product Backlog.
+
+With too many solution options before them, dependent teams cannot lock in their system designs. However, this does not mean that work must wait for a decision. By working within the critical constraints, the team can start work on the design of a subsystem while keeping in mind how it must fit within the overall solution space of the larger system. In fact, the team may leave some parameters open until production, never fixing them during design. In some cases it is even possible to offer the alternatives to the customer as options.
+
+
+Converging interdependent components over time (“The Second Toyota Paradox: How Delaying Decisions Can Make Better Cars Faster,” [4], p. 43).
+
+A key consideration is when to begin converging toward the final solution. Ford and Sobek modeled Toyota’s development process using real options and ran 100 simulations of a 900-day long project (“Adapting Real Options to New Product Development by Modeling the Second Toyota Paradox” in [5]).
+
+
+Expected quality of point-based and set-based development projects ([5]).
+
+
+Expected values of flexibility in set-based development relative to point-based development ([5]).
+
+These findings suggest that the optimal time for convergence is near the middle of the overall project span. However, the authors caution that if there are delays early in the project, it may be wise to push convergence even a little later than the midpoint. Therefore, the Product Owner must have visibility into the overall progress of the divergent work.
+
+Toyota prefers to have the same people together develop all the options. This way the group develops a feeling for the problem space, which can guide the design of new options. They can accelerate the process by developing several options concurrently rather than sequentially. This rapid comparing of options as the team builds them creates the shared experience needed to develop one’s intuition. It’s also worth pointing out that Set-Based Design ensures people maintain competencies in areas that haven’t been used in a product in a long time. This preserves corporate memory that may again become valuable for future products.
+
+Google’s Design Sprint is one approach for rapidly evaluating many design ideas. The authors claim it “gives teams a shortcut to learning without building and launching.” The process begins with mapping out the problem and identifying an important area to focus on, and concludes with testing a high-fidelity prototype with customers. The whole process takes 1 week or less. [6]
+
+Lastly, at these key moments when the process eliminates an option that some team has passionately developed, we must consider the human dimension: it can hurt when others judge your work, and it is possible that a team member may take the decision as a personal slight. This loss creates the need for a “rite of passage” of sorts. Robert Heath, author of Celebrating Failure, recommends that leaders should “acknowledge failures with positive comments. Congratulate everyone on their efforts and remind them of the strengths and wisdom they gained from the experience. Put in perspective, a failure can do as much to motivate a team as a win” ([7]).
+
+These in-the-moment comments, however, will mean nothing if they do not take place within a larger culture of continuous learning. Google’s culture of “blameless postmortems” is one such example. It draws from experience in other areas like healthcare and avionics, where failure can be fatal. In these workplaces, the focus after a failure is not on the individuals involved but on the larger system, and uncovering the underlying reasons why people had partial or incorrect information which led to the undesirable result. Lunney and Lueder write ([8]) that “you can’t ‘fix’ people, but you can fix systems and processes to better support people making the right choices when designing and maintaining complex systems.” The team must fully own the idea of collective improvement for this pattern to succeed.
+
+The Product Owner Team may apply this approach to evaluate which of several alternative PBIs to retain on the Product Backlog, or may use it to explore alternatives for a high-risk or high-uncertainty PBI or entire Product Increment. Such a design exploration may cross several Sprint boundaries.
+
+Alternatively, the Development Team may use this approach within a Sprint to evaluate risk across multiple implementation alternatives, and can use the resulting insight to select one alternative. When doing Set-Based Design within a Sprint, the Development Team should time-box the exploration. Because the process creates a high rate of emergent requirements (that’s why they do it), it is difficult to estimate how much the team will accomplish in the time box. Therefore, when using this approach, the team must accept the fact that there is a risk that the exploration may not result in a potentially shippable Product Increment, but it is nonetheless worth the time spent for the insight gained.
+
+Whether the results of a given Set-Based Design make it to the market or not, the team gains confidence in such features’ presence (or not) in the product, increasing Product Pride.

@@ -1,5 +1,57 @@
 Scrumming the Scrum
 
-============================================================
+...you are using Scrum as a process improvement. The Scrum Team must have effective Sprint Retrospectives and be willing to Pop the Happy Bubble. The basic Scrum mechanisms are in place, and you want to leverage Scrum to fulfill its vision of kaizen (see also Kaizen and Kaikaku):
 
-TODO: Vložiť popis vzoru z https://scrumbook.org/
+kai-zen (カイゼン) n. a Japanese business philosophy of continuous improvement of working practices, personal efficiency, etc. <ORIGIN> Japanese, literally ‘improvement’. [1]
+
+Also see Toyota Kata. [2]
+
+✥       ✥       ✥ 
+
+Only a small minority of Scrum teams make the paradigm shift to a radical new level of performance and ability to create value. This is because most teams fail to identify and remove impediments. Their work is not Done (see Definition of Done), their backlog is not Ready (see Definition of Ready), and the team does not self-organize to improve performance.
+
+
+Difficult impediments may require extremely focused efforts to remove. Working on many impediments at once often leads to a lot of work with little gain and can demoralize the team.
+
+Therefore:
+
+Identify the single most important impediment at the Sprint Retrospective and remove it before the end of the next Sprint. To remove the top priority impediment, put it in the Sprint Backlog as a task with acceptance tests (see Testable Improvements) that will determine when it is Done. Then evaluate the state of the task in the Sprint Review like any other task.
+
+
+Focusing attention on the top priority impediment will have the side effect of the team self-organizing to remove other high-priority impediments as well, without losing focus on the highest-priority impediment.
+
+✥       ✥       ✥ 
+
+This pattern assures continually increasing efficiency or sustainable high-level work capacity, perhaps as measured by velocity (see Notes on Velocity). If you are not continually improving, your throughput will flatline or decrease over time. Lean expert Hugo Heitz ([3]) emphasized that Scrum teams do not put enough focus on process improvement: “They need to put the kaizen in the backlog. They need to Scrum the Scrum. They need to use Scrum to make Scrum better.”
+
+While the ScrumMaster owns the process for creating and prioritizing the impediment list, the whole Scrum Team owns eliminating the impediments. Team members can resolve many impediments themselves. In other cases, the team may need management help (see Involve the Managers).
+
+Removing the top priority impediment should yield immediate improvement in the team’s performance. If not, the Scrum Team has not properly analyzed system dynamics and understood the root cause of the primary dysfunction.
+
+When the team is successful in increasing its throughput or becoming more efficient, the system will re-stabilize after impediment removal. Yet, the next most important impediment may be in an unexpected place. So it is likely wasteful for the team to work on multiple impediments or constraints at once. Focus on the top priority impediment.
+
+Scrum is a framework for inspecting and adapting to achieve continual improvement by removing impediments. Continual improvement can dramatically increase performance, even by integral factors of throughput. Beedle et al. established the perspective early on (see “Scrum: A Pattern Language for Hyperproductive Software Development” in [4], pp. 637–51) that Scrum is a pattern language for highly responsive and productive software development.
+
+Past work in both highly disciplined organizations ([5]) and dysfunctional organizations suggests that any team can achieve an uncharacteristically high state of effectiveness by implementing specific Scrum practices. For example, Systematic, a CMMI maturity level 5 company in Denmark, demonstrated that all teams could double the amount of work done by having software tested at the feature level and bug-free at the end of a Sprint. A second doubling resulted from a high ready state of the Product Backlog at the beginning of a Sprint.
+
+Example:
+
+A team used the Happiness Metric as a way to identify and prioritize process improvements. On a scale of 1–5 they asked: (1) How do you feel about your role in the company? (2) How do you feel about the company? Then, the team shared what would make the members feel better and used planning poker to estimate the value of things that would make team members feel better. The team estimated the value (as opposed to effort) of backlog items as well. The team estimated the entire Product Backlog to sum up to 50 points of value.
+
+“Better user stories” was the top priority improvement for the team. The team estimated that removing this impediment would yield over 60 points of value. The Chief Product Owner of the Product Owner Team wondered if removing that impediment might double velocity as the impediment value was higher than the entire Product Backlog value for the Sprint.
+
+The Product Owner put “Improve User Stories” into the Product Backlog and the developers pulled it into the next Sprint with a Definition of Done. The team defined this Definition of Done as acceptance tests that had metrics that they calculated at the next Sprint Review. The metrics included:
+
+How many stories got into the Sprint that did not meet the INVEST criteria (immediately actionable, negotiable, valuable, estimable, sized to fit, and testable)? There should be none.
+How many times did Developers have to go back to the Product Owner to clarify a PBI during a Sprint?
+How many times did dependencies force a PBI into a hold state during a Sprint?
+How many stories had process efficiency of over 50 percent? (Process efficiency = actual work time/calendar time)
+How many stories were not clear to Developers? Measure by number of team members that complained about a PBI.
+How many stories implied technical implementation rather than clarifying desired user experience?
+For how many stories did Developers understand the linkage between the PBI, the theme that produced the PBI, the epic that generated the theme, and the business need that generated the epic? Measured by number of team members complaining that they did not understand why they were doing a PBI.
+While improving the quality of user stories is never ending, the Sprint Review demonstrated significant improvement on this backlog item as measured by the acceptance tests. Significant improvement resulted in an increase in velocity after several Sprints. After velocity had doubled this impediment fell off the top of the impediment list and another impediment took its place.
+
+The graph below [6] shows the velocity of the team doing weekly Sprints. In Sprint 86 (around December 27, 2010) the team doubled in size. By Sprint 89, “Improve User Stories” became a backlog item in each Sprint. Within three Sprints velocity more than doubled. The team realized an average 10 percent increase in velocity per Sprint in subsequent Sprints by Scrumming the Scrum.
+
+
+Some teams prefer to explicitly put the process improvement item at the top of the Product Backlog instead of immediately just putting it on the Sprint Backlog. This emphasizes that working impediments is real work rather than something done by the developers in the margins. It is also a formal acknowledgment that the Product Owner has accounted the cost and value of the work.

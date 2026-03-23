@@ -1,0 +1,30 @@
+Specialized Velocities
+
+
+
+A department store has different areas for different departments, with each department serving its own market. Each department has its own team that works at its own pace, independent of the pace in other departments.
+
+...your product has grown to multiple teams, and some teams have developed along lines of specialization. The Product Owner wants to maintain one velocity for the Product Backlog.
+
+✥       ✥       ✥ 
+
+It is difficult and wasteful for a team to estimate Product Backlog Items (PBI) outside its line of specialization. For example, you probably don’t need a team working on the infotainment system for a car to also estimate the PBIs for (the specialized area of) the brake system, so involving it in such estimation would be wasteful. On the other hand, we want to recognize the ability of individuals to contribute from their perspectives. In fact, key insights sometimes come from the most unlikely places. As human beings we all have insights into all human phenomena. However, that isn’t reason enough to drag all of humanity into an estimation exercise. A good approximation is enough. Estimation is waste in the Value Stream and we should minimize its cost.
+
+
+Teams naturally tend to specialize over time, given the opportunity. There is no fundamental problem with specialized teams as long as there is no a priori partitioning of product development that precludes any team from working on some part of the system outside of its usual purview. For example, when there is coupling between the infotainment system and the brake system, that may create a security leak. A design shortcoming allows a hacker to commandeer the car by first seizing control of the infotainment system, and then using the security flaw to take over the brake or accelerator. Either the infotainment or brake system teams should be able to work outside their area to deal with the issue from the market perspective, rather than from any single technology perspective. Teams estimate with the knowledge that they will freely work with each other during implementation. And though specialization can bring focus, it cannot be an excuse for any team or individual to refuse a PBI for inclusion in a Sprint.
+
+The Aggregate Velocity approach does not depend on specialization and handles the fully general case, albeit at a cost of convening a large meeting. Individual voices tend to get lost in these large meetings, or the meetings bog down because of their size, or time-boxing and other expediencies cut off discussion prematurely. If more voices yearn to be heard, and if you believe there is value in hearing them, it will take more time to collect key insights from a large group than from a small group. And though the time spent eliciting input goes up, the amount of unique insights increases at a disproportionately smaller rate.
+
+Therefore:  Each specialized team estimates and develops items within its realm of specialization. Other PBI stakeholders will inform these estimates as necessary with their input. For example, you can elicit these stakeholders’ input by first asking the specialized team to make an initial estimation pass and then subsequently refining the estimates in areas outside the team’s experience, inviting external stakeholders as necessary. Many alternative approaches work just as well.
+
+✥       ✥       ✥ 
+
+The team will feel committed to the estimates in the end and will be able to size its Sprint Backlog appropriately and with confidence.
+
+Teams should not specialize along the lines of engineering technique; that is, there should be no testing team or coding team or architecture team. This pattern addresses specialization along the gradient of the Value Stream. You might consider writing and socializing patterns such as Market Team (which develops products for a given market) or Localization Team (which adapts a product to an ethnic market segment). See Value Areas and Value Stream Fork.
+
+Specialization creates stovepipes that could suffer from demand starvation in a given Sprint. If automobile software team A specializes on the infotainment system and team B specializes on the brake system, and if the candidate Product Backlog for the current Sprint doesn’t contain enough items for team B, then either team A will eventually begin working on items outside its specialization—or we should reduce the number of estimation points taken into the Sprint. Solve this by avoiding lines of specialization when you have only a few teams. You will move more towards Cross-Functional Teams, expanding each team’s ability to do competent work in a broad number of areas ([1], pp. 176–187).
+
+This specialization was a contributor to the success of the oft-cited Borland QPW project ([2]), though it is important to note that QPW did not meet the team’s anticipated schedule.
+
+See also Team per Task.

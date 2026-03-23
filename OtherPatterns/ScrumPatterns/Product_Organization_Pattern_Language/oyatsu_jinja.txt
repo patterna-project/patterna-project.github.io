@@ -1,5 +1,43 @@
-Oyatsu Jinja
+Oyatsu Jinja (Snack Shrine)
+Alias: Snack Shrine, Oyatsu Jinja (おやつ神社)
 
-============================================================
 
-TODO: Vložiť popis vzoru z https://scrumbook.org/
+…a Development Team has been successfully delivering Product Increments at a sustainable pace. Both the team and its technical practices have been improving. Recently, more and more requests for help are coming into the team. Members from other teams come asking for technical advice. Managers and other stakeholders frequently come to the team to learn how they work and discuss their new business ideas. Team members often feel interrupted and have less time to concentrate on product development.
+
+✥       ✥       ✥ 
+
+A Development Team needs an environment free from interruptions. At the same time, the team members need to interact with one another and the Product Owner. Additionally, the team needs to interact with people outside the team, like stakeholders and other teams, to continuously improve and share information.
+
+
+Having the team isolated can impede communication, whereas making the environment fully open to visitors can damage the team’s effectiveness ([1]).
+
+Therefore:
+
+Create an Oyatsu Jinja (Snack Shrine) near the team area, with some candies, snacks, and drinks (coffee or tea). The shrine needs to be located far enough from the team’s work area so that chatting at the shrine does not disturb the team. However, the shrine needs to be close enough to the team so that people at the shrine and in the team area can recognize one another. Oyatsu Jinja is not a secret place as activities at the shrine need to be observable by the team. It is important that people using the shrine do not interrupt the team.
+
+
+From [2], “A Place to Wait.”
+
+Team members can visit the shrine to take breaks. Snacks help people to relax and give people an opportunity to interact. The shrine creates a place for team members to chat and get help without disturbing the rest of the team.
+
+Stakeholders can visit the shrine. Rather than directly going to the team and interrupting them, they meet team members at the shrine. In many cases, chatting at the shrine is good enough. If the visitors need help from a team member not at the shrine, they will wait for him or her at the shrine until the team member takes a break. If the team members see the visitors at the shrine, they can adjust when to take a break. If the Development Team is concentrating and no team member is at the shrine, the visitor will notice this and come back to the shrine again sometime later.
+
+Oyatsu Jinja also works as a good communication place after Scrum events. For example, after finishing a Daily Scrum, Sprint Review, and/or Sprint Retrospective, members can use the shrine for quick follow-up chatting, if necessary.
+
+The shrine can also be an experimental place for kaizen (see Kaizen and Kaikaku) and self-organization. Anyone is welcome to contribute some snacks to the shrine and to help keep the shrine a clean and nice place to meet. For example, some teams develop their own process to keep the coffee fresh. This shrine becomes a locus for self-organization.
+
+Oyatsu Jinja can also work in multiple-team environments. A single shrine can work like a town square for the teams. In this case it is important to locate the shrine in a place easily accessible and visible to the teams.
+
+✥       ✥       ✥ 
+
+This pattern relates to The Water Cooler as it is a common area people can go to chat. The Water Cooler (or coffee machine or employee lounge) is a place that reinforces the informal communication network that helps information flow quickly between people that might otherwise be disconnected by issues of location or organization structure. Oyatsu Jinja differs from The Water Cooler in the sense that Oyatsu Jinja is highly visible and located close enough to the team to facilitate a sustainable communication environment (or ba (場)). While the Oyatsu Jinja can serve as a locus of some Water Cooler encounters, its main focus is more intentional communication between the Development Team and those outside that team.
+
+This pattern is also related to Do Food ([4]). There is something social about breaking bread that can lower barriers and encourage good communication.
+
+There are similarities between this pattern and Gatekeeper. In this pattern, the gatekeeper is the Oyatsu Jinja rather than an individual.
+
+A team can be motivated to defend its own focus if the members believe in themselves and in their product; see Product Pride.
+
+The sketch as shown in the solution is inspired by the pattern, A Place to Wait from Christopher Alexander, that “creates a situation which makes the waiting positive” ([2], pattern 150, “A Place to Wait”). You can also conceive of Oyatsu Jinja as a key waypoint in an implementation of Alexander’s Intimacy Gradient ([3], pattern 127).
+
+Editor’s note: This pattern bore the longstanding name Oyatsu Jinja (おやつ神社). However, technical issues during production prevented kanji characters from appearing in pattern names.

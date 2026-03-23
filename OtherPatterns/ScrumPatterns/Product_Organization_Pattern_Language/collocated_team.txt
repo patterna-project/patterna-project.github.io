@@ -1,5 +1,55 @@
-Collocated Team
+Collocated Team**
 
-============================================================
 
-TODO: Vložiť popis vzoru z https://scrumbook.org/
+
+…you have set up one or more Small Teams that are Cross-Functional Teams, working together on a product.
+
+✥       ✥       ✥ 
+
+Complex collaborative development such as knowledge work requires high-quality communication to be effective. It is difficult to predict the timing, frequency, and duration of this communication necessary for success.
+
+
+Some people like to work in solitude, and having cubicles can help people have some space of their own to concentrate. Or having your own office may be a sign of career success. In either case, the little telltale signs of their progress—like a cheer on the arrival of an awaited parcel, or the updates on their personal status board—are out of sight and out of mind. We try to compensate by booking meeting spaces for people to get together. It seems like the number of meeting spaces in all buildings is under-engineered, leading to increased overhead for having time together. The result is to discourage people to make the effort to meet, and reduced interpersonal communication. People often resort to using a lower-fidelity method of communication—IM, email, phone, fax, telegraph, Jira ticket, carrier pigeon, or post, instead.
+
+
+The graph shows two sets of situations: those in which question and answer are available and those in which they are not. “Warmer” indicates that more emotional and informational richness gets conveyed ([1], pp. 90–100).
+
+Communication depends on more than being able to send and receive messages: the receiver must also understand message. A rich communication channel supports the nuances of interpersonal communication including verbal and non-verbal attributes. There must be rapid feedback to confirm understanding while the message is still “fresh” for both the sender and the receiver. Non-verbal communication is important “to express emotions, communicate interpersonal relationships, support verbal interaction” ([2], p. 303).
+
+The Allen Curve from 1977 shows that when people separate to a distance of 10 meters their probability of communicating at least once a week is less than 10 percent ([3]). Despite recent developments in communication technology, Allen has said this has not improved:
+
+In his seminal 1977 book, Managing the Flow of Technology, Thomas J. Allen was the first to measure the strong negative correlation between physical distance and frequency of communication. The “Allen curve” estimates that we are four times as likely to communicate regularly with someone sitting six feet away from us as with someone 60 feet away, and that we almost never communicate with colleagues on separate floors or in separate buildings.
+
+But the office is no longer just a physical place; we can enter it by logging on, attend meetings from anywhere, and collaborate on documents without ever seeing one another. It would seem that distance-shrinking technologies break the Allen curve, and that communication no longer correlates to distance.
+
+Wrong. The Allen curve holds. In fact, as distance-shrinking technology accelerates, proximity is apparently becoming more important. Studies by Ben Waber show that both face-to-face and digital communications follow the Allen curve. In one study, engineers who shared a physical office were 20% more likely to stay in touch digitally than those who worked elsewhere. When they needed to collaborate closely, co-located coworkers e-mailed four times as frequently as colleagues in different locations, which led to 32% faster project completion times. (From [4].)
+
+Even more powerful than distance are features of the building architecture; being in different offices is a liability, in different hallways a serious liability, on different building levels an extreme liability, and in separate buildings a disaster. We have heard the CEO of one of the world’s largest telecommunications companies say that their popular telecommunications product is not a tool suitable to supporting multi-site software development.
+
+
+Probability of people communicating with each other once a week decreases when the distance between them increases. [3]
+
+Team members that are physically separated cannot function together effectively, and sometimes not at all. Even the New Zealand All Blacks can’t win if they play on three rugby pitches simultaneously. (Well, maybe there are a few teams they could beat even then.)
+
+Therefore:
+
+Collocate the team members, ideally in a room of their own, within talking distance. Alistair Cockburn suggests that the entire team sit within the length of one school bus ([1], p. 102).
+
+
+Collocation allows for people working together to have ad hoc conversations with ease. People share information regularly and rapidly. Collocated staff can also enjoy casual conversations about non-work topics that increase team cohesion.
+
+Reinertsen admonishes us that “[c]ollocation is the closest thing to fairy dust that we have to improve communications on the development team” ([5], p. 113).
+
+However, there is still an occasional need for quiet uninterrupted thinking, phone calls, or pair discussions. Therefore, the work environment should provide quiet rooms such as small offices that can be used as needed. If collocated team members spend most of their time working in isolation in such spaces, or if they wear headphones most of the time, or if the bulk of their communication takes place via Slack or some other electronic media, it seriously limits the benefits of collocation. The ScrumMaster should explore the reasons behind such behavior and confront the team.
+
+✥       ✥       ✥ 
+
+Some people may find this awkward, especially people with a preference for solitary work. Working in teams and working in Collocated Teams are not for everyone and these people may need to be helped out of the organization to work for an institution more suitable to their preferences—or maybe Scrum is not for them. While some people may find that frequent broad social contact takes them out of their comfort zone, most people can adapt their actions to the broader needs of the team. It takes more energy for some people than others to do so, but such communication is necessary for effective teamwork.
+
+For organizations that like to have large teams—or think they must have large teams—collocation can be very difficult. There may be a lack of space or a significant moving cost to have people shift locations. This will be an important moment for the organization, deciding to deal with this situation as an impediment or to accept this suboptimal state. See Small Teams, Cross-Functional Teams, and Conway’s Law.
+
+Infants learn to recognize the phonemes of their native language through repeated exposure to them. Studies have shown that physical presence is crucial. Infants exposed to foreign language phonemes learned to recognize them as if they had heard them from a physically present person. However, the infants showed no learning if they were exposed to the phonemes through either audio or audiovisual media ([6]). Communication is a social process, and communication becomes less effective when technology limits the naturalness of the communication channel. This tends to substantiate the inadequacy of teleconferences and videoconferences for effective communication. In your next tele- or videoconference, observe the differences between that session and face-to-face interaction. Note the differences in the amount of time someone speaks in a single turn; in the amount of interruptions, overlaps, and backchannels; and in the degree of formality when switching speakers. The studies have shown that the tele- or videoconference does not replicate face-to-face interaction ([7]).
+
+Members of a collocated team are likely to exhibit pride in their identity and in the product they build; see Product Pride:
+
+Collocated team members’ development of trust is also significantly identified with perceptions regarding equitable decision-making, and may affect team pride and self-respect, further affecting processes of vulnerability and self-disclosure ([8]).

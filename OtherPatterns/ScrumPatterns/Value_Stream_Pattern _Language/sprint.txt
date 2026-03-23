@@ -1,0 +1,57 @@
+Sprint**
+
+
+
+...you have a Value Stream with a Product Backlog that defines tentative deliverables and delivery order. In line with agile values, you are striving to deliver early and to get into a rhythm of Regular Product Increments while managing production cost.
+
+✥       ✥       ✥ 
+
+The most fundamental human processes build on cadence. Human culture often realizes cycles in rituals and other visible events of its calendar. As a culture matures, the rituals and events become more overt and newcomers learn events as their introduction to the culture. The centerpiece of any product development effort should honor business expectations to deliver products regularly and punctually, with satisfying content and value.
+
+Teams must manage many risks during complex product development. In spite of the best planning, there is still always a risk that the team inadvertently solves the wrong problem, and cost and schedule estimation are traditionally rife with uncertainty. Agile tells us to use frequent feedback to reduce risk and maximize the chances for success, inspecting and adapting. Using shorter development intervals produces more frequent feedback—and while that can help, substantial variance may remain and accumulate over time, even when delivering small work batches of non-uniform size ([1], pp. 176–178).
+
+In an ideal world, a team could produce anything on demand, but a team can’t get into a long-term flow of regular delivery without some kind of cadence. Being agile requires the freedom to inspect and adapt, but benchmarks of improvement and accomplishment drive people in a business setting. Constraints enable innovation, and the Development Team wants to be assured that it is making progress toward business goals.
+
+Individuals in complete isolation can choose to do what they want, but shared context can benefit groups of people working together. The Product Backlog provides some of that context but is better suited to the long-term business outlook than to delivery. A business wants to manage delivery expectations beyond a simple ordering of Regular Product Increments. And the business wants to manage risk: long-running complex projects too often deliver the wrong thing, or fail to deliver everything they set out to do. And while it’s important that the Scrum Team consider the Product Backlog as a whole, the Development Team must eventually and repeatedly focus on slices of that backlog and get down to producing specific Product Increments that are Done (see Definition of Done). While the Team members may eventually deliver everything in the Product Backlog, they need to deliver small increments often enough to support fast feedback and correction cycles; otherwise, the market can suffer for a long time when the product fails to meet end-user needs.
+
+Therefore:
+
+Organize development around recurring, frequent, fixed-length, time-boxed intervals called Sprints. The Sprint is both a single time-boxed period of product delivery effort (duration) as well as a unit demarcating delivery interval on the release calendar (cadence). The recurring nature of the Sprint supports the iterative nature of Scrum, enabling short feedback cycles that help reduce rework. The time-boxed nature of the Sprint corresponds to the effort behind the granularity of Product Increment delivery, and supports the incremental nature of Scrum.
+
+Regular cadence fundamentally scopes the effect of variance to one interval of iteration and short-circuits the long-term accumulation of variance ([1]).
+
+The maximum Sprint length is one calendar month. Dominant practice seems to follow two-week Sprints, and one-week Sprints are not uncommon. The length of the Sprint needs to balance the forces of being long enough to deliver a valuable Regular Product Increment and short enough for the Scrum team to gain useful feedback. A Sprint may not take longer than four weeks because the feedback loops become too long. Teams just starting Scrum may use one-week Sprints to speed up the feedback they receive as they shape their initial process.
+
+During the Sprint, the team focuses on the Sprint Goal and strives to achieve its forecast of completing all work on the Sprint Backlog.
+
+The Sprint starts with a gathering of the entire Scrum Team in Sprint Planning to update the Product Backlog, after which the Development Team creates a work plan. After Sprint Planning comes a time-boxed work interval, the Production Episode, during which the Development Team builds the Product Increment. In the meantime, the Product Owner continues to engage stakeholders and prepares the Product Backlog for the next Sprint. During this work interval, the Development Team assesses progress and replans the Sprint in a daily stand-up called the Daily Scrum. Every day, the Development Team updates the Sprint Backlog with a new Developer-Ordered Work Plan optimized to achieve the Sprint Goal. At the end of this work interval comes the Sprint Review, where the Product Owner reviews the Product Increment and the team discusses the status of the product; and a Sprint Retrospective where Scrum Team members together assess how to improve their process.
+
+
+✥       ✥       ✥ 
+
+Sprint rhythms apply to the Development Team. Product Owners work in a parallel process, and while they synchronize with the Development Team according to the Sprint time box, they can spread much of their work with stakeholders and with the Product Backlog across several Sprints.
+
+We can regard a Sprint in three ways: as a unit of time, as a unit of Regular Product Increment, and as a unit of learning. It is first a unit of time: the implementation of regular delivery that we find in Regular Product Increment. It is a fixed time increment. It is a number of steps along the side of the Value Stream. In most professional organizations time translates into cost, so Sprints also translate into units of cost based on the time worked by developers (see Stable Teams). Originally, Scrum had one-month Sprints after the natural rhythm of Follow the Moon. The Development Team owns the development time box: they pull their workload for the development interval from the top of the Product Backlog, and they manage their own work during the development time box. The time box is not a constraint to push developers to finish, but a gift within which they self-manage. When the Sprint is over, it is over: in Scrum, we never extend a Sprint to accommodate undone work (or for any other reason). Knowing that the Sprint will end when it ends encourages the team to focus on best using the time it has.
+
+Second, a Sprint is a representation of a Regular Product Increment at the usual granularity of market delivery. Sprints provide frequent delivery to support both incremental and iterative development:
+
+
+The Sprint schedule delineates delivery dates. However, Sprints are units of Regular Product Increment effort rather than of delivery or work. Scrum calls its smallest units of delivery Product Backlog Items, which combine into a Product Increment. By default, every Sprint encompasses the same amount of effort, but each may vary in the amount delivered because of emergent requirements, increases in velocity, variation in the quality of requirements, and other normal statistical variations.
+
+Third, a Sprint is the major unit of learning in Scrum. Scrum is a minimal framework that puts people into a mindset of learning and feedback. It’s important to have a learning cycle that builds on discipline, habit, and frames of reference of past accomplishment and future checkpoints. The Sprint itself—as a unit not just of time, but also of delivery of Regular Product Increment—provides a high-context frame of reference for deliberation and kaizen. But Sprint cadence also contributes powerfully to learning, just as having weekly piano lessons helps a pianist integrate great advances over periods longer than the week between sessions. The major ritual of product learning is the Sprint Review, and the major ritual of process learning is the Sprint Retrospective. Each Sprint has one instance of each of these events, one after the other, at the end of the time box.
+
+We use the term velocity (see Notes on Velocity) for the amount of work that a team can complete in a single Sprint. It is a measure of each team’s demonstrated capacity to do work in a Sprint. The current best practice is to measure velocity in units of relative time. See Production Episode.
+
+Knowing that each Sprint has a constant cost, a Product Owner can do rough cost projections for the work of a Development Team over a period of time. The time-boxing also limits the number of working hours to avoid burnout and variations in production, and to encourage common working hours within which cooperation and teamwork can flourish.
+
+The Product Backlog Items that reach a state of Done during a Sprint become delivery candidates for that Sprint or a subsequent Sprint. We separate the decision of whether something is Done from the decision of shipping to market: the Product Owner makes the decision of when to release a PBI to the market. However, early and frequent delivery leads to timely feedback and reduces the inventory of items with latent problems.
+
+In exceptional cases, particularly when it becomes impossible to meet the Sprint Goal, the Product Owner may shorten a Sprint: see Emergency Procedure.
+
+A Development Team within the product organization carries out production. A Sprint can best deliver high-quality product if the people working on it can sustain strong team dynamics (the alternative is to try to coordinate the work of individuals in multiple, dissociated organizations); therefore, make sure that a Cross-Functional Team develops the product increments within a Sprint.
+
+Teams synchronize on a smaller scale using Good Housekeeping and Daily Scrum, and on a larger scale with Organizational Sprint Pulse. The Product Owner may elect to deliver a Sprint as a “friendly user,” alpha or beta release, or to any subset of the market along the Release Staging Layers. The learning cycle also has a larger-scale rhythm as in Kaizen Pulse.
+
+A Team Sprint is a Sprint where the Development Team drives the content of the Sprint Backlog. This gives the Developers members a chance to be a bit selfish about their own agendas and to add value close to home for themselves, in areas that never quite make it to the top of the Product Backlog during normal Sprints.
+
+Regarding cadence and its relationship to deep human makeup and culture, see Hall’s work on the anthropology of time ([2]). On how cadence leads to learning, and therefore predictability, see the work of Greville and Buehner on causal learning ([3]). On the intrinsic human motivation to achieve and improve, see Dan Pink’s popular book on motivation ([4]). On innovation and constraints, see Johnson’s book on the contributing factors for innovation ([5], p. 84).

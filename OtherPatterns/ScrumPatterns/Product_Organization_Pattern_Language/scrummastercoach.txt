@@ -1,5 +1,43 @@
-Scrum(Master)Coach
+Scrum (Master) Coach*
 
-============================================================
+...your ScrumMaster is serving the Development Team and helping the team to continually improve.
 
-TODO: Vložiť popis vzoru z https://scrumbook.org/
+✥       ✥       ✥ 
+
+The ScrumMaster is sometimes the source of the Scrum Team’s problems, or might not be performing up to par, or otherwise simply wants to improve.
+
+The world ScrumMaster population is growing, which means that many ScrumMasters are new at their jobs. There are many facets to the ScrumMaster role, and it is easy to overlook some of them. Also, no single person has encountered every possible challenge, and unfamiliar circumstances require new thinking. Conversely, even the most experienced ScrumMaster can easily fall into routines; being “experienced” implies some kind of reuse of prior successes.
+
+While one of the ScrumMaster’s functions is to Pop the Happy Bubble of the Development Team, a ScrumMaster may become content with the current state of the Scrum Team and lose kaizen mind as well. Additionally, the ScrumMaster may come to accept some organizational impediments to be just business as usual, as familiarity dulls their sense of excellence—or the ScrumMaster may come to assume that some situations cannot be changed. This is against kaizen mind (see Kaizen and Kaikaku).
+
+In the extreme, a ScrumMaster may be personally limited and may be at risk of seeming unfit for the role. Or circumstances in the team may trigger memories that the ScrumMaster projects onto others.
+
+
+Without help, the ScrumMaster actions may damage relationships within the Scrum Team and with the team’s stakeholders.
+
+Therefore:
+
+The ScrumMaster should periodically seek opportunities for reflection and growth with a sparring partner or coach.
+
+The coach may be another ScrumMaster in the organization or someone external to the organization. In either case, the person should have enough distance from the ScrumMaster’s situation to be able to dispassionately engage with the issues at play. It is essential that whoever the ScrumMaster is working with is not caught in the same situation as the ScrumMaster.
+
+
+The coach need not have prior experience (or certification) in the subject matter at hand. Sometimes a good question is better than a definitive answer because it can unlock one’s thinking. As with Developing in Pairs, sometimes it is the novice that teaches the master.
+
+There are many forms of coaching. The interaction may be cathartic, challenging, or transformational as the situation requires, as long as the goal is to help the ScrumMaster to better serve the team.
+
+Trust is essential between the ScrumMaster and coach. Real progress comes faster when the ScrumMaster is able to fully disclose both the details of the situation and their reactions to it. And then, the ScrumMaster must actually be willing to change.
+
+The coach may observe the Development Team and the ScrumMaster’s interactions with the team, but should not intervene. Any intervention would confuse the ScrumMaster’s relationship with the team and the relationship between the coach and ScrumMaster. The focus of the coach must be to improve the team by helping the ScrumMaster better serve the team.
+
+✥       ✥       ✥ 
+
+A ScrumMaster who continues to develop kaizen mind in herself will be better able to serve and develop kaizen within the team. As with a priest, who does not minister to his or her own struggles and seeks the counsel of another, so should the ScrumMaster not try to resolve his or her struggles alone. As the ScrumMaster increases his or her awareness and becomes ever better in helping the team, the team can grow in confidence, ability, and its own sense of well-being (see Team Pride).
+
+Ideally, a ScrumMaster will seek a coach not just as an opportunity for continuous improvement, but also when he or she discovers specific shortcomings in carrying out the job. In some larger organizations there may be support for ScrumMasters through Birds of a Feather structures. In smaller organizations, the ScrumMaster will need to look outside the organization for help. In other situations, someone may recommend the ScrumMaster work with a coach. This recommendation may come as a surprise for the ScrumMaster, but we suggest that this is taken as a positive opportunity to grow and improve, with the ScrumMaster trying to be as open and trusting of the coach as he or she feels comfortable.
+
+When one person serves as coach to many ScrumMasters in a single organization, there is risk that the coach’s biases may rub off on the organization. The ScrumMaster should be conscious of this possibility when selecting a coach.
+
+Coaching is a subtle activity. It almost always leads to changes in behaviors, and change may be upsetting in its own right. Further, these new behaviors can too easily create an impression that is akin to disingenuousness; that is, the change can be perceived as happening for its own sake. For the coachee, such change might be progress, for others interacting with the coachee it can be upsetting as they need to accommodate the change. For example, a ScrumMaster who starts using an active listening style in conflict situations might be viewed as disingenuously out of character. While Scrum Team members may intellectually understand that active listening is a good tool, it may be off-putting to them to see such out-of-character behavior in the ScrumMaster who previously was less finessed in his or her interactions. It takes time both for the coached individual to assimilate the new behaviors naturally and for the team to accommodate the new interaction style, and these two changes can happen at different rates. This problem is further detailed in [1]. The first author of this work elaborated:
+
+In other words, a leader’s capacity to conduct new, more challenging conversations in an elegant and competent manner, might lag behind their initiative in commencing such conversations. Significant changes of style are rarely born fully formed.

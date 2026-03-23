@@ -1,5 +1,51 @@
 MetaScrum
 
-============================================================
+The National Advisory Committee for Aeronautics in session at Washington to discuss plans to place America foremost in the development of aviation.
 
-TODO: Vložiť popis vzoru z https://scrumbook.org/
+…the enterprise has introduced Scrum into its development organizations, which were formerly using traditional management practices. Development organizations are in place and the Value Streams are set to develop product. The enterprise has additional functions and organs, such as management and operations, which lack a good connection to the development organizations—the Scrum Teams. Further, organizations for different products have no recognized way to interact with each other.
+
+✥       ✥       ✥ 
+
+Scrum Teams are in place, but direction (or the threat of interference) from legacy management structures causes confusion about the locus of control over product content and direction. Managers may be messing with the backlog or interfering with the Development Team during the Sprint, causing the team to fail Sprints or to trigger Emergency Procedure. Repeated violations of the Product Owners’ authority may make it difficult for teams to do their job to optimize value. It is possible that some Scrum Teams are failing to deliver valuable Regular Product Increments towards the Vision because a rough relationship between the Scrum Teams and management leads to noise in the requirements. Or management may be too passive in supporting the team—for example, by being lax in its responsibility to hold customers to business and contractual agreements at the corporate level.
+
+
+Nonetheless, markets regularly present conflicting and changing needs, and stakeholders (such as those with corporate shares, and managers with a stake in the corporate direction) will occasionally raise concerns or desires with respect to how the organization works. It’s important to make those concerns transparent. But just because management expresses such concerns doesn’t necessarily imply that it’s helpful for them to intervene in development work. A healthy Scrum Team that honors the authority of the Product Owner will treat management mandates much differently than market requests; to mix both of these discussions in the same forum can lead to confusion. The enterprise may need to change individual or collective product directions because of competitive issues, market changes, sales contracts, or technical challenges and opportunities in development. Each Product Owner Team needs to meet regularly with stakeholders to align perspectives and expectations across products and Value Streams.
+
+Therefore:
+
+Create a MetaScrum as a forum where the entire enterprise can align behind the Product Owners’ backlogs at every level of Scrum in the organization. The MetaScrum meets regularly and comprises the Product Owners and executive corporate management. The CEO attends. The MetaScrum has a MetaScrum Product Owner who facilitates the alignment between management, the Scrum Teams, and other stakeholders. This MetaScrum Product Owner usually runs the meetings and leads the alignment between Product Owners, senior management, and development management.
+
+
+The MetaScrum has a cadence that corresponds to a kind of corporate-level Sprint Pulse. It meets once during each such interval in an event that is a kind of Sprint Planning that encompasses what Scrum Team Sprints will deliver during that interval.
+
+At this meeting, Scrum Teams can request support, funding, information, or even products—anything they are lacking to complete their delivery—from stakeholders outside the Scrum Team. The MetaScrum can be the venue to raise such requests and to make decisions to support them. Management and other Product Owners can argue for changes to Product Backlogs at this regular meeting. At the end of this meeting, the Product Backlogs are locked down for management input until the next MetaScrum meeting.
+
+✥       ✥       ✥ 
+
+The MetaScrum offers a forum where Product Owners can socialize their own plans and resolve portfolio-level concerns. The Product Owners, potentially with input from management, shift emphasis and priority between products, marketing initiatives, and other product programs. The MetaScrum can sensitize Product Owners to executive management directions and can inform management on how product plans support corporate goals. Between MetaScrum meetings, Scrum Teams work without management interference. A healthy organization does not violate the Product Owners’ authority, and good Product Owners carefully consider input from all stakeholders, including management. See Involve the Managers.
+
+The MetaScrum is not a body through which management controls product direction, but rather a forum for coordination between products and between products and management. Management can propose product changes through the MetaScrum but Product Owners still own the direction of their respective products. One highly popularized MetaScrum instance was in fact used to impose management will on product development. It’s important that, as regards product development, Scrum Teams remain autonomous.
+
+A common thing that happened at PatientKeeper (a company that provides healthcare applications for physicians), where the product organization was fully Scrum, was that they needed to delay certain hospital live dates and accelerate others because of market factors, sales contracts, and development issues. If there were major commitment changes, the MetaScrum had to decide who would talk to the CIO at each client (hospital) by the end of the day of the MetaScrum meeting. Also at PatientKeeper, the MetaScrum Product Owner ran the MetaScrum and brought about alignment with senior management and the department heads. The CEO was in the MetaScrum and would usually not intervene in the MetaScrum itself except to facilitate as needed. However, he aggressively removed organizational impediments that the MetaScrum identified—including changing management. People said he was like the ScrumMaster of the MetaScrum—a sort of über ScrumMaster—but he left operations to the Scrum of Scrums Master.
+
+At 3M, the chief executive of a division runs the MetaScrum by assuming the role of MetaScrum Product Owner for her organization. The MetaScrum focuses on alignment around the backlog, meeting twice per week. Here she wants to get the priorities clear and addressed. A separate leadership team focuses on removing organizational impediments.
+
+Systematic (a company that develops software and systems solutions) in Denmark and Saab Defense in Sweden run the whole organization as a Scrum. They have a forum at the top of the management hierarchy which functions like a high level Scrum of Scrums.
+
+The MetaScrum is the focal point of enterprise-level change. The organization as a whole has a strategic vision, a backlog, a roadmap, increments (reorganizations, new market initiatives, etc.), and such other Scrum components necessary to make the enterprise run smoothly and accelerate well. Stakeholders may change the direction of the organization, change staffing, or change budget allocations to remove impediments, so people with authority to do this must be part of this body.
+
+Each Value Stream and product makes its impediments visible at the MetaScrum level. It may be that the resources of individual products are inadequate to address such impediments, while the corporation as a whole can provide the horsepower to resolve such issues. It may also be that the problem has tacit links across products that will become visible only by making the issue transparent in a joint forum. Good MetaScrum Product Owners will recognize problems that surface in the MetaScrum meeting and will resolve them that same day if possible, and as soon as possible otherwise.
+
+A good MetaScrum is the locus of all inter-product decisions. All who have a voice in product decisions should be invited to the meeting. The MetaScrum meets on a regular schedule so that everyone knows where and when they will take product decisions. Strong support and presence of the CEO is important to make the MetaScrum work. Steve Jobs raised all strategic product decisions to a meeting every two weeks at Apple—an example of a MetaScrum implementation. For smaller companies, a MetaScrum often meets every week to keep pace with the cycle of change in the organization.
+
+While each Product Owner has final authority over their Product Backlog, they need to work within an approved budget. The MetaScrum is the forum for budget changes at the corporate level. Management and the Product Owners make small changes on the spot; if the decision involves weighty issues, such as the need to seek additional investment, management and the POs take action immediately after the meeting to pursue a decision path.
+
+In the best implementations, the MetaScrum is a powerful force in the organization. If the Product Owners agree to a management proposal at a MetaScrum event, that decision is final until the next MetaScrum. Managers may not approach the Scrum Teams with additional talking points until the next MetaScrum event, so the Scrum Teams can work without interruption from management. Even the customers and sales force learn that after the MetaScrum event is over, it is futile to try to alter agreements until the next one.
+
+The MetaScrum is accountable to all the stakeholders of the organization to steer a viable business that creates value for every stakeholder group. This includes the organization’s employees, the customers, and the investors. Use common sense in being more or less inclusive, but keep MetaScrum workings and decisions transparent.
+
+In good time, good corporations may find that management plays a diminishing role in product management and corporate power slowly shifts from executive management to the Product Owners. The organization becomes flatter. Executive managers and heads of department may relinquish what has become an antiquated role to become Product Owners, closer to where the action is.
+
+See also Involve the Managers.
+
+The first published reference to the MetaScrum ([1]) describes the PatientKeeper MetaScrum that started in 2003.

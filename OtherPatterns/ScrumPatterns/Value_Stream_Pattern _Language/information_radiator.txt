@@ -1,0 +1,75 @@
+Information Radiator**
+
+The Release Train (the plan of how parts integrate into the product as a whole) is visible to everyone, facilitating planning and awareness of where things are.
+
+...information drives product development, and it is essential for everyone involved in developing a product to have the right information and the same information whenever they need it. Development Teams and the organizations in which they work comprise individuals who capture, interpret, and distribute this information, but may not distribute the information broadly enough or as often as needed.
+
+✥       ✥       ✥ 
+
+Without valuable and timely information, the organization dies.
+
+
+On January 28, 1986, the American space shuttle orbiter Challenger broke up 73 seconds after takeoff, killing all crew members aboard. The commission that investigated the accident found lapses in communication of vital information:
+
+The commission also found that Morton Thiokol, the company that designed the solid rocket boosters, had ignored warnings about potential issues. NASA managers were aware of these design problems but also failed to take action. Famously, scientist Richard Feynman, a member of the commission, demonstrated the O-ring flaw to the public using a simple glass of ice water. (From a History Channel article on the Challenger explosion. [1])
+
+Data are just meaningless bits; it is only when a human being interprets the data, in the context of his or her memory and knowledge, that data become useful—that they become information. Disagreements about context, such as what value the Team is creating or what the organization values about how it works, result in vague, unfocused discussions about the interpretation of events, or interpretations based on the single, loudest perspective. Dangerous assumptions and hopes often fill the vacuum left by lack of good information.
+
+It is easy to keep information to yourself or only share it with a few peers whereas many other people need to know what you know. As sharing information can take a lot of time, there can be a temptation not to do it at all. Busy developers might view communication efforts as overhead or management crap (e.g., “I’m paid to make products, not reports.”).
+
+Too much data, untimely information and irrelevant information can be as bad as no information. People may eventually tune out and miss the important bits. Information needs to come to the right people at the right time to support the best possible decisions, but it is very easy for people to keep information to themselves. It may be that someone is intentionally withholding information—where the person with the information uses it for control or assumes that others do not need to know it. Or someone may unintentionally withhold information, forgetting to pass information on or not being in the habit of sharing information.
+
+Information also loses value with time. Knowing what a competitor will do next month is more valuable at the beginning of the month than at the end. When information surfaces late it can be costly, as the team may have made decisions based on incorrect or missing information. “If I knew that before” is a common utterance in modern workplaces and sums up the problem of not sharing information.
+
+It is easy to put formal processes in place to elicit data and socialize it into information (for example project status meetings). Such processes are cumbersome, intrusive, waste the time of most people involved and come with a discouraging overhead (e.g., “I’m paid to make products, not attend meetings”).
+
+Even small organizations can generate an enormous volume of information. Individuals may have to discover the information they need in the abyss of data, which may be a daunting exercise that acts as a deterrent. Even using digital search tools, people may find the cost of the effort to be too high when seeking information vital to their work.
+
+Therefore:
+
+Collaboratively maintain physical artifacts that keep information visible to all stakeholders.
+
+
+Collaboratively develop Information Radiators with the people who need the information. Accept that the first version will not be correct and instead review and revise what information it displays and how to display it. Be ruthless in discarding what has not worked—this may mean you will end up with a completely different Information Radiator than you first thought you needed, which is great if you are sharing the information in the best way.
+
+Simple, handmade displays work best for sharing information. Digital tools may be attractive but can easily flood people with too much data. Ironically, they simultaneously limit the view of information to the size of the display. They constrain the way you interact with the information. In addition, they typically require more work to use and populate than simple charts. In summary, the goal is to achieve low cost in producing the information and high effectiveness in using the information.
+
+Once they have been created, the team should probably evolve the Information Radiators occasionally or they will become wallpaper. This means you will need to continually put effort into maintaining the information. This is a small price to pay.
+
+The information will need to be as accurate as needed to support decision-making. This might mean you will have to share bad news. Be courageous and do this without fear of consequences. It is hard to correct an unacknowledged problem. Using an Information Radiator to passive-aggressively lay blame is never a good choice—it destroys the Community of Trust and breaks The Spirit of the Game.
+
+✥       ✥       ✥ 
+
+Good information radiators both help the team organize their thinking and planning, and largely eliminate the need for formal status reporting meetings in an agile environment. Sometimes, however, just making information visible may itself uncover deeper issues:
+
+On a Scrum project the teams used a whiteboard that showed the chain of application-systems needed to produce features.
+
+The application-systems were managed by different departments and teams. At every Retrospective the board showed which features could not be completed and which application-system was blocking delivery. The teams used red magnets for ``broken'' application-systems, black magnets for ``stubbed'' application-systems and blue magnets for ``working'' application-systems.
+
+After a while, people—and especially management of the blocking application-systems—became annoyed by the transparency and requested to not use the board anymore. The teams persisted and eventually this transparency led to important improvement efforts across the organization.
+
+
+An Information Radiator needs to attract attention. [2] In the above example, the team acted to bring focus to blockers rather than trying to identify any locus of blame. Developing the radiator collaboratively with the consumers of the information can support this need for bringing focus to issues as they arise. It is crucial that the team display the Information Radiators where people can’t miss seeing them. A simple indicator of summary information attracts attention and brings the workforce to an immediate recognition of the implication of a failure more than to its cause. For example, something as simple as a traffic light for the build status makes transparent (or at least translucent) what is happening, and it runs deep in Western culture that a red light implies trouble. But if the traffic light starts cueing people to ascribe blame, it is serving the wrong purpose.
+
+Starting to use Information Radiators sometimes has physical and political challenges. Some organizations have policies about the content, location, and means of affixing wall hangings (it may be to “avoid damaging the walls, paint, and design prints”). You may need to convince people that the cost of repainting a wall is far less than cost of making decisions without the correct information. There may also be a fear of radiating proprietary information; a simple encoding process can obviate this risk without being a deterrent to radiating information to the team (for example see bit-planner.com).
+
+In corporate scale Scrum adoption there can be a desire for uniformity “so we all know what we’re doing.” Different teams need different information and will develop different work practices, so Information Radiators will vary from team to team. This situation can be uncomfortable for some people. Over time, the dialogue will nudge the organization to choose Information Radiators that optimize the overall happiness of the development ecosystem.
+
+Many organizations have paid for expensive software to manage and organize information, and there may be a push to use this rather than anything hand crafted. Software tools make for information refrigerators instead of information radiators, and we need to be brave enough to admit to making bad decisions such as buying expensive software when we could have used some sticky notes.
+
+A healthy organization might embrace the opportunity to remodel the development space to accommodate the trade-offs between livable working space, protection of proprietary information, adequate wall space (e.g., glass walls) for sticky notes, and room lighting (putting stickies on the windows might darken the room).
+
+With the Information Radiators set up, the team is ready to manage releases (see Release Plan) and Production Episodes with the benefit of insight into recent history and current status.
+
+Information from an Information Radiator is often also consumed by the producers of that information. One important benefit of Information Radiators is that they send the message that the team has nothing to hide from itself (or others). Good Information Radiators digest raw data into higher-order information.
+
+Here are examples of Information Radiators used in Scrum:
+
+Scrum Board, owned by the Development Teams
+Impediment List, owned by the ScrumMaster
+Sprint Burndown Charts (when on walls), also owned by the Development Teams
+While Information Radiators inform the day’s work, they are not a call to action. If a particular status warrants immediate attention, go beyond just Information Radiators to use Visible Status.
+
+Toyota Production System’s “visual control” in the 1980s is one foundation of Information Radiators. Alistair Cockburn coined the term information radiator in the year 2001 ([3], p. 504).
+
+An Information Radiator culture can facilitate both improved collaboration with other Scrum teams and other parts of the organization, and can as well facilitate the team to adopt broader ownership of its processes, of its decisions, and of the product.

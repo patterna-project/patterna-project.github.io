@@ -1,5 +1,25 @@
 Small Red Phone
 
-============================================================
+...key roles are in place and you want to sustain the dynamics of a Scrum Team that is collocated and accessible.
 
-TODO: Vložiť popis vzoru z https://scrumbook.org/
+✥       ✥       ✥ 
+
+Scrum depends on second-by-second feedback. If individuals are remote or not around, then the team can become blocked waiting for their input. On the other hand, Product Owners and ScrumMasters cannot and should not hand-hold the team. They are sometimes—rightly—elsewhere, albeit working hard to support the team’s work. Yet occasions arise when it is crucial that they be immediately accessible to the Development Team, which is the goose that lays the golden egg. And even though development may not stop if they are unavailable for a few seconds, strategic problems can waylay the team if these roles stay inaccessible for just a few hours, or sometimes minutes. An example of such a situation is when the Development Team comes to an emergent understanding that it fundamentally misunderstands some Product Backlog Item. Another example is when the Development Team needs information from some external stakeholder who has been interacting with the team through the Product Owner or ScrumMaster but doesn’t know how to get in touch.
+
+
+We could just make key roles’ individual work phone numbers available to the team, but then they are likely to be distracted continuously as they are working to build support for the team or to mitigate problems on the Development Team’s behalf (see Don’t Interrupt an Interrupt).
+
+Therefore:
+
+Issue a red cellular phone, with its own number, to each critical staff member, to be used to reach these key players only in critical situations. Likely targets for such a phone include the Product Owner and the ScrumMaster. Publish the phone number to members of the Scrum Team with the understanding that it is to be used only in the most urgent situations.
+
+
+Create some kind of humorous or light disincentive that encourages members to keep its use to a minimum. Such a disincentive can include an activity reminiscent of the Abnormal Termination of Sprint Ceremony that helps memorialize the incident and bring focus to it for the Sprint Retrospective (see Emergency Procedure).
+
+✥       ✥       ✥ 
+
+Richard Gabriel reflects on his years working with software development teams, where developers may be working at odd hours and weekends. Inevitably they would need access to some physically secured resource, such as a computer server, which required physically present action to be restored to service. Richard insisted that there always be someone present during off-hours who knew how to pick locks, so that a dead machine or network router didn’t become a showstopper.
+
+Small Red Phone is an interruption-based style of communication. Contrast this with the much preferred protocol of Oyatsu Jinja.
+
+In many instances, this pattern is a compensation for a faulty bureaucracy. If you feel like you need this pattern frequently, you should consider trying Collocated Team instead. For example, neither Small Red Phone, nor anything else, can be a long-term workaround for multisite development.

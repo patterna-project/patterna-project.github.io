@@ -1,0 +1,39 @@
+Fixed-Date PBI*
+Alias: Due Date PBI
+
+
+...your Product Backlog tracks the delivery order of value increments to the market. The Product Owner is accountable for value and orders the Product Backlog—not by priority—but to attain the highest overall value (usually long-term value). The Development Team has a reliable understanding of its velocity (see Notes on Velocity).
+
+✥       ✥       ✥ 
+
+Sometimes external dependencies block progress on a Product Backlog Item (PBI). Some things happen on their own time, and the best-laid plans of mice and men often go astray. Some events, developments, and deliveries are beyond the control of the Development Team or the Product Owner. However, in many cases we can still know when those developments and deliveries will take place. You can’t control when an auto manufacturer will start selling a new line of trucks, but you usually can trust the manufacturer’s announced availability date. The expected availability date is useful information for planning. It’s good if the Product Owner can order deliveries according to their best fit to the market, and only according to their need to fit the market. However, suppliers tend to work on their own schedules. Some of them aren’t agile and deliver on their own locally optimized schedules or on schedules constrained by parties beyond your control. And most of the time, when key personnel take family or scheduled medical leave, it’s not under the Product Owner’s control or influence.
+
+
+Therefore,
+
+The Product Owner moves each Product Backlog Item blocked by a hard schedule dependency (such as deliveries from third-party partners) to a backlog position that corresponds to a date when it becomes ready for a Sprint (e.g., the supplier's scheduled delivery date). The Product Owner marks the PBI with the expected resolution date for the dependency.
+
+If another PBI depends on the fixed-date PBI such that the Development Team cannot start working on the dependent PBI until the fixed-date PBI is finished, then that PBI should be below the fixed-date PBI in the Product Backlog.
+
+
+As is true with any manipulation of the Product Backlog, the Scrum Team should frequently check relative position of the PBI and adjust it as necessary so it lands in the Sprint that will deliver by the target date.
+
+Here is one illustrative anecdote:
+
+A new telecom company appeared in the market. They promised to have the service available within six months; marketing campaigns and sales started. People started subscribing for their services. They needed a “good enough” call center. The telecom consulted third parties to provide the call center in time. The available market solutions offered more sophisticated solutions than what the telecom needed, and the cost was unreasonably high. The PO decided that the telecom instead would build its own call center in house (initial Fixed-Date PBI), with an availability date six months hence. They refined the initial PBI to specify a cheaper, lower-quality solution to meet the six-month deadline, with a longer-term plan to retire this interim system and replace it with a more robust and full-featured system.
+
+Here is another:
+
+An international agency’s Scrum Teams required components from its infrastructure team. The infrastructure team’s capacity was insufficient to provide all the required components in time for targeted deliveries. The Scrum Teams collaborated to identify their most important PBIs that could be resourced immediately by the infrastructure team. The Scrum Teams whose PBIs could not be resourced reorganized their Product Backlogs around their Fixed-Date PBIs (PBIs that the infrastructure teams could resource immediately).
+
+✥       ✥       ✥ 
+
+The Fixed-Date PBI stands out in the Product Backlog and its visibility enables the Scrum Team to replan.
+
+The Product Owner is better able to forecast deliveries impacted by the Fixed-Date PBI. There is less likely to be inventory from prematurely available external components, or partially developed internal components awaiting delivery from an external source.
+
+See Ackoff [1] about the pros and cons of contingency planning as an alternative to forecasts and probability.
+
+Some uses of Fixed-Date PBI try to accommodate delays between relatively independent teams, one of whose work depends on the output of another. As a deeper solution, the development organization should eliminate such handoffs where possible. Toyota has reduced delay by locating most of its (often internal) suppliers within a 30-minute drive of where the goods are consumed.
+
+See Vacation PBI as a variant on the idea of a Fixed-Date PBI.

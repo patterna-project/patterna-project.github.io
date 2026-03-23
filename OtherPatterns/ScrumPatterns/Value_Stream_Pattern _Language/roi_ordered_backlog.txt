@@ -1,0 +1,43 @@
+ROI-Ordered Backlog
+
+
+
+Orienteering is a group of sports that requires navigational skills, using a map and compass to navigate from point to point in diverse and usually unfamiliar terrain while moving at speed. [1] Part of a winning strategy is to visit control points in an order that yields the highest value.
+
+...you have a backlog of Product Backlog Items and need criteria to order them on the Product Backlog.
+
+✥       ✥       ✥ 
+
+The goal of a Scrum Team is to deliver value, and it is the responsibility of the Product Owner to optimize long-term value (see Value and ROI). The Product Owner achieves this in part by ordering the Product Backlog. The backlog must be a single, ordered list of PBIs (Product Backlog Items) that brings focus to the Development Team, and the entire enterprise, on the deliverables.
+
+You could order PBIs by the priorities of your dominant customer. However, that might lock out other customers, and in any case tends to focus on revenues rather than costs. Since cost is also a key consideration in ROI, focusing on customers alone isn’t enough.
+
+You could order them by the priorities of the Product Owner in isolation. But the question arises: What criteria should the Product Owner use to set the priorities of the Product Backlog Items?
+
+Most Product Owners annotate each PBI with a tentative ROI or other business value. It might seem obvious to order the Product Backlog with the highest ROI items first. However, the value of a PBI is in part a function of the features that previous PBIs already support, in part on the timing of delivery to the market, and in general on the item’s position in the backlog. Simple dependencies between PBIs further constrain the ordering. And because we are agile and the business is dynamic, PBI positions on the backlog may change frequently, even during a Sprint. So while a value annotation on a PBI may be a useful temporary convenience, it doesn’t prescribe an ordering that will always ensure the best long-term value.
+
+Proper ordering of the Product Backlog Items to line up development dependencies foreseen by the Development Team can avoid rework and facilitate a smooth flow of products to market. So you could order PBIs solely according to the team’s insight on dependencies, but that misses out on major revenue-generating opportunities that may arise for PBIs whose ordering is less constrained.
+
+
+Therefore:
+
+The Product Owner orders PBIs in a way that generates the largest long-term ROI. The Product Owner must account for both revenue and cost. If the Product Owner reorders PBIs, then he or she must account for the resulting value changes to the affected Product Increments. The Product Owner has the mandate to make decisions on behalf of all the stakeholders, but would be wise to weigh the supplications and insights of all stakeholders in balancing the value equation.
+
+
+
+
+While the common Scrum measure is “ROI,” a Product Owner may certainly choose to optimize Return on Equity (ROE), Net Present Value (NPV), or any other measure or indicator of value. In general, Scrum supports the enterprise in optimizing any value, including non-economic values such as corporate reputation, staff esprit de corps, minimal turnover, number of clients served, etc. Most Product Owners will want to optimize a combination of several such values. Note that this may result in a determination which is more relative that absolute in nature: see Estimation Points.
+
+✥       ✥       ✥ 
+
+The Value Stream will be set up to produce Regular Product Increments with the best possibility of generating high long-term value.
+
+This evaluation can rarely be reduced to a formula. Such ordering is always imperfect and benefits from good judgment, insight, and experience.
+
+The notion of priority for PBIs is flawed. The term priority is an attribute of an individual element that defines an ordering of the collection. However, Product Backlog ordering focuses on overall, emergent value, which is often more complex than the sum of the values of individual PBIs. Overall value is the sum of individual PBI values only for a single given ordering: all else being equal, a different ordering may yield a higher overall value. You can’t sit back and assign context-free priorities to PBIs and then sort the Product Backlog, because a PBI’s individual value is often a function of its position in the backlog. Some market offerings make sense only if they build on previous offerings; some market offerings are sensitive to market timing. Reordering items can change the value contribution of each one. In fact, Jeff Sutherland notes that you can as much as double your long-term value just by re-ordering the PBIs.
+
+One point of the solution is worth reiterating: ROI needn’t be just about money. In general, it is about value. Most value systems are rooted in the economic theory of value: the ability to exchange one artifact or token of value for another of equal value. However, an enterprise may also value employee retention, good customer relations, a good public image, or many other desiderata that fall outside the economic theory of value. It is possible to view many items of value as a return on some kind of investment. See, for example, Team Sprint.
+
+To serve process improvement, ROI or other values need to be measurable—even if only in relative terms.
+
+As an alternative approach, see High Value First, which can support the well-known patterns Change for Free and Money for Nothing. But if you order the Product Backlog by long-term value, you can’t easily use Change for Free or Money for Nothing.

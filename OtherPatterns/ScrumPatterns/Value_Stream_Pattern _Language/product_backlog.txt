@@ -1,0 +1,48 @@
+Product Backlog**
+
+
+
+Barrels of whiskey lined up by vintage year which, after aging, will determine the delivery order.
+
+...you have defined a Value Stream by which the Product Owner’s Vision flows to the market. You envision a product development effort in the organization, supported by one or more Development Teams that seek strategic direction. Many stakeholders, including Team members, have different ideas on how to achieve the Vision. The Development Team needs guidance on how to interact with the Product Owner to support the best implementation of the Vision, and to ultimately have a foundation for a good tactical direction for each Sprint.
+
+✥       ✥       ✥ 
+
+At any given time, it is important that the whole team is aligned about what it needs to deliver next, and that the direction be transparent. The Development Team can’t do everything at once—in fact, you can’t even do two things well at the same time. It’s important to maintain focus.
+
+
+While it’s good to have a Product Roadmap, it’s also important to pull decisions forward to order them properly as soon as enough supporting information is available. The Roadmap consciously leaves options open and decisions unbound. It’s important to force the exercise of binding the ordering and even near-term scheduling based on best current information so that stakeholders can be on notice for what is likely to transpire, with the acknowledgment that, as an agile enterprise, a Scrum Team works with stakeholders to sacrifice stability of schedule in the interest of increasing value.
+
+It’s important to make product direction decisions transparent to stakeholders. The delivery order must reflect dependencies between deliverables, as well as coordination with project calendar events: deliveries from suppliers, marketing campaigns, releases by partners or competitors, and so forth. Each Development Team needs its own direction, yet coordination becomes difficult if the Scrum Team has multiple Development Teams, each of which maintains its own long-term list of Product Increments. It is impossible to easily see the order of delivery if each team keeps its own list.
+
+Therefore:  For each product, create a single ordered list called the Product Backlog—a list of Product Increment contributions called Product Backlog Items (PBIs), arranged in their expected delivery order. The Product Backlog details the Product Owner’s Vision for the product as informed by the expectations of all stakeholders, with each PBI describing a contribution to a deliverable Product Increment. The Product Owner has final authority over the content of the Product Backlog; however, the Product Owner usually develops the Product Backlog in a joint effort with the Development Team during regular events convened to maintain a Refined Product Backlog, as well as during Sprint Planning.
+The Team should make the Product Backlog transparent to all stakeholders as an Information Radiator.
+
+Scrum calls a Product Backlog Ready (see Ready) if it is a Refined Product Backlog and if the Development Team feels confident enough about the top items to take them into a Sprint. The work at the top of the Product Backlog drives the Development Teams, and each Development Team works from only a single Product Backlog. The Product Backlog drives all Development Team work—developers respond to no other source of work requests external to their team.
+
+
+✥       ✥       ✥ 
+
+The Product Backlog makes the current likely trajectory of long-term delivery transparent to all stakeholders. The Product Owner typically derives the Product Backlog from a Product Vision or some other strategic document that captures value drivers. If the Product Owner has a Product Roadmap, it too can guide the Product Backlog contents. A good initial Product Backlog is a list of Sprint Goals that takes the product in the direction of the Vision, where each Sprint Goal becomes the core of the corresponding Product Increment.
+
+This list typically corresponds to a single product or product line; however, it can be any list of deliverables over which a single Product Owner has authority. We give the Product Owner authority over the Product Backlog because he or she is accountable for value (ROI), and the Product Backlog is the sole instrument reflecting the Product Owner’s control over the Development Team’s sprint towards value. The Product Backlog details the Product Owner Vision to drive the downstream activities of the Value Stream.
+
+The Product Backlog provides an opportunity for feedback from stakeholders early in the journey of a Product Increment through the Value Stream. It is visible to all stakeholders including end users, partners, Team members, and any managers in the organization. It is dynamic and can change whenever the Product Owner gains new information about the market, business conditions, new estimates from the Development Team or anything else that may affect the Vision or ROI. At any given time it represents the Product Owner’s best possible path to value through the Product Roadmap, and best possible realization of the Vision.
+
+Having a single Product Backlog per product can put an end to the thrashing that can occur between groups with differences in perspective within a company.
+
+Note that it is a Product Backlog and not a Requirements Backlog. The Product Owner uses the Product Backlog to describe Product Increments that implement whatever requirements are necessary for customers to realize a value increment in the corresponding Sprint. As such, the Product Backlog records the joint planning decisions of the Scrum Team, rather than serving as a vehicle to communicate requirements between stakeholders, the Product Owner, and the Development Team. The Product Owner discusses the details of PBIs face-to-face with the Development Team during Backlog Refinement (see Refined Product Backlog) and Sprint Planning to help the team internalize an Enabling Specification.
+
+That said, the Product Backlog can describe contributions that increase value indirectly, rather than as a direct increment to the product itself. Faster or more easily maintained machines on the manufacturing line might be an example, or better office space for workers. An occasional process improvement may also appear on the Product Backlog: see Scrumming the Scrum. In this sense it is useful to think of the Product Backlog as a value backlog. See “The Backlog: What to do When” in [1], pp. 173–5.
+
+The Product Backlog may contain more or less information about dependencies between PBIs, market timing constraints, or any other structuring of the requirements. A lean mindset suggests keeping it simple. Annotating each PBI with a cost or estimate of effort, as well as that PBI’s contribution to value (see Value and ROI) can help the Product Owner optimize value during business planning. The PO may of course need to adjust the value annotation of a PBI over time as its position in the backlog changes, since an earlier or later delivery, or changes in the external environment, might change the PBI’s alignment to market need.
+
+The team usually annotates the Product Backlog with forecast Sprint boundaries, which are the units of granularity of the product delivery schedule. Based on the Development Team estimates of PBIs, the Scrum Team can derive a rough Release Plan. Such plans might be meaningful for only two to five Sprints in the future; extrapolating further pretends being able to know more than one should presume for agile development.
+
+Within a Sprint, a Development Team may work on PBIs in any order to optimize the chances of meeting the Sprint Goal; see Developer-Ordered Work Plan.
+
+Break down the topmost PBIs according to a Granularity Gradient and refine them to be Enabling Specifications. The team should strive never to be more than a week away from having a Refined Product Backlog. Spreading the backlog refinement work across short daily meetings (the Backlog Refinement Meetings) helps smooth out flow and minimize the inventory of stale requirements. The Product Owner and the Development Team together should continuously be striving to meet the Definition of Ready for the topmost items when working together on the backlog.
+
+Historically, Jeff Sutherland split Toyota’s Chief Engineer into the Product Owner and ScrumMaster roles, reflecting business and development concerns respectively. The Product Backlog is the main Scrum artifact for the business half of that split while the Sprint Backlog reflects the development part.
+
+The Product Backlog makes Work Flows Inward possible.

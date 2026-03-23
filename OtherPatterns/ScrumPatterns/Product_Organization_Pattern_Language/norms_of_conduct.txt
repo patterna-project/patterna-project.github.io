@@ -1,5 +1,49 @@
 Norms of Conduct
 
-============================================================
 
-TODO: Vložiť popis vzoru z https://scrumbook.org/
+
+
+
+…a new Scrum Team has come together and is working as an Autonomous Team.
+
+✥       ✥       ✥ 
+
+A Scrum Team benefits from a common agreement among its members about what they aspire to become, how they will make decisions, how they will provide feedback to each other, and what they collectively value.
+
+Every member of a Scrum Team has preconceived notions about how to behave, rooted in their previous experience and their understanding of the present culture. Such notions generally go unspoken, either because people just assume that everyone else shares the same notions, or because they aren’t even aware that they have them. But different peoples’ norms of behavior can conflict, leading to misunderstandings and distrust.
+
+A team will rapidly (within minutes: [1]) develop norms whether this is done explicitly or not. When the team does not explicitly develop norms it is only by luck that the team norms will support effective teamwork.
+
+A Self-Organizing Team that is unable to get all issues out on the table will leave things unsaid. Questions will remain unanswered and the team will miss the opportunity to evaluate possible solutions.
+
+Therefore:
+
+The Scrum Team agrees to norms of conduct (expectations about acceptable behaviors; see [2]) to enable it to grow into high performance.
+
+As a example, we can relate the experience of a team comprising people from several hierarchical levels. There were, for example, professors that were part of the team. Because of the hierarchical relationship nobody felt safe enough to challenge the professors when promises were broken, or even during team discussions. After a Norms of Conduct session, the team became a safe environment and now knew how to engage in productive conflict. The team came up with the following Norms of Conduct:
+
+OPENNESS
+
+We see it as professionalism to hold each other accountable when we do not follow up on our promises.
+
+We believe that proactively informing the team of possible delays is our duty.
+
+COURAGE
+
+We see asking for help as a sign of strength and professional behavior.
+
+RESPECT
+
+We expect that every team member is accountable to all others.
+
+We value and are thankful for remarks and criticism from all team members.
+
+The ideal time to create Norms of Conduct is the moment the team first comes together, as the Scrum Team forms. A group can best express its norms in terms of what people can and should do rather than in terms of behaviors they should avoid. The norms provide safety because people can refer to them in Sprint Retrospectives when tension rises in the team.
+
+✥       ✥       ✥ 
+
+With the safety to engage in productive conflict, the Scrum Team is ready to grow into high performance. This will result in an increasing Happiness Metric. Taking ownership of the norms of local culture, and honoring them, is a fundamental source of Team Pride (see Team Pride).
+
+Try to broaden the scope of the most fundamental principles of work and community, as in Development Partnership. See also Community of Trust.
+
+Many organizations have working agreements which tend to address team operations, while Norms of Conduct is more about values and human behavior. The two may exist side by side in any organization.

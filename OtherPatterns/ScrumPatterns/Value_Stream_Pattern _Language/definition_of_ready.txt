@@ -1,0 +1,51 @@
+Definition of Ready*
+Alias: Ready-Ready
+
+
+Ready to go.
+
+…you have a Product Backlog that is a Refined Product Backlog, or nearly so, and you are beginning to plan a Sprint. Out of necessity, some items on the Product Backlog are still too nebulous for the Development Team to be able to implement then. Yet the Sprint Backlog embodies the work necessary to achieve the Sprint Goal, as well as guides development. Therefore, the items on the Sprint Backlog must be concrete; they cannot be nebulous. But how much “concreteness” does the Development Team need to do its job?
+
+✥       ✥       ✥ 
+
+If the Development Team does not precisely understand Product Backlog Items (PBI), development effort (and time) tend to balloon, which in turn cause the Sprint to miss the Sprint Goal or to not deliver what stakeholders expect.
+
+
+The challenge of development is taking new ideas and making them real—actually developing them. This is a fundamental change in thinking: the idea starts out quite abstract, but development demands that the idea become concrete in every particular. This change in thinking ultimately happens fully only in the moments of development. However, if you expect to do any detailed planning at all (and you need detailed short-term planning to inject some sanity into your process), the development ideas need to be concrete enough to make it possible to answer design questions. How concrete? Enough to enable detailed planning in which the team can have confidence.
+
+I once did some mercenary programming for a small company. At one point, the CEO asked me to write some software, and proposed a fixed price. “Are we agreed?” he asked. “No,” I said. “The software is not defined precisely enough for me to know how long it will take.”
+
+Said another way: there is a shearing layer between the market world and the design world. The realizations they produce evolve at different scales: market understanding comes slowly, while design usually converges quickly (under Enabling Specifications). You need an organizational boundary between them; otherwise you dilute the focus both of the market effort and of the engineering effort. In theory you could achieve this separation with a process boundary. But people membership cuts across process, thus you are still faced with the problem that individuals may be torn between focusing on the business and value landscape and the product and technology landscape. You in turn could solve that problem by time-slicing individuals’ focus between these two domains, but that leads to context switching, which is known to decrease efficiency. Scrum separates these concerns into the organizational realms of the Product Owner and Development Team, respectively. It is crucial for success that there be a touchpoint where these two realms meet.
+
+When you are in the throes of planning, there is a strong temptation to make quick assumptions and defer hard questions (such as detailed estimation) until later. When a group does planning together there is often implicit peer pressure to defer hard questions so that the planning process can proceed. To combat this, the team needs to agree to face the most difficult issues first. To avoid starting work on shaky footing, the team needs to adhere to an objective standard of shared clarity about the end point.
+
+Variability is one source of waste in lean thinking. If the Development Team insufficiently understands what some Product Backlog Item really means, or how to develop it or estimate it, there is increased variation in possible Sprint outcomes and the effort is likely to incur increased cost, risk, and uncertainty.
+
+Therefore:
+
+Each Product Backlog Item must meet at least the following criteria before the Development Team can take it as a candidate for the work on the Sprint Backlog during Sprint Planning:
+
+The work is immediately actionable by the team.
+The planned deliverable has value.
+The Product Owner and the Development Team have discussed it.
+The Development Team has estimated it.
+It is testable, and the Product Owner has specified tests for it.
+The Scrum Team has sized the pieces appropriately (see Small Items).
+A Product Backlog is “Ready” if it has enough Product Backlog Items at its top, meeting these criteria, to fill a Sprint.
+
+
+A good Definition of Ready can help guide the team to handle external dependencies. If an item depends on something outside the team’s control, putting it on the Sprint Backlog can greatly increase the risk of not having a potentially releasable Product Increment at the end of the Sprint, and you can’t do anything about it! Take dependency analysis all the way down to the level of Product Backlog Items instead of just managing gross dependencies at the level of Regular Product Increments; the team will ultimately need to understand dependencies at that level to order work during the Production Episode. Consider including criteria concerning external dependencies as part of the Definition of Ready.
+
+There is important interplay between this pattern and Enabling Specifications. The candidate Product Backlog Items for the upcoming Sprint must become Ready during Sprint Planning at the latest. Coming out of Sprint Planning, Product Backlog Items—together with the Product Owner’s explanation and clarification—must Enable the team to start implementation undaunted.
+
+✥       ✥       ✥ 
+
+The goal is for the Scrum Team to meet all the Ready criteria as it works towards a Refined Product Backlog and strives to develop Enabling Specifications before Sprint Planning. The goal is that PBIs pass through the “Ready gate” without pause or delay, subject only to adherence to a short checklist. While the list is important for undeveloped teams to be able to “stop the line,” the greater good comes from anticipating the stipulations and arranging ahead of time for the PBIs to be fully Ready by the time the Sprint starts, so that flow is unimpeded.
+
+Note that all PBI in the Product Backlog do not have to be Ready, though as they move up the Product Backlog, they should progress toward becoming Ready.
+
+Contrast the Definition of Ready, which applies to PBIs going into a Sprint, with the Definition of Done, which is a criterion applied to a PBI for delivery during or at the end of a Sprint.
+
+What happens if a PBI is not Ready? Though the entire team works on PBIs, the Product Owner is responsible to come to Sprint Planning fully prepared to enable the team to proceed unimpeded to develop the candidate PBIs for the current Sprint. Most of the time, being not Ready is a sign that the Product Owner has to go back and do more analysis and bring the PBI to the team again at a later date. The Scrum tradition is that if the Product Backlog is not Ready at Sprint Planning, the Development Team has the right to “go to the beach,” as Jeff Sutherland describes in [1] (“Be Ready to be Done,” p. 137). This makes it visible that the Product Owners have not done their job to make the backlog Ready. If you end up at the beach a lot you are probably in the wrong line of work. What is your contribution to the backlog not being Ready? How can the team help the Product Owner?
+
+To differentiate the Scrum notion of Ready as a term of the trade distinct from the vernacular sense of “ready,” Scrum folk will sometimes use the phrase “Ready-Ready” instead of the single word “Ready.” Richard Kronfält apparently published the first formal description of Definition of Ready in 2008. [2]

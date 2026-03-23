@@ -1,5 +1,35 @@
-Product Pride
+Product Pride*
 
-============================================================
+A man came upon a construction site where three people were working. He asked the first, “What are you doing?” and the man replied: “I am laying bricks.” He asked the second, “What are you doing?” and the man replied: “I am building a wall.” As he approached the third, he heard him humming a tune as he worked, and asked, “What are you doing?” The man stood, looked up at the sky, and smiled, “I am building a cathedral!” [1]
 
-TODO: Vložiť popis vzoru z https://scrumbook.org/
+…you have a Community of Trust (see Community of Trust) and have a common Vision. The Scrum Team is working towards that Vision.
+
+✥       ✥       ✥ 
+
+Team members need to know their work matters and have a say in how it’s done.
+
+The Scrum Team should build a product to the best of their abilities. However, market conditions or organizational concerns can put pressure on the Scrum Team to deliver something as soon as possible. This can tempt the Scrum Team to take shortcuts, which will result in lower quality of the product, technical debt, and wasteful rework. Such pressure on the Scrum Team reduces its autonomy. Not meeting your own expectation on quality degrades the pride you take in your work and in the result—the product.
+
+
+A Product Owner should have a deep appreciation of stakeholder wants and needs, and should understand exactly how product increments will increase product value (see Value and ROI) by meeting and exceeding the expectations of the market and other stakeholders. Impediments, such as lack of direct customer contact or authority to make decisions, may create an environment where there is a lack of clarity about the product Vision and result in a meandering Product Backlog that does not create the Greatest Value. Consequently, the team may have low energy or low enthusiasm for the product, and they may instead turn their energy to side projects.
+
+Therefore:
+
+Create a climate that enables Autonomy, Mastery, and Purpose.
+
+No one can either impose or bestow Product Pride. Instead it is an outcome that emerges when mastery, autonomy, and purpose converge ([2]). Climate is “the shared perception of the way things are around here” and “can be locally created by what leaders do, what circumstances apply, and what environments afford” ([3]). The Scrum Team controls its own destiny, so this work belongs to the Scrum Team.
+
+
+For example, the Scrum Team has a hand in creating the Sprint Goal. The team should be a Cross-Functional Team to ensure that it is capable in all product-development areas. If developers voluntarily sign up to join teams whose work or membership attracts them, it creates a foundation to align shared purpose with individual values (see Self-Selecting Team). See also Autonomous Team.
+
+A Scrum Team takes pride in building the product right and in the recognition of good craftsmanship. The ScrumMaster will help the team to excel in its skills and in how it works (see Kaizen Pulse and Scrumming the Scrum). Everyone takes pride when the right Product Increments appear. The feedback from the market gives recognition of the Scrum Team’s effort, furthering the team’s pride.
+
+Building the right product creates Product Pride. A great team has ba (場)—the potential for doing great things starts by aligning around a shared purpose. It is less so that purpose brings teams together; instead it emerges from great latent teams. Product Owners will be the initial carriers of this enthusiasm as part of the Vision, and part of their job is to make it infectious.
+
+✥       ✥       ✥ 
+
+When a Product comes to its end, the organization should recognize and honor the Scrum Team for its effort and contributions. Therefore, hold a Product Wake. It magnifies Product Pride to embrace the fact that someday the product will dissolve into The Mist. The effect of Product Pride is, however, much larger than the product itself.
+
+Two big evils in our world are our readiness to be herded along with the crowd and apparent indifference to destruction of all kinds. ([4])
+
+Having pride means working to your own standard of quality and taking ownership of the results. This opens the doorway to freedom in service of the world, and leads to a team that feels it is doing morally profound work, as in Happiness Metric.

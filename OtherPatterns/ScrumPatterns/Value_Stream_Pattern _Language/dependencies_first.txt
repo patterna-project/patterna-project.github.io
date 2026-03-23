@@ -1,0 +1,35 @@
+Dependencies First*
+
+...your Product Backlog meets the Definition of Ready, and you have started into the Production Episode. The team is Swarming, managing the delivery of the Sprint Backlog Items for one Product Backlog Item at a time. However, there are dependencies between some of these work items.
+
+✥       ✥       ✥ 
+
+If critical dependencies remain halfway through the Sprint and the team is still discovering more, you risk failing the Sprint.
+
+Significant risks can come from dependencies between Product Backlog Items, and the separate but related dependencies between the corresponding Sprint Backlog Items. Emergent requirements or unforeseen events may force the team to change the ordering of its work items. For example, a team may have to wait for a deliverable from a supplier or partner, or wait for promised but late lab resources to become available. Or a critical-path Product Backlog Item may become reordered to be later in the Sprint, when the team discovers that the item has a dependency on other Sprint work. When the team otherwise defers work, it is in the interest of overall progress (Someone Always Makes Progress).
+
+
+You want to make sure that the team has flexibility in its work ordering, yet too much churn in the work plan creates uncertainty and raises the risk of not delivering what stakeholders expect. You want to line up work to avoid doing setup and administrative tasks twice, but it’s hard to foresee all of this at the beginning of the Sprint. Foreseen dependencies become clearer as the Sprint progresses and new dependencies arise, and new knowledge leads the team to reorder the work plan at each Daily Scrum. However, leaving the dependencies until the “last responsible moment” leads to inefficiencies that show up as rework, balking, and blocking: you often don’t know when the “last responsible moment” will arrive until it has passed. [1]
+
+Therefore:
+
+Make sure that all known dependencies are under control by mid-Sprint.
+
+You want to force emergent items to arise as early in the Sprint as possible. You do this by first tackling the most difficult items and going into the work where dependencies are most likely to arise. This suggests a risk management strategy based on handling the most difficult tasks first. Move mutually dependent Sprint Backlog Items to the top of the Sprint work plan while still maintaining their grouping into Product Backlog Items (Swarming).
+
+
+The Scrum Team can make a rough cut at properly ordering PBIs as it works toward a Refined Product Backlog before the Production Episode. However, the Development Team does the bulk of this analysis and reordering during the Daily Scrums in the first half of the Sprint—a Developer-Ordered Work Plan.
+
+Occasionally this strategy won’t work and dependencies are not under control. Invoke Emergency Procedure: abort the Sprint, stop, replan, and start up a new Sprint with newfound direction. Another alternative is to revert to the Sprint Goal.
+
+✥       ✥       ✥ 
+
+Properly lining up dependencies raises the chances of meeting the Production Episode delivery targets.
+
+Using 5S techniques (seiri, seiton, seiso, seiketsu, shutsuke: sort, set in order, shine, standardize, and sustain; see [2], p. 64) to scrub the Sprint Backlog is one way to drill down to the latent dependencies. Because 5S can be time consuming, the team should use it only when latent dependencies pose potentially high risk.
+
+Jeff Sutherland relates a case study from OpenReview where they needed to remove dependencies by mid-Sprint; if they didn’t, they pulled out the Product Backlog Item. This pattern makes the problem visible with abnormal Sprint termination, rather than abrogating the team’s commitment by small cuts.
+
+This same pattern applies at the scope of the Product Backlog. The Development Team and Product Owner should jointly consider development and deployment dependencies, respectively, as they work together toward a Refined Product Backlog. Insight into long-term technical dependencies can sometimes contribute to a more efficiently ordered Product Backlog.
+
+See also Emergency Procedure.

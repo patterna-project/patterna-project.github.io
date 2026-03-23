@@ -1,0 +1,42 @@
+Sprint Backlog Item*
+
+
+...the Scrum Team has ordered the Product Backlog Items. The team is in Sprint Planning and is ready to start planning the work for the Production Episode of the current Sprint.
+
+✥       ✥       ✥ 
+
+A Product Backlog Item (PBI) does not define how to arrive at a solution or implementation, or how to deploy the solution.
+
+A Product Backlog Item represents the Enabling Specification for some product update that the Development Team will develop. A PBI clarifies what to build but does not specify how to build it.
+
+
+Scrum helps the team to manage risk. A PBI gives the Scrum Team enough information to assess outward-facing risk. However, it offers no insight into the risks associated with complex development. Development work is, by nature, emergent. PBIs describe deliverables in business (end-user and market) terms, while the Development Team works and estimates in production terms.
+
+The two key elements of risk management are feasibility and time. In order to understand and reduce risk, you must understand the PBI in sufficient detail to have confidence that it is technically feasible, and can reach a state of Done (see Definition of Done) within the Production Episode. Even then, you can’t have 100 percent confidence in feasibility up front. Even though you can mitigate most risks during Sprint Planning, you need to accept emergent requirements that arise during the Production Episode itself. We don’t want to handle them in the margins or treat them as second-class citizens. Yet, they are not PBIs in their own right.
+
+You could also reduce risk by taking a feature all the way into implementation; in fact, a good Product Owner might support the team with a working prototype of the feature. However, it is risky to take a PBI into a Production Episode after considering only commercial criteria while ignoring engineering, development, and deployment costs. If that top PBI takes an entire Production Episode by itself, then nothing else will get Done during the Sprint.
+
+You could launch into the work on a given PBI and put it on the shelf upon discovering that it will put the Sprint delivery at risk. But then, work in progress may grow arbitrarily large.
+
+Coarse granularity estimates are imprecise, unreliable, and unpredictable: you need Small Items to estimate.
+
+You can get more development efficiency by viewing a PBI differently. A PBI entails a collection of complementary tasks that build on teamwork and parallel development. The team could self-organize to start working on it, but it needs some direction. What is to prevent all team members from launching into just one of the five things that they need to do to finish this PBI? If the team is going to swarm on a PBI (see Swarming: One-Piece Continuous Flow), they better have talked about it first.
+
+Therefore:
+
+Break down Product Backlog Items into work items and assemble them into a plan called a Sprint Backlog. Each work item is a Sprint Backlog Item (SBI). No Sprint Backlog Item typically should be any larger than a single Development Team member can complete in a single work day.
+
+
+✥       ✥       ✥ 
+
+The Development Team commonly expresses work items as tasks, but the team can instead represent them as internal artifacts or as the result of any other breakdown that gives the Development Team confidence about meeting its Sprint Goal with the work items. The team takes all work items that it must complete during the Sprint and combines them into a plan called the Sprint Backlog. The Sprint Backlog becomes the Development Team’s view of the product increment development.
+
+The process of design (either during Sprint Planning or during the Sprint) offers insight into the work. This design process reduces risks such as realizing the cost of unknown additional work, or delaying the delivery by finding large chunks of latent work too late into the Sprint. Design clarifies the PBI, and uncovers unknown work.
+
+The team can use SBIs as units of progress measurement during a Production Episode. The Sprint Burndown Chart reflects the progress at the granularity of the work items on the Sprint Backlog. This granularity supports rapid feedback. It also improves the fidelity of estimation by creating Small Items to estimate.
+
+The collection of SBIs is dynamic and changes as we learn more about the product. SBIs can emerge as discovered work (e.g., more design and development are needed) or alternatively can die during the course of a Production Episode. So discuss them at the Daily Scrum and replan the Sprint. The team should estimate new SBIs as they emerge and should assign Estimation Points to each one. The team should also update the Sprint Burndown Chart accordingly.
+
+The Development Team collectively remains responsible for all the SBIs on the Sprint Backlog.
+
+It is a common practice to write SBIs on sticky notes and put them on the Scrum Board to make progress on work completion visible. Keep the writing to a minimum: the written text for an SBI should be just enough to remind the Development Team of the outcome of accumulated work plan discussions to date. Another common practice is to also write the Estimation Points on the sticky notes, which enables easy updating of the Sprint Burndown Chart when the team moves the work item to Done. Teams use sticky notes in all manner of creative ways (e.g., colors, rotation, adding marks, etc.) to accommodate a good visualization of Sprint Backlog status. No prescriptive guidance is necessary on this usage: it is up to the Development Team to find out what works best.

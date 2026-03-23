@@ -1,5 +1,51 @@
-Sprint Review
+Sprint Review**
 
-============================================================
+…the Production Episode is over.
 
-TODO: Vložiť popis vzoru z https://scrumbook.org/
+✥       ✥       ✥ 
+
+There must be closure on the state of a product after development is over; having completed a checklist of anticipated outcomes doesn’t alone ensure that the product has come as far as necessary, or that the team will take the appropriate next steps in development. A Development Team works as an Autonomous Team and a Self-Organizing Team, producing Regular Product Increments, completing Product Backlog Items (PBIs) as they understand them, in light of a Sprint Goal that provides context and focus.
+
+The Product Owner and the Development Team work together to deliver value to the organization by creating a Potentially Shippable Product Increment. Development Team members generally work among themselves during the Production Episode, but they are accountable to the Product Owner and other stakeholders to make sure they have developed the right thing. Left to their own impressions for too long, they may stray from the intent of the Product Vision.
+
+
+Good Product Owners can concretely envision the Product Increment that they ask the team to build during Sprint Planning. Even though this vision stands on thorough planning and discussion with the Developers, to the level of being an Enabling Specification, one can’t have perfect foresight when building a complex product. Concrete implementations almost always raise questions beyond those that arise while envisioning the product or while discussing it with the team. And there is always the possibility that communications between the Product Owner and the team loses information, or that Product Owners don’t communicate all of their tacit assumptions and aspirations for the product.
+
+To inspect what is really going on you need transparency, and the only way to get that is by inspecting working product—rather than by just checking off items on the Sprint Backlog, for example ([1], p. 56). Even checking off a list of stipulations for the Product Increment isn’t enough, because such lists are always necessarily incomplete because of the possibility of latent and emergent requirements—that is, of unknown unknowns. It is also necessary to establish a Community of Trust.
+
+Therefore:
+
+End the Production Episode with an event to assess the status of the product and to learn about end-user needs, risks, opportunities, problems, and likely completion dates to ensure product is moving in the direction of Greatest Value. The Development Team, the Product Owner, and other invited stakeholders attend the event. They work together both to discuss what parts of the Product Increment are and are not ready for deployment, about lessons learned about the product during the Sprint, and about tentative future product plans. The group ideally achieves consensus about deployment decisions and future plans, but the Product Owner has the final say in these matters.
+
+A good way to address problems in complex development is with short feedback loops that let stakeholders assess the solution so the team can adapt quickly without going too far astray. The Sprint Review is the focal point of deliberation and feedback during the Sprint cycle. The Product Owner can invite any stakeholder to the Sprint Review and is well-advised to invite key end users and elicit their feedback.
+
+
+The participants inspect the product not only to learn about the suitability of the current product increment for delivery, but to provide information to shape future work (such as reordering the Product Backlog).
+
+The event should be time-boxed to a maximum of three hours. The focus is on assessing the product. The Development Team should not spend more than about 30 minutes specifically preparing for this event. Too often a team will prop up the product with temporary supporting structures to make it work well for the Sprint Review, or will spend time trying to “impress” the stakeholders with a sophisticated presentation. There is very little opportunity to be convincing here: the product stands on its own. The team demonstrates the product in an environment approximating that of an end user, without any special “demo support,” and without any props that could make the product appear better than it is. A good rule of thumb is: No PowerPoint® (unless your product is PowerPoint).
+
+Typical activities for this event may include:
+
+Hands-on exploration of the product by users.
+Discussing whether the team achieved the Sprint Goal, or not.
+The Product Owner identifies which PBIs are Done and which are not (see Definition of Done).
+The Development Team demonstrates the functionality that was Done.
+The Product Owner evaluates the product and determines whether to accept the PBI(s).
+The Product Owner typically specifies acceptance tests, usually at Sprint Planning. The Product Owner might run them during the Sprint Review.
+Occasionally the Product Owner might accept a PBI before the end of the Sprint (see Responsive Deployment); however, the team should still hold the Sprint Review, and they and other pertinent stakeholders should review partial product increments released during the Sprint.
+The participants discuss the direction of the product, and possible ordering of the Product Backlog. The focus is on learning.
+The discussions should consider indicators of product health including the Development Team’s velocity, the conjectural (and real) level of technical debt, the current status of bugs and builds, and progress on the Product Roadmap.
+The team should review progress on actions identified at the previous Sprint Review. Many such action items may have been cast as PBIs, but others may require specific attention outside the usual focus given to PBIs during review. For example, the team may have identified an issue with unclarity or conflict in requirements across two key customers. The team should continue to bring focus to that product issue until it is resolved, though it is not itself part of a product increment.
+It is good for the Product Owner to adopt a vulnerable posture and to hear whether the team endorses and trusts the decisions and directions by which he or she is directing the team, particularly with respect to the product direction and dealing with technical debt and product quality. This helps reinforce the Community of Trust.
+
+Note that this meeting is all about the product. Discussions about the Scrum Team’s performance and processes happen in the Sprint Retrospective.
+
+✥       ✥       ✥ 
+
+A Sprint Review creates information for all parties: the Product Owner and stakeholders learn about the status of the product concerning possible shipment and future direction. The Development Team learns how well they met the expectations of the stakeholders, giving them more information for their Sprint Retrospective.
+
+A good way to validate status and get feedback on the PBI(s) is by having users explore them hands-on ([2], ff. 66). For example, members of user focus groups who support the team with different market perspectives can offer on-the-ground insights. Another example is that of a game studio that has gamers play their game to get feedback. Such assessment during the Sprint Review is not a substitute for, say, a full acceptance test; however, Enabling Specifications can sometimes reduce the need for such extensive testing. (Scrum’s iterative development is not an excuse to omit long-running stability or endurance tests, if the Product Owner can empirically justify the need for them.) Thoughtful users nonetheless appreciate the opportunity to be listened to, and engaging them in this review builds trust. End users may indeed notice lapses between the product and their expectations, and in any case can provide great input as the group discusses future product directions.
+
+Many Scrum adherents view the Sprint Review as the main mechanism of agile feedback in Scrum, bringing to mind the usual forces of emergent requirements and market changes, change in business conditions, and so forth. There may be a bit of that. But a Product Owner and other stakeholders are unlikely to always be able to assess, in a three-hour meeting, whether a complex product increment really does meet the intended need or not. More realistic and honest insight comes from trying to use the product in a more realistic application setting, over a more protracted period of time. However, the Product Owner and other stakeholders can and will notice misaligned assumptions and perspectives between what people believed they agreed to at Sprint Planning, and what the Development Team delivers. Such discrepancies come less often from emergence or evolution, or from a change in the mind of the customer, than from problems in the process. One of the main functions of the Sprint Review is for the team to note what process lapses allowed them to deliver something the customer did not expect, and to carry this knowledge forward into the Sprint Retrospective.
+
+A Sprint Review is an opportunity for the team to reflect on their accomplishments during the past Sprint, which contributes to growth in Product Pride. A Sprint Review can be a form of celebration if the team reaches a particularly noteworthy goal, or just for the sake of celebrating now and then. A company in Finland would occasionally have a Sprint Review in a sauna, with good food and drink, going late into the evening. The event covered the perfunctory agenda items but the real focus was for the team to celebrate its work together. (Thanks to Jukka Järvelä for this story!)

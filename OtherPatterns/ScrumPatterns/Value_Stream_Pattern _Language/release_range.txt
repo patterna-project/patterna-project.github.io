@@ -1,0 +1,49 @@
+Release Range*
+
+Cherry trees start to blossom on different dates every year. Over the centuries Japanese cultural traditions have evolved around this rhythm of nature. The season is so central to Japanese culture that efforts are taken on a national level to forecast the range of dates for the best cherry tree viewing (hanami).
+
+...the Product Owner is building a Release Plan based on team velocities. The team takes work into its Sprints based on Yesterday’s Weather.
+
+✥       ✥       ✥ 
+
+Stakeholders (e.g., managers or customers) tend to treat any single delivery date as definitive, and they tend to treat definitive feature lists as commitments.
+
+Stakeholders want to know release dates, but you cannot forecast a delivery to fall on an exact date, as there might emerge new requirements or delays; in addition, team velocities might gradually change. The possibility of such uncertainty lies close to the foundations of agile development.
+
+Estimates are almost always lacking in precision, or accuracy, or both. In general, the future is uncertain in any project and the Product Owner and other stakeholders must live with that. The delivery might be late because Development Team members leave the company or become sick; production machines may have unexpected down time; it’s always impossible to know precisely how much work a thorny problem will take to resolve; and so forth. While taking all this into account, it is hard for the Development Team to give a precise release date for a Product Backlog Item (PBI). An estimate is just that: the best guess at the current time of how long it will take to do something. This fact runs afoul of the madness in business expectations that any complex development effort should be able to precisely predict completion and delivery dates ahead of time.
+
+When a team estimates work effort on PBIs or Sprint tasks, they too often give a single number with no variance. One popular technique in this category, used for long-term “projects,” is a Release Burndown. At best, the team estimates the total effort to retire a particular PBI about which a stakeholder inquires, and then charts a trajectory that spans several Sprints. It’s like a Sprint Burndown Chart but it features per-Sprint tracking rather than day-by-day tracking:
+
+
+The Scrum Team may create such a graph using the current velocity (see Notes on Velocity), with the best intentions of predicting when the “project” will be complete. However, because variance accumulates with time, because the list of anticipated PBIs may change over the Sprints, and because velocity may change (even drop), the forecast completion date is likely to be inaccurate. Because stakeholders receive only a concrete completion estimate, they may hold this date as a given or even as a commitment, and there is likely to be disappointment all around in the likely event that the anticipated work is not complete on that date. Most use of the release burndown chart is a holdover from previous waterfall development.
+
+An alternative is for the team to create a range of estimates for each item that range from pessimistic to optimistic. However, that is time-consuming, is not based on an empirical history, and is difficult to fit within a consensus framework. The team spends more time discussing how confident they are about an estimate than raising their confidence by exploring uncertain issues. This meta-deliberation leads the team to accumulate an ever-growing list of concerns that feed a pessimistic estimate, and these become a cloud over the estimate that lowers the team’s confidence in the estimate and increases their sense of risk of taking the item into a Sprint. The team should be confident about estimates for the upcoming Sprint (see Estimation Points); a lack of confidence suggests that latent variance remains in the estimates. Reducing the variance of items in later Sprints can’t rescue the uncertainty from even a modest variance in velocity. Range estimation also begs the question: “What is the variance in the team’s estimate of variance?” and it’s too easy to get into numbers-driven project management hell. Further, this approach tends to weaken the team’s sense of commitment: they will tend to be content with consistently meeting the least ambitious forecast.
+
+Therefore:
+
+Make pessimistic and optimistic estimates for release dates based on Product Backlog Item estimates and a range of historic team velocities. Use a high and low team velocity from the past several months to calculate, respectively, the most pessimistic and most optimistic dates for each given release. The Scrum Team should accept release ranges so they feel committed to them. Note that this range is empirically derived, in contrast to the team articulating its gut feelings about worst-case and best-case estimates.
+
+In the example below, the business has asked the team when it will deliver a certain set of PBIs. The team always delivers starting at the top of the Product Backlog and works its way deeper into the backlog during succeeding Sprints. The team can compute its estimate for the total amount of effort required to accomplish such a delivery by summing the work estimates for all PBIs from the top of the backlog down to that desired point. Then the team divides that sum by the optimistic velocity, which suggests how many Sprints it will take to deliver all these items in the best case. Then the team divides the same sum by the pessimistic velocity to compute what might be the worst-case number of Sprints required to complete the work. A Sprint corresponds to a fixed time interval, so the team can directly map the results onto a development duration.
+
+
+The team can define the velocity range by looking at the velocities of the last few (three to five) Sprints, using the lowest among them as the pessimistic number, and the highest among them as the optimistic number. You can discard the top and bottom outliers first if you like. Remain consistent in your technique in the long term.
+
+✥       ✥       ✥ 
+
+The Scrum Team and the stakeholders can align their expectations about the timing of upcoming Regular Product Increments, and of the delivery of individual PBIs.
+
+This approach accommodates emerging requirements to arrive at a range of release dates. Then you can tell the customer that the release will very likely be within this range. The team, and particularly the ScrumMaster, should help stakeholders understand this as a benefit rather than as just an “unfortunate fuzziness.” Involve the Managers when it is impractical for the Product Owner or ScrumMaster to do this, provided that management is also on board to agile principles.
+
+The approach here is analogous to weather forecasts: there is a 60 percent chance that it will rain today and a 40 percent change that it will not. In the same way, the team can introduce the Release Range to stakeholders. There is an 80 percent chance that the release will be ready on day X and a 20 percent chance that it will be delayed to day Y.
+
+However, sometimes stakeholders want an exact date: for example, if the organization needs to release the product at a trade show. This may tempt the team to use the pessimistic estimate. However, this sets up a fixed-cost, fixed-scope release plan and may limit the Product Owner’s ability to change the Product Backlog ordering to take advantage of emergent opportunities in the market. The pessimistic number does not in any case represent an exact guaranteed date, and sometimes it’s as undesirable to deliver early as to deliver late. Such highballing of the estimates almost always signals the tacit desire for a commitment, and agile teams should avoid it. Such thinking kills kaizen mind (see Kaizen and Kaikaku).
+
+Hard deadlines do exist in the real world, however. You may need to have that demo ready in time for that trade show. Impending legislation may force the enterprise to change its software to be compliant with the law (at this writing, investment banks are scrambling to meet a deadline for the implementation of United States IRS 871(M) for which the deadline has already passed). However, there are never hard guarantees in complex development. The Product Owner can manage risk by positioning items appropriately on the Product Backlog so they come to the top and enter a Sprint in time for timely deployment.
+
+If there are no historic data of velocities of the teams, then the team can apply knowledge from previous similar developments in the same domain. Of course, in this case, the team should make it visible that the estimates are based on limited historic data and are likely to be unreliable. On the other hand, the Product Owner might want to be flexible with the release scope. It might make sense to drop features from the release to avoid delivering late. In all such cases, it is best to defer to the Development Team as the authority on these estimates and their reliability (see Pigs Estimate).
+
+The Scrum Team should revisit Release Range estimates regularly. As development goes forward the ranges can become more focused.
+
+You can do an analogous calculation for fixed-date planning, to report a range of PBIs that the team might deliver by a given deadline.
+
+To improve its predictions, a good Scrum Team reduces the variance in its velocity. See the Notes on Velocity.

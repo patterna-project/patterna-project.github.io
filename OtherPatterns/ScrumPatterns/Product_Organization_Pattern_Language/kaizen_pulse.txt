@@ -1,5 +1,44 @@
-Kaizen Pulse
+Kaizen Pulse*
 
-============================================================
 
-TODO: Vložiť popis vzoru z https://scrumbook.org/
+
+...the Development Team has shown sustainable performance as indicated by a dependable level of velocity (see Notes on Velocity), quality, or other measure, and now wants to go to the next level. The team’s measures of capacity and quality are transparent (Fertile Soil), and the team wishes them to remain so, and to take pride in improving them. The team is doing kaizen and introducing improvements One Step at a Time.
+
+✥       ✥       ✥ 
+
+Because it takes time to establish a statistically sound baseline, it’s difficult to show improvement from minute to minute, hour to hour, or even from Sprint to Sprint. Further, Sprints are usually the granularity of the most popular measures of Development Team effectiveness, and particularly of velocity. The same is true for other noble desirables such as, for example, product value, value per estimation point, product quality, or team passion (see Happiness Metric).
+
+In the end, Scrum—like the Toyota Production System—is fundamentally about only two things: kaizen mind and people. Improvement is important and the phrase “continuous improvement” emerges frequently from pundits’ lips. Yet truly continuous improvement has a paradoxical problem. It’s important to be able to measure an improvement, at least to know if a given change made things better or worse. We always measure improvement relative to some baseline, and any single process measurement we take at any point in time is subject to the vagaries of process variation. That means that we need a statistical baseline as a reference for improvement.
+
+More importantly, there is a crucial human side to process improvement: people, as groups, take time to absorb change. It’s O.K. to carry an ongoing consciousness of the need to improve, but you can’t continually focus on improving everything. Internalizing improved development approaches and adapting new techniques takes time. In the end, good production is a matter of practices of habit, and habit formation itself takes time. So at the Daily Scrum, the Development Team members make tactical adjustments toward the Sprint Goal more than they dwell on changing long-term practices, habits, or behaviors.
+
+If the velocity (or other measure) is varying wildly anyhow, you’ll never be able to measure the benefit or damage done by a kaizen program. If you make multiple changes at once, you can’t know which ones contributed to changing the velocity—or value, defect reduction, or any other measure of value.
+
+Therefore:
+
+Alternate periods of controlled velocity with spikes of process improvement. We might call this continual improvement instead of continuous improvement. Start by establishing a velocity baseline and bringing it into statistical control (a rule of thumb for the velocity is to reduce its variance to within 20 percent). Then introduce a single new improvement into product development. The Developers—or, as suitable, the Product Owner or ScrumMaster—commit to Intentional Practice as Jon Jagger describes in [1], pp. 44–45. Practice the improvement and make it routine through tireless repetition.
+
+
+From Takeuchi et al., [2], p. 84.
+
+Constant reflection is important as the Scrum Team members together introduce changes and evaluate their potential for long-term improvement. Some changes have unforeseeable liabilities and, of course, the team should reverse any decision to adopt practices which experience proves detrimental to velocity or to long-term value.
+
+✥       ✥       ✥ 
+
+The Sprint is the major instrument of strategic kaizen in Scrum. When the velocity stabilizes during the period of Intentional Practice, the team can either enjoy a subsequent period of predictable Sprint delivery or can prepare for another velocity-increasing kaizen. There will be turbulence as the team climbs to a new level by improving the process and team dynamics, or by improving the product. Both the Retrospective and the Sprint Review offer opportunities to evaluate the team’s convergence on a new plateau; however, such evaluations need to take place over several successive reviews to increase confidence in the stability of the results (i.e., to ensure that they aren’t temporary). While the Daily Scrum can effect change, Retrospectives and Sprint Reviews effect transition—and strategic changes are lasting changes. For a change to be discontinuous is neither sufficient nor necessary to qualify it as a strategic change.
+
+We can talk about two kinds of velocity kaizen: those that reduce variance in velocity, and those that increase velocity. The same principle applies to any measured value indicator. Many kaizens are more appropriate to bringing the process into statistical control than to increasing performance or value. These kinds of kaizens are not only appropriate, but also important, when the Scrum Team is trying to reduce variance in velocity. Some of the most common reasons for variance in velocity include lack of Cross-Functional Teams, management interference with production, and poor requirements. Kaizens that mitigate these problems can help bring a team to a good baseline.
+
+Complex systems are full of surprises. Change is rarely good for its own sake, and the best-intentioned changes often have negative consequences when reality comes home to roost. Strive to measure the value of the change (value, velocity, consistency, defect density), and be prepared to retrench if the change actually makes things worse. Go beyond single-dimensional measures: your efforts may increase velocity and decrease value (such as ROI; see Value and ROI) at the same time, and you’ll never notice the decrease in overall value if you measure only velocity. So while Piagetian learning provides a model that is monotonically increasing over time, moving from ever higher plateaus to the next level, the learning models of Keegan ([3]) are more realistic and recognize that learning is a complex process rich with setbacks. To reiterate: The Scrum Team should continuously monitor ROI and other value throughout improvement cycles, because velocity alone is not an indicator of increased value. It is important to remember that velocity is a tool for prediction rather than for value, and that value is the end goal.
+
+The pattern Updated Velocity is about establishing a new velocity baseline.
+
+Contrast with Scrumming the Scrum.
+
+In terms of pattern theory, this is more of a “meta-pattern” than a proper pattern. It tempers the way that the team uses the fundamental process (make local change, review, reflect; or the plan-do-check-act (PDCA) or plan-do-study-act (PDSA) cycle) on which the whole of incremental pattern practice is based. This pattern combines the structural improvements of organizational change with the time dimension of progress by introducing statistical variation. It adds a dimension of statistical control to the “check” part of PDCA, which is too easy to consider as being a static analysis of the system state. It is more in line with Deming’s updating of the term to PDSA, which begs the intellectual investment of study rather than just honoring the formality of an inspection.
+
+A team that improves its processes is likely to improve its product, and combined with ongoing product advances, Kaizen Pulse is a major contributor to Product Pride and helps the team achieve the Greatest Value in the long term.
+
+Related to the Kaizen Pulse cycle is the need to alternate between more radical, structure-changing improvements (sometimes called kaikaku) and the subsequent refinements on those changes, which are usually more incremental in nature (for which the term kaizen (カイゼン) is invoked more narrowly than for its usual Japanese use and meaning (改善)). See Kaizen and Kaikaku.
+
+The basic pattern comes from [2].

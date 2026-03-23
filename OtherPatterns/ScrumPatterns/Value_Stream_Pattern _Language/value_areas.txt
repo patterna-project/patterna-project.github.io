@@ -1,0 +1,47 @@
+Value Areas
+
+Trinity Cathedral/Charlie Comella Community Garden uses different garden beds to divide their work. Each bed grows one or more types of plant that are combined to produce the meals for the community.
+
+…your product is a success in the market and more and more people are using it. New customer segments arise with a demand for new features. The Scrum Team still needs to deliver the product at market cadence. All teams strive to be able to deliver any Product Backlog Item (PBI) that comes along, but the teams are about to infuse a new domain and are starting to approach the boundaries of what a team can master.
+
+✥       ✥       ✥ 
+
+When the business cannot serve a growing number of customer segments with separate products, but rather needs to develop a single product that serves all markets, in many cases a single Scrum Team cannot quickly develop the necessary deep understanding of all those customer segments.
+
+
+A Scrum Team should be able to add customer value on its own. Now that there are many customer segments, you might want to add more people who bring enough domain knowledge to the team so that all segments remain understood. Bigger teams are known to be slower because the team dynamics suffer. Also, the challenge of understanding multiple product parts in detail can result in demotivation.
+
+Each product part creates value for a customer segment. Each component team needs specific detailed knowledge about the domain of its part. The classical solution is dīvide et imperā: treat the product as a collection of multiple products, one for each customer segment and each with its own Product Owners and Product Backlog, so that each organization can deal autonomously with its own customer segment. But, the Product Owners and their Scrum Teams will then locally optimize, each for their own parts, instead of optimizing for the whole product ([3]). It is crucial to optimize the design for economies of scope.
+
+When you develop one product with multiple Product Owners, each working from a separate Product Backlog, it becomes harder to coordinate changes that cut across them and harder to give priority to the highest-value PBIs. This is because (1) the Development Teams specialize by customer segment so each team is likely not to be able to relate to needs in other areas, and (2) different specializations dominate the work cross section in different Sprints. Therefore, a strategy based on doing the highest-value PBIs first will overload some teams while leaving other teams with spare capacity. As a side effect, not all the highest-value PBIs can be staffed in a given Sprint, forcing the Product Owner to select lower-value PBIs to keep the teams with spare capacity busy.
+
+Organizing Scrum Teams around architectural components might seem a good solution, but a customer feature often requires an end-to-end slice across components, rather than just a component in isolation. A component team structure leads to sequential development, all kinds of delay, working on low-value PBIs, an opaque view on development progress, and unnecessary coordination roles ([2], “Requirements & PBIs,” p. 215). The same kind of issues arise when you organize your teams around single functions like testing, architecture or analysis. See Cross-Functional Team.
+
+Every Sprint, the Scrum Teams need to produce a Product Increment. Therefore, the Scrum Teams need to integrate their work and handle their dependencies. Managing dependencies across architectural components is hard with many teams. Often, the product introduces an otherwise unnecessary role like a project manager or external feature owner to manage, coordinate, and plan multiteam dependencies.
+
+Therefore:
+
+Scale your product along Value Areas. A Value Area is a valuable product part that addresses the needs of a customer segment but which has no useful value or identity apart from its inclusion in the product. With this organization, each set of Development Teams needs to understand only a subset of customer segments while each team is still capable of delivering valuable PBIs into the Product Increment.
+
+
+A large product can end up with many of Value Areas; when this happens, the Product Owner is not able to manage the Product Backlog on his or her own because of the vast amount of work and required to detail customer-segment understanding. In this situation, the Product Owner forms a Product Owner Team to manage the Product Backlog across Value Areas (see “Scaling Scrum” in [1], p. 331). A Product Owner Team member typically specializes and assists the Product Owner in one Value Area. A Product Owner Team member does not own the product in any sense; the one owning the product is sometimes called the Chief Product Owner.
+
+A large energy company has the following Value Areas: I-Join, I-Pay, and We-Support. Each Value Area exists because it specifically addresses an area of customer value and requires specific detailed knowledge.
+
+The I-Join area is about finding and adding new customers. The I-Pay area handles all the billing functionality and the We-Support area takes care of everything related to helpdesk and complaints.
+
+Each Value Area consists of four to six Development Teams working together in a single Sprint to add customer features to the overall product.
+
+Each Value Area has one or more Development Teams that work together in a single Sprint. A Development Team usually works within one Value Area. The Development Teams organize and coordinate their work themselves without any special coordination roles. All the Development Teams work from the same Product Backlog, and have one and the same Product Owner. Each team individually integrates valuable PBIs into a single Product Increment each Sprint.
+
+✥       ✥       ✥ 
+
+Organizing into Value Areas reduces functional dependencies between Development Teams when most customer segments encapsulate coupled closures of functionality. The remaining dependencies are pushed to the implementation level, and the teams must be attentive to the risk that this pattern might worsen technical dependencies between teams. Code management tools can help resolve implementation dependencies, as can continuous integration and other agile engineering practices (not tools that support or coordinate team interactions). The Development Teams also need to address crosscutting concerns like architectural integrity or a common user experience of the product. Members from the Development Teams can form into communities to handle these concerns and create knowledge across all Value Areas: see Birds of a Feather.
+
+Because the Development Teams start to specialize in a single Value Area, they lose deep understanding about all Value Areas. But the Development Teams still work on valuable (from the customers perspective) PBIs while maintaining focus on the whole product.
+
+The Development Teams in a Value Area need to coordinate their work. You want the teams to notice when there is a need to coordinate, and then coordinate in time with the right people. Therefore, decentralized and informal coordination mechanisms are better than centrally organized meetings (see “Requirement Areas,” Chapter 9, in [3]). You can start with the Scrum of Scrums, a common approach to team coordination.
+
+When a new business opportunity arises that you expect will require significant capacity in the near future, add an existing high-performing Development Team to work on the business opportunity. The Development Team learns fast about the opportunity’s development risks and business potential. When the business opportunity turns out to be successful, the new team becomes a grounding team that helps the other teams get up to speed in this new domain. The drawback is that it is difficult to find an existing team that is available, that has a track record of high performance, and which has competence in the domain of the new business.
+
+Value Areas are an interim response to unanticipated spikes in demand for expertise. One can help avoid such surprises with regular use of Set-Based Design. In the long term, the teams should strive to again become Cross-Functional Teams across all areas.

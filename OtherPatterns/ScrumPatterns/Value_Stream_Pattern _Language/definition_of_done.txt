@@ -1,0 +1,55 @@
+Definition of Done**
+Alias: Done-Done
+
+
+...a member of the team demonstrates to the Product Owner a Product Backlog Item that has just been “completed.” When the Product Owner asks the Development Team when the feature will be ready for users, the Development Team tells her that everything is done but that more testing is needed, and to just migrate the system to the client environment, which in turn depends on another task. Continuing the discussion, another team member says that because the item is an essential piece of the system, the Development Team and Product Owner should review it before release. “So when is it completed?” asks the desperate Product Owner. “You just demonstrated it, but there are still things that should be done.”
+
+✥       ✥       ✥ 
+
+Each team member may have a different understanding of “work completed” for the team’s deliverables.
+
+
+During the Sprint Review, the Product Owner needs to understand where development stands in terms of progress to be able to make informed decisions about what to work on in the next Sprint. Product Owners need to know which issues need attention, and need input to support them in their responsibility to keep stakeholders informed. The more transparent the Regular Product Increment is to the Product Owner, the better the Product Owner and stakeholders can inspect it and make appropriate decisions ([1], p. 71).
+
+For one person, “complete” may be when work is documented, reviewed, and having zero known bugs—for another, it may be “complete” when it does not break during light exploratory testing. This discrepancy may cause varying degrees of quality in delivered work.
+
+The teams should be able to deliver a Potentially Shippable Product Increment at the end of the Sprint. If the quality is lower than the stakeholders expect, the team should not view the increment as being releasable. Consequently, the team might require more time to stabilize, debug, and test the system. But if the Sprint is over, time is up.
+
+Uneven work quality and unexpected delays may draw blame toward the team and also create tension within the team. For developers to be a team, they must be aligned with respect to quality so they all work in the same direction.
+
+It’s not just about stuff that’s externally visible, but rather about anything that could be of value to any stakeholder, including the Development Team itself. For example, software source code that follows coding standards will cause developers less frustration and even increase efficiency when they work with it in the future.
+
+It’s easy for the team to unconsciously (or even consciously) hide the fact that it has skipped conventions of consistency or quality. Doing so creates technical debt: they owe the system some work, and payback comes sooner or later. However, these work items are absent from all the backlogs. While external product attributes will become visible in the Sprint Review, these remain hidden. It’s important to have a standard for these internal items, even if you trust the team to do its best.
+
+Therefore:
+
+All work done by the Scrum Team must adhere to criteria, agreed upon by the Development Team and the Product Owner, which collectively form the Definition of Done. Done means the Development Team has verified there is no known remaining work with respect to these criteria. If the work does not conform to Definition of Done, the work is then by definition not Done, and the team may not deliver the corresponding Product Backlog Item (PBI).
+
+
+It is wasteful to include items in the Definition of Done that fail to increase value for any stakeholder—remembering that Development Team members, too, are stakeholders.
+
+The perfect Definition of Done includes all work that the team must complete to release the product into the hands of the customer. Scrum Teams start with a Definition of Done that is within their current capability and then strengthen it over time. A more complete Definition of Done gives the team more accurate insight into development progress, makes development more effective, and ensures that the team experiences fewer surprises as development continues.
+
+The Definition of Done often captures small, repetitive work items that are too small for the Product Backlog. They are often just good habits of good professional behavior: checking in all the version management branches after programming a software module; updating engineering documents with design changes; updating inventory records for parts used; cleaning the shop floor or desktop, or measuring a component’s compliance to manufacturing standards. The team can start by putting some of these items on the Product Backlog, but that approach tends to bloat the backlog with many instances of the same tasks. If these tasks appear neither on the backlog nor in the Definition of Done, the product's reaching Done is at the mercy of developers’ attentiveness, professionalism, and good memory. It is best to create the Definition of Done with known internal tasks from the actual current process, and to grow it as the team discovers missing items.
+
+Sprint Retrospectives are a great time to review and enhance Done, but the team can revisit the definition at any time. The ScrumMaster should challenge the team to periodically tighten up Done; see Kaizen Pulse. This facilitates team growth as it raises the bar for itself.
+
+The Scrum Team owns its Definition of Done, and the standards of Done are always within the Development Team’s capability and control. The ScrumMaster enforces adherence to the Definition of Done—usually by making it visible if the team is about to deliver undone work. Scrum Teams generally create their initial Definition of Done based on how they currently operate, with a careful review of what demonstrably adds value.
+
+An understandable, clear and enforced Definition of Done creates a shared understanding and common agreement between the Product Owner and the Development Team. This reduces the risk of conflict between the Development Team and the Product Owner. The developers can assure the Product Owner that it needs do no additional work to deliver work at the end of the Sprint (such as an additional stabilization period.) The Scrum Team should occasionally explore whether it should add some kinds of hidden work to the Definition of Done.
+
+Each criterion in the Definition of Done should be objective and testable. Every parent knows the following story. A father asks a child, “Did you clean your room?” The child answers, ``Yes.'' Then the father continues, “Are the toys put away, clothes hung up, bed made, and floor vacuumed?” The child says, ``No.'' So, do not test for activity but rather for concrete result state. This makes it also easy to formulate Definition of Done as a checklist—a commendable practice. Contrast this with Testable Improvements, which applies more to process kaizens; most elements of Done are properties of the product.
+
+The Development Team should remove or reduce technical debt when it encounters old work that does not adhere to the current Definition of Done. Typically, the team cleans up only the area near the modification to limit the scope of change to a reasonable size. In the long run, Definition of Done helps to remove technical debt.
+
+In larger organizations, a shared Definition of Done across all teams might establish a common quality level. Balance the idea of a shared Definition of Done against the need for team autonomy. In case multiple Development Teams work on a single product they all share the same Definition of Done as they deliver a single integrated Product Increment at the end of a Sprint.
+
+The team does not create a custom Definition of Done for each PBI, but rather applies a general set of criteria. However, a single set of general criteria may not always match all work items well. For example, criteria for documentation, calculations, and code could be different. If you have a wide range of varying types of work items that a single set does not cover adequately, you might have separate a Definition of Done for each type of work item. This is quite common.
+
+✥       ✥       ✥ 
+
+With a discipline regularly of achieving Done, the Scrum Team is in a position to deliver Regular Product Increments of known quality. Just practicing Good Housekeeping can keep a team from getting in trouble with technical debt. As a consequence of each PBI being Done each Sprint, there are no “quality PBIs,” “quality Sprints,” or “hardening Sprints.” Focusing on Done reduces the possibility of unpleasant surprises during later development, and knowing that previous work is Done makes progress forecasts more reliable. Having a hard Definition of Done eliminates the need for, as an example, development operations (DevOps) teams that configure releases for clients, which eliminates handoffs in a way that is in line with good lean practice. The ultimate in Done is readiness for end-user consumption or application.
+
+A good Definition of Done captures the recurring required tasks that appear in multiple PBIs in multiple Sprints. Having one fixed, common list avoids having to repeat these items as PBI expectations or SBI activities.
+
+With a good Definition of Done, the team will avoid technical debt. Add the Definition of Done to the criteria the Product Owner uses to approve a Product Backlog Item in the Sprint Review. Good ScrumMasters challenge the Development Team to adhere to the agreed upon Definition of Done; the Product Owner enforces compliance with externally facing requirements, communicated in Product Backlog Items as Enabling Specifications. The Product Owner will allow the organization to deliver only Done PBIs and should choose to let only Done PBIs into the Sprint Review. There are some grey areas, such as user-interface guidelines (think Apple Human Interface Guidelines), which are outward facing but which can be automated and potentially put under the purview of the Development Team.

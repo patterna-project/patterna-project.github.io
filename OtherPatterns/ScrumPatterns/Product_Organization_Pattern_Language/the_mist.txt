@@ -1,5 +1,21 @@
-The Mist
+The Mist*
 
-============================================================
+...great works start with a vague longing across some community. Individual tinkerers and craftsmen strive to solve great problems locally or individually, often from the limited perspective of their trade. Though they aspire to do great things, they stop at small, local benefits for want of effective cooperation. The culture has already gained a sense of the need to explore improvements together, toward the greater good—The Spirit of the Game.
 
-TODO: Vložiť popis vzoru z https://scrumbook.org/
+✥       ✥       ✥ 
+
+Innovation has enjoyed its greatest days when humankind has come together in groups. Earliest humankind lived together in small groups able to live from a small subsistence economy. The author Steve Johnson credits cities with being the cradle of innovation as people with diverse skill sets and backgrounds were able to freely trade notes, in [1] (Chapter 2, “Liquid Networks”). As people came together in groups, production supplemented subsistence. In the same sense that cities grew, production institutions similarly became the new engines of innovation. The innovations that came from groups of workers and their colleagues inspired market enthusiasm and allowed them to reap the resulting economic rewards.
+
+
+Yet such communities have perhaps always been limited from achieving their full potential as they stayed beneath the shadow of hierarchy. There have always been strong patterns of human nature that elicit conformance from individuals’ social, professional, and economic behavior. Indeed, conformance has usually been the standard by which one is accepted into a society, and there was usually some authority defining the rules of acceptance—a ruler, a religion, labor unions, or academic standards. Feudal lords proposed and serfs disposed. Humanity’s most rapid period of economic growth, during the industrial revolution, saw the hands of many carrying out the designs of a few. The good drove out the perfect. Variety and progress languished through saws which we today view as humorous, such as: “You can have any color of car as long as it’s black,” or “I think there is a world market for maybe five computers.”
+
+Therefore,
+
+An individual, or a collective mind of several individuals, together create an environment where the necessary pre-work and evaluation can establish the primordial soup from which Scrum teams emerge. The core of this pre-work follows an emerging vision to improve quality of life. That vision is based in a product that will add value both for those who build it and those who use it. That vision breaks with the servitude habits of past work practices and foresees a more undifferentiated world of give-and-take between those who conceive it, those who build it, and those who use it. Scrum, as Jeff Sutherland conceived it, foresees the ability—even for those who have nothing—to have hope of being able to build something from nothing.
+
+
+✥       ✥       ✥ 
+
+Ideas start to come together about a product that can contribute to quality of life, and about how to excite and engage people to realize such a product and evolve it with the involvement of some community of stakeholders. People start to come together in groups of common interest, bound together as much by The Spirit of the Game as by their passion for the product or for the purpose it serves. Over time these collections of people cultivate Fertile Soil while aspiring to build something great, something cool, something exciting—with a shared purpose, to realize a Vision.
+
+The first step is the growing synthesis of ideas about the artifact as well as the processes to realize it, culminating in some consciousness about such a constellation of ideas as a Vision.

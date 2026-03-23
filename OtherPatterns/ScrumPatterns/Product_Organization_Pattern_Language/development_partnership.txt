@@ -1,5 +1,52 @@
-Development Partnership
+Development Partnership*
 
-============================================================
 
-TODO: Vložiť popis vzoru z https://scrumbook.org/
+
+Multiple parties in the Value Stream should strive to work as harmoniously as possible.
+
+...an enterprise may lack development staff with competencies to develop a product for a new market, so they outsource some or all development to another organization. Such engagements are “partnerships,” or “contracted” or “outsourced” work. (Third-party commodity goods and services are outside the focus of this pattern.)
+
+✥       ✥       ✥ 
+
+Partnerships are beautiful when they work, but corporate and organizational boundaries are often arbitrary with respect to how the organizational units develop products together. Though business needs may span several disciplines, an organization may choose to focus on its core competencies while going to more capable providers to fill in the gaps. For example, a manufacturer is unlikely to have the in-house expertise to develop its own personnel management software, yet has special needs that cannot be met by off-the-shelf software. Or a business may get caught by surprise as it finds itself in a market that needs expertise that is unavailable in-house. So, the enterprise adapts by engaging an outside firm to meet the need. Here, “outside” usually means another company, but the walls can be equally high between the client and another internal department.
+
+
+This sets up a vendor-client dichotomy. It’s natural for each side to keep many of their processes—processes that connect their own people together well, but don’t naturally integrate outsiders. Handoffs—particularly of requirements—start becoming more frequent. Developers face a crisis of allegiance split between their employer (or boss) and the client. The Development Team may face difficulty obtaining requirements or context from the client organization due to political firewalls or lack of knowledge about whom to approach. The lack of trust built into such an approach may be at the root of fixed-scope contracts, which usually leave someone unhappy when applied in a complex domain. Nobody wins.
+
+Who should employ the Product Owner: the vendor or the client? The client has the domain knowledge and should be in control of product content. Yet it is in the client’s interest to reap the highest possible value (see Value and ROI) which means the client has an interest in minimizing the vendor’s profits. On the other hand, perhaps the vendor should manage its own profitability from the engagement. This suggests that the Product Owner live on the vendor side. The usual solution is to place a Proxy Product Owner with the Development Team on the vendor side. The Proxy Product Owner becomes the first line of defense for questions of clarification from the team, and may even represent the Product Owner at activities as important as the Backlog Refinement event or Sprint Planning. If the Proxy Product Owner on the vendor side does not work in the same office as the actual Product Owner, all the problems of a multi-site setup ensue; development becomes two one-way communications instead of one two-way communication.
+
+Even worse, the client may just propose that the vendor draw on its own staff for the Product Owner role. However, this usually reduces the Product Owner to a product manager or project manager who in fact doesn’t own anything, who cannot speak authoritatively to the content of the product, and who usually cannot make product decisions unilaterally. The usual result is delays in requirements clarification, or in Product Increments that simply don’t meet client expectations.
+
+Therefore:
+
+Create a partnership between clients and vendors that breaks down walls between the organizations. The initial agreement makes the rules of engagement clear, and these rules should include consideration for collocated development, equitable risk sharing, and ongoing adjustment to the definition of the deliverable, with a vision of a continued long-term engagement after the initial business goals are met.
+
+
+Because the best Product Owners are as close to value delivery as possible, the Product Owner works for the client. The Product Owner will of course be attentive to maximizing value for his or her employer but will also honor the spirit and letter of the agreement according to how the vendor will realize benefit from the engagement.
+
+It is best if the Development Team be physically situated on the client site. There’s much to be said about picking up cues about the culture and the implied product needs by just noting how the client works, or by hearing the talk around the water cooler. This also has the benefit of making domain experts more readily available to the Development Team.
+
+In the absence of full-time collocation, the Product Owner should strive to be around the vendor Development Team members much of the time. One must inspect and adapt to find what “much of the time” means, but successful examples are at least six hours a day, four days a week, or four hours a day full-time—not one or two days a week or an appearance at a daily teleconference meeting. If there is a Product Owner Team, the Chief Product Owner should nonetheless engage with the Development Team to this degree. Again, it is tempting to solve this problem with a proxy, but experience suggests that arrangement causes too much loss in requirement communication. (In reality, it may make transparent that the titled Product Owner doesn’t actually own the product or is disengaged.)
+
+The business model should share risk between the vendor and client. There are many ways to do this; see Change for Free and Money for Nothing. In the best case, the vendor shares both the risk and the benefit. For example, the agreement may stipulate some long-term sharing of the profit (and maybe loss as well) from the vendor-built product.
+
+In short, though outsourcing splits the work across multiple political organizations, this does not excuse the development from following the principles of Scrum. Embrace the same principles as though the same boss signed everyone’s paycheck.
+
+✥       ✥       ✥ 
+
+The vendor and client can work together to reduce the most waste and to achieve the Greatest Value for the joint scope, rather than optimizing locally and individually.
+
+Cultural alignment is more important than technical expertise as regards product governance. The loyalty of all team members—Product Owner, ScrumMaster, and Development Team members—is to the product rather than to their organization. All allegiance is to the Product Owner.
+
+Things go much more smoothly when you synchronize the partners’ cadences: see Organizational Sprint Pulse.
+
+The ScrumMaster must be particularly attentive to interference from remote managers who want to “help” the team and to local managers who want to pressure the team to meet contractual obligations.
+
+It is difficult to fully plan out these engagements: what may look good on paper may fail miserably in practice. Inspect and adapt, and expect to learn how to correct many bad decisions during the first few months. Aggressively use the Sprint Retrospective to adjust and fix problems rapidly.
+
+Over time, the Development Team may become more and more part of the client culture. A seasoned agile vendor can help lead the client into a more agile way of doing things. Having a long-term engagement means that both sides can avoid the cost of renewed contract negotiations when considering new business needs, or the untenable overhead on the client to engage a new vendor and integrate them into the overall business processes. Maintaining Stable Teams requires particular attention in these arrangements.
+
+All parties in such a partnership should share a sense of Product Pride. An imbalance in this attitude across partners may signal that one partner has an overly controlling influence over the other, more unwitting party.
+
+
+See also Collocated Team, and the Federation Pattern of Terunobu Fujino ([1]). Furthermore, there is a curious overlap between this pattern and the foundations of Face-to-Face Before Working Remotely.

@@ -1,0 +1,45 @@
+Value Stream**
+
+
+
+...the Product Owner has defined a Vision and is now seeking ways for it to create value, where we define value as something of worth to some person or set of people whom we wish to serve.
+
+✥       ✥       ✥ 
+
+The development process and the path from conception to market are as important to product success as the product idea itself. In simple development, as in agrarian societies, the raw materials were close at hand and the vendor (the owner of the grape vines) could relay them to the consumer (a hungry traveler). As production became more advanced, the processes behind the product also became more complex (such as making wine). Unlike the workforce skills required for simple agrarian products, the innovation and wherewithal to support complex endeavors requires teamwork. Intellectual endeavors beg a more open system, where the inputs and connections between development networks form a dense network.
+
+
+Building a complex product like a car or a software program may require many teams and a deep understanding of how to coordinate their work. However, execution alone—good processes and good people—won’t carry the day.
+
+Therefore:
+
+The Product Owner creates an ecosystem whose elements build on each other to deliver ever-increasing value in an evolving product. At the center of this ecosystem, there is a process to deliver ongoing and evolving streams of product increments to stakeholders: the Value Stream.
+
+Value Stream building blocks include the artifacts (backlogs, product components) and processes that guide and coordinate the creation of these artifacts (through events and joint work). The people involved in the Value Stream are instrumental in building, enacting, and evolving the processes that guide the creation of these artifacts.
+
+
+The Value Stream structure is dynamic and the Product Owner may tailor it to changing business conditions, stakeholder relationships, or even product increment content. However, from an organizational perspective, the development component of the Scrum Value Stream comprises one organization: the Scrum Team. The Scrum Team carries out all development activity without significant handoffs to or from other teams.
+
+Toyota manages to build many cars with a lot of variety and high quality by applying the Toyota Production System (TPS) ([1]). This production system consists of world-class processes, good employee training, and elimination of waste. Yet, the processes don’t emerge from thin air; many of them reflect the structure of the path from the raw materials to a sales lot. This raises crucial questions: Who designs the assembly line or its robots? Who decides what is written on the process instruction cards at each work cell? Such activities fall within the scope of building a Value Stream. The retailer Tesco analyzed their Value Stream (from supplier to store sales) and discovered significant improvement opportunities. As a result of making the improvements in their Value Stream, the “supplied items began to flow more quickly,” which resulted in “lower costs and growing sales for Tesco and its suppliers” ([2]). “Their success in redesigning their grocery supply network helped them grow from being a mid-sized grocery retailer in the U.K. markets to being the third largest retailer in the world within a decade” (the same source).
+
+✥       ✥       ✥ 
+
+The Product Backlog, Sprint Backlogs, and Scrum Boards, together with many other following patterns, help form a Whole through which work flows as it progresses to delivery. The Value Stream is, in part, the organizational structures and processes that provide cradle-to-cradle support for the product. It is also a structuring of time that defines the life stages of value from conception through analysis, design, delivery, and ongoing product care. Product Increments flow in time through the Product Backlog, Sprint Backlogs, and Scrum Boards. These are the artifacts that reflect the workflow through the Product Owner and the Development Team.
+
+The rationale behind a single Scrum Team per Value Stream is to eliminate handoffs. Handoffs lead to feedback delay, which in turn causes rework—a particularly pernicious form of waste (muda). To be effective, the Scrum Team needs both the business solution insight of the Product Owner and the development capabilities of a Cross-Functional Team. Though commodity goods and services may come from other sources and flow through the Scrum Team, a Value Stream does not split value-adding development across multiple teams.
+
+While product and value flow downstream, there is also a corresponding upstream flow. New requirements, defect reports, and product ideas emerge from the market and from the development process itself and can affect subsequent work along the stream. Much upstream flow happens during the structured feedback events of the Scrum framework, and particularly during Sprint Review and Sprint Planning; however, defect reports and other feedback may come at any time. To deliver the Greatest Value, the team may disrupt the Production Episode to remediate defects and foster Product Pride. Most Value Streams field requests from end users and customers with a customer support function which, among other things, does triage on such requests to separate operational issues and user errors from defect reports and requests for product extension. That is the first “line of defense,” with the Product Owner being the next stage who filters and organizes such requests. Most of the corresponding downstream flow happens in discrete deliveries called Regular Product Increments, but high-performing Value Streams can use the more incremental Responsive Deployment to deliver off-cadence.
+
+Any given product can support multiple Value Streams, so a given Scrum Team may manage several Value Streams. Any given Scrum Team usually creates value for several stakeholders, and this implies that there are often several Value Streams at play. The client, end user, and customers are obvious stakeholders, but the Scrum Team should maintain a Value Stream that makes work ever less stressful, more fun, and more fulfilling for itself.
+
+There are a small number of key patterns that describe smaller Wholes within the Value Stream. Much of the remainder of this chapter comprises those patterns. Some of these patterns reflect processes related to production. Typical of such patterns are:
+
+Product Roadmap—the map of alternative paths to value
+Sprint and Sprint Backlog—the time and content dimensions of a product increment
+Regular Product Increment—the realization of Vision components
+Beyond focusing on the product for its own sake, it is important to remember that the Value Stream is a living system that is ever getting better, and that there are patterns around the processes for such improvement work. Typical of these patterns are:
+
+Kaizen Pulse—running a development as an alternation between base-lining and attempts to improve
+Sprint Retrospective—explicitly focusing on process improvement as much or more than on product improvement
+Scrumming the Scrum—using the Scrum framework itself as a tool to manage the work of process improvement
+The pattern you are reading describes the Value Stream only as a generic construct that goes hand-in-hand with Scrum's nature as a generic framework. Individual products each have their own Value Streams whose roots lie in the raw materials or sources of innovation and that contribute to the respective products' value. A Scrum Team might want to use Value Stream Mapping to explore the particulars of its own Value Stream. You can learn details of Value Stream Mapping from Mike Rother’s Toyota Kata ([3]). Such an analysis may help a Scrum Team refine the existing Scrum patterns or to add new patterns germane to the needs of a particular business.

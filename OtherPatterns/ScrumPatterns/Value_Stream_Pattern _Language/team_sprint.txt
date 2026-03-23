@@ -1,0 +1,52 @@
+Team Sprint
+Alias: Hack Sprint
+
+
+Let the Developers propose work every few Sprints.
+
+...you have a Product Owner and Product Backlog. The Development Team is coming up with new ideas, features, or innovations that the Product Owner puts on the Product Backlog as Product Backlog Items (PBIs). The organization is probably not yet Scrumming the Scrum.
+
+
+✥       ✥       ✥ 
+
+Development Team members come up with ideas for PBIs that never make it into the Sprint as new higher-value items are constantly pouring in from the other stakeholders. The team gets frustrated as its PBIs won’t ever make it into a Sprint. Development Team members can do much within their own sphere to increase their quality of work life and of the product by adding increments to the product, by creating or refining tools, or by improving their work environment. Yet these changes rarely make it to the boardroom-level discussions that usually guide the strategic development direction, so they never make it onto the Product Backlog and never influence the Development Team’s work. This might also lead to a situation where the team neglects redesign as the Product Owner sees no value in it.
+
+PBIs elicited by the Development Team can be important from their own perspective, but new items from other stakeholders prevent the team’s items from getting into a Sprint. Ideally the working relationship and trust between the Development Team and the Product Owner will be such that team’s proposals can be accommodated among those that the Product Owner has developed. Unfortunately, the team often cannot convince the Product Owner to include technical items in a Sprint because the Product Owner may not understand neither technical debt nor the merits of good design.
+
+It is demotivating to the Development Team if it has no say in what to work on. The team members want to work on items in which they have vested interests and for which they feel ownership ([1]). For example, Google and Atlassian let their employees work on ideas of their own initiative on a regular basis.
+
+Items that may be motivating for the Development Team may have lower value than those that come from the business. Therefore, the Development Team cannot work solely on those PBIs it finds interesting. However, in the long term, it is a good idea to also work on those items suggested by the Development Team.
+
+Getting to work on something else is refreshing and might even prevent burnouts.
+
+Because Development Team members have less direct exposure to market constraints than the Product Owner, they are more able to propose ideas that are outside near-term business concerns. So some potential valuable innovations may be left unexplored or unimplemented if the Product Owner sees value only for items that are “safe.” Furthermore, sometimes ideas might lie far outside the box and it is hard for anyone to see their value until the team actually implements them.
+
+Therefore: The Product Owner organizes a Team Sprint every fifth or tenth Sprint or as best suits the organization. In this Sprint, the Development Team can choose whatever PBIs it wants to include in the Sprint.
+
+
+
+The work items (PBIs) should still go through the Product Owner to the backlog, otherwise it is not Scrum, and transparency may suffer.
+
+✥       ✥       ✥ 
+
+The Development Team can choose items it wants from the Product Backlog, to define its own Sprint Backlog and Sprint Goal, to shape their own Product Increment, without respect to the usual practice of honoring the Product Owner’s ordering. In this way, the Development Team members really get to do what they want, and it will keep them motivated. If there is something more important coming up from the Product Backlog, then the Team Sprint can wait for a suitable moment. However, the team should not postpone the Team Sprint indefinitely, but instead agree on a concrete target date.
+
+Having a Team Sprint helps reinforce the Development Team’s sense of being an Autonomous Team.
+
+This approach also solves the issue of when the Product Owner does not invest time understanding the value of the PBIs that the team has proposed for the Product Backlog. The Product Owner might order the Product Backlog according to the perceived low market value of the team’s proposals so they end up near the bottom of the backlog. Often, their weighted view of value is a function of overestimating or underestimating technical or implementation risk. But if the Development Team occasionally or periodically gets to decide freely which items it will take into the Sprint, the team’s own PBIs will also eventually get attention. So this approach can open the door to potentially higher payoff from taking increased risk, while managing the risk by modulating the frequency of Team Sprints.
+
+As team members get to work once in a while on their own priorities, they are more motivated to also work on other PBIs. The idea is to tap into the team’s passion and enthusiasm; see Happiness Metric. Avoid, at all costs, using this opportunity to retire technical debt or to “catch up.” There should be no “quality Sprints,” “refactoring Sprints,” or other Sprints to retire technical debt, as they dilute the discipline of Done to which a team should attend every Sprint. In the extreme case that the Sprint Goal is to retire past accumulated technical debt, the Product Owner should legitimize the effort with one or more PBIs.
+
+The whole Sprint should be dedicated for the Team Sprint, so that there is enough time for the team to achieve some meaningful Sprint Goal. If the team needs new ideas to fill up a Team Sprint, one might consider hackathons or some other creativity event. The team can use the Team Sprint to come up with bug fixes, new features, or even developing tools. The team incorporates these items in its work plan as usual in Sprint Planning.
+
+The Product Owner should balance between optimizing external value and keeping the team motivated.
+
+An example is one of Google’s most famous management philosophies called “Google Fridays.” Some products that came out of this activity are: Google News, Gmail, and even AdSense. Gabrielle Benefield relates a story about introducing this idea at Yahoo!
+
+In 2003 I came up with the idea of Hack Sprints, as some teams were complaining that the pace was relentless with Scrum, and that they never had time to draw breath and just think. The idea was to have the entire team decide what they wanted to work on for that Sprint. It’s like the idea of using 20% of one’s time for undirected work (“Google Fridays”), but more focused. They did it about every 6th sprint as I recall.
+
+The team members included the Product Owner & ScrumMaster. Everyone had equal sway and you had to lobby and get others to agree to work on things together and to prioritize the backlog for the upcoming Sprint. Designers often wanted to look at the clouds and think up ideas, devs to fix annoying bugs, but often people came up with great ideas and got the whole team on board to build them.
+
+Not many teams tried this but for the ones that did they said it paid off in spades. The ideas were excellent and people felt motivated and that they weren’t just ``sprinting'' with no end in sight.
+
+Skype conducted between two and four Hack Sprints per year, aligned across all teams, which gave rise to innovations such as mobile video image stabilization, in-call emoticons and screen-sharing among other heavily used features. [2]

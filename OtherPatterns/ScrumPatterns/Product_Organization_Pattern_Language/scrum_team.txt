@@ -1,5 +1,55 @@
-Scrum Team
+Scrum Team**
 
-============================================================
+A team (producers and supporters) working closely together to achieve a vision—complete with a guard to protect the team.
 
-TODO: Vložiť popis vzoru z https://scrumbook.org/
+…you have a Vision of a product for your customers. You have started to record the ideas your customers are going to love and you need to start to make these ideas a reality. You don’t know how to make the product or whether the ideas are correct, but what you do know is there will be new ideas as you learn more.
+
+✥       ✥       ✥ 
+
+Many great Visions are beyond the reach of solo efforts, and to achieve such a Vision you need to build the complex product, bring it to the market and leverage feedback
+
+Some products simply cannot realize greatness at the hands of a single individual; it’s too easy to develop a low-value product in a feedback vacuum. Experience shows that person for person, teams outperform individuals: Many hands make light work.
+
+History, experience, and inclination will draw individuals to particular areas of focus (e.g., eliciting needs from the market as opposed to production), but too much specialization (e.g., wanting to be in production without dealing with other development tasks like documentation or testing) can lead to expertise starvation as development needs vary from delivery to delivery. Role differentiation should primarily follow from variations in the long-term rhythms of those roles’ primary activity. For example, one set of roles may deal with the market on a release cadence while another set of roles may deal with day-to-day production issues.
+
+
+The work rhythms of business and development are different with good reason, and letting them work separately increases autonomy and lets each focus on what it does best. The good part is that this gives the business the freedom to work on other things while development readies the product for delivery. The bad part is the hand-off that happens if the business gives the order to develop a product and transfers the responsibility of product delivery to a separate development organization. The hand-off may include a deadline and, because the business and development organizations are decoupled, the deadline may be arbitrary with respect to what development can actually deliver. The only thing that development can do is increase their rate of production.
+
+Focus on the whole product is a state of mind. It is hard to develop that mindset as an assembly line worker producing some small part of a product. Being decoupled from any whole-product focus makes work feel less meaningful and robs people of a sense of ownership for the Vision, or being able to identify with the purpose of the product.
+
+A team should be a locus of learning and improvement, and the team structure should support learning. Solving a complex problem means that you will learn a lot during development and use that learning to let the solution emerge. Both the business and development could respectively elicit and act on feedback relevant to their own worldviews. A solution that works well from the perspective of the business might not yield the Greatest Value. The same is true of development perspective. The frenetic pace of development and the intellectual demands of building a product work together to draw our focus to only the problem at hand. We’re so busy building a product that we can’t be bothered to do it better. And neither development nor the business are attendant to the more transcendent issue of process, which is very worrisome from the perspective of the Japanese roots of Scrum that advise us “build the right process and you’ll build the right product.”
+
+Fast feedback makes learning timely and effective. Learning is even more effective when people with different expertise and perspectives work together during development. People that focus on the activities of developing the product often have less time to think about how to improve.
+
+Therefore:
+
+Form a team that has all the necessary competencies: the people who can make and deliver the product (a Development Team), a Product Owner who guides product direction, and a ScrumMaster who facilitates learning.
+
+
+A Development Team has the skill and knowledge to implement products and to do all the work necessary to put them in the hands of end users. A Product Owner is the manifestation of the business within the Scrum Team (connecting it with the customer). A ScrumMaster has the skill and knowledge to coach a Scrum Team, help it continuously improve its development process, and address Impediments.
+
+Usually, the Product Owner brings the Scrum Team into existence to realize his or her Vision to achieve value, and in many contexts the Product Owner will work within an enterprise to create the Scrum Team as a small, autonomous enterprise within the larger entity. The Product Owner will lead the team toward the Vision. Teams may add small numbers of Developers and may grow over time, but never beyond Small Teams of no more than about seven developers in any Development Team.
+
+The developers have their own identity as a Development Team that manages itself to its forecasts and commitments. The Product Owner and Developers together hire or appoint the ScrumMaster; the ScrumMaster takes ownership of the process and supports the team in ongoing improvement.
+
+The Scrum Team is more than a wrapper for including the Product Owner in a team. The Scrum Team is a small business that can work within the context of the organization and make independent decisions to respond to the customer. This change in structure has a significant effect in the development of products when using Scrum.
+
+✥       ✥       ✥ 
+
+The Scrum Team provides an organizational home for the Product Owner’s Vision. Each Scrum Team runs like a small enterprise, as an Autonomous Team. Each team comes together around shared values and is conscious of, and may even articulate, its Norms of Conduct.
+
+A small and interactive Scrum Team creates opportunities for feedback from the development of the product (as a Regular Product Increment) into the Product Backlog. Because the Development Team spends a lot of time with the Product Owner—building a strong working relationship—the Development Team can come to understand the product direction well. The Product Owner will also gain a deeper understanding of the implementation of the product, leading to other joint decisions between the Development Team and Product Owner that may increase ROI or other value.
+
+The Scrum Team creates a structure that supports alignment for the team around the product direction and goals. The team meets regularly to attend to fixed work such as periodic review and planning (Fixed Work), and other central events like Sprint Planning. Teams have a purpose and, without the explicit link to the product direction via the Scrum Team, the purpose of the team can become fractured. Functional subgroups each have their own independent purpose: there are no such groups within a Scrum Team. The climate for product development can also be established via the Scrum Team. Whether a product needs to be highly secure, delivered very quickly, or be extremely robust, the Scrum Team can quickly establish that these might be so by its connection to the product market. The close connection between the Development Team with the Product Owner fosters a climate that steers overall development in the right direction. Multiple Scrum Teams align informally as needed, and more formally through the overarching MetaScrum.
+
+True teams are almost always Collocated Teams. Size the team according to Small Teams, ensure that it is a Cross-Functional Team and let the team manage the Development Team membership over time according to Stable Teams. This creates the opportunity for the team to become autonomous and self-organizing as well as aligned with the product.
+
+Development Teams within a common product development work on the same cadence (Organizational Sprint Pulse). They coordinate freely with each other as needed, with a daily opportunity for formal coordination in the Scrum of Scrums as well as once per Sprint in each of the Sprint Review and Sprint Retrospective. Great teams work in a rhythm of alternating focus on process improvement and production (Kaizen Pulse).
+
+Emergency situations may cause the team to take exceptional action to break cadence; see Emergency Procedure.
+
+For outsourcing, or other co-development programs, consider using Development Partnership to staff the Scrum Team roles, with particular attentiveness to keeping the Product Owner close to the business drivers.
+
+While multiple people working together can produce more than the sum of what they could do independently, a group setting leads to coordination and communication overhead that have a cost called process loss. Counter this process loss with Small Teams.
+
+Jeff Sutherland evolved the Scrum Team concept from the organization of the Toyota Production System work cell, which normally comprises workers and a Chief Engineer. Jeff split the Chief Engineer role in two, with the business focus going to the Product Owner and the process focus going to the ScrumMaster.

@@ -1,0 +1,35 @@
+Pigs Estimate**
+
+...the team has a Product Backlog or Sprint Backlog in hand. The team uses effort estimates, both for Product Backlog Items (PBIs) and tasks (or other Sprint Backlog Items), to forecast, plan, and schedule work and deliveries. The Development Team manages itself as an Autonomous Team.
+
+✥       ✥       ✥ 
+
+The team should ground its estimates in reality rather than assumptions or wishful thinking.
+
+Sometimes when new work comes in, a caring manager may want to protect the team from the work of estimating it, and may take the initiative to estimate it him- or herself. It will take the team some energy to undo a standing estimate, particularly if a manager, the Product Owner, or someone else in authority or with power over the team, imposes the estimate on the team.
+
+
+Development efforts tend to rely on experienced people and experts to do estimation. But maybe the people who are going to do the work are less experienced, or the team has forgotten to involve an important area (for example, Testing) in making the estimates.
+
+A team might not feel responsible for the backlog when others determine the estimates. If the expert is within the team, a hierarchy might emerge and the team as a whole might not take ownership of the estimates.
+
+Therefore:
+
+Let the people who are committed to do the actual work do the estimation. In the Scrum sense, it is pigs that estimate—not chickens ([1], p. 31; [2], p. 51; and [3], p. 123).
+
+The terms Pigs (Development Team members) and Chickens (everyone else) finds its roots in the following joke:
+
+A chicken and a pig are together when the chicken says, “Let’s start a restaurant!” The Pig thinks it over and says, “What would we call the restaurant?” The chicken says, “Ham n’ Eggs!” The pig says, “No thanks, I’d be committed, but you’d only be involved!” (From [5], p. 42)
+
+
+The estimate should be a consensus generated from the perspectives of all relevant development areas. Research shows that estimates are much better when combining independent estimates, with iteration and feedback, from everyone who participates in development. Since Development Teams are cross-functional, it’s possible for the Development Team to create very good estimates together ([4]).
+
+✥       ✥       ✥ 
+
+The team feels committed to ownership for its work. This is good in its own right but will also increase the focus that the team brings to its estimation efforts. Oh, and one gets better estimates in the long term if they come from the Developers.
+
+In particular, the Product Owner (perhaps together with the Product Owner Team) estimates the Business Value, and the Development Team estimates the cost or effort necessary to complete the PBIs. Each of these groups can use Wideband Delphi [6] or any other technique to build a consensus view (see Estimation Points). It is particularly important to capture the perspectives of all members of the cross-functional Development Team.
+
+The Development Team should continuously revise estimates as new information emerges. The team can estimate newly created Product Backlog Items as it works with the Product Owner toward creating a Refined Product Backlog, and it is natural to review estimates at Sprint Planning. The Development Team can follow its intuition about which estimates to revisit in light of new information. Estimates also come up for renewal as the Scrum Team restructures the Product Backlog while building a Refined Product Backlog or striving for a Granularity Gradient.
+
+In most applications of this pattern in Scrum, the estimate is only a forecast, and stakeholders should never view it as implying a commitment. On the other hand, no one other than “the pigs” is allowed to speak to estimation. There should never be a ground for challenging an estimate a priori. For example, Product Owners cannot impose their wishes for delivery on the team’s grounded forecast about how long work will take. Empirical insights from experience over time will help the team adjust its estimates to be more accurate.
