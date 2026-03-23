@@ -1,0 +1,55 @@
+ FAILED PROJECT WAKE *
+ The Trident project was the most exciting project I had ever worked on. We
+ were a small team with an aggressive schedule, but we made good progress
+ and were actually ahead of schedule. Then one day the the company made a
+ major business decision that meant that the Trident project was probably
+ unnecessary. Sure enough, the project was canceled a few days later. We all
+ agreed that it was probably the right decision, and we appreciated the speed
+ with which it was made, but it still hurt. 
+For a week we walked around in a fog. We did nothing. Finally, we took the
+ afternoon off, and had a party at someone’s home. We brought our families
+ and played croquet in the back yard. After that it was much easier to move on
+ to the next project. 
+...projects fail for a variety of reasons. Many of these are attributable
+ to the team involved in the project; in fact, this pattern language is
+ designed to help with many such problems. But software developers
+ don’t work in a vacuum. There are many external factors that contribute to the success or failure of any project. Changes in the market,
+ for example, can doom a product before it ever gets out the door. You
+ can have the greatest, hardest working team in the world, and their
+ project still might get canceled, in spite of their best efforts. 
+✥ ✥ ✥ 
+ Canceling a project, even for the best external reasons, is particularly demoralizing to a team that has put its heart and soul into it. 
+It doesn’t matter much that the team members fully understand the
+ reasons behind the cancellation, they still feel bad. They feel powerless, somewhat apathetic, and sometimes betrayed. At best, they will
+ have some “down” time, even if they have another project to jump
+ into immediately. At worst, they may quit. 
+They may note that successful projects are rewarded, but it wasn’t
+ their fault that their project was canned. This feeling of inequity can be
+ strong. 
+Therefore: 
+Hold a wake for the failed project. This should be much the flavor
+ of an Irish wake; a party for the dead. 
+Don’t try to placate them with false statements of “success.” They
+ all know the project bombed, so just hold a party over that. 
+Go ahead and make it a big party; make it more than just cake and
+ punch in the cafeteria. And make it a real party; it shouldn’t be a
+ project retrospective. There is a time and a place for retrospectives, and
+ this isn’t it. (Gerhard Ackermann [Ackermann2002] points out that it is
+ possible to combine the two, if you have a strong facilitator, and the
+ main purpose continues to be the wake.) 
+It’s best to hold the wake off-site. That helps people break from the
+ old project, and avoids even the appearance of a retrospective. 
+It’s even more helpful to hold the wake during working hours; an
+ afternoon works well. Holding the wake during work hours sends a
+ subtle “thank-you” message: everyone knows they don’t get a bonus
+ (see COMPENSATE SUCCESS (4.2.25)), but they appreciate some acknowledgment of their efforts. 
+✥ ✥ ✥ 
+Just like the death of a loved one, the death of a project causes a
+ period of mourning. A wake helps people get through the stages of
+ mourning. 
+It also serves as a bit of a catharsis. People will come out of it much
+ more ready to attack the next project, “and this time we’ll succeed!” It
+ is particularly important for upper management explicitly to express
+ appreciation for the effort, especially when the failure owes to business decisions rather than to decisions owned by the development
+ team. Paul Bramble notes that this helps “calm people down and to be
+ less worried about their future at the company.”

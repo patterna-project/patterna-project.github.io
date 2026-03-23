@@ -1,0 +1,73 @@
+DEPLOY ALONG THE GRAIN **
+ Alias: DEPLOY PEOPLE ALONG THE GRAIN OF THE DOMAIN, One Person
+ / Many Hats 
+One person, many hats. 
+... in the past, the roles of analysis, design and implementation have
+ been split among different people. 
+✥ ✥ ✥ 
+Some of the most powerful design insights come late in the
+ design cycle, particularly during the phase we affectionately call
+ “maintenance.” But traditional staffing profiles deploy the most
+ skilled designers at the front-end of the life cycle, leaving the later
+ phases to “maintenance engineers.” 
+Valuable architectural insight tends to emerge late in the life cycle,
+ as a result of having addressed requirements from concrete, successive
+ problems drawn from a given domain. It is then that a system can be
+ refactored to consolidate design insight and polish reusable artifacts.
+ (More can be said about this, but that’s another tale.) 
+Such insight can best be harvested if people are deployed along the
+ grain of the domain, and a given individual has responsibility for a
+ well-defined part of it. Organizational categories like Analyst,
+ Designer, Coder, Maintainer, and Reuse Expert can cut across the
+ grain, and greatly increase organizational communication overhead
+ and inertia. However, when responsibility for all these functions for a
+ given part of the system is vested in a single person, the communication overhead for redesign with that part of the system can be largely
+ intracranial. This is a one person/many hats strategy. A single individual can cope far more quickly with on-going bi-directional tensions
+ between top-down elegance and bottom-up detail than can a functionally partitioned organization. Such a person can develop a more comprehensive sense of the possibilities that the design space allows, and
+ exploit these to develop more genuinely durable artifacts. 
+A reusable API or object-oriented framework is, in many respects, a
+ domain-specific language. Given this, Wirth’s classic admonition that
+ language design is better done by a single guiding intelligence, rather
+ than by a committee, applies. (See the Pascal quote in ARCHITECT CONTROLS PRODUCT (5.2.3).) 
+Small teams deployed along the grain should be able to glean similar benefits. Team members would be responsible for distinct parts of
+ their team’s domain. Metafunctions like pure management and documentation might be factored and assigned to additional individuals.
+ Interpersonal communication would primarily be concerned with
+ interface negotiation, and not become mired with approving changes
+ to internals. 
+The key here is committing talented designers to a part of the
+ system, and keeping them there until late in the life cycle, when hindsight is available from addressing a range of design issues. 
+There is some commonality between this and Alexander’s Architect/Builder notions as well, as in ARCHITECT ALSO IMPLEMENTS (5.2.10).
+ This sort of personnel deployment strategy is a de facto favorite in academic environments and in some small organizations, both of which
+ often exhibit marked productivity advantages over traditional industrial organizations. If an organization really wants to get truly reusable
+ software, it will have to be willing to budget time and talent in such a
+ way as to exploit the insights that lead to it at the point in the life cycle
+ where they become available. But reuse isn’t something that can itself
+ easily be factored into its own department. The people who build and
+ maintain something in the first place have the best, most intimate
+ knowledge of how to generalize it. 
+There is certain amount of Alexandrian wiggle room with regard to
+ the question of how one knows where the grain is, especially at the
+ onset of a project. Often its something people settle into. 
+Therefore: 
+ Deploy people along the grain of the domain. That is to say, give
+ them dedicated, long term responsibility for a manageable piece of the
+ system, thereby enabling them to exploit opportunities to consolidate
+ and improve the reusability of their parts of the system as experience
+ accrues. 
+Frequently, there will be significant degree of self-selection at work
+ when this patterns is employed, a variation on SELF SELECTING TEAM
+ (4.2.11). Managers should keep a watchful eye open for the emergence
+ of new roles, as people elect to spontaneously fill them. 
+✥ ✥ ✥ 
+This pattern plays out in specializations such as OWNER PER DELIVERABLE (10.5.19) and more specifically CODE OWNERSHIP (5.2.13). It should
+ be contrasted with the approach suggested by Extreme Programming
+ [Beck1999] advocates, though the effective divisions of labor may not
+ be as different as a simple-minded comparison might suggest. 
+This pattern is constrained by the forces of CONWAY’S LAW (5.1.7); or
+ perhaps it is the embodiment of it. You also need to take people’s skills
+ into account, as stated in SKILL MIX (10.5.28) [Cockburn1996] or as in
+ SUBSYSTEM BY SKILL (4.2.23). 
+This pattern originally appeared as Brian Foote’s DEPLOY PEOPLE
+ ALONG THE GRAIN OF THE DOMAIN at PLoP 2000. The material was
+ drawn largely intact from a discussion of Reuse Teams that took place
+ in early December of 1993 in either comp.object or on an early incarnation of the patterns mailing list.

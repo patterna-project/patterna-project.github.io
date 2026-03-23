@@ -1,0 +1,73 @@
+ SACRIFICE ONE PERSON *
+ Other names: “Sacrificial Lamb” 
+... during a typical project, there are always a host of small distractions. 
+✥ ✥ ✥ 
+Small distractions can add up, and sap the strength of the team. 
+Even small distractions must be handled. But they take time away
+ from the primary task. In particular, any distraction, even a small one,
+ disrupts “flow” time, which costs significant additional time to regain. 
+Many small distractions are less desirable jobs. 
+Therefore: 
+Assign just one person to it until it gets handled. 
+This is very much like TEAM PER TASK (4.1.21), except the distraction
+ is smaller; it could seemingly be handled by one person half-time to
+ full-time. 
+✥ ✥ ✥ 
+The main group of the team moves forward distraction free. The
+ person assigned to the distracting task may be unhappy, so try to get
+ that person back on the team again as soon as possible. If you feel that
+ one person is too much to sacrifice to this task and want to make it part
+ time work, compute the loss of flow time that would result from trying
+ to work this distraction and some other task. 
+If this keeps happening, you will have no one performing the primary task, and you ought to examine why you have so many distractions in the first place. 
+OWNER PER DELIVERABLE (10.5.19) is the general ownership and
+ accountability pattern. SOMEONE ALWAYS MAKES PROGRESS (4.1.20) is the
+ general distraction management pattern. TEAM PER TASK (4.1.21) is the
+ general form of this pattern at the team level. 
+Several patterns refine this pattern for specific contexts. DAY CARE
+ (4.1.23) addresses training as a separate deliverable from the software,
+ and produces mentor as a profession. In FIRE WALLS (4.2.9), the distraction is a series of requests from outside the team, so one of the developers is sacrificed to act as project manager. That can produce project
+ manager as a profession. The MERCENARY ANALYST (4.1.24) handles the
+ distraction of documentation, usually a “hired gun” who takes care of
+ it, leading to technical writing as a profession. And in GATE KEEPER
+ (4.2.10), the constant inflow of technical information is the distraction,
+ and one person is assigned managing that information as a distinct,
+ part-time task. It is one of the major foundations for manager as a profession. 
+Don’t forget the sacrificial lamb when it comes time to COMPENSATE SUCCESS (4.2.25). 
+Principles involved: 
+As for TEAM PER TASK (4.1.21). The fact that handling the distraction looks less than a full-time job illustrates the significance of the time spent getting into mental flow. 
+Maximum parallelism, profession, or sacrifice? If the people 
+do not like the task, they consider it a sacrifice. If they like the 
+task, it becomes their profession. Thus, FIRE WALLS gives rise 
+to the profession of project management, DAY CARE gives rise 
+to the profession of mentor. 
+Sample situations: 
+A. Updating the project schedule. On Project Winifred, the schedule
+ was out of date. We thought it would be fair to let each person on each
+ team evaluate their own work. That would spread the experience, discomfort and load. What really happened was that progress came to a
+ total halt. When the design team got back to designing, a month had
+ gone by with no design progress, and they had forgotten some of the
+ design issues that had been in their head. One of the teams used SACRIFICE ONE PERSON (4.1.22). They drew lots, for one person to do the
+ whole team’s estimation while the others got on with the main task. At
+ the end of several weeks of estimation, that team had moved forward
+ while the other teams were at a standstill. Thereafter, every team
+ applied the pattern. The person working on the schedule really felt
+ sacrificed. This pattern was originally called “Scylla”, as described in
+ the story of Scylla and Charybdis. 
+B. Simultaneous release to QA and development of the next release. 
+Project Winifred had one increment entering test at the same time
+ design was starting on the next. We optimistically thought the bug
+ fixes would take a relatively small amount of time, and so assigned the
+ whole team to both fixing bugs and doing new design. 
+Each fix broke a designer’s train of thought for a period of time on
+ the order of an hour, beyond just the fix. Three or four of these caused
+ the designer to lose most of the day. Eventually, the designers gave up
+ on the new release, because they knew the next bug fix would arrive
+ before they would had recovered their thoughts and progressed on the
+ new design. 
+We applied SACRIFICE ONE PERSON (4.1.22), and assigned one person
+ to bug fixes. We originally planned it as a half-time job, but found
+ there was not enough time left over for the person to do any useful
+ design. The person rejoined the new design team as soon as the release
+ went through test. 
+A version of this pattern first appeared in [Cockburn1998].

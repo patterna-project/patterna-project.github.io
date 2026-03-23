@@ -1,0 +1,135 @@
+ENGAGE CUSTOMERS **
+ Clerk measuring customer for a suit of clothes, San Antonio, Texas. 
+A friend of one of the authors once designed and implemented the user
+ interface for a large system. He got input from customers on how to make it
+ useful for them. Unfortunately, the requirements writers had a different idea,
+ and made him remove the features the customers liked. But then the customers asked for the missing features, and the requirements writers were
+ forced to relent. I guess it didn’t help relations between my friend and the
+ requirements writers. 
+...an organization is in place, and its Quality Assurance function has
+ been generally shaped and chartered. The Quality Assurance (QA)
+ function needs input to drive its work. Many people in the enterprise
+ are concerned about quality. 
+✥ ✥ ✥ 
+It’s important that the development organization ensures and
+ maintains customer satisfaction by encouraging communication
+ between customers and key development organization roles. This
+ isn’t the responsibility of any single “customer satisfaction” organ, but
+ the need pervades the entire organization structure. Most organizations are averse to direct contact between developers and customers,
+ fearing that the developers are “loose cannons on deck” who will
+ promise to deliver things that go beyond the scope of a job. 
+Yet you can’t know all the requirements up front, so developers
+ need to keep going back to customers for more information—and customers need to keep coming back to developers with their insights,
+ particularly when developers BUILD PROTOTYPES (4.1.7). Requirements
+ changes occur even after design reviews are complete and coding has
+ started. 
+Many organizations depend on their marketing organization to
+ provide requirements and needs. But marketing doesn’t provide
+ design data (BeyerHoltzblatt1998], p. 30). The best that marketing can
+ do (or should do) is to understand what will sell and why people will
+ buy what you want to sell. Designers in turn must understand how
+ people will use the product in a way that creates value for them. Good
+ value sometimes leads to good market potential, but marketing usually looks at other factors (brand name recognition, product name and
+ posturing n the market) about which designers care little. 
+Missing customer requirements are a serious problem: most problems in software systems can be traced to requirements problems
+ ([Daley1977]; [Boehm1976]). Yet it seems like so much effort to elicit
+ them — which is work that is not directly producing a marketable artifact. It seems like makework and overhead. 
+Customers are traditionally not part of the mainstream development, which makes it difficult to discover and incorporate their
+ insights. Yet customer contact correlates with project success
+ [KeilCarmel1995]. 
+Trust relationship between managers and coders are often strained,
+ so you don’t want them to be the sole intermediary between developers and customers. 
+Therefore: 
+Closely couple the Customer role to the Developer and Architect,
+ not just to QA or marketing. In short, developers and architects must
+ talk freely and often with customers. When possible, engage customers in their environment rather than brining them into your
+ environment. 
+ Two things are necessary for this to happen: opportunity and culture. Developers must have the opportunity (and the means) to communicate with customers. They should meet customers personally to
+ establish trust and free flow of communication. 
+But these visits will be superficial if the organization culture builds
+ walls between customers and developers. In particular, if system
+ requirements must go through a lengthy formal process to be
+ approved, the developer will be hamstrung — unable to respond to
+ customer requests. Therefore, the organization must develop a culture
+ where developers have some latitude to respond to customers. This is
+ not saying, however, that all control of requirements should be relegated to the developer. Order is necessary. 
+Beyer and Holtzblatt note that “many common ways of working
+ with customers remove them from their work.”
+ [BeyerHoltzblatt1998], pp. 36-7. One way to help this is by “putting
+ designers and engineers directly in the customer’s work context”
+ [BeyerHoltzblatt1998], p. 20. This is particularly important if you are
+ using customer engagement to create wholly new market directions
+ for the enterprise, rather than refining existing work. Putting developers in the customer work environment also trains developers’ intuition about good design and good human interfaces, and this intuition
+ can fill in when specific detailed requirements are unavailable
+ [BeyerHoltzblatt1998], p. 35. 
+Language is a key element of culture that can smooth customer
+ engagement if treated properly, and smother it if treated badly. Don’t
+ make your customers learn UML or other technical notations; do your
+ best to learn their language and to communicate with them in the
+ terms of their culture. 
+QA can monitor the relationship to keep the direction within contractual business limits, while allowing a free flow of insights back and
+ forth between developers and customers. Such communication can
+ often flow unimpeded; however, see the pattern GATE KEEPER (4.2.10). 
+Note that this pattern is all about relationships and culture. It is the
+ culture of respect for and communication with customers that makes
+ the communication effective, for example, during the writing of use
+ cases, as described in PARTICIPATING AUDIENCE (10.5.20) ([Bramble2002],
+ p. 35). 
+✥ ✥ ✥ 
+ This pattern supports requirements discovery from the customer, as
+ required by SCENARIOS DEFINE PROBLEM (4.2.8) and BUILD PROTOTYPES
+ (4.1.7). Other patterns like FIRE WALLS (4.2.9) also build on this pattern.
+ The pattern RECOMMITMENT MEETING (4.1.12) is a more formal derivative
+ of this pattern in a different context. 
+A good understanding of customer needs can avoid rework after
+ implementation is done. While it is also important to continuously
+ engage customers through each development episode of iteration,
+ early understanding helps launch the effort in the right direction. A
+ Navision project in Copenhagen felt that improvements in customer
+ engagement helped save time on their development schedule (from a
+ draft pattern “Scandinavian System Development” by Flemming Pedersen, 24 January 2002). 
+This was a strong pattern in the Borland Quattro Pro for Windows
+ case study. Also, see [Floyd1992] and in particular the works of Reisin
+ and Floyd therein. 
+Some processes and methods are founded on customer engagement, such as IBM’s Joint Application Development. Other methods
+ are conducive to customer engagement, such as Cunningham and
+ Beck’s CRC design technique. Other methods, and especially most
+ CASE-based methods, are indifferent or harmful to customer engagement. 
+Even some of the best customer engagement techniques tend to
+ stop once they achieve some level of contractual agreement about
+ what is to be delivered. Customer engagement in agile processes goes
+ far beyond that. Developers need to assimilate the context in which
+ their product will be used: this is called contextual design. Contextual
+ design means gathering data on customers’ models of how they do
+ their work rather than creating models of how the program will solve
+ the problem. Use Cases are about the latter; contextual design is about
+ the former. See [BeyerHoltzblatt1998]. 
+The pattern is “ENGAGE CUSTOMERS”, in the plural, to support a
+ domain view and to avoid being blind-sided by a single customer. 
+The project must be careful to temper interactions between Customer and Developer, using FIRE WALLS (4.2.9), GATE KEEPER (4.2.10),
+ and the QA organizational presence as in ENGAGE QUALITY ASSURANCE
+ (4.2.29). A big part of interacting with the customer is to learn how
+ they want to interact with the project as the unfolding software
+ uncovers problems in requirements and systems engineering (see
+ APPLICATION DESIGN IS BOUNDED BY TEST DESIGN (4.2.30)). 
+Note that “maintaining product quality” is not the problem being
+ solved here. Product quality is only one component of customer satisfaction. Studies have shown that customers leave one company for
+ another when they feel they are being ignored (20% of the time), or
+ because the attention they receive was rude or unhelpful (50% of the
+ time). For customers having problems that cost over $100 to fix, and
+ the company does not fix it, only 9% would buy again. 82% would do
+ business with the company again if the problem was quickly resolved
+ after they complained. (The source for the former pair is The Forum
+ Corporation; for the latter pair, Traveler’s Insurance Company
+ [ZuckermanAndHatala1992].) 
+Joe Maranzano [Maranzano1992] notes that this pattern probably
+ should come earlier in the language. However, it is important that the
+ project roles be defined first—particularly those that interact with the
+ customer, and those that are driven by customer input (such as Quality
+ Assurance). Said in another way, the organization exists to serve the
+ customer, so the organization should be in place before the customer is
+ fully engaged. 
+This pattern works only if customers are directly accessible to the
+ development team. If that is impossible for business reasons or
+ because of geographic separation, consider SURROGATE CUSTOMER
+ (4.2.7).

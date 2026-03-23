@@ -1,0 +1,89 @@
+ORGANIZATION FOLLOWS LOCATION **
+ Different parts of the country may have different cultures and architectural styles. 
+I was once involved in planning a large project that was to be split between
+ two locations. My organization was located in a new building in Colorado
+ with blue carpet. The other half of the project was in New Jersey; their
+ building had green carpet. When I presented our plan to my organization, I
+ showed slides with different parts of the architecture colored blue or green,
+ depending on where the development was to take place. The organization got
+ the message immediately. 
+...a product must be developed in several different hallways, on different floors of a building, in different buildings or at different locations. This may owe to political reasons or to the need to have some
+ development teams colocated with remote markets, or for reasons of
+ standards or the distribution of physical facilities (e.g., the separation
+ between different trading centers, or between a radio telescope site
+ and a research university that uses its data), or even economic or trade
+ issues that drive development to a different country. 
+There needs to be a degree of trust and camaraderie within an organization, since an organization is a decision-making body that must
+ converge on and buy into joint decisions. Allegiance to an organization
+ falls strongly along the lines of geographic distribution. 
+ ✥ ✥ ✥ 
+It is important to assign tasks and roles insightfully across a geographically distributed work force. 
+Communication patterns between project members follows geographic distribution. Coupling between pieces of software must be sustained by analogous coupling between the people maintaining that
+ software. People avoid communicating with people who work in other
+ buildings, other towns, or overseas (see below). People in an organization usually work on related tasks, which suggests that they communicate frequently with each other. 
+Therefore: 
+The architectural partitioning should reflect the geographic partitioning, and vice versa. Architectural responsibilities should be
+ assigned so decisions can be made (geographically) locally. 
+This is a variant of CONWAY’S LAW (5.1.7). Since the organization will
+ follow the architecture, you want the organization, architecture, and
+ geography to line up. Geographical considerations are often the most
+ severe, and since architecture can be a strong lever for organization, it
+ is a good tool to bring these three aspects into alignment. 
+One of the most significant characteristics of geographic differences
+ is allegiance: people are naturally more loyal to local managers than to
+ remote managers. This is even more extreme if a remote location is
+ part of a company as a result of a merger or acquisition. If work is split
+ between two locations where the work itself does not split cleanly, one
+ or the other location must be in charge. And that naturally causes
+ resentment on the part of the other location. Instead, try to make the
+ work assignments as autonomous as practical; this instills trust. 
+✥ ✥ ✥ 
+Sub-organizations that can be further split or organized by market
+ or other criteria (see ORGANIZATION FOLLOWS MARKET (5.1.9), WORK FLOWS
+ INWARD (4.1.18), and others). You still need someone to break logjams
+ when consensus can’t be reached, perhaps using ARCHITECT CONTROLS
+ PRODUCT (5.2.3) or PATRON ROLE (4.2.15). If the organization is modularized along geographic boundaries, and the architecture is not then it
+ will be impossible to apply ARCHITECT ALSO IMPLEMENTS (5.2.10): it’s difficult for the architect at one location to oversee and contribute to the
+ code at another. 
+ Thomas Allen [Allen1977] has found that social distance goes up
+ rapidly with physical separation (see also “House Cluster”
+ ([Alexander1977], ff. 197) of Alexander). We have noted frequent cases
+ of international collaboration (usually overseas) that strongly exhibit
+ symptoms of this problem and which have had low prospects for success owing to just such separation. This is a crucial pattern that is often
+ overlooked or dismissed out of consideration for political alliances or
+ fashion (for example, outsourcing software development is very fashionable in management circles at this writing). Peter B¸rgi’s studies of
+ geographically distributed organizations in AT&T bore out the importance of this pattern. 
+We have seen few geographically distributed organizations that
+ exhibit positive team dynamics. There are exceptions, and there are
+ rare occasions when this pattern does not apply. Steve Berczuk (then at
+ MIT) notes: "... communications need not be poor between remote sites
+ if the following items are true: 
+1. The number of developers on a project, including all sites is
+ small; 
+2. Most of the communication is done via something like email
+ (wide distribution and asynchronous communication—in [one
+ case of his experience] ... more people were in the loop than if the
+ primary means of communication had been hallway chats); 
+3. The people involved have been together for some time so that
+ they feel like they know each other (this can be as short as a
+ kickoff meeting; see FACE TO FACE BEFORE WORKING REMOTELY
+ (5.1.10)); 
+4. Folks aren’t so burned out by “unnecessary” travel that they are
+ willing and happy to travel when it is needed. In some situations
+ [complete work split by location] is not possible because of the
+ nature of the project, so we need a way to address the issue of
+ remoteness." (Personal communication with Steve Berczuk,
+ August, 1994.) 
+There are times when the market demands geographic distribution;
+ see ORGANIZATION FOLLOWS MARKET (5.1.9) and [Berczuk1996]. In these
+ cases you need FACE TO FACE BEFORE WORKING REMOTELY (5.1.10). 
+As an organization grows, it may want to split geographically for a
+ number of marketing and political reasons (DIVIDE AND CONQUER
+ (5.1.6)). The OTI corporation relates how it splits organizations geographically to keep reusable assets uncontaminated by each other. 
+That people be colocated within a building is probably more important to organizational effectiveness than to allocate offices as perks of
+ seniority. Senior staff may have a need for larger or more secure offices
+ than junior staff, but not for an office near the rest room or an office
+ with a window. 
+See STANDARDS LINKING LOCATIONS (5.2.12) as a technique supporting
+ this organizational structure in the PEOPLE AND CODE PATTERN LANGUAGE
+ (5.2).

@@ -1,0 +1,62 @@
+ DIVERSE GROUPS *
+ ... a development team is coming together, and Birds of a Feather
+ tend to Flock Together. 
+✥ ✥ ✥ 
+Homogeneous teams that comprise too many of the same kind of
+ people easily fall into groupthink-like dysfunction. 
+Design is the act of making change to the world. In software, it usually means changing the literature of an author who came before and
+ encoded a solution in a programming language. That author usually
+ remains as part of the community that retains an interest in the code
+ see CODE OWNERSHIP (5.2.13), and the combination of CONWAY’S LAW
+ (5.1.7) and ORGANIZATION FOLLOWS MARKET (5.1.9) which implies that
+ architecture follows market. 
+Change is a process that has several phases, starting with complacency, which is upset by an opportunity or realization of an oversight.
+ There is a struggle to identify solutions, the process of realizing the
+ solution, culminating in deployment. 
+Different people are more comfortable with some parts of this process than with others. Some people are good at identifying problems,
+ others with the innovative processes of identifying solutions. Yet
+ others are good at focusing on implementation. The variance in comfort comes from variance in experience and individual background
+ and temperament. This is true even when programmers in their role as
+ designers, making a change, are the same programmers who were the
+ original authors of the code. 
+Therefore: 
+Consider temperaments and diverse experience backgrounds
+ when assembling a team. This diversity sometimes lines up with
+ social classifications like age and gender, but more generally can be
+ assessed on a personal level. 
+✥ ✥ ✥ 
+One source of variation is the variety of domains in the application
+ itself; see DOMAIN EXPERTISE IN ROLES (4.2.22). There is an open question
+ whether a SELF SELECTING TEAM (4.2.11) prejudices a homogeneous
+ group outcome; in any case, DIVERSE GROUPS (4.2.16) can be a good
+ audit of a SELF SELECTING TEAM (4.2.11). 
+Another source of variation is the variation in roles. In a vestigial
+ pattern DIVERSITY OF MEMBERSHIP, the pattern recommends building a
+ requirements teams from diverse roles: 
+The team should include a developer, a user or user’s repre
+sentative, and a system tester (at least one of each). These 
+individuals will work through the issues surrounding product requirements, often using small prototypes to identify the 
+requirements and determine testing criteria. The user of prototypes can be closely tied to using use cases or similar usage 
+scenarios as analysis and validation tools. 
+One area in which this approach is especially useful is in the 
+specification and design of the user interface. The developer 
+creates mock-ups of the user interface, and the user and system tester examine them. In this way, this small subteam can 
+go through many different designs of the user interface and 
+select the best one. 
+See more about this kind of diversity in HOLISTIC DIVERSITY (4.2.19). 
+Sometimes teams form around mutual interest and talent in a
+ domain, as in SUBSYSTEM BY SKILL (4.2.23), and diversity falls along other
+ dimensions of interest. 
+Yet another kind of diversity is ethnic diversity. The oft-touted
+ value of ethnic diversity is that it brings together people who can think
+ about problems differently, from much different perspectives, which
+ improves the chance of finding a good solution. But there are other
+ subtle advantages. In a large multinational corporation, we found that
+ each department had a few members of French national origin. The
+ French all ate lunch together, which provided a natural path of communication flow between departments. 
+One kind of person you want in the mix is a PUBLIC CHARACTER
+ (4.2.17). 
+However, one must guard against stereotyping people; e.g., using
+ personality instruments or other information to limit the roles of
+ people in organizations. See [KerthCoplienWeinberg1998]. 
+See the related pattern BALANCED TEAM (10.5.5) in [Bramble2002].

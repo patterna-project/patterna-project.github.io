@@ -1,0 +1,58 @@
+ GATE KEEPER **
+ ... an organization of developers has formed, in a corporate or social
+ context scrutinized by peers, funders, customers, and other “outsiders.” 
+✥ ✥ ✥ 
+A project must develop good interfaces with the many outsiders
+ with whom it interacts, or with whom it should interact. 
+Most software development professionals — particularly programmers — are more comfortable interacting with their software and
+ working with technology than working with people. Yet isolationism
+ doesn’t work: information flow is important. On the other hand, communication has a cost: communication overhead goes up non-linearly
+ with the number of external collaborators. That wouldn’t be so bad if
+ so many interruptions weren’t noise. And an organization should be in
+ control of its external interactions rather than letting the external interactions control it; that is a hallmark of organizational maturity. 
+Therefore: 
+One project member, a PUBLIC CHARACTER (4.2.17) with an engaging
+ personality, rises to the role of GATE KEEPER. This person disseminates leading-edge and fringe information from outside the project
+ to project members, “translating” it into terms relevant to the
+ project. The GATE KEEPER may also “leak” project information to relevant outsiders. 
+ ✥ ✥ ✥ 
+This role can also manage the development interface to marketing
+ and to the corporate control structure. 
+This pattern provides balance for the pattern FIRE WALLS (4.2.9), and
+ complements the pattern ENGAGE CUSTOMERS (4.2.6) (to the degree Customers are still viewed as outsiders). 
+GATE KEEPER and FIRE WALLS (4.2.9) alone are insufficient to protect
+ developers in an organization whose culture allows marketing to
+ drive development schedules. This role can be made explicit in large
+ projects whose budget and staffing profiles support funding and support for such a role. But the role can also thrive informally in the margins. 
+GATE KEEPER is a pattern that facilitates effective flow of useful information; on the other hand, the FIRE WALLS (4.2.9) role restricts flow of
+ detracting information. As described in FIRE WALLS, a self-serving
+ person who works their way into this role can do much damage. It is
+ probably healthier for the organization if this role is filled by someone
+ who is not part of the management establishment, because it is more
+ likely that peer support will sustain that person in the role, and it is
+ more likely that the person will remain responsive to his or her constituencies. But respected managers also make great GATE KEEPERS. 
+The GATE KEEPER pattern has empirical value. In the discussion of
+ this pattern at PLoP/94, many of the reviewers noted that creating a
+ GATE KEEPER role had served their organizations well. 
+Engineers are lousy communicators as a lot; it’s important to
+ leverage the communication abilities of an effective communicating
+ engineer when one is found. 
+Alexander notes that while it is important to build subcultures in a
+ society (as we are building a subculture here in the framework of a
+ company, or of the software industry as a whole), such a subculture
+ should not be closed (MOSAIC OF SUBCULTURES, [Alexander1977], ff. 42);
+ also, cp. Alexander’s pattern MAIN GATEWAYS ([Alexander1977], ff. 276). 
+One might muse that the GATE KEEPER takes an outsider through any
+ rites of passage necessary for more intimate access to the development
+ team, by analogy to Alexander’s ENTRANCE TRANSITION
+ ([Alexander1977], ff. 548). GATE KEEPER can serve the role of “peda
+ gogue” as in Alexander’s pattern NETWORK OF LEARNING
+ ([Alexander1977], ff. 99). 
+Joe Maranzano (personal interview, 1992) notes that the same
+ person often must fill both the MANAGER ROLE and GATE KEEPER roles,
+ because of the relationships to external people who need the info. 
+If the GATE KEEPER (4.2.10) function starts taking on an aura of stability and legitimacy in its own right, it might point to the fact that
+ there are key business issues that cut across the existing organizations.
+ Look at FUNCTION OWNER AND COMPONENT OWNER, as well as UPSIDE
+ DOWN MATRIX MANAGEMENT (5.1.19), as solutions that broaden the GATE
+ KEEPER function to organizational scope.

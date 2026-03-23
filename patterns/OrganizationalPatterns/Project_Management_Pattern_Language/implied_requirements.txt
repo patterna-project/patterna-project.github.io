@@ -1,0 +1,28 @@
+IMPLIED REQUIREMENTS
+ FSA (Farm Security Administration) home supervisor Miss Harton helping one of borrowers’ families cut patterns and make their own clothes. Caswell 
+County, North Carolina. Pattern parts such as sleeves are named chunks of 
+functionality, well understood by the customer. 
+...a PRODUCT INITIATIVE (10.5.22) [Cunningham1996] has identified the
+ direction for further development and a MARKET WALK-THROUGH
+ (10.5.16) [Cunningham1996] has explored the customer motivation
+ and developmental possibilities behind it. We expect positions and
+ attitudes to be understood but have yet to make any commitments
+ beyond everyone’s general commitment to do a good job by the company. 
+✥ ✥ ✥ 
+A commitment implies an agreement between people. Development commitments generally obligate developers to meet some customer need in a timely and satisfactory way. The tension here is to
+ define a need in sufficient detail that commitments have meaning
+ without exhausting up-front analysis or over constraining a solution. 
+Therefore: 
+ Select and name chunks of functionality. Use names that would
+ have meaning to customers consistent with the PRODUCT INITIATIVE
+ (10.5.22). Allow these names to imply customer requirements without
+ actually enumerating requirements in the traditional sense. 
+✥ ✥ ✥ 
+Examples: 
+• Year-End Tax Reports 
+• Dollar Denominated Japanese Bonds 
+• High-Quality Printing 
+• Disconnected Operation on LAP- TOPS 
+These names will fill in the blank in the recurring questions like:
+ Who’s handling the programming (or specification, or customer contact, or manual update, or release notes) for _____. 
+A version of this pattern first appeared in [Cunningham1996].

@@ -1,0 +1,43 @@
+RESPONSIBILITIES ENGAGE
+ The responsibilities of raising children encourage parents to be actively 
+engaged in their children’s lives. 
+...the organization has been established, and people have settled
+ into their roles. Communication tends to be centralized. 
+✥ ✥ ✥ 
+If communication predominately flows through the center of the
+ organization, two things happen: communication takes too long,
+ and the most central roles become overburdened with communication.
+The most central roles in an organization have the most information
+ about the project, thus they are the most logical ones to transmit and
+ receive information. However, they are also the key producer roles in
+ the organization as well. So time they spend in communication
+ directly impacts their development productivity. 
+ But there must be central coordination (which is a weak form of
+ control) or some other acceptable point of control. Fully distributed
+ control tends to lead to control breakdown. Coordination helps
+ accountability, efficiency, camaraderie, can reduce decision time for
+ changes in the business environment (such as requirements changes),
+ and so forth. 
+Therefore: 
+Shuffle responsibilities among roles in a way such that outer roles
+ collaborate with roles other than the most central roles. 
+ For example, a tester role may be isolated from the project. It would
+ be well for the tester to learn which areas of the project are especially
+ troublesome, so they can be tested especially rigorously. But this information is often not forthcoming. The tester could ask the key developers what the project “hot spots” are, but this would be inefficient
+ and cause bottlenecks. Therefore, give the tester some project management responsibilities, where they actively participate in status meetings. They will pick up information relevant to testing through the
+ project management responsibilities. 
+Note that in some cases, moving responsibilities will actually cause
+ roles themselves to migrate, and even merge. In most cases, that is
+ actually a good thing. 
+✥ ✥ ✥ 
+This infuses a level of “distributed control with central tendency”
+ that lends overall direction and cohesion to an organization. It complements DIVIDE AND CONQUER (5.1.6), both by providing for bonds within
+ organization clusters and by providing linkages between sub-clusters,
+ linkages less formal than a GATE KEEPER (4.2.10) role. It adds symmetry
+ to DIVIDE AND CONQUER. 
+This pattern can stand on its own, but it is nicely completed by the
+ application of HALLWAY CHATTER (5.1.15). 
+Laurie Williams notes that DEVELOPING IN PAIRS (4.2.28) achieves
+ some of the same effect. When she uses this in a pedagogical setting,
+ students learn to rely more on each other and less on the teacher for
+ answers to common questions.

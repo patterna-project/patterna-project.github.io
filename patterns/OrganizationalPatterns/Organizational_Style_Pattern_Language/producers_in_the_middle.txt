@@ -1,0 +1,47 @@
+ PRODUCERS IN THE MIDDLE **
+ The chef, the producer of food, is often the center of attention. 
+...one of the first steps a project takes in self-understanding is the
+ identification of roles, and in particular, which roles are the PRODUCER ROLES (5.1.3). But it is the information flow among the roles that helps
+ get the work done. 
+✥ ✥ ✥ 
+In a project, not all roles hear everything. But much of the information communicated has important implications for the product. 
+Within any software project, there are many activities, roles, and
+ individuals competing for attention. Of course, there are the developers. But project managers have a need to be at the center of everything. They need to have their finger on the pulse of the project; to
+ know everything that is going on. That’s their job. In a similar manner,
+ perhaps to a lesser degree, other roles also need to be involved in the
+ project. 
+But all roles are not equal. Certain roles (developer and a few
+ others) contribute directly to the product; they create it. Most other
+ roles contribute indirectly to the product; they (should) exist only to
+ help the producers do their job. The producer roles need information
+ in order to do their job. 
+Therefore, 
+ The producer role(s) must be at the center or very near the center
+ of the hive of communication. Make sure the producers are party to
+ all, or nearly all communication about the project. 
+The role at the center of the project must be a producer role (in fact,
+ it should be the producer role that gets the most done — like developer.) Consider the developer roles at the center of this healthy organization, an organization that develops financial trading software on
+ tight schedules: 
+The role at the center shows the focus of the project. In most cases, it
+ is a role like Developer or Coder. In a few cases, the most central role is
+ a management role (we have seen this, but rarely.) In this case, the
+ focus of the project is not on developing the product, but rather it is on
+ managing the development of the product. 
+If you find that your most central role is not a producer, you need
+ to, as a project, sit down and do some soul searching. Why isn’t your
+ focus on the product, like it should be? What is getting in the way? For
+ example, are you so preoccupied with something like ISO 9001 certification that you have lost your focus? 
+Note that this can be taken to an extreme. If you have too many
+ roles, and they all focus on the Coder, for example, (see picture), the
+ coder will have so much communication that they can’t get anything
+ done. So this must be applied together with FEW ROLES (5.1.2). See also
+ DISTRIBUTE WORK EVENLY (5.1.13). 
+✥ ✥ ✥ 
+ The natural tendency when this pattern is applied is toward WORK
+ FLOWS INWARD (4.1.18) — the developers will tend to get the information they need. This is not always true, as it can get sidetracked by
+ managers who are overly meddlesome. However, left alone, developers will evolve naturally to this pattern, and then to WORK FLOWS INWARD. 
+This pattern is closely related to DEVELOPER CONTROLS PROCESS
+ (4.1.17). If the developer — a producer role — controls the process, he
+ or she is likely to be a hub of communication. In fact, allowing the
+ developer to control the process is one way to help make this pattern
+ happen.

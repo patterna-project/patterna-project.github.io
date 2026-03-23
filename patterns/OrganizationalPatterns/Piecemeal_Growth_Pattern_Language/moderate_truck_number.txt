@@ -1,0 +1,92 @@
+MODERATE TRUCK NUMBER
+ In an insurance company we studied, the project scheduled some of their
+ release dates around the vacation times of a small number of key staff. While
+ this is much better than constraining vacation times to the release schedules,
+ it would have been better if the project had been less dependent on those
+ employees. As should have been predicted, the release date slipped and interfered with the vacation dates, anyhow. 
+... you have built an organization around specialists whose background and training match the expertise required by the application
+ and market, DOMAIN EXPERTISE IN ROLES (4.2.22). 
+✥ ✥ ✥ 
+A project cannot become overly dependent on any small number
+ of individuals. It’s important to have specialization. No amount of
+ general accomplishment can compensate for experience. And this
+ experience is embodied not in any abstract concept of roles, nor is it
+ often found in any supporting document or knowledge base that a
+ plug-compatible-interchangeable-developer could leverage. The
+ expertise is most often embodied in a living human being who can
+ make choices. 
+Such human beings may make unpleasant choices, such as leaving
+ the organization for another company. Or they may make silly choices,
+ like walking out in front of a truck at a busy intersection, never to
+ return to the project again. 
+And life may make choices for such individuals, such as giving
+ them prospects for promotion. Sadly enough, there is a high correlation between an individual’s perceived expertise and the chances that
+ a company will offer them promotion to optimize the chances for the
+ PETER PRINCIPLE to have its way. Or another project within the organization may take them away. 
+It is a risk if there are too many cases where your project depends
+ on such individuals for singular knowledge. You know you’re in
+ trouble if your project keeps a list of people and schedules release
+ dates around their vacation times. 
+Yet it’s still important to embody expertise in individuals, since it
+ reduces communication between individuals regarding decisions
+ within a certain business area and ensures that the right experience is
+ brought to bear in such decisions. 
+And it’s important to recognize that everyone brings some expertise
+ to the table; if everyone were the same, there would be useless redundancy in the organization (see DIVERSE GROUPS (4.2.16), HOLISTIC DIVERSITY (4.2.19)). 
+Yet not everyone can know everything. Being a true expert in a
+ topic requires all of one’s attention, and it is difficult to sustain multiple areas of expertise. 
+Define the truck number as being the number of people in the organization who have unique critical domain expertise. You don’t want the
+ truck number to be large, because that means that the probability is
+ large that the loss of any given team member would mean the loss of
+ critical expertise. The risk would be too high. Yet it’s impossible to
+ make the truck number very small (it’s almost impossible to make it
+ zero). Even if you could make it small, you probably wouldn’t—
+ because if it were one, then everyone but the critical resource is intellectually redundant, and by some rationale, all the other members of
+ the organization could turn into just overpaid worker bees or software
+ assembly line workers. 
+Therefore: 
+Keep the truck number low; retain a small number of key experts
+ with unique knowledge. Build a culture of shared knowledge that
+ increases the breadth of knowledge over time, particularly for
+ knowledge that easily can be codified, taught, or otherwise conveyed. 
+How do you do this? One way is to use DEVELOPING IN PAIRS (4.2.28).
+ Another is to make sure the experts rub shoulders with the mere mortals. Use ARCHITECT ALSO IMPLEMENTS (5.2.10). Of course, you retain a
+ non-zero truck number by keeping the architects from becoming mere
+ mortals themselves; see ARCHITECT CONTROLS PRODUCT (5.2.3). 
+✥ ✥ ✥ 
+Cross-training can be an effective technique for sharing knowledge.
+ In particular, APPRENTICESHIP (4.2.4) is an effective form of crosstraining. However, some of the deepest knowledge and “good guts”—
+ gut feeling—cannot be conveyed from an expert to an apprentice. 
+A pattern language of the organization’s key competencies can provide some relief for experts and can reduce the risk for the organization. Collect patterns from domain experts. 
+It is not the goal to level the playing field. You still need DOMAIN
+ EXPERTISE IN ROLES (4.2.22). It is too expensive (in time and talent) to
+ guard against any possible staff loss by completely replicating talent.
+ You want enough cross-training to control the costs of recovery from
+ losing a person. Trying to spread expertise too broadly will in fact just
+ dilute the overall expertise by detracting from each expert’s focus. 
+Truck Number is a measure of vulnerability of an organization. It’s
+ usually pretty easy to calculate it: just ask yourself, “Which people in
+ my project can we absolutely not do without?” It’s likely that several
+ names immediately come to mind. These people are the key architects,
+ programmers, or perhaps even testers. And they are critical in part
+ because they know things that others don’t. So we try to get them to
+ share that knowledge with the rest of the team. 
+Note that although we speak of the Truck Number as a number, it
+ has a subjective qualitative aspect to it as well. In other words, not all
+ critical experts are created equal. The loss of some experts may cause
+ serious problems, but the loss of others may be absolutely devastating! 
+One of the authors once studied a small software company. While
+ the company and its (single) product looked good, one particular
+ employee seemed to be unusually dominant. If he were to leave, the
+ company would be in serious jeopardy. Unfortunately, he did leave,
+ and the company suffered greatly. The moral is to watch closely for
+ such individuals, and make sure they continually share their expertise. 
+Why doesn’t DEVELOPING IN PAIRS (4.2.28) solve the problem completely? It certainly helps, but people are still individuals, and have
+ different skills. You can have a pair in which each member is good at
+ something different; the pair is greater than the sum of the individuals. 
+As with any risk reduction activity, reducing the Truck Number is
+ an exercise in trade-offs. You may find that duplicating the expertise of
+ certain people just isn’t cost — or time — effective. So you live with
+ the risk. Maybe you try to reduce it in other ways, such as creating
+ incentives for those people to stay on the team (see, for example, COM
+PENSATE SUCCESS (4.2.25).)

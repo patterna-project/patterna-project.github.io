@@ -1,0 +1,45 @@
+ FIRE WALLS **
+ Nobody gets past this point without my permission! 
+"A manager should be like the sweeper in curling: The sweeper runs ahead
+ of the stone and sweeps away debris from the path of the stone so that the
+ progress of the stone will be smooth and undisturbed — does this sound like
+ your manager?" [Gabriel1996] 
+Unfortunately, heavy human use in this same area could lead to bear/
+ human interactions which could injure humans and cause management
+ actions against the bear. — Sign at an entrance to Boulder Mountain Parks,
+ Boulder, Colorado 
+...an organization of developers has formed in a corporate or social
+ context where they are scrutinized by peers, funders, customers, and
+ other “outsiders.” Project implementors are often distracted by outsiders who feel a need to offer input and criticism. 
+✥ ✥ ✥ 
+It’s important to placate stakeholders who feel a need to “help”
+ by having access to low levels of the project, without distracting
+ developers and others who are moving towards project completion 
+ Isolationism doesn’t work: information flow is important. But communication overhead goes up non-linearly with the number of
+ external collaborators. 
+Many interruptions are noise. 
+Maturity and progress are more highly correlated with being in
+ control than being effectively controlled. 
+Therefore: 
+Create a MANAGER ROLE, who shields other development personnel from interaction with external roles. The responsibility of this
+ role is “to keep the pests away.” 
+✥ ✥ ✥ 
+The new organization isolates developers from extraneous external
+ interrupts. To avoid isolationism, this pattern must be tempered with
+ others, such as ENGAGE CUSTOMERS (4.2.6) and GATE KEEPER (4.2.10). 
+This pattern was present in both BORLAND QUATTRO PRO FOR WINDOWS (CHAPTER 8) and in A HYPERPRODUCTIVE TELECOMMUNICATIONS DEVELOPMENT TEAM (CHAPTER 9). See also the pattern ENGAGE CUSTOMERS (4.2.6),
+ which complements this pattern. GATE KEEPER (4.2.10) is a pattern that facilitates effective flow of
+ useful information; FIRE WALLS restricts detracting flow of (even potentially useful) information. You need a balance between them. In the
+ park in Boulder, people (customers) come to see nature, and bears are
+ a part of that nature. But if the customers interact too closely with the
+ core contributors—to the point where it is a distraction—things can
+ get out of control. Developers need information, and they can take
+ advantage of customer contacts and GATE KEEPERS to get the information they need. But they can also use managers as a shield. Furthermore, managers may need to step in to “help” developers who may be
+ afraid to ask not to be bothered by customer contacts, or who are at
+ risk of not fulfilling their own responsibilities if they are embroiled in
+ customer matters. 
+Be warned that if the organization fills this role with someone motivated largely by personal power, the potential damage to the organization can be large. If other roles like GATE KEEPER maintain good contact
+ with other organizations, communications are more likely to remain
+ open and FIRE WALLS will more likely be called to account for selfserving actions. 
+ Sun Tzu notes: “He will win who has military capacity and is not
+ interfered with by the sovereign.” [SunTzu1989]

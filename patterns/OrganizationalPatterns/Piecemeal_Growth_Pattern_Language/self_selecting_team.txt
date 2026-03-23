@@ -1,0 +1,38 @@
+ SELF SELECTING TEAM **
+ Japanese-American volunteers taking oath of induction. 
+I had applied for a job in a different part of the company. It was forward
+looking work in a small team. The manager was happy to take me, but it
+ wasn’t until the team had interviewed me that I got the job. 
+... SIZE THE ORGANIZATION (4.2.2) revealed the need for a small, select
+ team. How do you staff such a team? 
+✥ ✥ ✥ 
+The worst team dynamics can be found in appointed teams. 
+There are no perfect criteria for screening team members. Yet broad
+ interests (music and poetry for, example) seem to indicate successful
+ team players. Teams staffed with such individuals are often willing to
+ take 
+extraordinary measures to meet project goals. 
+However, when such interests are ignored, or when team members
+ are appointed, team dynamics can suffer, greatly diminishing the productivity of a team. 
+Therefore: 
+Create enthusiastic teams by letting people select their own
+ teams. Do limited screening on the basis of track record and broader
+ interests. 
+ Such teams often, but not always, come about of their own volition.
+ Sometimes, a PATRON ROLE (4.2.15) or other leader can seed the idea of
+ such a team first as a rallying point for the formation of the team. 
+✥ ✥ ✥ 
+A SOLO VIRTUOSO (4.2.5) or APPRENTICESHIP (4.2.4) role may self-select
+ a team. FORM FOLLOWS FUNCTION (5.1.11) can give such a team its structure. DIVERSE GROUPS (4.2.16) can help in the screening process. Temporary SELF SELECTING TEAMS can come together to work on PROGRAMMING
+ EPISODES (4.1.19). 
+A SKUNK WORKS (4.2.14) is a special kind of SELF SELECTING TEAM that
+ comes together to share high risk on behalf of the organization. Self-selection can and should happen at finer granularity than
+ teams, too; see, for example, DEPLOY ALONG THE GRAIN (5.2.8). 
+This is different from “empowered teams.” Research has shown
+ that empowerment leads to communication locales that can become
+ blindsided to the broader context of surrounding teams and can
+ unnecessarily narrow the communication channels between teams,
+ though it may increase it within teams [Yates1995]. 
+One danger to be aware of is that an exclusive group of friends may
+ build a team from their own numbers, failing to take advantage of
+ others’ skills. The PATRON ROLE (4.2.15) can monitor these dynamics.

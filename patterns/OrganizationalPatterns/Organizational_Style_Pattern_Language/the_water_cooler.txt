@@ -1,0 +1,96 @@
+THE WATER COOLER *
+ Boys cooling off around a fire hydrant, Chicago, Illinois, 1941. The cool water 
+of the fire hydrant created a setting for social interaction among the boys. 
+When I transferred to the Forward Looking Work department at Bell Laboratories, I eventually found myself working for a manager who was a fanatic
+ hobby runner. Each day, instead of taking lunch he would take a five-mile run
+ outside, even in inclement weather. Several of his group members, not to mention several of his peer managers, were also runners. There was a culture of
+ cross-organizational communication both in the locker room (a makeshift converted service corridor) and on the running trails that surrounded the site. I
+ quickly learned that becoming a runner was a good way to have communications with the boss that could venture into topics that would be difficult in the
+ office. 
+...your teams are starting to build identities. Team locality and identity lead to isolation and insularity in team dynamics. 
+✥ ✥ ✥ 
+Organizations need cross-team structures that guard against isolation. 
+In a large organization, individual teams build their identity around
+ their team or geographic location. In a large building it is difficult to
+ support frequent interaction across teams; most “excuses” to visit
+ another team arise in the forms of meetings and other formalisms that
+ don’t support spontaneous communication. Distance, inconvenience,
+ or xenophobia (a “belonging at home” feeling) discourage such
+ informal interactions. 
+Yet people need to have social contact with each other. And in fact
+ people want to “get out” now and again to see what life is like on the
+ other side of the fence, in other organizations. 
+Therefore: 
+Encourage social structures that are unrelated to workplace structures and which will likely cut across the formal partitioning of the
+ organization. 
+The Water Cooler is the time-honored example of this pattern. One
+ Alliance site in Vienna has a strong coffee culture that revolves around
+ coffee machines on each floor of each wing of the building and one can
+ find small groups congregating there all day, especially mid-morning
+ and mid-afternoon. Another common (but dieing) practice is the
+ smoker’s area; in Schlumberger in Houston, members of this group
+ would gather at an outside terrace; in another company, they met
+ secretly in the stairwell. 
+At the Navision company in Copenhagen, there was a strong food
+ culture: the company served breakfast and lunch. Breakfast in particular was a time of social connection, a relaxed beginning to the day.
+ The company also had well-stocked refrigerators and pantries for
+ snacks during the day, and many of these were enjoyed in a group setting. Food is fun, and is a key element of any culture, but the main contribution to the communication network comes from the social
+ structures built around food. 
+Corporate clubs, singing groups, running clubs, chess clubs, and a
+ million other social structures can also help serve this purpose. What
+ can you do to encourage such structures? Give them a place to be.
+ Buying a coffee machine or water cooler provides a place for the social
+ dynamics to unfold. Make it special. People won’t come by for coffee
+ that is worse than instant coffee they can make in their office. Investing
+ in quality also has the benefit of demonstrating a sense of caring
+ within the organization. 
+Remember: location, location, location! You can’t just plop a water
+ cooler down in a hallway and expect people to congregate around it;
+ you must put it in a place where people can sit or stand comfortably
+ for a time. You may wish to incorporate several of Alexander’s patterns [Alexander1977] as you lay it out. The research department in
+ AT&T where both authors worked for a time had a room with comfortable furniture and a pleasant ambiance. As an added draw, it had a
+ small library. On the other hand, one facility had a water cooler stuffed
+ in a back storeroom of a lab with restricted access—it was no more
+ than a place to get (or perhaps just store) cold water. 
+✥ ✥ ✥ 
+This pattern not only gives people a break during the day, but it
+ contributes to fundamental human needs and desires that lie in the
+ deep foundations of any human culture. And it will contribute
+ strongly to inter-team communication: most professional communication takes place outside formal channels [GrinterHerbsleb2000]. 
+One potential danger in this pattern is "cliquishness,’’ a form of
+ schismogenesis (see THE OPEN CLOSED PRINCIPLE OF TEAMS (6.1.4)). If the
+ group is in any way exclusive, some people will feel left out; the locker
+ room example is one such example. A runners’ club may literally leave
+ non-members (and even novice members) behind. Coffee clubs might
+ be uncomfortable for those who do not drink coffee. Problems of complementary schismogenesis can be solved by having a bounty of such
+ cross-cutting organizations, but that can also lead to symmetrical
+ schismogenesis. A better solution, where feasible, is to broaden the
+ base of the organization (e.g. the coffee corner can also offer tea and
+ juice). But a healthy environment should be able to sustain even highly
+ specialized groups. In all cases: build on the local culture and its
+ mores. 
+This pattern rounds out UPSIDE DOWN MATRIX MANAGEMENT (5.1.19)
+ by going outside the context of the business interests of the enterprise,
+ building on potentially deeper social relationships and normative
+ practices of the culture of the area, town, or other constituency. It complements and rounds out RESPONSIBILITIES ENGAGE (5.1.14) as an independent pattern. 
+This pattern is similar to HALLWAY CHATTER (5.1.15); in fact, both
+ work to improve informal communication. But notice the difference:
+ HALLWAY CHATTER moves people close so that they will go to each
+ others’ offices or cubicles. That communication, while informal, is
+ planned, and tend to be more of a technical nature. On the other hand,
+ THE WATER COOLER enables chance meetings and non-technical conversations. Both are necessary and these patterns are complementary. 
+ Combined with an application of ENGAGE CUSTOMERS (4.2.6) where
+ you seat your developers in the customer work space, THE WATER
+ COOLER can be a powerful way to uncover important requirements
+ details. Beyer and Holtzblatt ([BeyerHoltzblatt1998], p. 37) relate: 
+Many of the important aspects of work are invisible, not 
+because they are hidden, but just because it doesn’t occur to 
+anyone to pay attention to them. Intuition doesn’t help make 
+these aspects explicit: 
+An entire project team hangs out in the hallway outside their 
+offices every morning and chats over coffee and donuts. Does 
+anyone on the team know this is a critical project coordination session? 
+A worker in accounting calls a friend in order processing to 
+gossip and mentions that a rush order is on its way. Does his 
+manager know this informal communication is the only thing 
+keeping the company’s rush orders on time? 

@@ -1,0 +1,47 @@
+SOLO VIRTUOSO *
+ . . . we have described optimal sizes of organizations needed to
+ create large software systems on time and within budget — SIZE THE ORGANIZATION (4.2.2). The following pattern explains what to do for
+ smaller systems (less than twenty-five thousand lines of code), when a
+ product must still be created on time and within budget, but when
+ rapid growth is not anticipated after the first release. 
+✥ ✥ ✥ 
+When a smaller software project (less than twenty-five thousand
+ lines of code) is overstaffed, communication overhead increases and
+ talented individuals, who could produce the software entirely on their
+ own, are bridled, their “horsepower” diminished. 
+We have said that organizational size affects the deliverable in a
+ non-linear manner (SIZE THE ORGANIZATION (4.2.2)). We have also
+ observed that communication overhead goes up as the square of the
+ size, which means that the organization becomes less cohesive as the
+ square of the size while the “horsepower” of the organization goes up
+ only linearly. 
+ The question then is, what organizational size works best for
+ smaller software projects? 
+The answer depends on the individual(s) involved in the project.
+ The productivity of a single individual can be higher than that of a collection of productive individuals. We have seen single-person developments generate 25KSLOC of deliverable code in 4 months (a craft
+ interface for a telecommunication system); two-person developments
+ do 135 KSLOC in 30 months. Many of these adhered faithfully to all
+ stipulated reviews and verification steps. 
+Boehm [Boehm1981] notes a 20-fold spread between the least and
+ most effective developers. A telecommunications developer recently
+ told me that “having the right expertise means the difference between
+ being able to solve a problem in a half hour, and never being able to
+ solve the problem at all.” 
+(Note: Boehm quotes Grant and Stackman [Grant1966] with a 26
+fold spread, page 667.) 
+The result of using a SOLO VIRTUOSO (4.2.5) is an organization limited
+ to small development. Though there is a singleton development role,
+ other roles may be necessary to support marketing, toolsmithing, and
+ other functions. The productivity of a suitably chosen singleton developer is enough to handle sizable projects; here, we establish 25KSLOC
+ as a limit. 
+Therefore: 
+Do the entire design and implementation with one or two of your
+ most effective developers. 
+✥ ✥ ✥ 
+This pattern is not a “License to Hack.” The work of SOLO VIRTUOSOS
+ (4.2.5) is still subject to technical reviews, validation, and verification
+ at appropriate times in the development cycle — STAND UP MEETING
+ (5.2.7), ENGAGE CUSTOMERS (4.2.6). This combines nicely with DEVELOPING
+ IN PAIRS (4.2.28). 
+See also MODERATE TRUCK NUMBER (4.2.24), which raises concerns
+ about the use of this pattern in risk-averse business.

@@ -1,0 +1,94 @@
+PUBLIC CHARACTER *
+ ...an organization structure is emerging, both formally and informally, and frequent contact at the workplace cultivates friendships as
+ well as a social context that begs for support of common social graces
+ and functioning. 
+✥ ✥ ✥ 
+An organization is a social entity whose smooth functioning
+ depends on more than professional relationships. 
+Much of what defines “culture” is the widely known but rarely
+ spoken myths, tidbits, history, and interpretations of these stories.
+ However, most professional organizations are built around the
+ exchange of more structured information in blatantly public forums:
+ memoranda, meetings, explicit policies, and executive pronouncements. 
+Yet the daily small pieces of information, details, and deep insights
+ are the glue that hold the organization and its systems together. Furthermore, this information might include insights on shortcuts and
+ other expediencies that serve the culture and its value system while
+ falling short of the “letter of the law.” The formal organization rarely
+ has any organ that legitimizes the exchange of such information, yet
+ such information is crucial not only to the smooth operation of the
+ enterprise, but to its very survival. 
+Such information includes information outside of the primary business goals, but which is nonetheless important to the support of the
+ work environment: where to find a good place for lunch, how to find
+ the boss when she’s not in the office, who knows how to fix the jam in
+ the copy machine. It also includes meta-knowledge, how to find out
+ where to find out certain kinds of information: who would know how
+ to find answers to questions about the web server machine? who
+ would know where to direct questions about personnel issues. 
+Therefore: 
+One or more people serve in the role as PUBLIC CHARACTER to help
+ social processes both behind the scenes and through social events. 
+There may be socio-technological role combinations. For example,
+ an Architect role might spend time passing information between
+ development coordinators who otherwise wouldn’t take the initiative
+ to talk with each other [CoplienDevos2000]. We wrote up this pattern
+ as “Shmoozing Architect” at OT ’99. 
+✥ ✥ ✥ 
+MATRON ROLE (4.2.18) and GATE KEEPER (4.2.10) are examples of
+ PUBLIC CHARACTERS. 
+From Jane Jacobs’s The Death and Life of Great American Cities,
+ [Jacobs1961]: 
+The social structure of sidewalk life hangs partly on what can 
+be called self-appointed public characters. A PUBLIC CHARACTER is anyone who is in frequent contact with a wide circle of 
+people and who is sufficiently interested to make himself a PUBLIC CHARACTER. ... His main qualification is that he is public, that he talks to lots of different people. In this way, news 
+travels that is of sidewalk interest. 
+Jacobs goes on to say that, once the neighborhood recognizes a
+ PUBLIC CHARACTER, people consciously tell him gossip (meeting dates,
+ lost items) that they want propagated. A PUBLIC CHARACTER is a sort of
+ living bulletin-board, with highly advanced search capabilities. 
+One finds a similar function in the Maven role in The Tipping Point
+ [Gladwell2000]. 
+In our experience, large software projects usually have at least one
+ PUBLIC CHARACTER, and s/he is critical to project success. When you
+ want to know who understands the persistence layer, you don’t ask
+ the architect; he’s too busy. You ask the PUBLIC CHARACTER, who won’t
+ know beans about persistence, but will know that Mary knows a lot
+ about databases, and that she will either understand the persistence
+ layer or know who does. 
+One interesting form of PUBLIC CHARACTER is the Jester or WISE FOOL
+ (4.2.21). In medieval courts, the Jester was a person who could make
+ fun of the king with impunity. The king was not obliged to follow the
+ jester’s insights; rather, these insights provided stimulus for thought.
+ A jester PUBLIC CHARACTER can incite the organization to introspection
+ and care; again, part of their qualification is that they are public. Such
+ a person might be instrumental in facilitating workshops using creative techniques, visual meeting, system envisioning, and games—as
+ well as reporting on user fears and expectations and being a change
+ agent. This is also reminiscent of the “laughing uncle” configuration
+ Bateson talks about in his writings of Pacific cultures [Bateson1958].
+ This uncle advised a child’s father of feelings that the child might not
+ convey to the father directly. 
+Project members are often penalized for being PUBLIC CHARACTERS —
+ “Oh, Mary never gets anything done, she’s always gossiping.” PUBLIC
+ CHARACTERS are a vital part of keeping large projects connected and
+ successful. In a number of cases, we have seen that the disappearance
+ of a single public character caused a major turn in morale and culture
+ in the organization, to a much greater degree than the loss of a key technical
+ person might do. The role is essentially informal; a project manager can’t
+ successfully assign somebody to this role. Rather, the role is something
+ that is recognized and taken advantage of when already present. The
+ recognition can help sustain the role. 
+If you see a team member “always gossiping”, consider whether the
+ team member has become a PUBLIC CHARACTER. Ask him or her a couple
+ of team-related questions (“Where can I find out more about the garbage collection? Who understands the compiler tools”?) If he or she
+ can handle these, as well as other questions (“Where’s the best place to
+ have lunch?” “How can I find Phil if he isn’t at his desk?” “And what
+ about... Naomi?”), you’ve found your PUBLIC CHARACTER. 
+It is instructive to compare the PUBLIC CHARACTER, MATRON ROLE
+ (4.2.18), and GATE KEEPER (4.2.10); the PUBLIC CHARACTER is related to,
+ but different from, both. The MATRON ROLE is concerned with the nur
+turing of the organization, and is inward-focused. On the other hand,
+ the GATE KEEPER is outward focused; always looking forward for the
+ next great direction. The PUBLIC CHARACTER is somewhat in the middle
+ of these two, but separate from each. An ideal project has each of these
+ roles, filled by different people. 
+A good place for the PUBLIC CHARACTER to hang out is at THE WATER
+ COOLER (5.1.20).

@@ -1,0 +1,46 @@
+STANDARDS LINKING LOCATIONS **
+ Standards in cartography allow people in different nations to use the same maps. 
+We once worked with a project doing a wireless communications architecture. The project was spread across three states and two countries, though
+ most of the work centered in two states. Each of those two locations built software for the locations’ respective hardware boxes, and those boxes communicated closely with each other. There of course was a standard message
+ protocol, but it wasn’t articulated anywhere: each location used its own C language structures to define its understanding of the messages. Each location
+ emphasized the message fields most of interest to it; in some cases, one location would give a field one name while another location gave it another name.
+ It doesn’t take much imagination to envision the confusion that ensued. 
+...a product must be developed in several different hallways, on different floors of a building, in different buildings or at different locations. Their code must interact. 
+✥ ✥ ✥ 
+It is difficult for geographically distanced teams to find opportunity or time to meet and interact for reasons of geographic distance.
+ Yet the system must act as a system, and to do that the parts must talk
+ to each other. There must be a common convention for the parts to talk
+ to each other. The many parties could come to an agreement in a
+ common meeting, but that is too much master planning and doesn’t
+ build on experience enough, and also doesn’t leave much room for
+ correction and iteration. 
+Communication patterns between project members follows geographic distribution. Local groups should be as autonomous as possible. Coupling between pieces of software must be sustained by
+ analogous coupling between the people maintaining that software.
+ People avoid communicating with people who work in other buildings, other towns, or overseas (see below). People in an organization
+ usually work on related tasks, which suggests that they communicate
+ frequently with each other. 
+Therefore: 
+Use standards to express architectural concerns that cross geographic boundaries. The technique may extend to organizational
+ boundaries, which can be as severe as distant geographic location. It
+ might extend to organizations separated only by one floor in a
+ building; small geographic distances can loom large if the building
+ architecture doesn’t support close interworking. 
+One of the good things about standards is that they are almost context-free. They at least give the illusion of a shared context across organizations that otherwise can find little in common. 
+✥ ✥ ✥ 
+This is a variant of CONWAY’S LAW (5.1.7). There is low cultural context between locations, so the interaction between locations is mediated at a technical level using the most vernacular approach: industry
+ or corporate standards. 
+Local groups have higher context and more effective communication within themselves. Use of standards within a location or within
+ groups can actually reduce understanding, add overhead, and complicate communication. 
+Be sure to use FACE TO FACE BEFORE WORKING REMOTELY (5.1.10) to
+ temper what can too easily become a sterile exchange of standardsbased communications. 
+The problem described in this pattern might, in extreme cases,
+ extend to work between adjacent cubicles—but in that case, there may
+ be nothing that can help, and such a technological solution to this certainly won’t solve the underlying organizational or personality problems. 
+ Example: 
+A project might use standards like XML and RM/ODP to communicate between corporate subsidiaries working on a project. But to use
+ a standard within one of the subsidiaries would be counterproductive.
+ For example, reducing all inter-object communications to use CORBA
+ would both complicate architectural understanding and put system
+ performance at jeopardy. 
+Standards such as protocols and conventional data formats can provide cultural context that lowers the need for communication between
+ remote sites.

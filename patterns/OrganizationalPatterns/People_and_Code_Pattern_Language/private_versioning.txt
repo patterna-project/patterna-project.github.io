@@ -1,0 +1,45 @@
+PRIVATE VERSIONING **
+ “Solitude”, an outhouse on the property of Frank Weeks, Willston, North 
+Dakota, 1937. A place for anyone’s private version... 
+...a developer should have a way to checkpoint changes without
+ making these changes available to the development team at large. We
+ want to implement CODE OWNERSHIP (5.2.13) but subsystems never
+ work entirely in isolation. 
+✥ ✥ ✥ 
+Periodic integration of a developer’s work with that of other
+ members of the development team is important for ensuring stability. 
+Checkpointing only after completing major changes can make it difficult to back off of one phase of a change. Using the revision control
+ area for this can lead to changes being “published” before they are
+ ready for integration. Also, publishing intermediate changes can lead
+ to a deceptive number of revisions listed in the SCM system. It is necessary to be able to save intermediate steps in a change in case a
+ coding step results in an error. This is particularly important when: 
+• The mechanism for specifying that a version is ready for integration is primitive, and another developer has access to a version
+ as soon as it is checked in. 
+• There is a desire to keep the revision history database “uncluttered” with only significant changes logged. 
+ Therefore: 
+Developers should be provided with a mechanism for check
+ pointing changes at a granularity that they are comfortable with.
+ This can be provided for by a local revision control area, Only stable
+ code sets are checked into the project repository 
+Add a private repository to the developer work space so that a
+ developer can save intermediate versions before checking them in to
+ the repository. The private repository can use the same mechanisms as
+ the project repository (i.e., RCS) or can simply be a means of maintaining copies of intermediate files. 
+The key point is to provide a way for developers to use revision
+ control to save changes in increments which make sense to them,
+ without any risk of the changes being available to other developers
+ until the developer decides to publish a consistent and correct version.
+ Some SCM tools support this without a need for physically separate
+ repository area. 
+It is important to make sure that developers using PRIVATE VERSIONING remember to migrate changes to the shared version control
+ system at reasonable intervals. 
+The revision control mechanism could also provide a means for
+ restricting access to checked-in versions that are not yet ready for use
+ by others, and could also provide a mechanism for filtering log messages to eliminate trivial changes. 
+✥ ✥ ✥ 
+Note that PRIVATE VERSIONING works together with VARIATION BEHIND
+ INTERFACE (5.2.15) to help prevent developers step on each others’ toes,
+ but they come about it in very different ways. Code owners (CODE
+ OWNERSHIP (5.2.13)) can work together to do coordinated development
+ and testing of private features before they are released to the project as
+ a whole.

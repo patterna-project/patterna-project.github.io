@@ -1,0 +1,71 @@
+WORK FLOWS INWARD **
+ Work (i.e. pears) flowing into a pear processing plant. 
+...an organization is in place and has been doing work long enough
+ that it can introspect about its structure and workings. There is some
+ management pecking order or hierarchical decision-making structure
+ in the organizational network. Work instructions flow through this
+ structure, with the possibility that each role makes decisions, adds
+ constraints, or works to carry out decisions within some set of constraints. 
+✥ ✥ ✥ 
+An organization must seek a structure that best insures that the
+ most authoritative roles make the decisions and carry out the work
+ that adds value directly to the product. 
+Some centralized control and direction are necessary. During software production, the work bottleneck of a system should be at the
+ center of its communication and control structure. If the communication center of the organization generates work more than it does work,
+ then organization performance can become unpredictable and sporadic. The developer is already sensitized to market needs through
+ FIRE WALLS (4.2.9) and GATE KEEPER (4.2.10) (no centralized role need fill
+ this function). 
+Look at the following grid that depicts the directed flow of communication in an organization (see HOW THE PATTERNS CAME TO US
+ (CHAPTER 2)). In this organization, there is a core of roles at the center
+ that initiate interactions across the spectrum of most of the other roles: 
+Yet this core receives very little input from the rest of the roles in the
+ organization. And this core is rife with management roles (Team
+ Leader, Manager, Lead Assembler). It has an overloaded center, and
+ work requests flow outward from this center, diffusing across the
+ other roles. Core roles make work. 
+Katz & Kahn’s analysis of organizations shows that the exercise of
+ control is not a zero-sum game [KatzKahn1978, p. 314]. 
+Therefore: 
+Work should flow in to developer from stakeholders, especially
+ customers. Work should not flow out from managers. 
+You should not put managers at the center of the communication
+ grid: they will become overloaded and make decisions that are less
+ well-considered, and they will make decisions that don’t take day-to-day dynamics into account. 
+Consider the following picture, where work flows from the roles
+ across the organization to the roles at the center: Developer, Architect,
+ Ambassador. There is a healthy distribution of inward-directed inputs.
+ And in large part, the central roles do work, not make work. 
+ ✥ ✥ ✥ 
+The result is an organization whose communication grid has more
+ points below the diagonal than above it (as in the second figure
+ above). 
+The work should focus at the center of the process; the center of the
+ process should focus on value-added activities (DEVELOPER CONTROLS
+ PROCESS (4.1.17)). 
+But consider this interaction grid: 
+ Superficially, the graph appears to show a WORK FLOWS INWARD pattern. But in fact, most of the interactions directed from outlying roles
+ to the developer were of an imperative nature rather than an informative nature. The developer role was being pulled in many directions,
+ and the organization health suffered greatly. 
+Organizations run by professional managers tend to have repeatable business processes, but don’t seem to reach the same productivity
+ plateaus of organizations run by engineers. In programmer-centric
+ organizations, the value-added roles are at the center of the process
+ (DEVELOPER CONTROLS PROCESS (4.1.17); ARCHITECT ALSO IMPLEMENTS
+ (5.2.10)). The manager should facilitate and support these roles and
+ their work (PATRON ROLE (4.2.15); FIRE WALLS (4.2.9)). 
+Mackenzie characterizes this pattern using M-curves, that model the
+ percentage of task processes of each task process law level (planning,
+ directing, and execution) as a function of the classification.
+ [Mackenzie1986] 
+The rationale is supported with empirical observations from
+ existing projects. 
+The broad goal of this pattern is to separate overhead work from
+ central work; DAY CARE (4.1.23) is another pattern with a similar intent. 
+ The MANAGER ROLE should still make day-to-day decisions for the
+ business process, and pursuant to their responsibility to “keep the
+ pests away” (FIRE WALLS (4.2.9)). 
+In his new work, The Nature of Order, Christopher Alexander speaks
+ of gradients as one of the 15 structural properties of whole systems that
+ emerge naturally in a process of local adaptation. In WORK FLOWS INWARD, there should be a natural gradient of information flow toward
+ the developer: the “center” of the organization — both in the sense of
+ the social network diagrams, and in the sense that Alexander uses the
+ term “center” to describe a prominent feature of a system. 

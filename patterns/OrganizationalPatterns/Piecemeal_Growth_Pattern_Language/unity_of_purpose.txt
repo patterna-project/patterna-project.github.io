@@ -1,0 +1,55 @@
+UNITY OF PURPOSE **
+ ...the team is beginning to come together. Team members may come
+ from different backgrounds and may bring many different experiences. 
+✥ ✥ ✥ 
+Many projects have rocky beginnings as people struggle to work
+ together. 
+Often, the people have different ideas about what the final product
+ should be. In fact, the final product may well be a pretty fuzzy conept. Yet the people must have a consistent view of the product if there
+ is any hope of it getting done. 
+Each person is different and has different views and opinions. They
+ come with different backgrounds and experiences. They must learn to
+ work together. 
+It is important to get off to a good start — initial impressions, good
+ or bad, tend to be lasting. 
+Therefore, 
+The leader of the project must instill a common vision and pur   pose in all the members of the team. This “leader” can be a manager,
+ or the PATRON ROLE (4.2.15), or a customer advocate, but should be
+ someone who holds the team’s respect and who has influence over the
+ team’s thinking. This is an overt action; you can’t count on it happening automatically. The leader should make sure everyone agrees
+ on the following: What is the product supposed to do? Who are the
+ customers, and how will it help them? What is the schedule, and
+ everyone must feel personally committed to the schedule. Who is the
+ competition? 
+An important component of this action is to identify strengths of
+ the team, and use them as rallying points as well. This is related to
+ identifying the challenges and competition, and uniting to overcome
+ and surpass them. 
+As time goes on, the UNITY OF PURPOSE continues to emerge from
+ ongoing dialogue within the team and with customers and other
+ stakeholders. While the team leader primes the pump, team dynamics
+ take over and keep things going. 
+✥ ✥ ✥ 
+The obvious result is that the team is on the same page, and is
+ working together, rather than at cross purposes. But a more subtle, but
+ probably more powerful effect is what it does for the morale of the
+ team. The best teams tend to feel that they are somehow better than
+ others — and they work to prove it! 
+This pattern relates to some deep-seated principles and values of
+ organizational health. There may be no more important single property of an organization than that its members have a shared vision
+ they are motivated to achieve. Communication—which receives the
+ bulk of the attention in this book—is just a means to achieving that
+ shared vision. UNITY OF PURPOSE is a deeper principle even than effective communication; communications are just a means to UNITY OF
+ PURPOSE. 
+Related Patterns: 
+SHARED CLEAR VISION (10.5.25) ([Bramble2002], p. 80) notes the
+ importance of a clear vision in creating unity, from the point of view of
+ writing use cases. SELF SELECTING TEAM (4.2.11) outlines how a team
+ should come together, but that alone is insufficient to achieve UNITY OF
+ PURPOSE. LOCK ’EM UP TOGETHER (5.2.5) helps achieve unity, particularly
+ of architecture. A GATE KEEPER (4.2.10) can help. It can help the team be
+ more unified on what requirements to ENGAGE CUSTOMERS (4.2.6). This
+ pattern sets up COMPENSATE SUCCESS (4.2.25): it’s much easier to compensate success when everyone knows what success means. And
+ while UNITY OF PURPOSE is important to galvanize the team, effective
+ team dynamics can come only if every team member is also valued as
+ an individual: HOLISTIC DIVERSITY (4.2.19) comes to play here. 

@@ -1,0 +1,60 @@
+ INTERRUPTS UNJAM BLOCKING **
+ During one project status meeting, it was reported that a critical piece of
+ hardware was malfunctioning. Unfortunately, the expert on the hardware
+ was on the other side of the country, and was involved in his own work. But
+ he had the (mis)fortune to be on that conference call. So was the project
+ director, who informed him in blunt terms that his services were required
+ immediately. He was on the next plane out. 
+... you are fine-tuning scheduling in a high productivity design/
+ implementation process or low-latency service process. The scheduling problem is to be addressed on a small scale (i.e., this is not scheduling entire departments, but the work of cooperating individuals).
+ You want to use INFORMAL LABOR PLAN (4.1.14), but need additional criteria for individuals and small groups to plan their schedules. Local
+ decisions may lack the scope necessary to avoid duplication of work,
+ missed opportunities, and other sillinesses.    
+A comprehensive scheduling plan is difficult if not impossible;
+ yet, without some kind of plan, it becomes easy to fall into
+ thrashing. 
+The events and tasks in a process are too complex to schedule
+ development activities as a time-linear sequence. 
+ Complete scheduling insight is impossible. Even if it were possible
+ to capture the entire picture of the project for an instant, it would
+ change very quickly. The dynamics of project development mean that
+ the best we can hope for is a high-level, approximate schedule. 
+The programmers with the longest development schedules will
+ benefit if more of others’ code is done before they try integrating or
+ testing later code, and their interval can’t otherwise be shortened (see
+ CODE OWNERSHIP (5.2.13)). 
+Therefore: 
+If a role is about to block on a critical resource, interrupt the role
+ that provides that resource so they stop what they’re doing to keep
+ you unblocked. 
+The nature of the critical resource can vary. It may be a software
+ module that is in the critical path. It could be the latest software integration. It is often critical knowledge, without which one cannot move
+ forward. Whatever the resource is, the approach is to interrupt the provider of the resource. 
+✥ ✥ ✥ 
+If the overhead is small enough, it doesn’t affect throughput. It will
+ always improve local latency. 
+The process should have a higher throughput, again, at the expense
+ of higher coupling. Coupling may have already been facilitated by earlier patterns, such as WORK FLOWS INWARD (4.1.18), MOVE RESPONSIBILITIES
+ (5.1.18), RESPONSIBILITIES ENGAGE (5.1.14), HALLWAY CHATTER (5.1.15), and
+ COUPLING DECREASES LATENCY (5.1.22). 
+The intent is that this pattern will apply most frequently between
+ cooperating developers working on a single project. This is supported
+ empirically from a high productivity process in AT&T. There are
+ strong software engineering (operating system) principles as well. 
+It may be useful to prioritize interrupts, and service the ones that
+ would optimize the productivity of the organization as a whole. That
+ is, it is better to unblock 4 people who are currently blocked than to
+ unblock a single squeaky wheel. The decision-making process should
+ be fast: Most of the time, it should be distributed. Where arbitration is
+ needed, apply PATRON ROLE (4.2.15). The simplest resolution is the pattern DON’T INTERRUPT AN INTERRUPT (4.1.26). 
+ The PATRON ROLE (4.2.15) and MANAGER ROLE can help the team audit
+ the project for blocked progress, but should defer to the Developers (or
+ other directly impacted roles) to resolve the blockage when ever possible. Management intervention can be effective, but may risk good
+ will within the project. 
+Joe Maranzano notes a corollary to this pattern is another pattern:
+ Don’t put too many critical tasks on one person (which is related to
+ MODERATE TRUCK NUMBER (4.2.24) and DISTRIBUTE WORK EVENLY (5.1.13)). 
+This pattern is much less effective if the provider of the resource is
+ not in the same project as you are. In that case, the provider has little
+ incentive to service your interrupt, and you risk alienating the provider if you engage in incessant pestering. This problem can be mitigated by adopting a policy of reciprocity, fair and proactive exchange
+ of value among partners. [Dikel2001].

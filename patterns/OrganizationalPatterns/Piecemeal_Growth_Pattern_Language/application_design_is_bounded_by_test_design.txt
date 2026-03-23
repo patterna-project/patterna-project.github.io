@@ -1,0 +1,41 @@
+APPLICATION DESIGN IS BOUNDED BY TEST DESIGN *
+ An M4 tank tops the ridge on a test course. The tank was designed to meet all 
+the challenges of the test course — the test course should simulate all the 
+extremes of the field. 
+...a development organization has mechanisms to document and
+ enforce the software architecture, and developers to write the code.
+ You are planning how to engage your customer. A Testing role is being
+ defined. 
+✥ ✥ ✥ 
+When do you design and implement test plans and scripts? 
+Test development takes time, and cannot be started just when the
+ coding is done (“when we know what we have to test”). 
+Scenarios are known when requirements are known, and many of
+ these are known early (see SCENARIOS DEFINE PROBLEM (4.2.8)). 
+Test implementation needs to know the details of message formats,
+ interfaces, and other architectural properties in great details (to support test scripts and test jigs). Both software developers and testers
+ need to work closely together from the same “script”—the Use Cases
+ that define customer needs. 
+ Yet external tests are largely ignorant of the internal software structure, so much test development can take place in parallel with design
+ and implementation of the deliverable software. Implementation
+ changes daily; there should be no need for test designs to track ephemeral changes in software implementation. 
+Therefore: 
+Use case-driven test design starts when the customer first agrees
+ to use case requirements. Test design evolves along with software
+ design, but only in response to customer use case changes: the
+ source software is inaccessible to the tester. When development
+ decides that architectural interfaces have stabilized, low-level test
+ design and implementation can proceed. 
+Software designers can and should use test specifications as a major
+ touchstone for requirements. 
+✥ ✥ ✥ 
+This provides a context for SCENARIOS DEFINE PROBLEM and complements ENGAGE QUALITY ASSURANCE (4.2.29). Once the expectations are
+ established between the testers and developers in the context of customer expectations (perhaps through FIRE WALLS (4.2.9) and GATE KEEPER (4.2.10)) you can approach the customer to capture Use Cases. 
+Making the software accessible to testers causes them to see the
+ developer view rather than the customer view, and leads to the chance
+ they may test the wrong things, or at the wrong level of detail. Fur
+thermore, the software will continue to evolve from requirements until
+ the architecture gels, and there is no sense in causing test design to
+ fishtail until interfaces settle down. 
+In short, test design kicks off at the end of the first major influx of
+ requirements, and touches base with design again when the architecture is stable.
