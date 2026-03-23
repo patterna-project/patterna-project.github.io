@@ -1,0 +1,5 @@
+Involve the Managers
+
+============================================================
+
+TODO: Vložiť popis vzoru z https://scrumbook.org/

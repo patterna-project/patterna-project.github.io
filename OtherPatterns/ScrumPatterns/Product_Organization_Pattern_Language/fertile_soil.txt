@@ -1,0 +1,5 @@
+Fertile Soil
+
+============================================================
+
+TODO: Vložiť popis vzoru z https://scrumbook.org/

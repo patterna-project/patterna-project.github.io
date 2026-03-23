@@ -1,0 +1,5 @@
+Birds of a Feather
+
+============================================================
+
+TODO: Vložiť popis vzoru z https://scrumbook.org/

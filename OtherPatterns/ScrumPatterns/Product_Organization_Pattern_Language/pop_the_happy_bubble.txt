@@ -1,0 +1,47 @@
+Pop the Happy Bubble
+Alias: Beyond the Happy Bubble
+
+
+
+
+...the Scrum Team has overcome some impediments and is working more effectively than before.
+
+✥       ✥       ✥ 
+
+Teams can get into a state where they are satisfied with the improvements they have made. However, this allows dysfunctions to persist. It is like a bubble of happiness surrounds them and insulates them from unpleasant but true information.
+
+Many organizations adopt Scrum in a crisis where the time they need to develop a new version of their product is far longer than the market is willing to wait. After the initial adjustments to Scrum, the team delivers Product Increments. The transition from no product to any product is such a significant success that it inhibits removing any other impediments because none of the observed impediments are of the magnitude of the previous state. The team does not feel it is worth putting the effort into resolving such comparatively small problems.
+
+In environments where there is support for ongoing improvement, a successful team often cannot see how to improve. Over time, it gets harder and harder to improve. The team has harvested all the low-hanging fruit. It may be the team has reached the limit of its knowledge or experience and cannot see there is an alternative to how it is working.
+
+The Sprint Retrospectives can become self-congratulatory affairs that produce few (if any) process changes, or that produce superficial changes with no real impact on the team. Eventually the team ceases to hold Retrospectives because it sees no way to improve—apart from stopping to perpetuate the shared myth of great performance.
+
+Some teams may see no way to improve because all the impediments they have are “outside the team.” When they fail to achieve the Sprint Goal, they always ascribe it to one-time, exceptional events. And there is always some one-time event. They feel that if only some other “they” could do something about this, the team would improve.
+
+Facing up to problems is aversive and resolving impediments can force teams to have uncomfortable conversations or to make difficult decisions. It is natural for people to avoid such unpleasant experiences. This can be the case in a team that is highly social cohesive where everyone likes to work with each other and just wants to get along. This makes it difficult to acknowledge problems. In cultures that teach people not to rock the boat, it becomes more and more difficult to acknowledge problems. Where there isn’t the courage and determination to accept problems and change there can never be any improvement.
+
+A team may be living in a Happy Bubble, but one of the biggest challenges is that bubbles are transparent—it is very hard for a team to see the Happy Bubble that surrounds it. It almost always takes an outside perspective to pick up on such behavior. The team needs to seek feedback from independent observers. This is something teams may not want to seek. The observers will need to have the courage to be honest with team members and deal with the unpleasantness of results of their feedback.
+
+On the other hand, all teams have the capacity to improve. They just may not see it.
+
+Therefore:
+
+Jolt the team into awareness of its situation (pop the Happy Bubble): force the team to confront its happy-bubble-ness by showing them important deficiencies. Then, together with the team, plan actions to improve. Create a culture in the team of relentless, continuous self-examination and improvement.
+
+This is a pattern of repair—the best situation is to avoid getting in the Happy Bubble in the first place. When someone (like the ScrumMaster) raises an issue that everyone is ignoring, challenge the team with the issue and ask them how they plan to resolve it. The key is getting the team to admit it has a problem in the first place.
+
+The best person who can take the team beyond the Happy Bubble is someone who is on the Scrum Team and who is willing and able to bring up difficult issues. This person must be able to see the issues, raise the issues and instigate change. The person must have the respect and trust of the Scrum Team and maintain the team’s autonomy and self-organization. The ScrumMaster is in a unique position to pop the Happy Bubble because of his or her perspective on the whole team, and because of the objectivity that owes to the ScrumMaster practice of removing him- or herself from development decisions. However, when the ScrumMaster confronts the team, the message must be that we (not you) are not performing well enough, and what will we do about it.
+
+What if the ScrumMaster is part of the problem? If it is only the ScrumMaster, the team can take care of it internally. However, because the ScrumMaster has the broader process view, if the ScrumMaster is in the Happy Bubble, it is very likely the whole team is also in the Happy Bubble. In this case, the Product Owner may have to take drastic measures, such as bringing in an outside perspective, either informally or formally. This is a last resort for times when the Happy Bubble is causing serious disruption and other measures have failed.
+
+An external bubble-popper is inferior to someone within the Scrum Team, but may be necessary if the entire team is unaware of the Happy Bubble. Anyone in a leadership role can initiate the involvement of this external bubble-popper. It is crucial that there is hard data to back up claims of the team’s performance and the existence of a Happy Bubble. The fact that the team is in a Happy Bubble means that they may be skeptical about even having a problem. Confront team members with data so they can’t argue it away. The best role external to the team is probably a ScrumMaster from another team, particularly if the ScrumMaster is also blind to the dysfunction. This role is unique in that it is both objective and neutral and can see the whole picture. This provides a mirror to the team so it can understand the implications of its plateauing behavior. The ScrumMaster plays a questioning role. However, if a ScrumMaster is too strong and tries to force a specific solution it can disrupt the team’s self-organization. Where possible, use Socratic questioning.
+
+✥       ✥       ✥ 
+
+The hoped-for result is that the team becomes aware of its deficiencies, recommits to improve, and takes steps to improve. The most basic result is awareness, and that may be the most important. Popping the Happy Bubble raises awareness of problems that the team might address with Scrumming the Scrum. Conversely, the patterns of Scrumming the Scrum, Retrospectives and Norms of Conduct help prevent happy bubbles in the first place.
+
+The ideal result is that the team learns why it got in the Happy Bubble in the first place and takes steps to prevent the formation of future Happy Bubbles.
+
+Some people might not enjoy being jolted out of their Happy Bubble. They may perceive it as unreasonable pressure to perform at an unwarranted level. In extreme cases, people might leave the team. An effect of this pressure may be a sudden disruption that removes the euphoric feeling that the team has been under, resulting in a lack of motivation and potentially harming the team dynamics with people leaving the organization as a result.
+
+The most possible positive long-term consequence of repeatedly popping the Happy Bubble is that the team gains an appreciation for its ability to reflect and improve. This is a rightful source of Team Pride (see Team Pride).

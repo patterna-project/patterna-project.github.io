@@ -1,0 +1,5 @@
+Development Team
+
+============================================================
+
+TODO: Vložiť popis vzoru z https://scrumbook.org/

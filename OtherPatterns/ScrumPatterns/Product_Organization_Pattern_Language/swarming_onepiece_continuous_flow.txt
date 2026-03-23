@@ -1,0 +1,5 @@
+Swarming: One-Piece Continuous Flow
+
+============================================================
+
+TODO: Vložiť popis vzoru z https://scrumbook.org/

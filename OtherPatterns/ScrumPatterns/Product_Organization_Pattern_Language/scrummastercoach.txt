@@ -1,0 +1,5 @@
+Scrum(Master)Coach
+
+============================================================
+
+TODO: Vložiť popis vzoru z https://scrumbook.org/

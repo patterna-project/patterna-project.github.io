@@ -1,0 +1,5 @@
+Conway's Law
+
+============================================================
+
+TODO: Vložiť popis vzoru z https://scrumbook.org/

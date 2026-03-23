@@ -1,0 +1,5 @@
+The Mist
+
+============================================================
+
+TODO: Vložiť popis vzoru z https://scrumbook.org/

@@ -1,0 +1,5 @@
+Scrum of Scrums
+
+============================================================
+
+TODO: Vložiť popis vzoru z https://scrumbook.org/

@@ -1,0 +1,5 @@
+Illegitimus Non Interruptus
+
+============================================================
+
+TODO: Vložiť popis vzoru z https://scrumbook.org/

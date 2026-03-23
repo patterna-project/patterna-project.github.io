@@ -1,0 +1,5 @@
+Sprint Planning
+
+============================================================
+
+TODO: Vložiť popis vzoru z https://scrumbook.org/
