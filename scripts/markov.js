@@ -568,24 +568,32 @@ async function generateSequence() {
         let similarityMatrix;
 
         if (useUSE) {
-            // Detailný loading pre USE - 3 fázy
             updateLoadingIndicator(30, t.loadingUSEModel);
             await delay(100);
             
             updateLoadingIndicator(50, t.generatingEmbeddings);
             await delay(100);
             
-            // Overíme, či je USE model dostupný
             if (typeof use === 'undefined' || !use) {
                 throw new Error('Universal Sentence Encoder nie je načítaný. Skontrolujte pripojenie k internetu.');
             }
             
-            // Vytvoríme callback pre aktualizáciu loading textu počas výpočtu
-            const updateUSEProgress = (msg) => {
-                updateLoadingIndicator(60 + Math.floor(Math.random() * 20), msg);
-            };
+            // Spustíme nový scope pre riadenie pamäte
+            if (typeof tf !== 'undefined' && tf.engine) {
+                tf.engine().startScope();
+            }
             
-            similarityMatrix = await similarityCalculator.calculateUSESimilarityMatrix(selectedPatterns, updateUSEProgress);
+            try {
+                const updateUSEProgress = (msg) => {
+                    updateLoadingIndicator(60 + Math.floor(Math.random() * 20), msg);
+                };
+                similarityMatrix = await similarityCalculator.calculateUSESimilarityMatrix(selectedPatterns, updateUSEProgress);
+            } finally {
+                // Uvoľníme všetky tenzory vytvorené v tomto scope
+                if (typeof tf !== 'undefined' && tf.engine) {
+                    tf.engine().endScope();
+                }
+            }
             
             updateLoadingIndicator(80, t.computingSimilarity);
             await delay(100);
