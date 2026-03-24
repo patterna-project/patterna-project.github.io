@@ -18,22 +18,22 @@ A web application for generating optimal pattern sequences using **Markov Decisi
 
 ---
 
-## ✨ Features
+## Features
 
-- 🔢 **Similarity Matrix** – Cosine similarity between pattern descriptions (TF‑IDF / Universal Sentence Encoder)
-- 🕸️ **Interactive Graph** – Force‑directed visualization of pattern relationships
-- 📊 **Statistics** – Average similarity, median, standard deviation, top connections
-- 🎯 **Goal‑driven Sequencing** – Markov Decision Process (MDP) with configurable rewards
-- 🚩 **Forced Start / Goal** – Pin specific patterns as start or goal
-- 📎 **Reference Bonus** – Boost transitions when one pattern mentions another
-- 🎭 **Sentiment Analysis** – Adjust rewards based on emotional tone
-- 🌙 **Dark Mode** – Toggle between light and dark themes
+-  **Similarity Matrix** – Cosine similarity between pattern descriptions (TF‑IDF / Universal Sentence Encoder)
+-  **Interactive Graph** – Force‑directed visualization of pattern relationships
+-  **Statistics** – Average similarity, median, standard deviation, top connections
+-  **Goal‑driven Sequencing** – Markov Decision Process (MDP) with configurable rewards
+-  **Forced Start / Goal** – Pin specific patterns as start or goal
+-  **Reference Bonus** – Boost transitions when one pattern mentions another
+-  **Sentiment Analysis** – Adjust rewards based on emotional tone
+-  **Dark Mode** – Toggle between light and dark themes
 - 🇸🇰 / 🇬🇧 **Bilingual UI** – Slovak and English
-- 📤 **Export** – TXT, PDF, CSV, PNG, or full PRO ZIP with all data
+-  **Export** – TXT, PDF, CSV, PNG, or full PRO ZIP with all data
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 1. **Select patterns** from the catalog (Coplien & Harrison or upload your own)
 2. **Adjust parameters** (γ, rewards, ε) or enable advanced features (IDF, sentiment, reference bonus, USE)
@@ -45,7 +45,7 @@ A web application for generating optimal pattern sequences using **Markov Decisi
 
 ---
 
-## 🛠️ Technologies
+## Technologies
 
 | Technology | Purpose |
 |------------|---------|
@@ -58,7 +58,7 @@ A web application for generating optimal pattern sequences using **Markov Decisi
 
 ---
 
-## 📄 Pattern texts
+## Pattern texts
 
 Patterna includes pattern texts for educational purposes only:
 
