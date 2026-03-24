@@ -5,8 +5,8 @@
 A web application for generating optimal pattern sequences using **Markov Decision Process (MDP)** and text similarity analysis.
 
 **Live demo:** [patterna-project-github-io.vercel.app](https://patterna-project-github-io.vercel.app)  
-**Feedback:** [Patterna – Spätná väzba](https://tally.so/r/Y5rWkB) 
-**Bachelor's thesis:** FIIT STU Bratislava, 2025/2026
+**Feedback:** [Patterna – Spätná väzba](https://tally.so/r/Y5rWkB)
+**Bachelor's thesis:** [FIIT STU Bratislava](https://www.fiit.stuba.sk/), 2025/2026
 
 ---
 
