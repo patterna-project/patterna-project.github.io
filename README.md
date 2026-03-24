@@ -29,7 +29,7 @@ A web application for generating optimal pattern sequences using **Markov Decisi
 -  **Sentiment Analysis** – Adjust rewards based on emotional tone
 -  **Dark Mode** – Toggle between light and dark themes
 - 🇸🇰 / 🇬🇧 **Bilingual UI** – Slovak and English
--  **Export** – TXT, PDF, CSV, PNG, or full PRO ZIP with all data
+-  **Export** – TXT, PDF, CSV, PNG, or ZIP with all data
 
 ---
 
