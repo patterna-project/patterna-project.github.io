@@ -344,6 +344,8 @@ class PatternSimilarity {
         // 3. Získame embeddingy (volanie modelu)
         const embeddings = await model.embed(texts);
         const vectors = await embeddings.array(); // premeníme na JS pole
+
+        embeddings.dispose();
         
         // 4. Vypočítame kosínusovú podobnosť pre všetky dvojice
         const matrix = {};
