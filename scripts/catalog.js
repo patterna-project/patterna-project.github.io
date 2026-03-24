@@ -101,7 +101,7 @@ async function loadCatalog(catalogName) {
                 
                 for (const file of files) {         
                     if (!allPatternsData[file]) {
-                        const response = await fetch(`patterns/OrganizationalPatterns/${language}/${file}`);
+                        const response = await fetch(`patterns/DefaultPatterns/${language}/${file}`);
                         if (response.ok) {
                             const content = await response.text();
                             allPatternsData[file] = {

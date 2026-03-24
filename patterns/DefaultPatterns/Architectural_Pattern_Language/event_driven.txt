@@ -1,0 +1,16 @@
+EVENT DRIVEN ARCHITECTURE
+
+During a conference, I saw a demo where a new feature was added by simply publishing an event. No existing code was changed. That was the moment I understood the power of events: they let systems react to changes without being tightly coupled.
+
+✥ ✥ ✥
+
+Systems often need to react to state changes without knowing in advance who is interested. Direct calls lead to tight coupling and make it hard to add new behaviour.
+
+Therefore:
+Design the system around the production, detection, consumption, and reaction to events. Producers emit events; consumers subscribe to events they care about. An event bus decouples them.
+
+✥ ✥ ✥
+
+This pattern is the basis for OBSERVER PATTERN (observer_demo.txt) on a larger scale. It fits naturally with MICROSERVICES (microservices_basics.txt) and LAYERED ARCHITECTURE (layered_architecture.txt). Testing event‑driven systems requires UNIT TESTING (unit_testing.txt) of handlers and INTEGRATION TESTING (integration_testing.txt) of the bus.
+
+Event driven architecture also encourages the same transparency that makes DAILY STANDUP (daily_standup.txt) effective – everyone sees what events are being emitted.

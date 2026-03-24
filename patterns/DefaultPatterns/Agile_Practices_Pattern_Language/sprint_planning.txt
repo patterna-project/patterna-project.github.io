@@ -1,0 +1,16 @@
+SPRINT PLANNING
+
+Before we adopted Scrum, our project never had a clear short‑term direction. We would start coding without a plan, only to realise two weeks later we were heading in the wrong direction. Then we tried sprint planning: the team and product owner together pick a set of tasks for the next two weeks.
+
+✥ ✥ ✥
+
+A team needs a shared understanding of what to build in the coming iteration. Without a plan, work becomes chaotic and priorities shift daily. Yet the plan must be flexible enough to accommodate learning.
+
+Therefore:
+At the beginning of each sprint, the team and product owner collaboratively select a set of product backlog items to complete. The team breaks them into tasks, estimates effort, and commits to the work. The result is a sprint backlog.
+
+✥ ✥ ✥
+
+Sprint planning sets the stage for DAILY STANDUP (daily_standup.txt) – the standup tracks progress against the sprint plan. It also influences RETROSPECTIVE (retrospective.txt), where the team reflects on how well the planning process worked.
+
+This practice aligns well with TEST‑DRIVEN DEVELOPMENT (test_driven_development.txt) because planned stories can be turned into tests. The plan itself can be seen as a form of FACTORY METHOD (factory_method_demo.txt) – it creates a structured workflow.

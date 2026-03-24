@@ -132,7 +132,7 @@ function renderSimilarityGraph(patterns, similarityMatrix) {
         name: p.name,
         index: index,
         language: p.language,  // Pridáme language
-        catalog: p.language && Object.keys(userCatalogs).includes(p.language) ? p.language : 'C & H',  // Pridáme catalog
+        catalog: p.language && Object.keys(userCatalogs).includes(p.language) ? p.language : 'Default',  // Pridáme catalog
         element: null // Sem neskôr uložíme referenciu na D3 element
     }));
     
@@ -828,7 +828,7 @@ function showNodeInfo(nodeData, patterns, similarityMatrix) {
     const topConnections = connections.slice(0, 3);
     
     // Zistenie katalógu a jazyka
-    let catalogName = 'C & H';
+    let catalogName = 'Default';
     let isUserCatalog = false;
     let languageName = '';
 

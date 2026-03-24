@@ -798,7 +798,7 @@ function displayPatternSequence(sequence, similarityMatrix, referenceMatrix = nu
             `;
         }
 
-        let catalogName = 'C & H';
+        let catalogName = 'Default';
         let isUserCatalog = false;
         let languageName = '';
 

@@ -1,0 +1,16 @@
+SINGLETON PATTERN
+
+Once I was working on a logging module. Every part of the application needed to write log messages, and we kept creating new logger objects. Soon we had dozens of loggers fighting over the same file, and configuration was a mess. We realised that a single, central logger would solve everything.
+
+✥ ✥ ✥
+
+A system often needs exactly one instance of a class. Creating multiple instances leads to resource conflicts, inconsistent state, and unnecessary overhead. Yet we need a global point of access that all components can use.
+
+Therefore:
+Ensure that a class has only one instance and provide a global access point to it. Make the constructor private and expose a static method that returns the single instance, creating it lazily on first use.
+
+✥ ✥ ✥
+
+This pattern is often used together with FACTORY METHOD PATTERN (factory_method_demo.txt) to control object creation. It also appears in configuration managers, thread pools, and caches. See also UNIT TESTING PATTERN (unit_testing.txt) for how to test singletons.
+
+The singleton ensures that shared resources are managed consistently. It pairs well with LAYERED ARCHITECTURE PATTERN (layered_architecture.txt) where each layer might need a single instance of a service.

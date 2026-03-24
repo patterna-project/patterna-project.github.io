@@ -1,0 +1,16 @@
+INTEGRATION TESTING
+
+Our team had perfect unit tests, but when we deployed, the system still failed. The problem was how components interacted. We added integration tests that exercised the real connections, and the failures disappeared.
+
+✥ ✥ ✥
+
+Even when individual units work correctly, their interactions can break. Unit tests run in isolation and may miss interface mismatches, database issues, or timing problems.
+
+Therefore:
+Write tests that verify the interactions between multiple components, using real dependencies or controlled substitutes. Focus on the interfaces and data flow between units.
+
+✥ ✥ ✥
+
+Integration testing is essential for EVENT DRIVEN ARCHITECTURE (event_driven.txt) to ensure events are processed correctly. It also verifies that LAYERED ARCHITECTURE (layered_architecture.txt) layers communicate properly. In microservices, integration tests validate service contracts.
+
+The practice is often paired with UNIT TESTING (unit_testing.txt) and TEST‑DRIVEN DEVELOPMENT (test_driven_development.txt) to create a comprehensive test suite. It also fits with AGILE PRACTICES like RETROSPECTIVE (retrospective.txt) to improve testing strategy.

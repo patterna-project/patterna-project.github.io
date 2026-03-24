@@ -1,0 +1,16 @@
+FACTORY METHOD PATTERN
+
+At the start of a project, we needed to support multiple database backends. Hard‑coding the database type everywhere would make the code brittle. We thought: what if we let subclasses decide which database to instantiate?
+
+✥ ✥ ✥
+
+A system must be open for extension but closed for modification. Direct instantiation of concrete classes couples the client to specific implementations. Adding a new variant requires changing existing code.
+
+Therefore:
+Define an interface for creating an object, but let subclasses decide which class to instantiate. The Factory Method lets a class defer instantiation to subclasses.
+
+✥ ✥ ✥
+
+This pattern is a foundation for many frameworks. It is often used with SINGLETON PATTERN (singleton_demo.txt) to control the number of created objects. In testing, we use it with MOCK OBJECTS (see UNIT TESTING PATTERN, unit_testing.txt) to substitute real dependencies.
+
+Factories also play a key role in EVENT DRIVEN ARCHITECTURE (event_driven.txt) where event handlers are created on the fly. The pattern naturally leads to a LAYERED ARCHITECTURE (layered_architecture.txt) where each layer can provide its own factory.

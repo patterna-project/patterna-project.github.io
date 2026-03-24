@@ -1,0 +1,16 @@
+OBSERVER PATTERN
+
+In a stock trading system, we had many displays: a chart, a table, and a news ticker. Whenever the stock price changed, every display needed to update. Hard‑coding the list of displays would be a maintenance nightmare.
+
+✥ ✥ ✥
+
+When one object changes state, many dependent objects must be notified. The dependencies should be kept loose to allow adding or removing observers without affecting the subject.
+
+Therefore:
+Define a one‑to‑many dependency between objects so that when one object changes state, all its dependents are notified and updated automatically.
+
+✥ ✥ ✥
+
+Observer is a cornerstone of event‑driven systems. It is heavily used in EVENT DRIVEN ARCHITECTURE (event_driven.txt) and in GUI frameworks. The pattern appears in AGILE PRACTICES like DAILY STANDUP (daily_standup.txt) where team members observe each other’s progress.
+
+In combination with FACTORY METHOD PATTERN (factory_method_demo.txt), observers can be created dynamically. The LAYERED ARCHITECTURE (layered_architecture.txt) often uses observers to propagate changes between layers.

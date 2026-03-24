@@ -1,0 +1,16 @@
+DAILY STANDUP MEETING
+
+I remember a team that worked in silos. Developers hid in their cubicles, and integration was a nightmare every two weeks. Then they started meeting for 15 minutes each morning, standing in a circle. Problems surfaced early, and the team began to self‑organize.
+
+✥ ✥ ✥
+
+A development team needs to synchronize daily, identify impediments, and align on goals. Long meetings kill productivity, and asynchronous communication can miss important context.
+
+Therefore:
+Hold a short, time‑boxed meeting every day where each team member answers three questions: What did I do yesterday? What will I do today? What is blocking me? Keep the meeting standing to encourage brevity.
+
+✥ ✥ ✥
+
+This practice is a cornerstone of Scrum and Agile. It works well with SPRINT PLANNING (sprint_planning.txt) to set daily goals aligned with the sprint. It also feeds into RETROSPECTIVE (retrospective.txt) where the team reflects on the standup’s effectiveness.
+
+The standup reveals dependencies and impediments that can be tackled using OBSERVER PATTERN (observer_demo.txt) – team members become observers of each other’s work. It also encourages the kind of transparency needed for TEST‑DRIVEN DEVELOPMENT (test_driven_development.txt) to work well.

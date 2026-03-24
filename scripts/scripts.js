@@ -14,44 +14,25 @@ let languageColorMap = {};
 
 
 const patternLanguages = {
-    "Project_Management_Pattern_Language": [
-        "build_prototypes.txt", "community_of_trust.txt", "completion_headroom.txt",
-        "day_care.txt", "developer_controls_process.txt", "development_episode.txt",
-        "dont_interrupt_an_interrupt.txt", "get_on_with_it.txt", "implied_requirements.txt",
-        "incremental_integration.txt", "informal_labor_plan.txt", "interrupts_unjam_blocking.txt",
-        "mercenary_analyst.txt", "named_stable_bases.txt", "private_world.txt",
-        "programming_episode.txt", "recommitment_meeting.txt", "sacrifice_one_person.txt",
-        "size_the_schedule.txt", "someone_always_makes_progress.txt", "take_no_small_slips.txt",
-        "team_per_task.txt", "work_flows_inward.txt", "work_queue.txt", "work_split.txt"
+    "Agile_Practices_Pattern_Language": [
+        "daily_standup.txt",
+        "sprint_planning.txt",
+        "retrospective.txt"
     ],
-    "Piecemeal_Growth_Pattern_Language": [
-        "application_design_is_bounded_by_test_design.txt", "apprenticeship.txt", "compensate_success.txt",
-        "failed_project_wake.txt", "engage_quality_assurance.txt", "engage_customers.txt",
-        "domain_expertise_in_roles.txt", "diverse_groups.txt", "developing_in_pairs.txt",
-        "fire_walls.txt", "gate_keeper.txt", "group_validation.txt",
-        "holistic_diversity.txt", "legend_role.txt", "matron_role.txt",
-        "moderate_truck_number.txt", "patron_role.txt", "phasing_it_in.txt",
-        "public_character.txt", "scenarios_define_problem.txt", "self_selecting_team.txt",
-        "size_the_organization.txt", "skunk_works.txt", "solo_virtuoso.txt",
-        "subsystem_by_skill.txt", "surrogate_customer.txt", "team_pride.txt",
-        "unity_of_purpose.txt", "wise_fool.txt"
+    "Architectural_Pattern_Language": [
+        "layered_architecture.txt",
+        "microservices_basics.txt",
+        "event_driven.txt"
     ],
-    "People_and_Code_Pattern_Language": [
-        "architect_also_implements.txt", "architect_controls_product.txt", "architecture_team.txt",
-        "code_ownership.txt", "deploy_along_the_grain.txt", "feature_assignment.txt",
-        "generics_and_specifics.txt", "hierarchy_of_factories.txt", "lock_’em_up_together.txt",
-        "loose_interfaces.txt", "parser_builder.txt", "private_versioning.txt",
-        "smoke_filled_room.txt", "stand_up_meeting.txt", "standards_linking_locations.txt",
-        "subclass_per_team.txt", "variation_behind_interface.txt"
+    "Software_Design_Pattern_Language": [
+        "singleton_demo.txt",
+        "factory_method_demo.txt",
+        "observer_demo.txt"
     ],
-    "Organizational_Style_Pattern_Language": [
-        "the_water_cooler.txt", "three_to_seven_helpers_per_role.txt", "upside_down_matrix_management.txt",
-        "conway's_law.txt", "coupling_decreases_latency.txt", "decouple_stages.txt",
-        "distribute_work_evenly.txt", "divide_and_conquer.txt", "face_to_face_before_working_remotely.txt",
-        "few_roles.txt", "form_follows_function.txt", "hallway_chatter.txt",
-        "hub_spoke_and_rim.txt", "move_responsibilites.txt", "organization_follows_location.txt",
-        "organization_follows_market.txt", "producer_roles.txt", "producers_in_the_middle.txt",
-        "responsibilities_engage.txt", "shaping_circulation_realms.txt", "stable_roles.txt"
+    "Testing_Pattern_Language": [
+        "unit_testing.txt",
+        "integration_testing.txt",
+        "test_driven_development.txt"
     ]
 };
 

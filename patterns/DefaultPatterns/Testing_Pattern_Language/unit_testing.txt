@@ -1,0 +1,16 @@
+UNIT TESTING
+
+I once spent a week chasing a bug that only appeared in production. We had no tests. After we started writing unit tests, we caught errors immediately, and refactoring became safe. The confidence it gave was immense.
+
+✥ ✥ ✥
+
+Without automated tests, code rots. Developers fear to change it, and bugs slip into production. Testing after the fact is slow and misses many errors.
+
+Therefore:
+Write small, fast tests that exercise individual units of code in isolation. Each test should verify a single behaviour. Run them every time the code changes.
+
+✥ ✥ ✥
+
+Unit testing is the foundation for TEST‑DRIVEN DEVELOPMENT (test_driven_development.txt). It also relies on SINGLETON PATTERN (singleton_demo.txt) and FACTORY METHOD (factory_method_demo.txt) to provide test doubles. Well‑tested code is easier to refactor, which fits with AGILE PRACTICES like SPRINT PLANNING (sprint_planning.txt).
+
+The practice of isolating units also echoes LAYERED ARCHITECTURE (layered_architecture.txt) – each layer can be tested independently.

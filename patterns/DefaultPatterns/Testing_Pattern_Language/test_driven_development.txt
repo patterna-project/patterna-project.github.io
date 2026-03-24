@@ -1,0 +1,16 @@
+TEST‑DRIVEN DEVELOPMENT
+
+I used to write code first and tests later, often skipping tests altogether. Then I tried writing the test before the code. It forced me to think about the design, and I ended up with cleaner, more modular code that was a pleasure to maintain.
+
+✥ ✥ ✥
+
+Writing tests after code often leads to under‑testing and fragile designs. Without a clear specification, code can grow in messy ways.
+
+Therefore:
+Write a failing test before writing any production code. Then write just enough code to make the test pass. Refactor while keeping tests green. Repeat in short cycles.
+
+✥ ✥ ✥
+
+TDD naturally leads to UNIT TESTING (unit_testing.txt) and good design. It often results in the use of SINGLETON PATTERN (singleton_demo.txt) or FACTORY METHOD (factory_method_demo.txt) to manage dependencies. The practice aligns perfectly with AGILE PRACTICES like SPRINT PLANNING (sprint_planning.txt) – each story can be broken into test‑first tasks.
+
+It also supports EVENT DRIVEN ARCHITECTURE (event_driven.txt) by helping design events and handlers cleanly. In a MICROSERVICES (microservices_basics.txt) environment, TDD ensures each service has a well‑defined contract.

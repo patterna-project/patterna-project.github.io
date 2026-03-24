@@ -1,0 +1,16 @@
+MICROSERVICES BASICS
+
+A monolithic application grew too large. A small change took hours to deploy, and a bug in one module could bring down the whole system. The team split it into small, independently deployable services, each with its own database and responsibility.
+
+✥ ✥ ✥
+
+When a system becomes too large for a single team to manage, scaling and deployment become painful. Tight coupling leads to fragile deployments and slow innovation.
+
+Therefore:
+Decompose the system into a set of small, autonomous services, each running its own process and communicating via lightweight protocols. Each service is owned by a small team and can be deployed independently.
+
+✥ ✥ ✥
+
+Microservices heavily rely on EVENT DRIVEN ARCHITECTURE (event_driven.txt) for loose coupling. They also use FACTORY METHOD (factory_method_demo.txt) to instantiate service clients. Testing them requires good UNIT TESTING (unit_testing.txt) and INTEGRATION TESTING (integration_testing.txt) practices.
+
+The pattern aligns with AGILE principles: small teams own small services, and sprint planning can focus on individual services. See also LAYERED ARCHITECTURE (layered_architecture.txt) for guidelines on structuring each service.

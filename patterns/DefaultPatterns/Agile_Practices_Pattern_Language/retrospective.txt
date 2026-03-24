@@ -1,0 +1,16 @@
+RETROSPECTIVE
+
+I once worked with a team that had the same problems sprint after sprint: the build was slow, tests were flaky, and communication was poor. We never stopped to fix them. After we introduced retrospectives, we finally dedicated time to improve our process. Over a few sprints, the build time dropped by half.
+
+✥ ✥ ✥
+
+A team can easily fall into a pattern of repeating the same mistakes. Without a dedicated time to inspect and adapt, improvements are rare and morale suffers.
+
+Therefore:
+At the end of each sprint, hold a meeting where the team reflects on what went well, what went wrong, and what can be improved. Capture actionable items and commit to trying at least one improvement in the next sprint.
+
+✥ ✥ ✥
+
+The retrospective closes the loop that starts with SPRINT PLANNING (sprint_planning.txt) and is guided by DAILY STANDUP (daily_standup.txt). It also connects to TEST‑DRIVEN DEVELOPMENT (test_driven_development.txt) because the team can improve testing practices.
+
+The ideas from retrospectives often lead to architectural changes that follow LAYERED ARCHITECTURE (layered_architecture.txt) or EVENT DRIVEN ARCHITECTURE (event_driven.txt). They also promote the kind of transparency that makes SINGLETON PATTERN (singleton_demo.txt) safer to use.

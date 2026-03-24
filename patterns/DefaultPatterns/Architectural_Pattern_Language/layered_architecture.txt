@@ -1,0 +1,16 @@
+LAYERED ARCHITECTURE
+
+I recall a legacy system where business logic was mixed with database queries and user interface code. Every change was risky, and testing was impossible. The team decided to separate the system into layers: presentation, business logic, and data access.
+
+✥ ✥ ✥
+
+A system with tangled concerns is hard to understand, test, and maintain. Changes in one area ripple unpredictably. Developers need a clear separation of responsibilities.
+
+Therefore:
+Organise the system into layers, each with a distinct responsibility. Higher layers depend only on lower layers. Common layers include presentation, business logic, and data access.
+
+✥ ✥ ✥
+
+This pattern is a foundation for many other patterns. It works well with SINGLETON PATTERN (singleton_demo.txt) to manage layer‑specific services. It also enables FACTORY METHOD (factory_method_demo.txt) to hide concrete implementations across layers.
+
+Layered architecture supports EVENT DRIVEN ARCHITECTURE (event_driven.txt) by isolating event handlers. It also makes TEST‑DRIVEN DEVELOPMENT (test_driven_development.txt) easier because layers can be tested in isolation. The clear boundaries complement AGILE PRACTICES like SPRINT PLANNING (sprint_planning.txt).
