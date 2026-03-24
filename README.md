@@ -20,22 +20,22 @@ A web application for generating optimal pattern sequences using **Markov Decisi
 
 ## Features
 
--  **Similarity Matrix** – Cosine similarity between pattern descriptions (TF‑IDF / Universal Sentence Encoder)
--  **Interactive Graph** – Force‑directed visualization of pattern relationships
--  **Statistics** – Average similarity, median, standard deviation, top connections
--  **Goal‑driven Sequencing** – Markov Decision Process (MDP) with configurable rewards
--  **Forced Start / Goal** – Pin specific patterns as start or goal
--  **Reference Bonus** – Boost transitions when one pattern mentions another
--  **Sentiment Analysis** – Adjust rewards based on emotional tone
--  **Dark Mode** – Toggle between light and dark themes
+- **Similarity Matrix** – Cosine similarity between pattern descriptions (TF‑IDF / Universal Sentence Encoder)
+- **Interactive Graph** – Force‑directed visualization of pattern relationships
+- **Statistics** – Average similarity, median, standard deviation, top connections
+- **Goal‑driven Sequencing** – Markov Decision Process (MDP) with configurable rewards
+- **Forced Start / Goal** – Pin specific patterns as start or goal
+- **Reference Bonus** – Boost transitions when one pattern mentions another
+- **Sentiment Analysis** – Adjust rewards based on emotional tone
+- **Dark Mode** – Toggle between light and dark themes
 - 🇸🇰 / 🇬🇧 **Bilingual UI** – Slovak and English
--  **Export** – TXT, PDF, CSV, PNG, or ZIP with all data
+- **Export** – TXT, PDF, CSV, PNG, or ZIP with all data
 
 ---
 
 ## Quick Start
 
-1. **Select patterns** from the catalog (Coplien & Harrison or upload your own)
+1. **Select patterns** from the catalog (Educational Patterns or upload your own)
 2. **Adjust parameters** (γ, rewards, ε) or enable advanced features (IDF, sentiment, reference bonus, USE)
 3. **Click "Generate Sequence"** – the algorithm selects a goal and builds a path
 4. **Drag & drop** to reorder the sequence manually
@@ -58,17 +58,24 @@ A web application for generating optimal pattern sequences using **Markov Decisi
 
 ---
 
-## Pattern texts
+## Pattern Library
 
-Patterna includes pattern texts for educational purposes only:
+Patterna includes a collection of **educational patterns** created for learning and demonstration purposes:
 
-| Source | Citation |
-|--------|---------|
-| **Scrum Patterns** | *A Scrum Book: The Spirit of the Game* (2019) – Pragmatic Bookshelf |
-| **Coplien & Harrison** | *Organizational Patterns of Agile Software Development* (2004) – Pearson Prentice Hall |
-| **GoF Patterns** | *Design Patterns: Elements of Reusable Object-Oriented Software* (1994) – Addison-Wesley |
- 
-For any other use, please refer to the original sources.
+| Category | Patterns |
+|----------|----------|
+| **Software Design Patterns** | Singleton, Factory Method, Observer |
+| **Agile Practices** | Daily Standup, Sprint Planning, Retrospective |
+| **Architecture Patterns** | Layered Architecture, Microservices, Event-Driven |
+| **Testing Patterns** | Unit Testing, Integration Testing, TDD |
+
+All patterns are original content written for this project. They follow the Coplien‑Harrison style and include cross‑references to demonstrate pattern relationships.
+
+---
+
+## Acknowledgements
+
+This bachelor's thesis was developed at the **Faculty of Informatics and Information Technologies, Slovak University of Technology in Bratislava** under the [Institute of Informatics and Software Engineering](https://www.fiit.stuba.sk/sk/ustavy/ustav-informatiky-a-softveroveho-inzinierstva).
 
 ---
 
