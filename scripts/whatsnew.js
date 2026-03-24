@@ -3,41 +3,76 @@
 // Kľúč pre localStorage
 const WHATS_NEW_SEEN_KEY = 'patterna_whats_new_seen';
 
+// Globálna premenná pre aktuálnu verziu aplikácie
+let currentAppVersion = '';
+
 async function checkAndShowWhatsNew() {
     try {
         // 1. Načítanie obsahu
         const response = await fetch('whatsnew.txt');
         if (!response.ok) return;
-        const content = await response.text();
-        if (!content || content.trim().length === 0) return;
+        const fullContent = await response.text();
+        if (!fullContent || fullContent.trim().length === 0) return;
 
-        // 2. Kontrola prvého riadku
-        const firstLine = content.trim().split('\n')[0].trim();
-        if (firstLine.toUpperCase() === 'NO') return;
+        // 2. Rozdelenie obsahu: prvý riadok je verzia, zvyšok je obsah pre modal
+        const lines = fullContent.split('\n');
+        const versionLine = lines[0].trim();
+        
+        // Ak je prvý riadok prázdny, nepokračujeme
+        if (versionLine.length === 0) return;
+        
+        // Uložíme verziu do globálnej premennej
+        currentAppVersion = versionLine;
+        
+        // Obsah pre modal je od druhého riadku ďalej (zachováme formátovanie)
+        const modalContent = lines.slice(1).join('\n').trim();
+        
+        // Ak je modalContent prázdny, zobrazíme len verziu alebo nič
+        if (modalContent.length === 0) {
+            console.debug('Whats New modal: Obsah je prázdny (iba verzia)');
+            // Aktualizujeme len about modal s verziou
+            updateAboutVersion();
+            return;
+        }
 
-        // 3. Overenie, či používateľ už videl túto verziu
-        const contentHash = simpleHash(content);
-        const seenHash = localStorage.getItem(WHATS_NEW_SEEN_KEY);
-        if (seenHash === contentHash) return;
+        // 3. Kontrola, či používateľ už videl túto verziu
+        const seenVersion = localStorage.getItem(WHATS_NEW_SEEN_KEY);
+        if (seenVersion === currentAppVersion) {
+            // Už videl, len aktualizujeme about modal
+            updateAboutVersion();
+            return;
+        }
 
         // 4. Zobrazenie modalu
         const modal = document.getElementById('whatsNewModal');
         const contentDiv = document.getElementById('whatsNewContent');
         if (!modal || !contentDiv) return;
 
-        // ★ PRIDANÉ: Nastavenie nadpisu modalu podľa jazyka
+        // Nastavenie nadpisu modalu podľa jazyka
         const title = modal.querySelector('h3');
         if (title) {
             const t = window.translations?.[window.currentLanguage];
             title.textContent = t?.whatsNewTitle || 'What\'s New';
         }
 
-        contentDiv.innerHTML = formatWhatsNewContent(content);
-        openModal('whatsNewModal');           // Otvorí modal cez centralizovanú funkciu
-        localStorage.setItem(WHATS_NEW_SEEN_KEY, contentHash);
+        // Formátovanie obsahu
+        contentDiv.innerHTML = formatWhatsNewContent(modalContent);
+        openModal('whatsNewModal');
+        localStorage.setItem(WHATS_NEW_SEEN_KEY, currentAppVersion);
+        
+        // Aktualizujeme about modal s novou verziou
+        updateAboutVersion();
 
     } catch (error) {
         console.debug('Whats New modal error:', error);
+    }
+}
+
+// Funkcia na aktualizáciu verzie len v about modal
+function updateAboutVersion() {
+    const aboutVersionSpan = document.getElementById('aboutVersion');
+    if (aboutVersionSpan && currentAppVersion) {
+        aboutVersionSpan.textContent = currentAppVersion;
     }
 }
 
@@ -71,3 +106,7 @@ function formatWhatsNewContent(content) {
 document.addEventListener('DOMContentLoaded', () => {
     setTimeout(checkAndShowWhatsNew, 500);
 });
+
+// Export funkcií pre iné moduly
+window.updateAboutVersion = updateAboutVersion;
+window.getCurrentAppVersion = () => currentAppVersion;

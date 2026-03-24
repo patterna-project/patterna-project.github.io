@@ -93,7 +93,7 @@ const translations = {
         researchSources: "Výskumné zdroje",
         researchSource1: "Článok o používaní podobnosti medzi opismi vzorov",
         researchSource2: "Techniky analýzy podobnosti textových opisov",
-        footerText: "FIIT STU Bratislava | Ústav informatiky a softvérového inžinierstva | Verzia 1.0.4",
+        footerText: "FIIT STU Bratislava | Ústav informatiky a softvérového inžinierstva | Verzia ",
 
         // FAQ Modal
         frequentlyAskedQuestions: "Často kladené otázky",
@@ -417,7 +417,7 @@ const translations = {
         researchSources: "Research Sources",
         researchSource1: "Article on using similarity between pattern descriptions",
         researchSource2: "Techniques for analyzing similarity of textual descriptions",
-        footerText: "FIIT STU Bratislava | Institute of Informatics and Software Engineering | Version 1.0.4",
+        footerText: "FIIT STU Bratislava | Institute of Informatics and Software Engineering | Version ",
 
         // FAQ Modal
         frequentlyAskedQuestions: "Frequently Asked Questions",
@@ -917,24 +917,20 @@ function updateModalContent() {
             const studentLabel = gridDivs[0]?.querySelector('p:first-child');
             const studentValue = gridDivs[0]?.querySelector('p:last-child');
             if (studentLabel) studentLabel.textContent = t.student;
-            // studentValue (Ondrej Drengubiak) necháme ako je
 
             const supervisorLabel = gridDivs[1]?.querySelector('p:first-child');
             const supervisorValue = gridDivs[1]?.querySelector('p:last-child');
             if (supervisorLabel) supervisorLabel.textContent = t.supervisor;
-            // supervisorValue (Ing. Viktor Matovič, PhD.) necháme ako je
 
             const yearLabel = gridDivs[2]?.querySelector('p:first-child');
             const yearValue = gridDivs[2]?.querySelector('p:last-child');
             if (yearLabel) yearLabel.textContent = t.year;
-            // yearValue (2025/2026) necháme ako je
 
             const programLabel = gridDivs[3]?.querySelector('p:first-child');
             const programValue = gridDivs[3]?.querySelector('p:last-child');
             if (programLabel) programLabel.textContent = t.studyProgram;
-            if (programValue) programValue.textContent = t.informatics;  // ← TOTO JE DÔLEŽITÉ
+            if (programValue) programValue.textContent = t.informatics;
         }
-
 
         // Popis projektu
         const projectDescHeader = aboutModal.querySelectorAll('.mt-6 > div:nth-child(2) h4');
@@ -965,9 +961,21 @@ function updateModalContent() {
             if (researchLinks[1]) researchLinks[1].textContent = t.researchSource2;
         }
 
-        // Footer text
+        // Aktualizácia textu v pätičke about modalu (bez verzie, len statický text)
         const footerText = aboutModal.querySelector('.pt-4 p');
-        if (footerText) footerText.textContent = t.footerText;
+        if (footerText) {
+            // Získame aktuálnu verziu z whatsnew.js
+            const version = window.getCurrentAppVersion ? window.getCurrentAppVersion() : '---';
+            const aboutVersionSpan = aboutModal.querySelector('#aboutVersion');
+            if (aboutVersionSpan) {
+                aboutVersionSpan.textContent = version;
+            }
+            // Nastavíme text bez verzie (verzia je v samostatnom spane)
+            const textNode = footerText.childNodes[0];
+            if (textNode && textNode.nodeType === Node.TEXT_NODE) {
+                textNode.textContent = t.footerText;
+            }
+        }
     }
 
     // FAQ Modal
