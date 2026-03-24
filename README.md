@@ -10,7 +10,7 @@
     <img src="https://img.shields.io/badge/feedback-16a34a?style=for-the-badge&logo=tally&logoColor=white" alt="Feedback">
   </a>
   <a href="https://github.com/patterna-project/patterna">
-    <img src="https://img.shields.io/badge/open_source-181717?style=for-the-badge&logo=github&logoColor=white" alt="Open Source">
+    <img src="https://img.shields.io/github/last-commit/patterna-project/patterna?style=for-the-badge&logo=github&logoColor=white&color=181717" alt="Last Commit">
   </a>
 </p>
 
