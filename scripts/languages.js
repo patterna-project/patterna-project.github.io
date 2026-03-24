@@ -286,6 +286,21 @@ const translations = {
         mdpSequenceBuild: "Postup podľa optimálnej politiky:",
         mdpFinalSequence: "Výsledná sekvencia:",
 
+        // Formula labels
+        formulaLabel: "📐 Vzorec:",
+        formulaTransitionMatrix: "$$P(s' \\mid s) = \\frac{\\text{sim}(s, s')}{\\sum_{s'' \\neq s} \\text{sim}(s, s'')}, \\quad s' \\neq s$$",
+        formulaSelfTransition: "$$P(s \\mid s) = 0$$ (žiadny prechod do seba samého)",
+        formulaTotalSimilarity: "$$\\text{TotalSim}(s) = \\sum_{s' \\neq s} \\text{sim}(s, s')$$",
+        formulaVariance: "$$\\sigma^2 = \\frac{1}{n-1} \\sum_{i=1}^{n} (x_i - \\bar{x})^2$$",
+        formulaInitialUtilities: "$$v_0(s) = 0 \\quad \\text{pre všetky stavy } s$$",
+        formulaInitialUtilitiesNote: "Počiatočné utility sú nulové, hodnoty sa postupne aktualizujú iteráciami.",
+        formulaWeightedSelection: "$$P(\\text{select } s) = \\frac{\\sigma^2(s) + 0.01}{\\sum_{c \\in \\text{topCandidates}} (\\sigma^2(c) + 0.01)}$$",
+        formulaReward: "$$R(s) = \\begin{cases} R(g) & \\text{pre cieľový stav} \\\\ R(o) & \\text{inak} \\end{cases}$$",
+        formulaBellman: "$$v_{k+1}(s) = R(s) + \\gamma \\cdot \\max_{a} \\sum_{s'} P(s' \\mid s, a) \\cdot v_k(s')$$",
+        formulaBellmanNote: "kde $R(s)$ = odmena za stav ($R(g)$ pre cieľ, inak $R(o)$), $\\gamma$ = diskontný faktor",
+        formulaOptimalPolicy: "$$\\pi(s) = \\arg\\max_{a} \\sum_{s'} P(s' \\mid s, a) \\cdot v(s')$$",
+        formulaOptimalPolicyNote: "Pre každý stav $s$ vyberáme akciu $a$, ktorá maximalizuje očakávanú hodnotu budúcich stavov.",
+
         // Loading messages
         analysisInProgress: "Spúšťam analýzu...",
         loadingPatterns: "Načítavam vzory...",
@@ -613,6 +628,21 @@ const translations = {
         mdpOptimalAction: "Optimal action",
         mdpSequenceBuild: "Following the optimal policy:",
         mdpFinalSequence: "Final sequence:",
+
+        // Formula labels
+        formulaLabel: "📐 Formula:",
+        formulaTransitionMatrix: "$$P(s' \\mid s) = \\frac{\\text{sim}(s, s')}{\\sum_{s'' \\neq s} \\text{sim}(s, s'')}, \\quad s' \\neq s$$",
+        formulaSelfTransition: "$$P(s \\mid s) = 0$$ (no self-transition)",
+        formulaTotalSimilarity: "$$\\text{TotalSim}(s) = \\sum_{s' \\neq s} \\text{sim}(s, s')$$",
+        formulaInitialUtilities: "$$v_0(s) = 0 \\quad \\text{for all states } s$$",
+        formulaInitialUtilitiesNote: "Initial utilities are zero, values are gradually updated through iterations.",
+        formulaVariance: "$$\\sigma^2 = \\frac{1}{n-1} \\sum_{i=1}^{n} (x_i - \\bar{x})^2$$",
+        formulaWeightedSelection: "$$P(\\text{select } s) = \\frac{\\sigma^2(s) + 0.01}{\\sum_{c \\in \\text{topCandidates}} (\\sigma^2(c) + 0.01)}$$",
+        formulaReward: "$$R(s) = \\begin{cases} R(g) & \\text{for goal state} \\\\ R(o) & \\text{otherwise} \\end{cases}$$",
+        formulaBellman: "$$v_{k+1}(s) = R(s) + \\gamma \\cdot \\max_{a} \\sum_{s'} P(s' \\mid s, a) \\cdot v_k(s')$$",
+        formulaBellmanNote: "where $R(s)$ = reward for state ($R(g)$ for goal, otherwise $R(o)$), $\\gamma$ = discount factor",
+        formulaOptimalPolicy: "$$\\pi(s) = \\arg\\max_{a} \\sum_{s'} P(s' \\mid s, a) \\cdot v(s')$$",
+        formulaOptimalPolicyNote: "For each state $s$, choose action $a$ that maximizes the expected value of future states.",
 
         // Loading messages
         analysisInProgress: "Starting analysis...",

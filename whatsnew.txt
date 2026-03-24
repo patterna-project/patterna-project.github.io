@@ -11,8 +11,16 @@
 - Nové tlačidlo v pätičke na odoslanie spätnej väzby 💬
 - Otvára sa **modal priamo v aplikácii** (nemusíte opúšťať stránku)
 
+## VZORCE V MDP KROKOCH
+- Pridané **matematické vzorce** pri každom kroku MDP riešenia, kde je to relevantné
+
 ## KOPÍROVANIE TEXTU VZORU
 - V detaile vzoru pribudlo tlačidlo koírovania textu vzoru **📋** (zobrazí sa on hover)
+
+## GOOGLE ANALYTICS INTEGRÁCIA
+- Pridané anonymné sledovanie používania (iba ak používateľ súhlasí)
+- **Cookie consent** banner – používateľ môže anonymné štatistiky odmietnuť
+- IP adresy sú anonymizované, nezbierame žiadne osobné údaje
 
 ## OPRAVY CHÝB
 - Delete button teraz nastaví parametre na predvolené, odporúčané hodnoty

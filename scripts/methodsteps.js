@@ -117,6 +117,19 @@ function displayMDPSolution(result, patterns) {
 
         mdpSteps.appendChild(collapsible);
     });
+
+    if (typeof renderMathInElement !== 'undefined') {
+        try {
+            renderMathInElement(mdpSteps, {
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},
+                    {left: '$', right: '$', display: false}
+                ]
+            });
+        } catch (e) {
+            console.warn('KaTeX render error:', e);
+        }
+    }
 }
 
 function createCompleteTransitionMatrixStep(step, patterns) {
@@ -130,11 +143,18 @@ function createCompleteTransitionMatrixStep(step, patterns) {
     // Check if reference bonus was used
     const useReferences = window.referenceBonusActive || false;
     if (useReferences) {
-        const t = translations[currentLanguage];
         const msg = t.referenceBonusActive?.replace('{bonus}', window.referenceBonusValue || 0.1) || 
                     `📎 Reference bonus active (bonus: ${window.referenceBonusValue || 0.1}) – values shown as: raw (raw+bonus)`;
         content += `<p class="mb-2 text-xs text-blue-600 dark:text-blue-400">${msg}</p>`;
     }
+
+    content += `
+        <div class="mb-3 p-2 bg-gray-100 dark:bg-gray-800 rounded text-xs">
+            <p class="font-semibold mb-1">${t.formulaLabel}</p>
+            <p>${t.formulaTransitionMatrix}</p>
+            <p class="text-gray-500 text-xs mt-1">${t.formulaSelfTransition}</p>
+        </div>
+    `;
 
     // Vytvoríme wrapper pre tabuľku so scrollbarom
     const tableWrapper = document.createElement("div");
@@ -170,26 +190,20 @@ function createCompleteTransitionMatrixStep(step, patterns) {
             const cell = document.createElement("td");
             cell.className = "p-2 text-center";
             
-            // Get raw and boosted values for display
             const raw = rawScores[pattern1.filename]?.[pattern2.filename] || 0;
             const boosted = boostedScores[pattern1.filename]?.[pattern2.filename] || 0;
             
-            // Format cell content
-            let cellContent = '';
             if (useReferences && raw !== boosted && boosted > 0) {
-                // Show raw (boosted) format
                 const bonusValue = window.referenceBonusValue || 0.1;
                 cell.innerHTML = `${raw.toFixed(3)}<span class="text-xs text-green-500 dark:text-green-400">(+${bonusValue.toFixed(2)})</span> → ${probability.toFixed(3)}`;
             } else {
                 cell.textContent = probability.toFixed(3);
             }
             
-            // Farba podľa pravdepodobnosti
             const intensity = probability * 0.7;
             cell.style.backgroundColor = `rgba(99, 102, 241, ${intensity})`;
             cell.style.color = probability > 0.5 ? 'white' : 'black';
             
-            // Title with detailed info
             if (useReferences && raw !== boosted) {
                 cell.title = `${pattern1.name} → ${pattern2.name}: raw=${raw.toFixed(3)}, boosted=${boosted.toFixed(3)} → probability=${probability.toFixed(3)} (bonus applied)`;
             } else {
@@ -206,7 +220,6 @@ function createCompleteTransitionMatrixStep(step, patterns) {
     stepDiv.innerHTML = content;
     stepDiv.appendChild(tableWrapper);
 
-    // Pridajte vysvetlenie s prekladom
     const explanation = document.createElement("div");
     explanation.className = "mt-3 p-2 bg-blue-50 dark:bg-blue-900 rounded text-xs";
     explanation.innerHTML = `
@@ -224,7 +237,6 @@ function createGoalCalculationStep(step, patterns) {
 
     let content = `<h4 class="font-semibold mb-2 text-indigo-600 dark:text-indigo-400">${t.mdpStep1}</h4>`;
 
-    // Ak bol použitý vynútený cieľový vzor
     if (step.forcedGoalUsed) {
         const goalPattern = patterns.find(p => p.filename === step.goalState);
         content += `<p class="mb-2 text-green-600 dark:text-green-400">🎯 Používateľom vynútený cieľový vzor: <strong>${goalPattern ? goalPattern.name : step.goalState}</strong></p>`;
@@ -233,7 +245,6 @@ function createGoalCalculationStep(step, patterns) {
         return stepDiv;
     }
 
-    // Ak bol vylúčený forcedStartPattern, zobrazíme správu s vlajočkou
     if (step.forcedStartExcluded) {
         const excludedPattern = patterns.find(p => p.filename === step.forcedStartExcluded);
         const excludedName = excludedPattern ? excludedPattern.name : step.forcedStartExcluded;
@@ -242,14 +253,21 @@ function createGoalCalculationStep(step, patterns) {
 
     content += `<p class="mb-2">${t.mdpGoalCalculation}</p>`;
 
-    // ZORADENIE: Prevedieme Object.entries na pole a zoradíme podľa podobnosti (od najväčšej)
+    content += `
+        <div class="mb-3 p-2 bg-gray-100 dark:bg-gray-800 rounded text-xs">
+            <p class="font-semibold mb-1">${t.formulaLabel}</p>
+            <p>${t.formulaTotalSimilarity}</p>
+            <p class="mt-1">${t.formulaVariance}</p>
+            <p class="mt-1">${t.formulaWeightedSelection}</p>
+        </div>
+    `;
+
     const sortedEntries = Object.entries(step.totalSimilarities)
         .sort((a, b) => b[1] - a[1]);
 
     const table = document.createElement("table");
     table.className = "w-full text-xs border-collapse mb-2";
 
-    // Hlavička tabuľky
     const headerRow = document.createElement("tr");
     headerRow.innerHTML = `
         <th class="p-2 bg-gray-100 dark:bg-gray-600 text-left">${t.mdpCurrentState}</th>
@@ -259,7 +277,6 @@ function createGoalCalculationStep(step, patterns) {
     `;
     table.appendChild(headerRow);
 
-    // Vytvoríme mapu pre rýchle zistenie, či je vzor v top kandidátoch a jeho variance
     const topCandidatesMap = new Map();
     if (step.selectionInfo && step.selectionInfo.topCandidates) {
         step.selectionInfo.topCandidates.forEach(c => {
@@ -267,18 +284,15 @@ function createGoalCalculationStep(step, patterns) {
         });
     }
 
-    // Riadky s údajmi - TERAZ ZORADENÉ
     sortedEntries.forEach(([filename, similarity], index) => {
         const pattern = patterns.find(p => p.filename === filename);
         const row = document.createElement("tr");
         
-        // Zvýrazníme vybraný cieľový vzor
         const isGoal = (filename === step.goalState);
         const isExcluded = (filename === step.forcedStartExcluded);
         const isInTopCandidates = topCandidatesMap.has(filename);
         const variance = topCandidatesMap.get(filename) || 0;
         
-        // Pridáme ikonky
         let nameHtml = pattern.name;
         let iconHtml = '';
         
@@ -292,24 +306,20 @@ function createGoalCalculationStep(step, patterns) {
         
         nameHtml = `<span class="inline-flex items-center gap-1">${iconHtml}${pattern.name}</span>`;
         
-        // Pridáme poradie (1., 2., 3., ...)
         const rank = index + 1;
         let rankDisplay = rank === 1 ? '🥇' : (rank === 2 ? '🥈' : (rank === 3 ? '🥉' : `${rank}.`));
-        
-        // Formátovanie rozptylu
         const varianceDisplay = variance > 0 ? variance.toFixed(4) : '0.0000';
         const varianceClass = isGoal && step.selectionInfo?.selectedWeightedRandom ? 'font-bold text-blue-600 dark:text-blue-400' : '';
         
         row.innerHTML = `
-            <td class="p-2 border-b border-gray-200 dark:border-gray-600 ${isGoal ? 'font-bold bg-green-50 dark:bg-green-900/20' : ''}">${nameHtml}</td>
-            <td class="p-2 border-b border-gray-200 dark:border-gray-600 text-right ${isGoal ? 'font-bold text-green-600 dark:text-green-400' : ''}">${similarity.toFixed(3)}</td>
-            <td class="p-2 border-b border-gray-200 dark:border-gray-600 text-right ${varianceClass}">${varianceDisplay}</td>
-            <td class="p-2 border-b border-gray-200 dark:border-gray-600 text-center">${rankDisplay}</td>
+            <td class="p-2 border-b border-gray-200 dark:border-gray-600 ${isGoal ? 'font-bold bg-green-50 dark:bg-green-900/20' : ''}">${nameHtml}<\/td>
+            <td class="p-2 border-b border-gray-200 dark:border-gray-600 text-right ${isGoal ? 'font-bold text-green-600 dark:text-green-400' : ''}">${similarity.toFixed(3)}<\/td>
+            <td class="p-2 border-b border-gray-200 dark:border-gray-600 text-right ${varianceClass}">${varianceDisplay}<\/td>
+            <td class="p-2 border-b border-gray-200 dark:border-gray-600 text-center">${rankDisplay}<\/td>
         `;
         table.appendChild(row);
     });
 
-    // Informácia o výbere (upravená pre náhodný výber s váhou)
     if (step.selectionInfo && step.selectionInfo.selectedByVariance && step.selectionInfo.topCandidates) {
         const topCount = step.selectionInfo.topCandidates.length;
         
@@ -323,7 +333,6 @@ function createGoalCalculationStep(step, patterns) {
             </p>`;
         }
         
-        // Zobrazíme aj zoznam top kandidátov s rozptylmi
         const topList = step.selectionInfo.topCandidates.map((c, idx) => {
             const pattern = patterns.find(p => p.filename === c.state);
             const isSelected = c.state === step.goalState;
@@ -336,7 +345,6 @@ function createGoalCalculationStep(step, patterns) {
         </p>`;
     }
 
-    // Pridáme štatistiku - rozdiel medzi 1. a 2. miestom (len ak existujú)
     if (sortedEntries.length >= 2) {
         const first = sortedEntries[0];
         const second = sortedEntries[1];
@@ -378,10 +386,17 @@ function createGoalStateStep(step, patterns) {
     stepDiv.className = "bg-white dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600";
 
     let content = `<h4 class="font-semibold mb-2 text-indigo-600 dark:text-indigo-400">${t.mdpStep2}</h4>`;
+
+    content += `
+        <div class="mb-3 p-2 bg-gray-100 dark:bg-gray-800 rounded text-xs">
+            <p class="font-semibold mb-1">${t.formulaLabel}</p>
+            <p>${t.formulaReward}</p>
+        </div>
+    `;
+
     content += `<p>${t.mdpGoalState} <strong class="inline-flex items-center gap-1"><span class="text-green-600">🎯</span>${step.goalPattern.name}</strong> ${t.mdpGoalReward} = ${step.goalReward?.toFixed(1) ?? '10.0'}</p>`;
     content += `<p>${t.mdpOtherReward} = ${step.otherReward?.toFixed(1) ?? '1.0'}</p>`;
     
-    // Ak je zapnutý sentiment, zobrazíme ho
     if (window.useSentiment && window.sentimentScores) {
         content += `<p class="mt-2 text-xs text-gray-500 dark:text-gray-400">${t.sentimentActive}</p>`;
     }
@@ -400,11 +415,16 @@ function createInitialUtilitiesStep(step, patterns) {
 
     let content = `<h4 class="font-semibold mb-2 text-indigo-600 dark:text-indigo-400">${t.mdpStep4}</h4>`;
     
-    // Potrebujeme získať goalState - skúsime ho nájsť z result (ale nemáme ho priamo)
-    // Preto ho odovzdáme cez window.goalState pri generovaní
+    content += `
+        <div class="mb-3 p-2 bg-gray-100 dark:bg-gray-800 rounded text-xs">
+            <p class="font-semibold mb-1">${t.formulaLabel}</p>
+            <p>${t.formulaInitialUtilities}</p>
+            <p class="text-gray-500 text-xs mt-1">${t.formulaInitialUtilitiesNote}</p>
+        </div>
+    `;
+
     const goalState = window.currentGoalState || null;
     
-    // Ak je sentiment aktívny, zobrazíme aj základné odmeny a sentiment
     if (window.useSentiment && window.sentimentScores) {
         content += `<p class="mb-2 text-xs text-gray-500 dark:text-gray-400">${t.sentimentRewardInfo}</p>`;
     }
@@ -412,7 +432,6 @@ function createInitialUtilitiesStep(step, patterns) {
     const table = document.createElement("table");
     table.className = "w-full text-xs border-collapse";
 
-    // Hlavička tabuľky - dynamická podľa toho, či je sentiment
     let headerHtml = '<th class="p-2 bg-gray-100 dark:bg-gray-600 text-left">' + t.mdpCurrentState + '</th>';
     if (window.useSentiment && window.sentimentScores) {
         headerHtml += '<th class="p-2 bg-gray-100 dark:bg-gray-600 text-right">🎭 Sentiment</th>';
@@ -423,12 +442,10 @@ function createInitialUtilitiesStep(step, patterns) {
     headerRow.innerHTML = headerHtml;
     table.appendChild(headerRow);
 
-    // Riadky s údajmi
     Object.entries(step.utilities).forEach(([filename, utility]) => {
         const pattern = patterns.find(p => p.filename === filename);
         const row = document.createElement("tr");
         
-        // Pridáme ikonky pre štart a cieľ
         let nameHtml = pattern.name;
         let iconHtml = '';
         
@@ -440,16 +457,15 @@ function createInitialUtilitiesStep(step, patterns) {
         
         nameHtml = `<span class="inline-flex items-center gap-1">${iconHtml}${pattern.name}</span>`;
         
-        let rowHtml = `<td class="p-2 border-b border-gray-200 dark:border-gray-600">${nameHtml}</td>`;
+        let rowHtml = `<td class="p-2 border-b border-gray-200 dark:border-gray-600">${nameHtml}<\/td>`;
         
-        // Pridáme sentiment ak je aktívny
         if (window.useSentiment && window.sentimentScores) {
             const sentiment = window.sentimentScores[filename] || 0;
             const sentimentClass = sentiment > 0.1 ? 'text-green-600' : (sentiment < -0.1 ? 'text-red-600' : 'text-gray-500');
-            rowHtml += `<td class="p-2 border-b border-gray-200 dark:border-gray-600 text-right ${sentimentClass}">${(sentiment * 100).toFixed(0)}%</td>`;
+            rowHtml += `<td class="p-2 border-b border-gray-200 dark:border-gray-600 text-right ${sentimentClass}">${(sentiment * 100).toFixed(0)}%<\/td>`;
         }
         
-        rowHtml += `<td class="p-2 border-b border-gray-200 dark:border-gray-600 text-right">${utility.toFixed(3)}</td>`;
+        rowHtml += `<td class="p-2 border-b border-gray-200 dark:border-gray-600 text-right">${utility.toFixed(3)}<\/td>`;
         
         row.innerHTML = rowHtml;
         table.appendChild(row);
@@ -468,13 +484,19 @@ function createIterationStep(step, patterns) {
     let content = `<h4 class="font-semibold mb-2 text-indigo-600 dark:text-indigo-400">${t.mdpStep5} ${step.iteration}</h4>`;
     content += `<p class="mb-2 text-xs text-gray-600 dark:text-gray-400">${t.mdpMaxChange} ${step.maxChange.toFixed(4)}</p>`;
 
-    // Potrebujeme získať goalState
+    content += `
+        <div class="mb-3 p-2 bg-gray-100 dark:bg-gray-800 rounded text-xs">
+            <p class="font-semibold mb-1">${t.formulaLabel}</p>
+            <p>${t.formulaBellman}</p>
+            <p class="text-gray-500 text-xs mt-1">${t.formulaBellmanNote}</p>
+        </div>
+    `;
+
     const goalState = window.currentGoalState || null;
 
     const table = document.createElement("table");
     table.className = "w-full text-xs border-collapse";
 
-    // Hlavička
     let headerHtml = '<th class="p-2 bg-gray-100 dark:bg-gray-600 text-left">' + t.mdpCurrentState + '</th>';
     if (window.useSentiment && window.sentimentScores) {
         headerHtml += '<th class="p-2 bg-gray-100 dark:bg-gray-600 text-right">🎭 Sentiment</th>';
@@ -485,12 +507,10 @@ function createIterationStep(step, patterns) {
     headerRow.innerHTML = headerHtml;
     table.appendChild(headerRow);
 
-    // Riadky
     Object.entries(step.utilities).forEach(([filename, utility]) => {
         const pattern = patterns.find(p => p.filename === filename);
         const row = document.createElement("tr");
         
-        // Pridáme ikonky pre štart a cieľ
         let nameHtml = pattern.name;
         let iconHtml = '';
         
@@ -502,15 +522,15 @@ function createIterationStep(step, patterns) {
         
         nameHtml = `<span class="inline-flex items-center gap-1">${iconHtml}${pattern.name}</span>`;
         
-        let rowHtml = `<td class="p-2 border-b border-gray-200 dark:border-gray-600">${nameHtml}</td>`;
+        let rowHtml = `<td class="p-2 border-b border-gray-200 dark:border-gray-600">${nameHtml}<\/td>`;
         
         if (window.useSentiment && window.sentimentScores) {
             const sentiment = window.sentimentScores[filename] || 0;
             const sentimentClass = sentiment > 0.1 ? 'text-green-600' : (sentiment < -0.1 ? 'text-red-600' : 'text-gray-500');
-            rowHtml += `<td class="p-2 border-b border-gray-200 dark:border-gray-600 text-right ${sentimentClass}">${(sentiment * 100).toFixed(0)}%</td>`;
+            rowHtml += `<td class="p-2 border-b border-gray-200 dark:border-gray-600 text-right ${sentimentClass}">${(sentiment * 100).toFixed(0)}%<\/td>`;
         }
         
-        rowHtml += `<td class="p-2 border-b border-gray-200 dark:border-gray-600 text-right">${utility.toFixed(3)}</td>`;
+        rowHtml += `<td class="p-2 border-b border-gray-200 dark:border-gray-600 text-right">${utility.toFixed(3)}<\/td>`;
         
         row.innerHTML = rowHtml;
         table.appendChild(row);
@@ -542,13 +562,19 @@ function createPolicyCalculationStep(step, patterns) {
     let content = `<h4 class="font-semibold mb-2 text-indigo-600 dark:text-indigo-400">${t.mdpStep6}</h4>`;
     content += `<p class="mb-2">${t.mdpPolicyCalculation}</p>`;
 
-    // Potrebujeme získať goalState
+    content += `
+        <div class="mb-3 p-2 bg-gray-100 dark:bg-gray-800 rounded text-xs">
+            <p class="font-semibold mb-1">${t.formulaLabel}</p>
+            <p>${t.formulaOptimalPolicy}</p>
+            <p class="text-gray-500 text-xs mt-1">${t.formulaOptimalPolicyNote}</p>
+        </div>
+    `;
+
     const goalState = window.currentGoalState || null;
 
     const table = document.createElement("table");
     table.className = "w-full text-xs border-collapse";
 
-    // Hlavička tabuľky
     const headerRow = document.createElement("tr");
     headerRow.innerHTML = `
         <th class="p-2 bg-gray-100 dark:bg-gray-600 text-left">${t.mdpCurrentState}</th>
@@ -556,15 +582,12 @@ function createPolicyCalculationStep(step, patterns) {
     `;
     table.appendChild(headerRow);
 
-    // Riadky s údajmi
     Object.entries(step.calculations).forEach(([state, calc]) => {
         const statePattern = patterns.find(p => p.filename === state);
         
-        // Ak je bestAction null (cieľový stav), zobrazíme pomlčku
         if (calc.bestAction === null) {
             const row = document.createElement("tr");
             
-            // Pridáme ikonky pre štart a cieľ v stĺpci "Current State"
             let stateNameHtml = statePattern.name;
             let stateIconHtml = '';
             
@@ -577,8 +600,8 @@ function createPolicyCalculationStep(step, patterns) {
             stateNameHtml = `<span class="inline-flex items-center gap-1">${stateIconHtml}${statePattern.name}</span>`;
             
             row.innerHTML = `
-                <td class="p-2 border-b border-gray-200 dark:border-gray-600">${stateNameHtml}</td>
-                <td class="p-2 border-b border-gray-200 dark:border-gray-600 text-gray-400 italic">—</td>
+                <td class="p-2 border-b border-gray-200 dark:border-gray-600">${stateNameHtml}<\/td>
+                <td class="p-2 border-b border-gray-200 dark:border-gray-600 text-gray-400 italic">—<\/td>
             `;
             table.appendChild(row);
         } else {
@@ -587,7 +610,6 @@ function createPolicyCalculationStep(step, patterns) {
             if (actionPattern) {
                 const row = document.createElement("tr");
                 
-                // Pridáme ikonky pre štart a cieľ v stĺpci "Current State"
                 let stateNameHtml = statePattern.name;
                 let stateIconHtml = '';
                 
@@ -599,7 +621,6 @@ function createPolicyCalculationStep(step, patterns) {
                 
                 stateNameHtml = `<span class="inline-flex items-center gap-1">${stateIconHtml}${statePattern.name}</span>`;
                 
-                // Pridáme ikonky pre štart a cieľ v stĺpci "Optimal Action"
                 let actionNameHtml = actionPattern.name;
                 let actionIconHtml = '';
                 
@@ -612,8 +633,8 @@ function createPolicyCalculationStep(step, patterns) {
                 actionNameHtml = `<span class="inline-flex items-center gap-1">${actionIconHtml}${actionPattern.name}</span>`;
                 
                 row.innerHTML = `
-                    <td class="p-2 border-b border-gray-200 dark:border-gray-600">${stateNameHtml}</td>
-                    <td class="p-2 border-b border-gray-200 dark:border-gray-600">${actionNameHtml}</td>
+                    <td class="p-2 border-b border-gray-200 dark:border-gray-600">${stateNameHtml}<\/td>
+                    <td class="p-2 border-b border-gray-200 dark:border-gray-600">${actionNameHtml}<\/td>
                 `;
                 table.appendChild(row);
             }
