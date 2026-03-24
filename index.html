@@ -23,6 +23,14 @@
         <script src="https://d3js.org/d3.v7.min.js"></script>
         <!-- JSZip pre vytváranie ZIP archívov -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-TEN716J2D8"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-TEN716J2D8');
+        </script>
     </head>
     <body class="flex flex-col min-h-screen text-gray-800">
         <!-- Navbar -->
@@ -1099,6 +1107,16 @@
         aria-label="Back to top">
         ▲
     </button>
+
+    <!-- COOKIE CONSENT BANNER -->
+    <div id="cookieConsent" class="fixed bottom-4 left-4 right-4 md:left-auto md:right-4 bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 z-50 max-w-sm border border-gray-200 dark:border-gray-700 hidden">
+        <p id="cookieConsentText" class="text-sm text-gray-600 dark:text-gray-400 mb-3">
+            Používame anonymné štatistiky na zlepšenie aplikácie. Žiadne osobné údaje nezbierame.
+        </p>
+        <button id="acceptCookies" class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-indigo-700">
+            Rozumiem
+        </button>
+    </div>
 
         <script src="scripts/utils/utils.js"></script>
         <script src="scripts/scripts.js"></script>

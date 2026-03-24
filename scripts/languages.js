@@ -65,6 +65,10 @@ const translations = {
         statisticsLeastConnected: "Najizolovanejšie",
         statisticsDistribution: "Distribúcia podobností",
 
+        // Cookies
+        cookieConsentText: "Používame anonymné štatistiky na zlepšenie aplikácie. Žiadne osobné údaje nezbierame.",
+        cookieConsentButton: "Rozumiem",
+
         // Footer
         quickLinks: "Rýchle odkazy",
         aboutProject: "O projekte",
@@ -122,7 +126,7 @@ const translations = {
         terms1Question: "1. Všeobecné podmienky",
         terms1Answer: "Táto webová aplikácia je poskytovaná ako služba bez akýchkoľvek záruk. Používateľ súhlasí s tým, že používa aplikáciu na vlastné riziko.",
         terms2Question: "2. Ochrana osobných údajov",
-        terms2Answer: "Aplikácia nezhromažďuje ani neukladá žiadne osobné údaje používateľov. Všetky analýzy prebiehajú lokálne v prehliadači.",
+        terms2Answer: "Aplikácia zhromažďuje anonymné štatistiky používania prostredníctvom Google Analytics. Nezbierame žiadne osobné údaje, IP adresy sú anonymizované. Všetky analýzy textov prebiehajú lokálne v prehliadači.",
         terms3Question: "3. Obmedzenia zodpovednosti",
         terms3Answer: "Vytvárané sekvencie vzorov sú iba návrhmi a odporúčaniami. Autor ani FIIT STU nepreberajú zodpovednosť za dôsledky ich implementácie.",
         terms4Question: "4. Duševné vlastníctvo",
@@ -180,8 +184,6 @@ const translations = {
 
         // What's New Modal
         whatsNewTitle: "Čo je nové",
-
-
 
         //Explanations modal
         explainButton: "❓ Vysvetli",
@@ -391,6 +393,10 @@ const translations = {
         statisticsLeastConnected: "Least connected",
         statisticsDistribution: "Similarity distribution",
 
+        // Cookies
+        cookieConsentText: "We use anonymous statistics to improve the application. No personal data is collected.",
+        cookieConsentButton: "I understand",
+
         // Footer
         quickLinks: "Quick Links",
         aboutProject: "About Project",
@@ -448,7 +454,7 @@ const translations = {
         terms1Question: "1. General Terms",
         terms1Answer: "This web application is provided as a service without any warranties. The user agrees to use the application at their own risk.",
         terms2Question: "2. Privacy Protection",
-        terms2Answer: "The application does not collect or store any personal user data. All analyses run locally in the browser.",
+        terms2Answer: "The application collects anonymous usage statistics via Google Analytics. No personal data is collected, IP addresses are anonymized. All text analyses run locally in the browser.",
         terms3Question: "3. Liability Limitations",
         terms3Answer: "Generated pattern sequences are only suggestions and recommendations. The author nor FIIT STU assume responsibility for the consequences of their implementation.",
         terms4Question: "4. Intellectual Property",
@@ -716,9 +722,15 @@ function updateTextContent() {
         matrixViewLabel.textContent = t.matrixView;
     }
 
+    const cookieConsentText = document.getElementById('cookieConsentText');
+    if (cookieConsentText) {
+        cookieConsentText.textContent = t.cookieConsentText;
+    }
 
-
-
+    const acceptCookiesBtn = document.getElementById('acceptCookies');
+    if (acceptCookiesBtn) {
+        acceptCookiesBtn.textContent = t.cookieConsentButton;
+    }
 
     const examplesHeader = document.querySelector("#examplesMenu li:first-child");
     if (examplesHeader) {

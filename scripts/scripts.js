@@ -355,7 +355,8 @@ function updateSequenceOrder() {
 // ========== INITIALIZE APP ==========
 
 document.addEventListener('DOMContentLoaded', () => {
-    loadCatalog('coplien');  // ← namiesto loadAllPatterns()
+    // ===== 1. INITIALIZE APP =====
+    loadCatalog('coplien');
     updateCatalogButtons();
     setupCheckboxChangeListeners();
     initExportDropdown();
@@ -368,6 +369,31 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 100);
     
     setTimeout(updateGenerateButtonState, 500);
+    
+    // ===== 2. WATCH LOADING INDICATOR =====
+    watchLoadingIndicator();
+    validateInputs();
+    
+    // ===== 3. COOKIE CONSENT =====
+    const cookieConsent = document.getElementById('cookieConsent');
+    if (!localStorage.getItem('cookies_accepted') && cookieConsent) {
+        cookieConsent.classList.remove('hidden');
+    }
+
+    const acceptCookiesBtn = document.getElementById('acceptCookies');
+    if (acceptCookiesBtn) {
+        acceptCookiesBtn.addEventListener('click', () => {
+            localStorage.setItem('cookies_accepted', 'true');
+            if (cookieConsent) {
+                cookieConsent.classList.add('hidden');
+            }
+            if (typeof gtag !== 'undefined') {
+                gtag('consent', 'update', {
+                    'analytics_storage': 'granted'
+                });
+            }
+        });
+    }
 });
 
 // ========== COUNTER FUNCTIONS ==========
@@ -569,12 +595,6 @@ function watchLoadingIndicator() {
     
     observer.observe(loadingIndicator, { attributes: true });
 }
-
-// Spustíme sledovanie po načítaní stránky
-document.addEventListener('DOMContentLoaded', () => {
-    watchLoadingIndicator();
-    validateInputs(); 
-});
 
 // ========== VALIDÁCIA HODNÔT V PARAMETROCH ==========
 

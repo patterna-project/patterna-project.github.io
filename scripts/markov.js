@@ -661,6 +661,53 @@ async function generateSequence() {
 
         document.getElementById("suggestionsSection").classList.remove("hidden");
 
+        // ===== GOOGLE ANALYTICS – UDALOSŤ GENEROVANIA =====
+        if (typeof gtag !== 'undefined') {
+            // Získame hodnoty parametrov
+            const gamma = parseFloat(document.getElementById('gammaInput').value) || 0.9;
+            const goalReward = parseFloat(document.getElementById('goalRewardInput').value) || 10.0;
+            const otherReward = parseFloat(document.getElementById('otherRewardInput').value) || 1.0;
+            const epsilon = parseFloat(document.getElementById('epsilonInput').value) || 0.1;
+            const useIDF = document.getElementById('idfCheckbox')?.checked || false;
+            const useSentiment = document.getElementById('sentimentCheckbox')?.checked || false;
+            const useReference = document.getElementById('referenceCheckbox')?.checked || false;
+            const useUSE = document.getElementById('useCheckbox')?.checked || false;
+            
+            // Vypočítame priemernú spoľahlivosť sekvencie
+            let avgConfidence = 0;
+            if (result.sequence.length > 1) {
+                let totalSim = 0;
+                for (let i = 1; i < result.sequence.length; i++) {
+                    const sim = similarityMatrix[result.sequence[i-1].filename]?.[result.sequence[i].filename] || 0;
+                    totalSim += sim;
+                }
+                avgConfidence = (totalSim / (result.sequence.length - 1)) * 100;
+            }
+            
+            gtag('event', 'generate_sequence', {
+                // A. Základné parametre
+                'gamma': gamma,
+                'goal_reward': goalReward,
+                'other_reward': otherReward,
+                'epsilon': epsilon,
+                
+                // B. Prepínače (checkboxy)
+                'use_idf': useIDF,
+                'use_sentiment': useSentiment,
+                'use_reference': useReference,
+                'use_use': useUSE,
+                
+                // C. Vynútené vzory
+                'forced_start': forcedStartPattern !== null,
+                'forced_goal': forcedGoalPattern !== null,
+                
+                // D. Výsledky generovania
+                'pattern_count': selectedPatterns.length,
+                'sequence_length': result.sequence.length,
+                'avg_confidence': Math.round(avgConfidence)
+            });
+        }
+
         updateLoadingIndicator(100, t.doneSequenceGenerated);
         cleanupGeneration(true);
 
