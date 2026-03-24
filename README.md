@@ -9,8 +9,8 @@
   <a href="https://tally.so/r/Y5rWkB">
     <img src="https://img.shields.io/badge/feedback-16a34a?style=for-the-badge&logo=tally&logoColor=white" alt="Feedback">
   </a>
-  <a href="https://github.com/patterna-project/patterna">
-    <img src="https://img.shields.io/github/last-commit/patterna-project/patterna?style=for-the-badge&logo=github&logoColor=white&color=181717" alt="Last Commit">
+  <a href="https://www.fiit.stuba.sk/">
+    <img src="https://img.shields.io/badge/bachelor's_thesis-8b5cf6?style=for-the-badge&logo=academia&logoColor=white" alt="Bachelor's Thesis">
   </a>
 </p>
 
