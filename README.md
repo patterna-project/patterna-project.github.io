@@ -1,4 +1,6 @@
-# Patterna
+<p align="center">
+  <img src="assets/images/logo.png" alt="Patterna Logo" width="200">
+</p>
 
 A web application for generating optimal pattern sequences using **Markov Decision Process (MDP)** and text similarity analysis.
 
