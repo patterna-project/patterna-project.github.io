@@ -81,7 +81,7 @@ function createBasicStats(patterns, similarityMatrix) {
     return container;
 }
 
-// Top 5 najsilnejších spojení
+// Top 5 najsilnejších spojení - OPRAVENÉ
 function createTopConnections(patterns, similarityMatrix) {
     const container = document.createElement('div');
     container.className = 'statistics-section mb-6 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg';
@@ -117,7 +117,7 @@ function createTopConnections(patterns, similarityMatrix) {
         item.className = 'flex items-center justify-between p-2 bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-600';
         
         const colors = getConfidenceColor(conn.similarity);
-        
+
         item.innerHTML = `
             <div class="flex items-center gap-2">
                 <span class="text-xs font-medium text-gray-500 dark:text-gray-400 w-6">#${index + 1}</span>
@@ -126,7 +126,7 @@ function createTopConnections(patterns, similarityMatrix) {
                 <span class="text-sm font-medium text-gray-800 dark:text-gray-200">${conn.to}</span>
             </div>
             <span class="text-xs font-semibold px-2 py-1 rounded-full" 
-                  style="background: ${colors.bg}; color: ${colors.text}; border: 1px solid ${colors.border}">
+                style="background: ${colors.bg}; color: ${colors.text}; border: 1px solid ${colors.border}">
                 ${conn.similarity.toFixed(1)}%
             </span>
         `;
@@ -138,7 +138,7 @@ function createTopConnections(patterns, similarityMatrix) {
     return container;
 }
 
-// Najizolovanejšie a najprepojenejšie vzory
+// Najizolovanejšie a najprepojenejšie vzory - OPRAVENÉ
 function createCentralityStats(patterns, similarityMatrix) {
     const container = document.createElement('div');
     container.className = 'statistics-section mb-6 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg';

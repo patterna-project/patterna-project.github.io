@@ -7,9 +7,7 @@ A web application for generating optimal pattern sequences using **Markov Decisi
 
 ---
 
-## Copyright Notice
-
-Patterna includes pattern texts from the following sources for educational purposes:
+## Patterna includes pattern texts from the following sources for educational purposes:
 
 ### Scrum Patterns
 **Source:** *A Scrum Book: The Spirit of the Game* (2019)  

@@ -183,6 +183,106 @@ function getConfidenceColor(percent) {
     }
 }
 
+
+
+/**
+ * Zistí, či textA priamo odkazuje na patternB (podľa názvu alebo filename)
+ * @param {string} textA - Obsah vzoru A
+ * @param {Object} patternB - Vzor B (obsahuje name a filename)
+ * @returns {boolean} - True ak textA odkazuje na patternB
+ */
+function checkPatternReference(textA, patternB) {
+    const patternName = patternB.name.toLowerCase();
+    const patternFilename = patternB.filename.replace('.txt', '').toLowerCase().replace(/_/g, ' ');
+    
+    const patterns = [
+        new RegExp(`\\b(?:see|cf\\.?|refer to|as in)\\s+${escapeRegex(patternName)}\\b`, 'i'),
+        new RegExp(`\\b${escapeRegex(patternName)}\\s+pattern\\b`, 'i'),
+        new RegExp(`\\bpattern\\s+${escapeRegex(patternName)}\\b`, 'i'),
+        new RegExp(`\\b${escapeRegex(patternFilename)}\\b`, 'i')
+    ];
+
+    for (let regex of patterns) {
+        if (regex.test(textA)) {
+            return true;
+        }
+    }
+    return false;
+}
+
+/**
+ * Vytvorí referenčnú maticu pre všetky vzory
+ * @param {Array} patterns - Zoznam vzorov (objekty s name, filename, content)
+ * @returns {Object} - Matica { fromFilename: { toFilename: 1 } }
+ */
+function buildReferenceMatrix(patterns) {
+    const refMatrix = {};
+    
+    patterns.forEach(p1 => {
+        refMatrix[p1.filename] = {};
+        patterns.forEach(p2 => {
+            refMatrix[p1.filename][p2.filename] = 0;
+        });
+        
+        patterns.forEach(p2 => {
+            if (p1.filename !== p2.filename && checkPatternReference(p1.content, p2)) {
+                refMatrix[p1.filename][p2.filename] = 1;
+            }
+        });
+    });
+    
+    return refMatrix;
+}
+
+// ========== GENEROVANIE FARIEB PRE JAZYKY ==========
+
+/**
+ * Generuje farby pre jazyky/katalógy na základe hash názvu
+ * @param {Array} patterns - Zoznam vzorov (každý musí mať vlastnosť language)
+ * @returns {Object} Objekt { languageName: "hsl(...)" }
+ */
+function generateLanguageColors(patterns) {
+    const uniqueLanguages = [...new Set(patterns.map(p => p.language || 'C & H'))];
+    const colors = {};
+    
+    // Použijeme zoznam pevných farieb pre lepšiu vizuálnu odlišnosť
+    const presetColors = [
+        '#3b82f6', // modrá
+        '#ef4444', // červená
+        '#10b981', // zelená
+        '#f59e0b', // oranžová
+        '#8b5cf6', // fialová
+        '#ec489a', // ružová
+        '#06b6d4', // tyrkysová
+        '#84cc16', // limetková
+        '#f97316', // oranžovo-červená
+        '#6366f1', // indigo
+        '#14b8a6', // zeleno-modrá
+        '#d946ef', // magenta
+        '#f43f5e', // ružovo-červená
+        '#0ea5e9', // svetlo modrá
+        '#a855f7'  // fialová
+    ];
+    
+    // Pre každý jazyk vyberieme farbu podľa indexu
+    uniqueLanguages.forEach((lang, index) => {
+        // Použijeme modulo, aby sme sa vrátili na začiatok, ak je viac jazykov ako presetov
+        const colorIndex = index % presetColors.length;
+        colors[lang] = presetColors[colorIndex];
+    });
+    
+    return colors;
+}
+
+/**
+ * Escapuje špeciálne regex znaky
+ * @param {string} str - Vstupný reťazec
+ * @returns {string} - Escapovaný reťazec pre použitie v Regex
+ */
+function escapeRegex(str) {
+    return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
 // Export funkcií do globálneho priestoru
 window.escapeHtml = escapeHtml;
 window.delay = delay;
@@ -191,3 +291,5 @@ window.getFormattedDateTime = getFormattedDateTime;
 window.simpleHash = simpleHash;
 window.downloadAsFile = downloadAsFile;
 window.getConfidenceColor = getConfidenceColor; 
+window.escapeRegex = escapeRegex;
+window.generateLanguageColors = generateLanguageColors;

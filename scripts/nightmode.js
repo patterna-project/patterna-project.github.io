@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const isDark = document.documentElement.classList.contains('dark');
         moonIcon.style.opacity = isDark ? '1' : '0';
     }
+    
 
     function handleDarkModeToggle(event) {
         event.preventDefault();

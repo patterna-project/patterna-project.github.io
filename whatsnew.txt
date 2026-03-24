@@ -1,3 +1,20 @@
+# NOVINKY VO VERZII 1.0.5
+
+## REFERENČNÝ BONUS
+- Nový prepínač **📎** aktivuje bonus za textové referencie medzi vzormi (explicitné odkazy)
+- Bonus (0.6) zvýhodňuje prechody **z odkazovaného na odkazujúci** vzor
+- Zobrazenie v matici: `0.523(+0.60) → 0.104` – pôvodná + bonus → normalizovaná
+- Vedľa percenta podobnosti sa zobrazí **📎**, ak predchádzajúci vzor odkazuje na aktuálny
+
+## KOPÍROVANIE TEXTU VZORU
+- V detaile vzoru pribudlo tlačidlo koírovania textu vzoru **📋** (zobrazí sa on hover)
+
+## OPRAVY CHÝB
+- Delete button teraz nastaví parametre na predvolené, odporúčané hodnoty
+- Chýbajúce jazykové preklady doplnené
+
+---
+
 # NOVINKY VO VERZII 1.0.4c
 
 ## VYLEPŠENÝ GRAF PODOBNOSTÍ
@@ -49,7 +66,7 @@
 - Animovaný spinner počas analýzy (⏳)
 - API kľúč je bezpečne uložený a stránka beží na Vercel serveri
 
-## Hlavné nové funkcie
+## NOVÉ FUNKCIE
 - Pridaná podpora pre **vlastné katalógy s podpriečinkami** (pôvodne sa dalo mať pri vlastných katalógoch len jeden jazyk/kategóriu)
 - Vylepšené vyhľadávanie v zozname vzorov
 - Nové tooltipy pre lepšiu orientáciu (celková spoľahlivosť, priečinky)
@@ -57,7 +74,7 @@
 - Kompletné preklady pre detail vzoru (SK/EN)
 - Aktualizované FAQ s novými otázkami
 
-## Opravy chýb
+## OPRAVY CHÝB
 - Správne zobrazovanie jazykov v user katalógoch
 - Funkčné tlačidlo pre vymazanie všetkých vzorov
 - Vylepšená stabilita pri veľkých katalógoch

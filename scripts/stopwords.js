@@ -119,7 +119,7 @@ function initStopWordsSettings() {
         window.customStopWords = new Set(DEFAULT_STOP_WORDS);
         renderStopWords();
         updateButtonStates();
-        showToast(t?.stopWordsReset || 'Stop slová boli resetované na predvolené', 'info');
+        showToast(t?.stopWordsResetAfter || 'Stop slová boli resetované na predvolené', 'info');
     });
 
     function renderStopWords() {

@@ -99,9 +99,9 @@ async function loadCatalog(catalogName) {
             for (const [language, files] of Object.entries(patternLanguages)) {
                 catalogData.structure[language] = {};
                 
-                for (const file of files) {
+                for (const file of files) {         
                     if (!allPatternsData[file]) {
-                        const response = await fetch(`patterns/${language}/${file}`);
+                        const response = await fetch(`patterns/OrganizationalPatterns/${language}/${file}`);
                         if (response.ok) {
                             const content = await response.text();
                             allPatternsData[file] = {
@@ -173,7 +173,7 @@ async function loadCatalog(catalogName) {
     }
 }
 
-// ========== JEDNOTNÁ INICIALIZÁCIA SEKCIÍ ==========
+// ========== INICIALIZÁCIA SEKCIÍ ==========
 
 function initializeCatalogSections(catalogName, structure, catalogType = 'user') {
     const checkboxContainer = document.getElementById("patternCheckboxes");

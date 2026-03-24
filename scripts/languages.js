@@ -48,6 +48,11 @@ const translations = {
         similarityMatrix: "🔢 Matica podobností",
         similarityGraph: "🕸️ Graf podobností",
         graphThreshold: "Prah:",
+        isolateNode: "Izolovať uzol (zobraziť len spojenia)",
+        disableIsolation: "Vypnúť izoláciu (zobraziť všetko)",
+        deselectNode: "Zrušiť výber",
+        highlightSequence: "Zvýrazniť sekvenciu",
+        disableHighlight: "Vypnúť zvýraznenie sekvencie",
         statistics: "📊 Štatistiky",
         statisticsBasic: "Základné štatistiky",
         statisticsTotalPatterns: "Počet vzorov",
@@ -149,7 +154,7 @@ const translations = {
         stopWordsMinLength: 'Stop slovo musí mať aspoň 2 znaky',
         stopWordsExists: 'Stop slovo "{word}" už existuje',
         stopWordsMaxLimit: 'Maximálny počet stop slov je 30',
-        stopWordsReset: 'Stop slová boli resetované na predvolené',
+        stopWordsResetAfter: 'Stop slová boli resetované na predvolené',
 
         // Pattern Detail Modal
         patternDetailTitle: "Detail vzoru",
@@ -169,6 +174,12 @@ const translations = {
         patternDetailFilterAll: "Všetky",
         patternDetailFilterSequence: "Len sekvencia",
         patternDetailNotInSequence: "(mimo sekvencie)",
+        copyPatternTextTooltip: "Kopírovať celý text",
+
+        // What's New Modal
+        whatsNewTitle: "Čo je nové",
+
+
 
         //Explanations modal
         explainButton: "❓ Vysvetli",
@@ -201,12 +212,12 @@ const translations = {
         explainSequenceWeak: "Prechody medzi vzormi sú menej výrazné.",
         explainSequenceStep: "Krok {step}: {from} → {to}",
         explainSimilarity: "Podobnosť {percent}%",
-        explainStrong: "✨ Veľmi silné prepojenie – vzory spolu úzko súvisia.",
-        explainMedium: "🔗 Stredne silné prepojenie – vzory zdieľajú niekoľko dôležitých konceptov.",
-        explainWeak: "📎 Slabšie prepojenie – vzory sú skôr komplementárne.",
+        explainStrong: "Veľmi silné prepojenie – vzory spolu úzko súvisia.",
+        explainMedium: "Stredne silné prepojenie – vzory zdieľajú niekoľko dôležitých konceptov.",
+        explainWeak: "Slabšie prepojenie – vzory sú skôr komplementárne.",
         explainCommonTopics: "Spoločné témy:",
         explainNoCommon: "Žiadne výrazne spoločné kľúčové slová.",
-        explainDirectReference: "📖 Text priamo odkazuje na „{name}“.",
+        explainDirectReference: "📎 Text priamo odkazuje na „{name}“.",
         explainTakeaway: "💡 Čo si z toho odniesť?",
         explainGoalWellConnected: "Cieľový vzor <span class='font-medium text-green-600 dark:text-green-400'>{name}</span> je dobre prepojený s ostatnými vzormi (priemerná podobnosť {sim}%), čo potvrdzuje jeho vhodnosť ako záverečného bodu.",
         explainGoalSpecific: "Cieľový vzor <span class='font-medium text-green-600 dark:text-green-400'>{name}</span> je skôr špecifický – jeho sila spočíva v unikátnom zameraní, nie v priamom prepojení so všetkými vzormi.",
@@ -224,6 +235,7 @@ const translations = {
         matrixTooltip: "Zobrazenie matice podobností medzi vzormi. Čím tmavšia farba, tým vyššia podobnosť. Hodnoty sú normalizované na škále 0-1.",
         graphTooltip: "Interaktívny graf vzťahov medzi vzormi. Hrubšia čiara = vyššia podobnosť. Kliknutím na uzol zobrazíš detaily a top spojenia. Môžeš meniť prah zobrazenia posuvníkom.",
         statisticsTooltip: "Základné štatistiky o podobnostiach medzi vzormi – počet vzorov, priemerná podobnosť, medián, smerodajná odchýlka, top 5 najsilnejších spojení a distribúcia hodnôt.",
+        referenceTooltip: "📎 Referenčný bonus – zvyšuje pravdepodobnosť prechodu od vzoru, ktorý je spomenutý, k vzoru, ktorý ho spomína. Pomáha rešpektovať závislosti v pattern languages (napr. keď vzor odkazuje na iný, ten spomínaný by mal ísť skôr v sekvencii).",
 
         // MDP steps
         mdpTitle: "Postup riešenia Markov Decision Process (MDP):",
@@ -237,13 +249,25 @@ const translations = {
         mdpConvergence: "✓ Konvergencia",
         mdpGoalCalculation: "Výpočet celkových podobností pre každý vzor:",
         mdpGoalState: "Cieľový stav",
+        goalSelectionTopCandidates: "Výber cieľa: Z {topCount} najlepších kandidátov (top 30%) bol náhodne vybraný vzor s pravdepodobnosťou úmernou rozptylu (špecifickejšie vzory majú vyššiu šancu).",
+        goalSelectionDeterministic: "Výber cieľa: Z {topCount} najlepších kandidátov (top 30%) bol vybraný vzor s najväčším rozptylom podobností (najšpecifickejší).",
+        topCandidatesList: "📋 Top kandidáti: {list}",
+        differenceBetweenFirstAndSecond: "📊 Rozdiel medzi 1. a 2. miestom: {diff}%",
+        significantDifference: "(výrazný rozdiel)",
+        tightDifference: "(tesný rozdiel)",
+        selectedByHighestTotal: "(najvyššia celková podobnosť = {sim})",
+        selectedByVariance: "(vybraný podľa rozptylu z top 30%, rozptyl = {variance}, celková podobnosť = {sim})",
+        selectedByWeightedRandom: "(náhodne vybraný z top 30% s váhou rozptylu {variance}, celková podobnosť = {sim})",
         mdpForcedStartExcluded: 'Vynútený štartovací vzor "{pattern}" bol vylúčený z výberu cieľa',
         mdpGoalReward: "má okamžitú odmenu (reward)",
         mdpOtherReward: "Ostatné stavy majú okamžitú odmenu (reward)",
         mdpGamma: "Diskontný faktor: γ =",
         mdpEpsilon: "Epsilon (konvergencia):",
+        sentimentActive: "🎭 Analýza sentimentu je aktívna – odmeny upravené podľa sentimentu vzorov",
+        sentimentRewardInfo: "🎭 Odmeny upravené sentimentom (faktor: 0.5-1.5 podľa sentimentu)",
         mdpTransitionMatrix: "Pravdepodobnosti prechodu medzi všetkými stavmi (normalizované podobnosti):",
         mdpTransitionExplanation: "Prechodová matica vznikla normalizáciou matice súvislostí. Každý riadok predstavuje rozdelenie pravdepodobností prechodu z daného stavu do ostatných stavov. Cieľový stav (diagonála) má vždy pravdepodobnosť 0.",
+        referenceBonusActive: "📎 Referenčný bonus aktívny (bonus: {bonus}) – hodnoty zobrazené ako: pôvodná (pôvodná+bonus)",
         mdpInitialUtilities: "Počiatočné utility",
         mdpIteration: "Iterácia",
         mdpMaxChange: "Maximálna zmena:",
@@ -252,9 +276,29 @@ const translations = {
         mdpIterations: "iteráciách",
         mdpPolicyCalculation: "Výpočet najlepšej akcie pre každý stav:",
         mdpCurrentState: "Aktuálny stav",
+        totalSimilarity: "Celková podobnosť",
+        variance: "Rozptyl",
         mdpOptimalAction: "Optimálna akcia",
         mdpSequenceBuild: "Postup podľa optimálnej politiky:",
         mdpFinalSequence: "Výsledná sekvencia:",
+
+        // Loading messages
+        analysisInProgress: "Spúšťam analýzu...",
+        loadingPatterns: "Načítavam vzory...",
+        loadingUSEModel: "Načítavam USE model...",
+        generatingEmbeddings: "Generujem sémantické embeddingy...",
+        computingSimilarity: "Počítam maticu podobností...",
+        analyzingText: "Analyzujem textové opisy (TF-IDF)...",
+        analyzingSentiment: "Analyzujem sentiment...",
+        computingSimilarities: "Vypočítavam podobnosti...",
+        optimizingSequence: "Optimalizujem sekvenciu...",
+        preparingResults: "Pripravujem výsledky...",
+        doneSequenceGenerated: "Hotovo! Sekvencia vygenerovaná",
+
+        // MDP messages
+        mdpStartNotReachable: "Vynútený štartovací vzor nie je dosiahnuteľný podľa MDP politiky",
+        cannotGenerateNoConnections: "Nie je možné vytvoriť sekvenciu - vzory nemajú žiadne spojenia",
+        standardCalculationSkipped: "Štandardný výpočet celkových podobností bol preskočený.",
 
         // Alerts and messages
         selectAtLeastTwoPatterns: "Vyber aspoň 2 vzory!",
@@ -328,6 +372,11 @@ const translations = {
         similarityMatrix: "🔢 Similarity Matrix",
         similarityGraph: "🕸️ Similarity Graph",
         graphThreshold: "Threshold:",
+        isolateNode: "Isolate node (show only connections)",
+        disableIsolation: "Disable isolation (show all)",
+        deselectNode: "Deselect",
+        highlightSequence: "Highlight sequence",
+        disableHighlight: "Disable highlight",
         statistics: "📊 Statistics",
         statisticsBasic: "Basic Statistics",
         statisticsTotalPatterns: "Number of patterns",
@@ -430,7 +479,7 @@ const translations = {
         stopWordsMinLength: 'Stop word must be at least 2 characters long',
         stopWordsExists: 'Stop word "{word}" already exists',
         stopWordsMaxLimit: 'Maximum number of stop words is 30',
-        stopWordsReset: 'Stop words have been reset to default',
+        stopWordsResetAfter: 'Stop words have been reset to default',
 
         // Pattern Detail Modal
         patternDetailTitle: "Pattern Detail",
@@ -450,6 +499,10 @@ const translations = {
         patternDetailFilterAll: "All",
         patternDetailFilterSequence: "Only sequence",
         patternDetailNotInSequence: "(outside sequence)",
+        copyPatternTextTooltip: "Copy full text",
+
+        // What's New Modal
+        whatsNewTitle: "What's New",
 
         //Explanations modal
         explainButton: "❓ Explain",
@@ -482,12 +535,12 @@ const translations = {
         explainSequenceWeak: "Transitions between patterns are less pronounced.",
         explainSequenceStep: "Step {step}: {from} → {to}",
         explainSimilarity: "Similarity {percent}%",
-        explainStrong: "✨ Very strong connection – patterns are closely related.",
-        explainMedium: "🔗 Moderate connection – patterns share several important concepts.",
-        explainWeak: "📎 Weaker connection – patterns are rather complementary.",
+        explainStrong: "Very strong connection – patterns are closely related.",
+        explainMedium: "Moderate connection – patterns share several important concepts.",
+        explainWeak: "Weaker connection – patterns are rather complementary.",
         explainCommonTopics: "Common topics:",
         explainNoCommon: "No significant common keywords.",
-        explainDirectReference: "📖 The text directly references „{name}“.",
+        explainDirectReference: "📎 The text directly references „{name}“.",
         explainTakeaway: "💡 What to take away?",
         explainGoalWellConnected: "The goal pattern <span class='font-medium text-green-600 dark:text-green-400'>{name}</span> is well connected to the other patterns (average similarity {sim}%), confirming its suitability as the final point.",
         explainGoalSpecific: "The goal pattern <span class='font-medium text-green-600 dark:text-green-400'>{name}</span> is rather specific – its strength lies in its unique focus, not in direct connection to all patterns.",
@@ -504,6 +557,7 @@ const translations = {
         matrixTooltip: "Display of similarity matrix between patterns. Darker color = higher similarity. Values are normalized to 0-1 scale.",
         graphTooltip: "Interactive graph of relationships between patterns. Thicker line = higher similarity. Click on a node to see details and top connections. You can adjust the display threshold with the slider.",
         statisticsTooltip: "Basic statistics about similarities between patterns – number of patterns, average similarity, median, standard deviation, top 5 strongest connections and value distribution.",
+        referenceTooltip: "📎 Reference bonus – boosts transitions from patterns that are mentioned to the patterns that mention them. Helps respect pattern language dependencies (e.g., when a pattern references another, the referenced pattern should appear earlier in the sequence).",
 
         // MDP steps
         mdpTitle: "Markov Decision Process (MDP) Solution Steps:",
@@ -517,13 +571,25 @@ const translations = {
         mdpConvergence: "✓ Convergence",
         mdpGoalCalculation: "Calculating total similarities for each pattern:",
         mdpGoalState: "Goal state",
+        goalSelectionTopCandidates: "Goal selection: From top {topCount} candidates (top 30%), a pattern was randomly selected with probability proportional to variance (more specific patterns have higher chance).",
+        goalSelectionDeterministic: "Goal selection: From top {topCount} candidates (top 30%), the pattern with the highest similarity variance (most specific) was selected.",
+        topCandidatesList: "📋 Top candidates: {list}",
+        differenceBetweenFirstAndSecond: "📊 Difference between 1st and 2nd place: {diff}%",
+        significantDifference: "(significant difference)",
+        tightDifference: "(tight difference)",
+        selectedByHighestTotal: "(highest total similarity = {sim})",
+        selectedByVariance: "(selected by variance from top 30%, variance = {variance}, total similarity = {sim})",
+        selectedByWeightedRandom: "(randomly selected from top 30% weighted by variance {variance}, total similarity = {sim})",
         mdpForcedStartExcluded: 'Forced start pattern "{pattern}" was excluded from goal selection',
         mdpGoalReward: "has immediate reward",
         mdpOtherReward: "Other states have immediate reward",
         mdpGamma: "Discount factor: γ =",
         mdpEpsilon: "Epsilon (convergence):",
+        sentimentActive: "🎭 Sentiment analysis is active – rewards adjusted by pattern sentiment",
+        sentimentRewardInfo: "🎭 Rewards adjusted by sentiment (factor: 0.5-1.5 based on sentiment)",
         mdpTransitionMatrix: "Transition probabilities between all states (normalized similarities):",
         mdpTransitionExplanation: "The transition matrix is created by normalizing the similarity matrix. Each row represents the probability distribution of transitioning from a given state to other states. The goal state (diagonal) always has probability 0.",
+        referenceBonusActive: "📎 Reference bonus active (bonus: {bonus}) – values shown as: raw (raw+bonus)",
         mdpInitialUtilities: "Initial Utilities",
         mdpIteration: "Iteration",
         mdpMaxChange: "Maximum change:",
@@ -532,9 +598,29 @@ const translations = {
         mdpIterations: "iterations",
         mdpPolicyCalculation: "Calculating best action for each state:",
         mdpCurrentState: "Current state",
+        totalSimilarity: "Total similarity",
+        variance: "Variance",
         mdpOptimalAction: "Optimal action",
         mdpSequenceBuild: "Following the optimal policy:",
         mdpFinalSequence: "Final sequence:",
+
+        // Loading messages
+        analysisInProgress: "Starting analysis...",
+        loadingPatterns: "Loading patterns...",
+        loadingUSEModel: "Loading USE model...",
+        generatingEmbeddings: "Generating semantic embeddings...",
+        computingSimilarity: "Computing similarity matrix...",
+        analyzingText: "Analyzing text descriptions (TF-IDF)...",
+        analyzingSentiment: "Analyzing sentiment...",
+        computingSimilarities: "Computing similarities...",
+        optimizingSequence: "Optimizing sequence...",
+        preparingResults: "Preparing results...",
+        doneSequenceGenerated: "Done! Sequence generated",
+
+        // MDP messages
+        mdpStartNotReachable: "Forced start pattern is not reachable according to MDP policy",
+        cannotGenerateNoConnections: "Cannot generate sequence - patterns have no connections",
+        standardCalculationSkipped: "Standard total similarity calculation was skipped.",
 
         // Alerts and messages
         selectAtLeastTwoPatterns: 'Select at least 2 patterns!',
@@ -649,6 +735,33 @@ function updateTextContent() {
         thresholdLabelText.textContent = t.graphThreshold;
     }
 
+    const isolateNodeBtn = document.getElementById('isolateNodeBtn');
+    if (isolateNodeBtn) {
+        // Skontrolujeme aktuálny stav tlačidla (či je v izolačnom režime alebo nie)
+        const isIsolationMode = isolateNodeBtn.classList.contains('bg-yellow-500');
+        if (isIsolationMode) {
+            isolateNodeBtn.title = t.disableIsolation || 'Vypnúť izoláciu (zobraziť všetko)';
+        } else {
+            isolateNodeBtn.title = t.isolateNode || 'Izolovať uzol (zobraziť len spojenia)';
+        }
+    }
+
+    const deselectNodeBtn = document.getElementById('deselectNodeBtn');
+    if (deselectNodeBtn) {
+        deselectNodeBtn.title = t.deselectNode || 'Zrušiť výber';
+    }
+
+    const highlightSequenceBtn = document.getElementById('highlightSequenceBtn');
+    if (highlightSequenceBtn) {
+        // Skontrolujeme, či je zvýraznenie aktívne (podľa textu tlačidla)
+        const isHighlightActive = highlightSequenceBtn.innerHTML === '❌';
+        if (isHighlightActive) {
+            highlightSequenceBtn.title = t.disableHighlight || 'Vypnúť zvýraznenie sekvencie';
+        } else {
+            highlightSequenceBtn.title = t.highlightSequence || 'Zvýrazniť sekvenciu';
+        }
+    }
+
     const confidenceLabel = document.getElementById('confidenceLabel');
     if (confidenceLabel) confidenceLabel.textContent = t.overallConfidence;
 
@@ -698,6 +811,11 @@ function updateTextContent() {
     const sentimentCheckbox = document.getElementById('sentimentCheckbox');
     if (sentimentCheckbox) {
         sentimentCheckbox.title = t.sentimentTitle;
+    }
+
+    const referenceCheckbox = document.getElementById('referenceCheckbox');
+    if (referenceCheckbox) {
+        referenceCheckbox.title = t.referenceTooltip;
     }
 
     const useCheckbox = document.getElementById('useCheckbox');
@@ -753,14 +871,12 @@ function updateTextContent() {
         explainViewBtn.title = t.explainButtonTooltip;
     }
     
-    
-    
-    
-    // Ak je aktuálne zobrazenie štatistík, prekreslíme ich
-    if (window.currentView === 'statistics' && currentStatisticsData) {
-        displayStatistics(currentStatisticsData.patterns, currentStatisticsData.matrix);
+    // Prekreslenie štatistík (ak sú aktívne)
+    if (window.currentView === 'statistics') {
+        if (typeof refreshStatistics === 'function') {
+            refreshStatistics();
+        }
     }
-
     if (typeof window.updateGraphSearchPlaceholder === 'function') {
         window.updateGraphSearchPlaceholder();
     }

@@ -58,6 +58,8 @@ function renderSimilarityGraph(patterns, similarityMatrix) {
     // Stav pre izolačný režim - definujeme na začiatku
     let isolationMode = false;
     let isolatedNodeId = null;
+
+    const t = window.translations?.[window.currentLanguage] || { graphThreshold: "Prah:" };
     
     // Znova vytvoríme štruktúru s info panelom
     const graphContainer = document.createElement('div');
@@ -85,7 +87,7 @@ function renderSimilarityGraph(patterns, similarityMatrix) {
                     <button id="isolateNodeBtn" class="w-5 h-5 flex items-center justify-center bg-green-500 hover:bg-green-600 text-white rounded transition-colors" title="Izolovať uzol (zobraziť len spojenia)">
                         <span class="text-xs">👁️</span>
                     </button>
-                    <button id="deselectNodeBtn" class="w-5 h-5 flex items-center justify-center bg-red-500 hover:bg-red-600 text-white rounded transition-colors" title="Zrušiť výber">
+                    <button id="deselectNodeBtn" class="w-5 h-5 flex items-center justify-center bg-red-500 hover:bg-red-600 text-white rounded transition-colors" title="${t.deselectNode || 'Zrušiť výber'}">
                         <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                         </svg>
@@ -99,7 +101,6 @@ function renderSimilarityGraph(patterns, similarityMatrix) {
     // TERAZ VYTVORÍME POSUVNÍK A VLOŽÍME HO DO graphContainer
     const thresholdContainer = document.createElement('div');
     thresholdContainer.className = 'absolute top-4 right-4 z-20 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 p-3 flex items-center gap-3';
-    const t = window.translations?.[window.currentLanguage] || { graphThreshold: "Prah:" };
     
     thresholdContainer.innerHTML = `
     <span class="text-xs font-medium text-gray-700 dark:text-gray-300 whitespace-nowrap">
@@ -114,7 +115,7 @@ function renderSimilarityGraph(patterns, similarityMatrix) {
     const sequenceHighlightContainer = document.createElement('div');
     sequenceHighlightContainer.className = 'absolute top-20 right-4 z-20'; // top-24 = 6rem (96px) - pod posuvník
     sequenceHighlightContainer.innerHTML = `
-        <button id="highlightSequenceBtn" class="w-10 h-10 flex items-center justify-center bg-white dark:bg-gray-800 rounded-full shadow-lg border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-lg" title="Zvýrazniť sekvenciu">
+        <button id="highlightSequenceBtn" class="w-10 h-10 flex items-center justify-center bg-white dark:bg-gray-800 rounded-full shadow-lg border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-lg" title="${t.highlightSequence || 'Zvýrazniť sekvenciu'}">
             🔗
         </button>
     `;
@@ -295,7 +296,7 @@ function renderSimilarityGraph(patterns, similarityMatrix) {
             const btn = document.getElementById('highlightSequenceBtn');
             if (btn) {
                 btn.innerHTML = '🔗';
-                btn.title = 'Zvýrazniť sekvenciu';
+                btn.title = t.highlightSequence || 'Zvýrazniť sekvenciu';
             }
             resetHighlight();
         }
@@ -575,7 +576,7 @@ function renderSimilarityGraph(patterns, similarityMatrix) {
                 isolateBtn.innerHTML = '<span class="text-xs">🚫</span>';
                 isolateBtn.classList.remove('bg-green-500', 'hover:bg-green-600');
                 isolateBtn.classList.add('bg-yellow-500', 'hover:bg-yellow-600');
-                isolateBtn.title = 'Vypnúť izoláciu (zobraziť všetko)';
+                isolateBtn.title = t.disableIsolation || 'Vypnúť izoláciu (zobraziť všetko)';
                 
                 // Zistíme všetky spojenia vybraného uzla
                 const connectedNodeIds = new Set([selectedNodeId]);
@@ -609,7 +610,7 @@ function renderSimilarityGraph(patterns, similarityMatrix) {
                 isolateBtn.innerHTML = '<span class="text-xs">👁️</span>';
                 isolateBtn.classList.remove('bg-yellow-500', 'hover:bg-yellow-600');
                 isolateBtn.classList.add('bg-green-500', 'hover:bg-green-600');
-                isolateBtn.title = 'Izolovať uzol (zobraziť len spojenia)';
+                isolateBtn.title = t.isolateNode || 'Izolovať uzol (zobraziť len spojenia)';
                 
                 // Obnovíme normálne zobrazenie
                 node.style('opacity', 1);
@@ -693,11 +694,11 @@ function renderSimilarityGraph(patterns, similarityMatrix) {
             if (sequenceHighlightEnabled) {
                 highlightSequence();
                 highlightBtn.innerHTML = '❌'; // Zmena na ❌
-                highlightBtn.title = 'Vypnúť zvýraznenie sekvencie';
+                highlightBtn.title = t.disableHighlight || 'Vypnúť zvýraznenie sekvencie';
             } else {
                 resetHighlight();
                 highlightBtn.innerHTML = '🔗';
-                highlightBtn.title = 'Zvýrazniť sekvenciu';
+                highlightBtn.title = t.highlightSequence || 'Zvýrazniť sekvenciu';
             }
         });
     }

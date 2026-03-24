@@ -1,7 +1,7 @@
 //markov.js
 
 class MDPSequenceGenerator {
-    constructor(similarityMatrix, patterns, gamma = 0.9, goalReward = 10.0, otherReward = 1.0, epsilon = 0.1, useSentiment = false, sentimentScores = {}) {
+    constructor(similarityMatrix, patterns, gamma = 0.9, goalReward = 10.0, otherReward = 1.0, epsilon = 0.1, useSentiment = false, sentimentScores = {}, referenceMatrix = null, referenceBonus = 0.1) {
         this.similarityMatrix = similarityMatrix;
         this.patterns = patterns;
         this.states = patterns.map(p => p.filename);
@@ -12,12 +12,13 @@ class MDPSequenceGenerator {
         this.useSentiment = useSentiment;
         this.sentimentScores = sentimentScores;
         this.steps = [];
+        this.referenceMatrix = referenceMatrix;
+        this.referenceBonus = referenceBonus;
     }
 
     createTransitionMatrix(goalState) {
         const transitionMatrix = {};
 
-        // kroky - PRIDÁME VŠETKY PARAMETRE
         this.steps.push({
             type: 'goal_state',
             goalState: goalState,
@@ -28,25 +29,57 @@ class MDPSequenceGenerator {
             epsilon: this.epsilon
         });
 
-        // Vypočítanie pre prechodovú maticu (bez zaznamenávania jednotlivých stavov)
+        // Store raw scores and boosted scores for UI display
+        const rawScores = {};
+        const boostedScores = {};
+
         this.states.forEach(state => {
             transitionMatrix[state] = {};
+            rawScores[state] = {};
+            boostedScores[state] = {};
 
             if (state === goalState) {
                 this.states.forEach(nextState => {
                     transitionMatrix[state][nextState] = 0.0;
+                    rawScores[state][nextState] = 0;
+                    boostedScores[state][nextState] = 0;
                 });
             } else {
-                const similarities = this.states.map(other =>
-                    state === other ? 0 : (this.similarityMatrix[state][other] || 0)
-                );
-                const sum = similarities.reduce((a, b) => a + b, 0);
-
+                const scores = [];
+                const rawValues = [];
+                
+                this.states.forEach((other, idx) => {
+                    if (state === other) {
+                        scores.push(0);
+                        rawValues.push(0);
+                        rawScores[state][other] = 0;
+                    } else {
+                        let sim = this.similarityMatrix[state][other] || 0;
+                        let boosted = sim;
+                        rawValues.push(sim);
+                        
+                        // Bonus, keď zdroj (state) odkazuje na cieľ (other)
+                        if (this.referenceMatrix && this.referenceMatrix[state] && this.referenceMatrix[state][other]) {
+                            boosted = sim + this.referenceBonus;
+                        }
+                        scores.push(boosted);
+                        rawScores[state][other] = sim;
+                    }
+                });
+                
+                const sum = scores.reduce((a, b) => a + b, 0);
+                
                 this.states.forEach((nextState, j) => {
-                    transitionMatrix[state][nextState] = sum > 0 ? similarities[j] / sum : 0;
+                    const prob = sum > 0 ? scores[j] / sum : 0;
+                    transitionMatrix[state][nextState] = prob;
+                    boostedScores[state][nextState] = scores[j];
                 });
             }
         });
+
+        // Store raw and boosted scores for UI display
+        this.rawTransitionScores = rawScores;
+        this.boostedTransitionScores = boostedScores;
 
         return transitionMatrix;
     }
@@ -281,7 +314,7 @@ class MDPSequenceGenerator {
             } else {
                 console.warn('Vynútený štart nie je životaschopný, sekvencia sa nedá vytvoriť');
                 if (typeof showToast === 'function') {
-                    showToast('Vynútený štartovací vzor nie je dosiahnuteľný podľa MDP politiky', 'warning');
+                    showToast(translations[currentLanguage]?.mdpStartNotReachable || 'Forced start pattern is not reachable', 'warning');
                 }
                 return []; 
             }
@@ -422,7 +455,9 @@ class MDPSequenceGenerator {
             goalState: goalState,
             transitionMatrix: transitionMatrix,
             utilities: utilities,
-            policy: policy
+            policy: policy,
+            rawTransitionScores: this.rawTransitionScores,    
+            boostedTransitionScores: this.boostedTransitionScores  
         };
     }
 }
@@ -484,7 +519,8 @@ function canGenerateSequence(similarityMatrix, patterns) {
 }
 
 async function generateSequence() {  
-    updateLoadingIndicator(0, 'Spúšťam analýzu...');
+    const t = translations[currentLanguage];
+    updateLoadingIndicator(0, t.analysisInProgress);
     await delay(100);
 
     try {
@@ -494,10 +530,9 @@ async function generateSequence() {
         const otherReward = parseFloat(document.getElementById('otherRewardInput').value) || 1.0;
         const epsilon = parseFloat(document.getElementById('epsilonInput').value) || 0.1;
         const useSentiment = document.getElementById('sentimentCheckbox')?.checked || false;
-        
-        // ★ NOVÉ: Zistenie, či je zaškrtnutý USE checkbox
         const useUSE = document.getElementById('useCheckbox')?.checked || false;
         const useIDF = document.getElementById('idfCheckbox')?.checked || false;
+        const useReferences = document.getElementById('referenceCheckbox')?.checked || false;
 
         // Zozbierame všetky zaškrtnuté vzory z globálneho stavu
         const selectedFiles = [];
@@ -526,7 +561,7 @@ async function generateSequence() {
         window.languageColorMap = languageColorMap; // sprístupníme globálne
 
         // Fáza 1: Výpočet matice podobnosti
-        updateLoadingIndicator(20, 'Načítavam vzory...');
+        updateLoadingIndicator(20, t.loadingPatterns);
         await delay(100);
 
         const similarityCalculator = new PatternSimilarity();
@@ -534,10 +569,10 @@ async function generateSequence() {
 
         if (useUSE) {
             // Detailný loading pre USE - 3 fázy
-            updateLoadingIndicator(30, 'Načítavam USE model...');
+            updateLoadingIndicator(30, t.loadingUSEModel);
             await delay(100);
             
-            updateLoadingIndicator(50, 'Generujem sémantické embeddingy...');
+            updateLoadingIndicator(50, t.generatingEmbeddings);
             await delay(100);
             
             // Overíme, či je USE model dostupný
@@ -552,10 +587,10 @@ async function generateSequence() {
             
             similarityMatrix = await similarityCalculator.calculateUSESimilarityMatrix(selectedPatterns, updateUSEProgress);
             
-            updateLoadingIndicator(80, 'Počítam maticu podobností...');
+            updateLoadingIndicator(80, t.computingSimilarity);
             await delay(100);
         } else {
-            updateLoadingIndicator(40, 'Analyzujem textové opisy (TF-IDF)...');
+            updateLoadingIndicator(40, t.analyzingText);
             await delay(100);
             similarityMatrix = similarityCalculator.calculateSimilarityMatrix(selectedPatterns, useIDF);
         }
@@ -563,16 +598,19 @@ async function generateSequence() {
         // Výpočet sentiment skóre (ak je checkbox zapnutý)
         let sentimentScores = {};
         if (useSentiment && typeof getSentimentScores === 'function') {
-            updateLoadingIndicator(50, 'Analyzujem sentiment...');
+            updateLoadingIndicator(50, t.analyzingSentiment);
             await delay(100);
             sentimentScores = getSentimentScores(selectedPatterns);
         }
 
+        const referenceMatrix = window.buildReferenceMatrix(selectedPatterns);
+        window.referenceMatrix = referenceMatrix; 
+
         // Fáza 2: Generovanie sekvencie pomocou MDP
-        updateLoadingIndicator(60, 'Vypočítavam podobnosti...');
+        updateLoadingIndicator(60, t.computingSimilarities);
         await delay(100);
 
-        updateLoadingIndicator(75, 'Optimalizujem sekvenciu...');
+        updateLoadingIndicator(75, t.optimizingSequence);;
         await delay(100);
 
         const mdpGenerator = new MDPSequenceGenerator(
@@ -583,33 +621,39 @@ async function generateSequence() {
             otherReward,
             epsilon,
             useSentiment,       
-            sentimentScores       
+            sentimentScores,
+            useReferences ? referenceMatrix : null,   
+            0.6               
         );
 
         // Je vôbec možné vytvoriť sekvenciu?
         if (!canGenerateSequence(similarityMatrix, selectedPatterns)) {
-            showToast('Nie je možné vytvoriť sekvenciu - vzory nemajú žiadne spojenia', 'warning', 5000);
+            showToast(translations[currentLanguage]?.cannotGenerateNoConnections || 'Cannot generate sequence - patterns have no connections', 'warning', 5000);
             cleanupGeneration(false);
             return;
         }
 
         const result = mdpGenerator.generateSequence();
         window.currentGoalState = result.goalState;
+        window.rawTransitionScores = result.rawTransitionScores;       
+        window.boostedTransitionScores = result.boostedTransitionScores; 
+        window.referenceBonusActive = useReferences;                  
+        window.referenceBonusValue = 0.6;                           
 
         // Fáza 3: Zobrazenie výsledkov
-        updateLoadingIndicator(90, 'Pripravujem výsledky...');
+        updateLoadingIndicator(90, t.preparingResults);
         await delay(300);
 
         window.useSentiment = useSentiment;
         window.sentimentScores = sentimentScores;
 
-        displayPatternSequence(result.sequence, similarityMatrix);
+        displayPatternSequence(result.sequence, similarityMatrix, referenceMatrix);
         displaySimilarityMatrixWithToggle(selectedPatterns, similarityMatrix);
         displayMDPSolution(result, selectedPatterns);
 
         document.getElementById("suggestionsSection").classList.remove("hidden");
 
-        updateLoadingIndicator(100, 'Hotovo! Sekvencia vygenerovaná');
+        updateLoadingIndicator(100, t.doneSequenceGenerated);
         cleanupGeneration(true);
 
         evaluateWithAI(result.sequence, similarityMatrix);
@@ -642,7 +686,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-function displayPatternSequence(sequence, similarityMatrix) {
+function displayPatternSequence(sequence, similarityMatrix, referenceMatrix = null) {
     const patternsList = document.getElementById("patternsList");
     patternsList.innerHTML = "";
 
@@ -685,10 +729,16 @@ function displayPatternSequence(sequence, similarityMatrix) {
             const percent = similarityWithPrevious * 100;
             const colors = getConfidenceColor(percent);
             
+            // Check if previous pattern references this pattern
+            const isReferenced = referenceMatrix && referenceMatrix[previousPattern.filename] && 
+                                 referenceMatrix[previousPattern.filename][pattern.filename] === 1;
+            const t = translations[currentLanguage];
+            const referenceIcon = isReferenced ? ` <span class="inline-block text-xs" title="${t.referenceTooltip || 'Tento vzor je priamo odkazovaný z predchádzajúceho'}">📎</span>` : '';            
+            
             similarityHTML = `
                 <span class="text-xs similarity-badge px-2 py-1 rounded" 
                       style="background: ${colors.bg}; color: ${colors.text}; border: 1px solid ${colors.border};">
-                    ${(similarityWithPrevious * 100).toFixed(0)}%
+                    ${referenceIcon}${(similarityWithPrevious * 100).toFixed(0)}%
                 </span>
             `;
         }
@@ -1120,4 +1170,34 @@ function showPatternDetail(filename, position, sequence, similarityMatrix) {
 
     // Zobrazenie modálu
     openModal('patternDetailModal');
+
+    // Kopírovanie textu vzoru
+    const copyBtn = document.getElementById('copyPatternTextBtn');
+    if (copyBtn) {
+        // Nastavíme tooltip podľa jazyka
+        copyBtn.setAttribute('title', translations[currentLanguage]?.copyPatternTextTooltip || 'Copy full text');
+        
+        // Odstránime staré listenery (aby sa nenabaľovali)
+        const newCopyBtn = copyBtn.cloneNode(true);
+        copyBtn.parentNode.replaceChild(newCopyBtn, copyBtn);
+        
+        newCopyBtn.addEventListener('click', () => {
+            const contentDiv = document.getElementById('patternDetailContent');
+            const text = contentDiv.innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                const originalEmoji = newCopyBtn.innerHTML;
+                newCopyBtn.innerHTML = '✅';
+                newCopyBtn.classList.remove('hover:text-indigo-600');
+                newCopyBtn.classList.add('text-green-600');
+                
+                setTimeout(() => {
+                    newCopyBtn.innerHTML = originalEmoji;
+                    newCopyBtn.classList.add('hover:text-indigo-600');
+                    newCopyBtn.classList.remove('text-green-600');
+                }, 2000);
+            }).catch(() => {
+                showToast(translations[currentLanguage]?.copyFailed || 'Nepodarilo sa skopírovať', 'error');
+            });
+        });
+    }
 }

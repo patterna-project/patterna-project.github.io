@@ -135,7 +135,7 @@ function generateStepExplanation(patternA, patternB, similarityMatrix, stepNumbe
         stepHtml += `<p class="mt-2 text-xs text-gray-400 italic">${t.explainNoCommon}</p>`;
     }
 
-    const directReference = checkForDirectReference(patternA.content, patternB);
+    const directReference = window.checkPatternReference(patternA.content, patternB);
     if (directReference) {
         const refText = t.explainDirectReference.replace('{name}', patternB.name);
         stepHtml += `<p class="mt-2 text-xs text-green-600 dark:text-green-400">${refText}</p>`;
@@ -174,26 +174,6 @@ function generateClosingNote(sequence, similarityMatrix, t) {
 /**
  * Pomocné funkcie
  */
-
-// Skontroluje, či textA priamo odkazuje na textB (napr. "see PATTERN_NAME")
-function checkForDirectReference(textA, patternB) {
-    const patternName = patternB.name.toLowerCase();
-    const patternFilename = patternB.filename.replace('.txt', '').toLowerCase().replace(/_/g, ' ');
-    
-    const patterns = [
-        new RegExp(`\\b(?:see|cf\\.?|refer to|as in)\\s+${patternName}\\b`, 'i'),
-        new RegExp(`\\b${patternName}\\s+pattern\\b`, 'i'),
-        new RegExp(`\\bpattern\\s+${patternName}\\b`, 'i'),
-        new RegExp(`\\b${patternFilename}\\b`, 'i')
-    ];
-
-    for (let regex of patterns) {
-        if (regex.test(textA)) {
-            return true;
-        }
-    }
-    return false;
-}
 
 // Vypočíta priemernú podobnosť medzi po sebe idúcimi vzormi
 function calculateAverageSimilarity(sequence, similarityMatrix) {

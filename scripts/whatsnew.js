@@ -25,6 +25,13 @@ async function checkAndShowWhatsNew() {
         const contentDiv = document.getElementById('whatsNewContent');
         if (!modal || !contentDiv) return;
 
+        // ★ PRIDANÉ: Nastavenie nadpisu modalu podľa jazyka
+        const title = modal.querySelector('h3');
+        if (title) {
+            const t = window.translations?.[window.currentLanguage];
+            title.textContent = t?.whatsNewTitle || 'What\'s New';
+        }
+
         contentDiv.innerHTML = formatWhatsNewContent(content);
         openModal('whatsNewModal');           // Otvorí modal cez centralizovanú funkciu
         localStorage.setItem(WHATS_NEW_SEEN_KEY, contentHash);

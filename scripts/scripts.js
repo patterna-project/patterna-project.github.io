@@ -255,6 +255,7 @@ document.getElementById('clearBtn').addEventListener('click', () => {
     updateAllLanguageCounters();
     updateGenerateButtonState();
     updateSelectAllButtonsColor();
+    resetParametersToDefault();
 
     showToast(t?.allPatternsCleared || 'Všetky vzory boli vymazané', 'info');
 });
@@ -730,23 +731,46 @@ function updateGoalFlags() {
     });
 }
 
-// Funkcia na generovanie farieb pre jazyky (rovnaká ako v grafe)
-function generateLanguageColors(patterns) {
-    const uniqueLanguages = [...new Set(patterns.map(p => p.language || 'C & H'))];
-    const colors = {};
+// ========== RESET PARAMETERS TO DEFAULT ==========
+
+function resetParametersToDefault() {
+    const defaultValues = {
+        gamma: 0.9,
+        goalReward: 10,
+        otherReward: 1,
+        epsilon: 0.1,
+        idfCheckbox: false,
+        sentimentCheckbox: false,
+        referenceCheckbox: false,
+        useCheckbox: false
+    };
     
-    function getRandomColor(seed) {
-        let hash = 0;
-        for (let i = 0; i < seed.length; i++) {
-            hash = seed.charCodeAt(i) + ((hash << 5) - hash);
-        }
-        const hue = Math.abs(hash % 360);
-        return `hsl(${hue}, 75%, 55%)`;
+    const gammaInput = document.getElementById('gammaInput');
+    if (gammaInput) gammaInput.value = defaultValues.gamma;
+    
+    const goalRewardInput = document.getElementById('goalRewardInput');
+    if (goalRewardInput) goalRewardInput.value = defaultValues.goalReward;
+    
+    const otherRewardInput = document.getElementById('otherRewardInput');
+    if (otherRewardInput) otherRewardInput.value = defaultValues.otherReward;
+    
+    const epsilonInput = document.getElementById('epsilonInput');
+    if (epsilonInput) epsilonInput.value = defaultValues.epsilon;
+    
+    const idfCheckbox = document.getElementById('idfCheckbox');
+    if (idfCheckbox) idfCheckbox.checked = defaultValues.idfCheckbox;
+    
+    const sentimentCheckbox = document.getElementById('sentimentCheckbox');
+    if (sentimentCheckbox) sentimentCheckbox.checked = defaultValues.sentimentCheckbox;
+    
+    const referenceCheckbox = document.getElementById('referenceCheckbox');
+    if (referenceCheckbox) referenceCheckbox.checked = defaultValues.referenceCheckbox;
+    
+    const useCheckbox = document.getElementById('useCheckbox');
+    if (useCheckbox) useCheckbox.checked = defaultValues.useCheckbox;
+    
+    // Voliteľne: reset aj stop slov na predvolené
+    if (window.resetStopWordsToDefault && typeof window.resetStopWordsToDefault === 'function') {
+        window.resetStopWordsToDefault();
     }
-    
-    uniqueLanguages.forEach(lang => {
-        colors[lang] = getRandomColor(lang);
-    });
-    
-    return colors;
 }

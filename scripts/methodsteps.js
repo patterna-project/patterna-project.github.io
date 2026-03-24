@@ -127,15 +127,24 @@ function createCompleteTransitionMatrixStep(step, patterns) {
     let content = `<h4 class="font-semibold mb-2 text-indigo-600 dark:text-indigo-400">${t.mdpStep3}</h4>`;
     content += `<p class="mb-2 text-sm text-gray-600 dark:text-gray-400">${t.mdpTransitionMatrix}</p>`;
 
-    // Vytvoríme wrapper pre tabuľku so scrollbarom - DÔLEŽITÉ: nastavíme max-width a overflow
+    // Check if reference bonus was used
+    const useReferences = window.referenceBonusActive || false;
+    if (useReferences) {
+        const t = translations[currentLanguage];
+        const msg = t.referenceBonusActive?.replace('{bonus}', window.referenceBonusValue || 0.1) || 
+                    `📎 Reference bonus active (bonus: ${window.referenceBonusValue || 0.1}) – values shown as: raw (raw+bonus)`;
+        content += `<p class="mb-2 text-xs text-blue-600 dark:text-blue-400">${msg}</p>`;
+    }
+
+    // Vytvoríme wrapper pre tabuľku so scrollbarom
     const tableWrapper = document.createElement("div");
     tableWrapper.className = "text-sm overflow-x-auto custom-scrollbar";
-    tableWrapper.style.maxWidth = "100%"; // Zabezpečíme, že nepresahuje
-    tableWrapper.style.overflowX = "auto"; // Explicitne nastavíme horizontálne scrollovanie
+    tableWrapper.style.maxWidth = "100%";
+    tableWrapper.style.overflowX = "auto";
 
     const table = document.createElement("table");
     table.className = "w-full text-xs border-collapse";
-    table.style.minWidth = "600px"; // Minimálna šírka, aby sa scrollbar ukázal pri zúžení
+    table.style.minWidth = "600px";
 
     // Hlavička tabuľky
     const headerRow = document.createElement("tr");
@@ -146,23 +155,46 @@ function createCompleteTransitionMatrixStep(step, patterns) {
         }).join("");
     table.appendChild(headerRow);
 
+    // Get raw and boosted scores if available
+    const rawScores = window.rawTransitionScores || {};
+    const boostedScores = window.boostedTransitionScores || {};
+
     // Riadky
     patterns.forEach((pattern1, i) => {
         const row = document.createElement("tr");
         const shortName1 = pattern1.name.length > 15 ? pattern1.name.substring(0, 15) + '...' : pattern1.name;
-        row.innerHTML = `<td class="font-medium p-2 bg-gray-50 dark:bg-gray-600" title="${pattern1.name}">${escapeHtml(shortName1)}</td>`;
+        row.innerHTML = `<td class="font-medium p-2 bg-gray-50 dark:bg-gray-600" title="${pattern1.name}">${escapeHtml(shortName1)}<\/td>`;
 
         patterns.forEach((pattern2, j) => {
             const probability = step.transitionMatrix[pattern1.filename][pattern2.filename] || 0;
             const cell = document.createElement("td");
             cell.className = "p-2 text-center";
-            cell.textContent = probability.toFixed(2);
-
+            
+            // Get raw and boosted values for display
+            const raw = rawScores[pattern1.filename]?.[pattern2.filename] || 0;
+            const boosted = boostedScores[pattern1.filename]?.[pattern2.filename] || 0;
+            
+            // Format cell content
+            let cellContent = '';
+            if (useReferences && raw !== boosted && boosted > 0) {
+                // Show raw (boosted) format
+                const bonusValue = window.referenceBonusValue || 0.1;
+                cell.innerHTML = `${raw.toFixed(3)}<span class="text-xs text-green-500 dark:text-green-400">(+${bonusValue.toFixed(2)})</span> → ${probability.toFixed(3)}`;
+            } else {
+                cell.textContent = probability.toFixed(3);
+            }
+            
             // Farba podľa pravdepodobnosti
             const intensity = probability * 0.7;
             cell.style.backgroundColor = `rgba(99, 102, 241, ${intensity})`;
             cell.style.color = probability > 0.5 ? 'white' : 'black';
-            cell.title = `${pattern1.name} → ${pattern2.name}: ${(probability * 100).toFixed(1)}%`;
+            
+            // Title with detailed info
+            if (useReferences && raw !== boosted) {
+                cell.title = `${pattern1.name} → ${pattern2.name}: raw=${raw.toFixed(3)}, boosted=${boosted.toFixed(3)} → probability=${probability.toFixed(3)} (bonus applied)`;
+            } else {
+                cell.title = `${pattern1.name} → ${pattern2.name}: ${probability.toFixed(3)}`;
+            }
 
             row.appendChild(cell);
         });
@@ -196,7 +228,7 @@ function createGoalCalculationStep(step, patterns) {
     if (step.forcedGoalUsed) {
         const goalPattern = patterns.find(p => p.filename === step.goalState);
         content += `<p class="mb-2 text-green-600 dark:text-green-400">🎯 Používateľom vynútený cieľový vzor: <strong>${goalPattern ? goalPattern.name : step.goalState}</strong></p>`;
-        content += `<p class="mb-2 text-sm text-gray-600 dark:text-gray-400">Štandardný výpočet celkových podobností bol preskočený.</p>`;
+        content += `<p class="mb-2 text-sm text-gray-600 dark:text-gray-400">${t.standardCalculationSkipped || 'Štandardný výpočet celkových podobností bol preskočený.'}</p>`;
         stepDiv.innerHTML = content;
         return stepDiv;
     }
@@ -221,8 +253,8 @@ function createGoalCalculationStep(step, patterns) {
     const headerRow = document.createElement("tr");
     headerRow.innerHTML = `
         <th class="p-2 bg-gray-100 dark:bg-gray-600 text-left">${t.mdpCurrentState}</th>
-        <th class="p-2 bg-gray-100 dark:bg-gray-600 text-right">Celková podobnosť</th>
-        <th class="p-2 bg-gray-100 dark:bg-gray-600 text-right">Rozptyl</th>
+        <th class="p-2 bg-gray-100 dark:bg-gray-600 text-right">${t.totalSimilarity || 'Celková podobnosť'}</th>
+        <th class="p-2 bg-gray-100 dark:bg-gray-600 text-right">${t.variance || 'Rozptyl'}</th>
         <th class="p-2 bg-gray-100 dark:bg-gray-600 text-center">#</th>
     `;
     table.appendChild(headerRow);
@@ -283,11 +315,11 @@ function createGoalCalculationStep(step, patterns) {
         
         if (step.selectionInfo.selectedWeightedRandom) {
             content += `<p class="mt-2 text-xs text-blue-600 dark:text-blue-400">
-                🎲 Výber cieľa: Z <strong>${topCount}</strong> najlepších kandidátov (top 30%) bol náhodne vybraný vzor s <strong>pravdepodobnosťou úmernou rozptylu</strong> (špecifickejšie vzory majú vyššiu šancu).
+                🎲 ${t.goalSelectionTopCandidates?.replace('{topCount}', topCount) || `Výber cieľa: Z ${topCount} najlepších kandidátov (top 30%) bol náhodne vybraný vzor s pravdepodobnosťou úmernou rozptylu (špecifickejšie vzory majú vyššiu šancu).`}
             </p>`;
         } else {
             content += `<p class="mt-2 text-xs text-blue-600 dark:text-blue-400">
-                🔍 Výber cieľa: Z <strong>${topCount}</strong> najlepších kandidátov (top 30%) bol vybraný vzor s <strong>najväčším rozptylom</strong> podobností (najšpecifickejší).
+                🔍 ${t.goalSelectionDeterministic?.replace('{topCount}', topCount) || `Výber cieľa: Z ${topCount} najlepších kandidátov (top 30%) bol vybraný vzor s najväčším rozptylom podobností (najšpecifickejší).`}
             </p>`;
         }
         
@@ -300,7 +332,7 @@ function createGoalCalculationStep(step, patterns) {
         }).join(', ');
         
         content += `<p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
-            📋 Top kandidáti: ${topList}
+            ${t.topCandidatesList?.replace('{list}', topList) || `📋 Top kandidáti: ${topList}`}
         </p>`;
     }
 
@@ -311,8 +343,10 @@ function createGoalCalculationStep(step, patterns) {
         const difference = (first[1] - second[1]) * 100;
         
         content += `<p class="mt-2 text-xs text-gray-600 dark:text-gray-400">
-            📊 Rozdiel medzi 1. a 2. miestom: <span class="font-semibold ${difference > 5 ? 'text-green-600' : 'text-amber-600'}">${difference.toFixed(1)}%</span>
-            ${difference > 5 ? '(výrazný rozdiel)' : '(tesný rozdiel)'}
+            ${t.differenceBetweenFirstAndSecond?.replace('{diff}', difference.toFixed(1)) || `📊 Rozdiel medzi 1. a 2. miestom: ${difference.toFixed(1)}%`}
+            <span class="font-semibold ${difference > 5 ? 'text-green-600' : 'text-amber-600'}">
+                ${difference > 5 ? (t.significantDifference || '(výrazný rozdiel)') : (t.tightDifference || '(tesný rozdiel)')}
+            </span>
         </p>`;
     }
 
@@ -324,11 +358,11 @@ function createGoalCalculationStep(step, patterns) {
         const goalVariance = topCandidatesMap.get(step.goalState) || 0;
         
         if (goalSim === topSim && sortedEntries[0][0] === step.goalState) {
-            similarityInfo = `(najvyššia celková podobnosť = ${topSim.toFixed(3)})`;
+            similarityInfo = t.selectedByHighestTotal?.replace('{sim}', topSim.toFixed(3)) || `(najvyššia celková podobnosť = ${topSim.toFixed(3)})`;
         } else if (step.selectionInfo?.selectedWeightedRandom) {
-            similarityInfo = `(náhodne vybraný z top 30% s váhou rozptylu ${goalVariance.toFixed(4)}, celková podobnosť = ${goalSim.toFixed(3)})`;
+            similarityInfo = t.selectedByWeightedRandom?.replace('{variance}', goalVariance.toFixed(4)).replace('{sim}', goalSim.toFixed(3)) || `(náhodne vybraný z top 30% s váhou rozptylu ${goalVariance.toFixed(4)}, celková podobnosť = ${goalSim.toFixed(3)})`;
         } else {
-            similarityInfo = `(vybraný podľa rozptylu z top 30%, rozptyl = ${goalVariance.toFixed(4)}, celková podobnosť = ${goalSim.toFixed(3)})`;
+            similarityInfo = t.selectedByVariance?.replace('{variance}', goalVariance.toFixed(4)).replace('{sim}', goalSim.toFixed(3)) || `(vybraný podľa rozptylu z top 30%, rozptyl = ${goalVariance.toFixed(4)}, celková podobnosť = ${goalSim.toFixed(3)})`;
         }
     }
     content += `<p class="mt-2 font-semibold flex items-center gap-1">${t.mdpGoalState}: <span class="text-green-600 flex items-center gap-1 text-base"><span>🎯</span>${goalPattern.name}</span> ${similarityInfo}</p>`;
@@ -349,9 +383,9 @@ function createGoalStateStep(step, patterns) {
     
     // Ak je zapnutý sentiment, zobrazíme ho
     if (window.useSentiment && window.sentimentScores) {
-        content += `<p class="mt-2 text-xs text-gray-500 dark:text-gray-400">🎭 Sentiment analysis je aktívny - odmeny budú upravené podľa sentimentu vzorov</p>`;
+        content += `<p class="mt-2 text-xs text-gray-500 dark:text-gray-400">${t.sentimentActive}</p>`;
     }
-    
+        
     content += `<p class="mt-2">${t.mdpGamma} ${step.gamma?.toFixed(2) ?? '0.9'}</p>`;
     content += `<p class="text-xs text-gray-500 dark:text-gray-400 mt-1">${t.mdpEpsilon} ${step.epsilon?.toFixed(4) ?? '0.001'}</p>`;
 
@@ -372,7 +406,7 @@ function createInitialUtilitiesStep(step, patterns) {
     
     // Ak je sentiment aktívny, zobrazíme aj základné odmeny a sentiment
     if (window.useSentiment && window.sentimentScores) {
-        content += `<p class="mb-2 text-xs text-gray-500 dark:text-gray-400">🎭 Odmeny upravené sentimentom (faktor: 0.5-1.5 podľa sentimentu)</p>`;
+        content += `<p class="mb-2 text-xs text-gray-500 dark:text-gray-400">${t.sentimentRewardInfo}</p>`;
     }
 
     const table = document.createElement("table");

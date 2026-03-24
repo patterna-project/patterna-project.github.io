@@ -704,6 +704,14 @@ html:not(.dark) #patternDetailModal .text-gray-700 { color: #374151 !important; 
 html:not(.dark) #patternDetailModal .text-gray-800 { color: var(--text-default) !important; }
 html:not(.dark) #patternDetailModal .bg-gray-50 { background-color: var(--bg-gray-50) !important; }
 
+#patternDetailModal .group .copy-pattern-btn {
+    transition: opacity 0.2s ease-in-out;
+}
+
+#patternDetailModal .group:hover .copy-pattern-btn {
+    opacity: 1 !important;
+}
+
 /* AI Modal */
 html:not(.dark) [data-i18n="aiConfidence"] { color: var(--text-default) !important; }
 html:not(.dark) #aiExplanationModal h3 { color: #111827 !important; }
@@ -1874,4 +1882,36 @@ input[type=range]::-webkit-slider-thumb:hover {
 @media (min-width: 641px) and (max-width: 1024px) {
     #paramsContainer { max-width: 400px !important; }
     #paramsContainer .group { width: auto; }
+}
+
+
+
+/* Sankey diagram štýly */
+#sankeyDiagram svg {
+    background-color: transparent;
+    border-radius: 0.75rem;
+}
+
+#sankeyDiagram .node rect {
+    cursor: pointer;
+    transition: filter 0.2s ease;
+}
+
+#sankeyDiagram .node rect:hover {
+    filter: brightness(1.1);
+}
+
+#sankeyDiagram .link-group path {
+    transition: stroke-width 0.2s ease, stroke-opacity 0.2s ease;
+    cursor: pointer;
+}
+
+#sankeyDiagram .link-group path:hover {
+    stroke-width: 4px !important;
+    stroke-opacity: 1 !important;
+}
+
+#sankeyDiagram .link-group text {
+    pointer-events: none;
+    user-select: none;
 }
