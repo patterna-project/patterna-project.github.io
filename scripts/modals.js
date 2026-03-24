@@ -16,7 +16,8 @@ const MODALS = [
     { id: 'patternDetailModal', openButtons: [] },
     { id: 'aiExplanationModal', openButtons: [] },
     { id: 'whatsNewModal', openButtons: [] },
-    { id: 'explanationModal', openButtons: [] }         // otvára sa programovo
+    { id: 'explanationModal', openButtons: [] },        // otvára sa programovo
+    { id: 'feedbackModal', openButtons: ['openFeedbackBtn'] }  // NOVÝ FEEDBACK MODAL
 ];
 
 // ===== INICIALIZÁCIA =====
@@ -27,7 +28,51 @@ document.addEventListener('DOMContentLoaded', () => {
     initEscapeHandler();
     initFooterLinks(); 
     initDropdowns(); 
+    initFeedbackModal(); // NOVÁ INICIALIZÁCIA PRE FEEDBACK MODAL
 });
+
+function initFeedbackModal() {
+    const feedbackModal = document.getElementById('feedbackModal');
+    const openFeedbackBtn = document.getElementById('openFeedbackBtn');
+    const openFeedbackBtnFooter = document.getElementById('openFeedbackBtnFooter'); // NOVÉ
+    const closeFeedbackModal = document.getElementById('closeFeedbackModal');
+
+    // Otvorenie cez tlačidlo v kontaktoch
+    if (openFeedbackBtn) {
+        openFeedbackBtn.addEventListener('click', () => {
+            if (feedbackModal) {
+                feedbackModal.classList.remove('hidden');
+            }
+        });
+    }
+
+    // Otvorenie cez tlačidlo v sekcii "Zdrojový kód & Spätná väzba"
+    if (openFeedbackBtnFooter) {
+        openFeedbackBtnFooter.addEventListener('click', () => {
+            if (feedbackModal) {
+                feedbackModal.classList.remove('hidden');
+            }
+        });
+    }
+
+    // Zatvorenie cez krížik
+    if (closeFeedbackModal) {
+        closeFeedbackModal.addEventListener('click', () => {
+            if (feedbackModal) {
+                feedbackModal.classList.add('hidden');
+            }
+        });
+    }
+
+    // Zatvorenie kliknutím na pozadie (overlay)
+    if (feedbackModal) {
+        feedbackModal.addEventListener('click', (e) => {
+            if (e.target === feedbackModal) {
+                feedbackModal.classList.add('hidden');
+            }
+        });
+    }
+}
 
 // ===== NOVÁ FUNKCIA PRE FOOTER LINKY (DELEGOVANIE) =====
 function initFooterLinks() {
@@ -274,7 +319,6 @@ function initEscapeHandler() {
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
             closeAllModals();
-
         }
     });
 }

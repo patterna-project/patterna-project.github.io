@@ -7,6 +7,10 @@
 - Zobrazenie v matici: `0.523(+0.60) → 0.104` – pôvodná + bonus → normalizovaná
 - Vedľa percenta podobnosti sa zobrazí **📎**, ak predchádzajúci vzor odkazuje na aktuálny
 
+## SPÄTNÁ VÄZBA
+- Nové tlačidlo v pätičke na odoslanie spätnej väzby 💬
+- Otvára sa **modal priamo v aplikácii** (nemusíte opúšťať stránku)
+
 ## KOPÍROVANIE TEXTU VZORU
 - V detaile vzoru pribudlo tlačidlo koírovania textu vzoru **📋** (zobrazí sa on hover)
 

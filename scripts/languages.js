@@ -71,9 +71,11 @@ const translations = {
         documentation: "Dokumentácia",
         faq: "Časté otázky",
         contact: "Kontakt",
-        sourceCode: "Zdrojový kód",
+        community: "Komunita",
         allRightsReserved: "Všetky práva vyhradené",
         termsOfUse: "Podmienky používania",
+        githubTooltip: "GitHub - Zdrojový kód",
+        feedbackTooltip: "Poslať spätnú väzbu",
 
         // About Modal
         aboutPatterna: "O projekte Patterna",
@@ -395,9 +397,11 @@ const translations = {
         documentation: "Documentation",
         faq: "Frequently Asked Questions",
         contact: "Contact",
-        sourceCode: "Source Code",
+        community: "Community",
         allRightsReserved: "All rights reserved",
         termsOfUse: "Terms of Use",
+        githubTooltip: "GitHub - Source code",
+        feedbackTooltip: "Send feedback",
 
         // About Modal
         aboutPatterna: "About Patterna Project",
@@ -866,7 +870,7 @@ function updateTextContent() {
         statsViewBtn.innerHTML = t.statistics;
         statsViewBtn.title = t.statisticsTooltip;
     }
-    if (explainViewBtn) { // ← toto je nové
+    if (explainViewBtn) { 
         explainViewBtn.innerHTML = t.explainButton;
         explainViewBtn.title = t.explainButtonTooltip;
     }
@@ -881,6 +885,16 @@ function updateTextContent() {
         window.updateGraphSearchPlaceholder();
     }
 
+    const githubLink = document.getElementById('githubLink');
+    if (githubLink) {
+        githubLink.title = t.githubTooltip || 'GitHub - Source code';
+    }
+
+    const feedbackBtnFooter = document.getElementById('openFeedbackBtnFooter');
+    if (feedbackBtnFooter) {
+        feedbackBtnFooter.title = t.feedbackTooltip || 'Send feedback';
+    }
+
     document.getElementById("resetSequenceBtn").title = t.resetSequence;
     document.getElementById("copySequenceBtn").title = t.copySequence;
 
@@ -889,7 +903,7 @@ function updateTextContent() {
     document.getElementById("docsLink").textContent = t.documentation;
     document.getElementById("faqLink").textContent = t.faq;
     document.querySelector('footer .space-y-4:nth-child(2) h3').textContent = t.contact;
-    document.querySelector('footer .space-y-4:last-child h3').textContent = t.sourceCode;
+    document.querySelector('footer .space-y-4:last-child h3').textContent = t.community;
     document.querySelector('footer .border-t p').innerHTML = `© 2026 FIIT STU • ${t.allRightsReserved} • <a href="#" id="Termslink" class="text-indigo-600 hover:text-indigo-700 dark:text-indigo-400">${t.termsOfUse}</a>`;
 
     const aiTooltip = document.getElementById('aiConfidenceTooltip');
