@@ -1,4 +1,4 @@
-// ai.js 
+//ai.js 
 
 // Proxy URL pre Vercel (bez API kľúča!)
 const GEMINI_API_PROXY = 'https://patterna-project-github-io.vercel.app/api/gemini';
