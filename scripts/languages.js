@@ -297,9 +297,15 @@ const translations = {
         formulaWeightedSelection: "$$P(\\text{select } s) = \\frac{\\sigma^2(s) + 0.01}{\\sum_{c \\in \\text{topCandidates}} (\\sigma^2(c) + 0.01)}$$",
         formulaReward: "$$R(s) = \\begin{cases} R(g) & \\text{pre cieľový stav} \\\\ R(o) & \\text{inak} \\end{cases}$$",
         formulaBellman: "$$v_{k+1}(s) = R(s) + \\gamma \\cdot \\max_{a} \\sum_{s'} P(s' \\mid s, a) \\cdot v_k(s')$$",
-        formulaBellmanNote: "kde $R(s)$ = odmena za stav ($R(g)$ pre cieľ, inak $R(o)$), $\\gamma$ = diskontný faktor",
         formulaOptimalPolicy: "$$\\pi(s) = \\arg\\max_{a} \\sum_{s'} P(s' \\mid s, a) \\cdot v(s')$$",
         formulaOptimalPolicyNote: "Pre každý stav $s$ vyberáme akciu $a$, ktorá maximalizuje očakávanú hodnotu budúcich stavov.",
+        formulaTransitionSymbols: "kde $s$ = aktuálny stav, $s'$ = nasledujúci stav, $\\text{sim}$ = podobnosť medzi stavmi",
+        formulaTotalSimilaritySymbols: "kde $\\text{TotalSim}(s)$ = celková podobnosť stavu $s$ so všetkými ostatnými",
+        formulaVarianceSymbols: "kde $\\sigma^2$ = rozptyl, $x_i$ = jednotlivé podobnosti, $\\bar{x}$ = priemer",
+        formulaWeightedSelectionSymbols: "kde $\\sigma^2(s)$ = rozptyl podobností stavu $s$, $\\text{topCandidates}$ = 30% najlepších kandidátov",
+        formulaRewardSymbols: "kde $R(g)$ = odmena za cieľ, $R(o)$ = odmena za ostatné stavy",
+        formulaBellmanSymbols: "kde $v_k(s)$ = úžitok stavu $s$ v iterácii $k$, $R(s)$ = odmena za stav ($R(g)$ pre cieľ, inak $R(o)$), $\\gamma$ = diskontný faktor, $P(s' \\mid s, a)$ = pravdepodobnosť prechodu do $s'$ zo $s$ pri akcii $a$",
+        formulaOptimalPolicySymbols: "kde $\\pi(s)$ = optimálna akcia v stave $s$, $P(s' \\mid s, a)$ = pravdepodobnosť prechodu do $s'$ zo $s$ pri akcii $a$, $v(s')$ = úžitok stavu $s'$",
 
         // Loading messages
         analysisInProgress: "Spúšťam analýzu...",
@@ -640,9 +646,16 @@ const translations = {
         formulaWeightedSelection: "$$P(\\text{select } s) = \\frac{\\sigma^2(s) + 0.01}{\\sum_{c \\in \\text{topCandidates}} (\\sigma^2(c) + 0.01)}$$",
         formulaReward: "$$R(s) = \\begin{cases} R(g) & \\text{for goal state} \\\\ R(o) & \\text{otherwise} \\end{cases}$$",
         formulaBellman: "$$v_{k+1}(s) = R(s) + \\gamma \\cdot \\max_{a} \\sum_{s'} P(s' \\mid s, a) \\cdot v_k(s')$$",
-        formulaBellmanNote: "where $R(s)$ = reward for state ($R(g)$ for goal, otherwise $R(o)$), $\\gamma$ = discount factor",
         formulaOptimalPolicy: "$$\\pi(s) = \\arg\\max_{a} \\sum_{s'} P(s' \\mid s, a) \\cdot v(s')$$",
         formulaOptimalPolicyNote: "For each state $s$, choose action $a$ that maximizes the expected value of future states.",
+        ormulaTransitionSymbols: "where $s$ = current state, $s'$ = next state, $\\text{sim}$ = similarity between states",
+        formulaTotalSimilaritySymbols: "where $\\text{TotalSim}(s)$ = total similarity of state $s$ with all others",
+        formulaVarianceSymbols: "where $\\sigma^2$ = variance, $x_i$ = individual similarities, $\\bar{x}$ = mean",
+        formulaWeightedSelectionSymbols: "where $\\sigma^2(s)$ = variance of similarities for state $s$, $\\text{topCandidates}$ = top 30% candidates",
+        formulaRewardSymbols: "where $R(g)$ = goal reward, $R(o)$ = reward for other states",
+        formulaBellmanSymbols: "where $v_k(s)$ = utility of state $s$ at iteration $k$, $R(s)$ = reward for state ($R(g)$ for goal, $\\gamma$ = discount factor, $P(s' \\mid s, a)$ = transition probability from $s$ to $s'$ under action $a$",
+        formulaOptimalPolicySymbols: "where $\\pi(s)$ = optimal action in state $s$, $P(s' \\mid s, a)$ = transition probability from $s$ to $s'$ under action $a$, $v(s')$ = utility of state $s'$",
+
 
         // Loading messages
         analysisInProgress: "Starting analysis...",

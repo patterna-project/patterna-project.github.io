@@ -153,6 +153,7 @@ function createCompleteTransitionMatrixStep(step, patterns) {
             <p class="font-semibold mb-1">${t.formulaLabel}</p>
             <p>${t.formulaTransitionMatrix}</p>
             <p class="text-gray-500 text-xs mt-1">${t.formulaSelfTransition}</p>
+            <p class="text-gray-500 text-xs mt-1">${t.formulaTransitionSymbols}</p>
         </div>
     `;
 
@@ -257,8 +258,11 @@ function createGoalCalculationStep(step, patterns) {
         <div class="mb-3 p-2 bg-gray-100 dark:bg-gray-800 rounded text-xs">
             <p class="font-semibold mb-1">${t.formulaLabel}</p>
             <p>${t.formulaTotalSimilarity}</p>
+            <p class="text-gray-500 text-xs mt-1">${t.formulaTotalSimilaritySymbols}</p>
             <p class="mt-1">${t.formulaVariance}</p>
+            <p class="text-gray-500 text-xs mt-1">${t.formulaVarianceSymbols}</p>
             <p class="mt-1">${t.formulaWeightedSelection}</p>
+            <p class="text-gray-500 text-xs mt-1">${t.formulaWeightedSelectionSymbols}</p>
         </div>
     `;
 
@@ -391,6 +395,7 @@ function createGoalStateStep(step, patterns) {
         <div class="mb-3 p-2 bg-gray-100 dark:bg-gray-800 rounded text-xs">
             <p class="font-semibold mb-1">${t.formulaLabel}</p>
             <p>${t.formulaReward}</p>
+            <p class="text-gray-500 text-xs mt-1">${t.formulaRewardSymbols}</p>
         </div>
     `;
 
@@ -488,7 +493,7 @@ function createIterationStep(step, patterns) {
         <div class="mb-3 p-2 bg-gray-100 dark:bg-gray-800 rounded text-xs">
             <p class="font-semibold mb-1">${t.formulaLabel}</p>
             <p>${t.formulaBellman}</p>
-            <p class="text-gray-500 text-xs mt-1">${t.formulaBellmanNote}</p>
+            <p class="text-gray-500 text-xs mt-1">${t.formulaBellmanSymbols}</p>
         </div>
     `;
 
@@ -567,6 +572,7 @@ function createPolicyCalculationStep(step, patterns) {
             <p class="font-semibold mb-1">${t.formulaLabel}</p>
             <p>${t.formulaOptimalPolicy}</p>
             <p class="text-gray-500 text-xs mt-1">${t.formulaOptimalPolicyNote}</p>
+            <p class="text-gray-500 text-xs mt-1">${t.formulaOptimalPolicySymbols}</p>
         </div>
     `;
 

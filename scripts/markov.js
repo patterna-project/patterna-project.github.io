@@ -525,10 +525,18 @@ async function generateSequence() {
 
     try {
         // Načítanie hodnôt z inputov
-        const gamma = parseFloat(document.getElementById('gammaInput').value) || 0.9;
-        const goalReward = parseFloat(document.getElementById('goalRewardInput').value) || 10.0;
-        const otherReward = parseFloat(document.getElementById('otherRewardInput').value) || 1.0;
-        const epsilon = parseFloat(document.getElementById('epsilonInput').value) || 0.1;
+        const gammaRaw = parseFloat(document.getElementById('gammaInput').value);
+        const gamma = isNaN(gammaRaw) ? 0.9 : gammaRaw;
+
+        const goalRewardRaw = parseFloat(document.getElementById('goalRewardInput').value);
+        const goalReward = isNaN(goalRewardRaw) ? 10.0 : goalRewardRaw;
+
+        const otherRewardRaw = parseFloat(document.getElementById('otherRewardInput').value);
+        const otherReward = isNaN(otherRewardRaw) ? 1.0 : otherRewardRaw;
+
+        const epsilonRaw = parseFloat(document.getElementById('epsilonInput').value);
+        const epsilon = isNaN(epsilonRaw) ? 0.1 : epsilonRaw;
+
         const useSentiment = document.getElementById('sentimentCheckbox')?.checked || false;
         const useUSE = document.getElementById('useCheckbox')?.checked || false;
         const useIDF = document.getElementById('idfCheckbox')?.checked || false;
