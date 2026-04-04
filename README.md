@@ -79,4 +79,4 @@ This bachelor's thesis was developed at the **Faculty of Informatics and Informa
 
 ---
 
-© 2026 FIIT STU – [Faculty of Informatics and Information Technologies](https://www.fiit.stuba.sk/), Slovak University of Technology in Bratislava
+© 2026 FIIT STU – [Faculty of Informatics and Information Technologies](https://www.fiit.stuba.sk/), [Slovak University of Technology in Bratislava](https://www.stuba.sk/english.html?page_id=132)
