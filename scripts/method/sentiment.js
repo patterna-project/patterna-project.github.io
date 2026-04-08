@@ -1,4 +1,4 @@
-// sentiment.js
+//method/sentiment.js
 
 // Slovník sentimentov pre anglické slová (rozšírený)
 const sentimentLexicon = {

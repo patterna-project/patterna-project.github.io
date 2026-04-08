@@ -1,5 +1,4 @@
-// ========== MODALS.JS ==========
-// Jednotný skript pre všetky modaly – otváranie, zatváranie, ťahanie, FAQ a Terms accordion
+//function/modals.js
 
 // ===== ZÁKLADNÉ PREMENNÉ =====
 let draggedModal = null;
@@ -103,7 +102,7 @@ function initFooterLinks() {
         // Docs link (open new tab)
         if (target.closest && target.closest('#docsLink')) {
             e.preventDefault();
-            window.open('https://www.overleaf.com/read/jtkqhqtqjpty#72eff1', '_blank');
+            window.open('https://www.overleaf.com/read/qpbxyxxpdssq#3a8fbc', '_blank');
             return;
         }
     });

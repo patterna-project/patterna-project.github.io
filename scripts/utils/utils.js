@@ -1,4 +1,4 @@
-//utils.js
+//utils/utils.js
 
 /**
  * Escapuje HTML špeciálne znaky pre bezpečné zobrazenie používateľského vstupu

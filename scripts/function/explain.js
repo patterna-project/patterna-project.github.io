@@ -1,4 +1,4 @@
-// explain.js - Generovanie vysvetlení sekvencií na základe textovej podobnosti
+//function/explain.js
 
 /**
  * Hlavná funkcia na vysvetlenie sekvencie
