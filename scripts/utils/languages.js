@@ -151,7 +151,6 @@ const translations = {
         stopWordsAdd: "Pridať nové stop slovo:",
         stopWordsPlaceholder: "napr. 'example' (iba jedno slovo)",
         stopWordsHint: "Enterom potvrdíš, slovo musí byť bez medzier a dlhé aspoň 2 znaky.",
-        stopWordsCount: "/30",
         stopWordsReset: "Resetovať na predvolené",
         stopWordsEmpty: "Žiadne stop slová. Pridajte nejaké!",
         stopWordsAddButton: "Pridať",
@@ -161,6 +160,11 @@ const translations = {
         stopWordsExists: 'Stop slovo "{word}" už existuje',
         stopWordsMaxLimit: 'Maximálny počet stop slov je 30',
         stopWordsResetAfter: 'Stop slová boli resetované na predvolené',
+        stopWordsLoadFromFile: "Načítať stop slová z .txt súboru (prepíše aktuálne)",
+        stopWordsLoadedFromFile: "Načítaných {count} stop slov zo súboru",
+        stopWordsNoValidWords: "V súbore neboli nájdené žiadne platné stop slová",
+        stopWordsMaxLimit: "Maximálny počet stop slov je 200",
+        stopWordsFileTruncated: "(súbor obsahoval viac slov, ponechaných bolo prvých 200)",
 
         // Pattern Detail Modal
         patternDetailTitle: "Detail vzoru",
@@ -501,7 +505,6 @@ const translations = {
         stopWordsAdd: "Add new stop word:",
         stopWordsPlaceholder: "e.g. 'example' (single word only)",
         stopWordsHint: "Press Enter to confirm, word must be without spaces and at least 2 characters long.",
-        stopWordsCount: "/30",
         stopWordsReset: "Reset to default",
         stopWordsEmpty: "No stop words. Add some!",
         stopWordsAddButton: "Add",
@@ -511,6 +514,11 @@ const translations = {
         stopWordsExists: 'Stop word "{word}" already exists',
         stopWordsMaxLimit: 'Maximum number of stop words is 30',
         stopWordsResetAfter: 'Stop words have been reset to default',
+        stopWordsLoadFromFile: "Load stop words from .txt file (overwrites current)",
+        stopWordsLoadedFromFile: "Loaded {count} stop words from file",
+        stopWordsNoValidWords: "No valid stop words found in the file",
+        stopWordsMaxLimit: "Maximum number of stop words is 200",
+        stopWordsFileTruncated: "(file contained more words, only first 200 kept)",
 
         // Pattern Detail Modal
         patternDetailTitle: "Pattern Detail",
@@ -1145,9 +1153,6 @@ function updateModalContent() {
         const currentLabel = stopWordsModal.querySelector('.stop-words-current-label');
         if (currentLabel) currentLabel.textContent = t.stopWordsCurrent;
         
-        const totalSpan = stopWordsModal.querySelector('.stop-words-total');
-        if (totalSpan) totalSpan.textContent = t.stopWordsCount;
-        
         const resetBtn = stopWordsModal.querySelector('.stop-words-reset');
         if (resetBtn) resetBtn.title = t.stopWordsReset;
         
@@ -1162,6 +1167,9 @@ function updateModalContent() {
         
         const hint = stopWordsModal.querySelector('.stop-words-hint');
         if (hint) hint.textContent = t.stopWordsHint;
+
+        const loadFromFileBtn = document.getElementById('loadStopWordsFromFileBtn');
+        if (loadFromFileBtn) loadFromFileBtn.title = t.stopWordsLoadFromFile;
         
         // Uložíme pre neskoršie použitie v renderStopWords
         window.stopWordsEmptyText = t.stopWordsEmpty;

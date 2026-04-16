@@ -1,4 +1,14 @@
-1.0.5
+1.0.6
+# NOVINKY VO VERZII 1.0.6
+
+## NAČÍTANIE STOP SLOV ZO SÚBORU
+- V editore stop slov (🚫) pribudlo tlačidlo **📂**, ktoré umožňuje nahrať vlastný zoznam stop slov z `.txt` súboru.
+- Slová v súbore môžu byť oddelené medzerami, tabulátormi alebo novými riadkami.
+- Maximálny počet stop slov je **200** – ak súbor obsahuje viac slov, použije sa prvých 200 a zobrazí sa upozornenie.
+- Nahratý zoznam **nahradí** aktuálne stop slová (pôvodné predvolené je možné kedykoľvek obnoviť tlačidlom 🔄).
+
+---
+
 # NOVINKY VO VERZII 1.0.5
 
 ## REFERENČNÝ BONUS

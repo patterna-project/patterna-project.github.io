@@ -17,6 +17,10 @@ function initStopWordsSettings() {
     const addStopWordBtn = document.getElementById('addStopWordBtn');
     const resetBtn = document.getElementById('resetStopWordsBtn');
 
+    const loadFromFileBtn = document.getElementById('loadStopWordsFromFileBtn');
+    const fileInput = document.getElementById('stopWordsFileInput');
+
+
     if (!stopWordsBtn || !stopWordsModal) return;
 
     // Funkcia na získanie prekladov
@@ -47,6 +51,58 @@ function initStopWordsSettings() {
             addStopWordBtn.disabled = newStopWordInput.value.trim().length === 0;
         }
     }
+
+    // Funkcia a spracovanie nahrania súboru
+    if (loadFromFileBtn && fileInput) {
+        loadFromFileBtn.addEventListener('click', () => {
+            fileInput.click();
+        });
+
+        fileInput.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const content = e.target.result;
+                // Rozdelíme podľa bielych znakov
+                const words = content.split(/\s+/).filter(w => w.trim().length > 0);
+                
+                const t = getT();
+                const newSet = new Set();
+                
+                // Prechádzame slová a ukladáme ich do Setu, kým nedosiahneme limit 200
+                for (const rawWord of words) {
+                    if (newSet.size >= 200) break; // Limit 200
+                    
+                    const word = rawWord.trim().toLowerCase();
+                    if (word.length >= 2 && !word.includes(' ')) {
+                        newSet.add(word);
+                    }
+                }
+                
+                if (newSet.size === 0) {
+                    showToast(t?.stopWordsNoValidWords || 'V súbore neboli nájdené žiadne platné stop slová', 'warning');
+                } else {
+                    window.customStopWords = newSet;
+                    renderStopWords();
+                    updateButtonStates();
+                    
+                    let message = (t?.stopWordsLoadedFromFile || 'Načítaných {count} stop slov zo súboru').replace('{count}', newSet.size);
+                    if (words.length > 200) {
+                        message += ' ' + (t?.stopWordsFileTruncated || '(súbor obsahoval viac slov, ponechaných bolo prvých 200)');
+                    }
+                    showToast(message, 'success');
+                }
+                
+                fileInput.value = '';
+            };
+            
+            reader.readAsText(file);
+        });
+    }
+
+
 
     // Sledovanie inputu pre povolenie/zakázanie tlačidla
     newStopWordInput.addEventListener('input', updateButtonStates);
@@ -89,9 +145,9 @@ function initStopWordsSettings() {
             return;
         }
         
-        // Kontrola maximálneho počtu (30)
-        if (window.customStopWords.size >= 30) {
-            showToast(t?.stopWordsMaxLimit || 'Maximálny počet stop slov je 30', 'warning');
+        // Kontrola maximálneho počtu (200)
+        if (window.customStopWords.size >= 200) {
+            showToast(t?.stopWordsMaxLimit || 'Maximálny počet stop slov je 200', 'warning');
             return;
         }
         
