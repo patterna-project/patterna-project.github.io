@@ -295,8 +295,8 @@ function createGoalCalculationStep(step, patterns) {
         const isGoal = (filename === step.goalState);
         const isExcluded = (filename === step.forcedStartExcluded);
         const isInTopCandidates = topCandidatesMap.has(filename);
-        const variance = topCandidatesMap.get(filename) || 0;
-        
+        const variance = topCandidatesMap.get(filename); 
+
         let nameHtml = pattern.name;
         let iconHtml = '';
         
@@ -312,7 +312,12 @@ function createGoalCalculationStep(step, patterns) {
         
         const rank = index + 1;
         let rankDisplay = rank === 1 ? '🥇' : (rank === 2 ? '🥈' : (rank === 3 ? '🥉' : `${rank}.`));
-        const varianceDisplay = variance > 0 ? variance.toFixed(4) : '0.0000';
+        let varianceDisplay = '';
+        if (isInTopCandidates && variance !== undefined && variance > 0) {
+            varianceDisplay = variance.toFixed(4);
+        } else {
+            varianceDisplay = '—';
+        }
         const varianceClass = isGoal && step.selectionInfo?.selectedWeightedRandom ? 'font-bold text-blue-600 dark:text-blue-400' : '';
         
         row.innerHTML = `
