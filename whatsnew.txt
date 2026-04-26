@@ -7,6 +7,10 @@
 - Maximálny počet stop slov je **200** – ak súbor obsahuje viac slov, použije sa prvých 200 a zobrazí sa upozornenie.
 - Nahratý zoznam **nahradí** aktuálne stop slová (pôvodné predvolené je možné kedykoľvek obnoviť tlačidlom 🔄).
 
+## VYLEPŠENIA MDP KROKOV
+- Zobrazenie nárastu utility v iteráciách (+ X.XXX)
+- Progress bar konvergencie s hodnotou ε na pravej strane
+
 ## OPRAVY CHÝB
 - Odstránenie hodnoty 0.000 pri vzoroch mimo top 30 percentilu pri výbere rozptylu v krokoch metódy (miesto toho je len -)
 

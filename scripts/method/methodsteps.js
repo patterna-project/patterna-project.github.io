@@ -11,9 +11,10 @@ function refreshMDPSteps() {
     }
 }
 
-// Upravená funkcia – ukladá si dáta a nekreslí znovu, ak sa volá s rovnakými údajmi
+// ukladá si dáta a nekreslí znovu, ak sa volá s rovnakými údajmi
 function displayMDPSolution(result, patterns) {
     // Uložíme pre budúce použitie
+    window.lastIterationUtilities = null;
     lastMDPResult = result;
     window.lastMDPResult = result; 
     lastMDPPatterns = patterns;
@@ -30,31 +31,48 @@ function displayMDPSolution(result, patterns) {
         title.textContent = translations[currentLanguage].mdpTitle;
     }
 
-    // jednoduchý summary text podľa typu kroku
+    // jednoduchý summary text podľa typu kroku (malý text vpravo)
     function summaryForStep(step) {
         const t = translations[currentLanguage];
         switch (step.type) {
             case 'goal_calculation': {
-                // Zobrazí SKUTOČNÝ vybraný cieľ, nie len ten s najvyššou podobnosťou
                 const goalPattern = patterns.find(p => p.filename === step.goalState);
                 const goalName = goalPattern ? goalPattern.name : step.goalState;
                 const goalSim = step.totalSimilarities[step.goalState] || 0;
-                return `${t.mdpGoalState}: ${goalName} (${goalSim.toFixed(3)})`;
+                return `${goalName} (${goalSim.toFixed(3)})`;
             }
             case 'goal_state':
-                return `${t.mdpGoalState}: ${step.goalPattern ? step.goalPattern.name : step.goalState}`;
-            case 'complete_transition_matrix':
-                return `${t.mdpStep3} (${Object.keys(step.transitionMatrix).length}×${Object.keys(step.transitionMatrix).length})`;
-            case 'initial_utilities':
-                return `${t.mdpStep4} (${t.mdpUtility}: ${Object.keys(step.utilities).length})`;
+                return `${step.goalPattern ? step.goalPattern.name : step.goalState}`;
+            case 'complete_transition_matrix': {
+                const size = Object.keys(step.transitionMatrix).length;
+                return `${size}×${size} ${t.summaryMatrixSize}`;
+            }
+            case 'initial_utilities': {
+                const count = Object.keys(step.utilities).length;
+                return `${count} ${t.summaryStates}`;
+            }
             case 'iteration':
-                return `${t.mdpIteration} ${step.iteration}: ${t.mdpMaxChange} ${step.maxChange.toFixed(4)}`;
+                return `${t.mdpMaxChange}: ${step.maxChange.toFixed(4)}`;
             case 'convergence':
                 return `${t.mdpConverged} ${step.iterations} ${t.mdpIterations}`;
-            case 'policy_calculation':
-                return `${t.mdpStep6} (${t.mdpCurrentState}: ${Object.keys(step.calculations).length})`;
-            case 'sequence_build':
-                return `${t.mdpStep7}: ${step.finalSequence ? step.finalSequence.length + ' ' + (currentLanguage === 'sk' ? 'položiek' : 'items') : '—'}`;
+            case 'policy_calculation': {
+                // Počet unikátnych akcií (cieľových stavov) v politike
+                const calculations = step.calculations;
+                const uniqueActions = new Set();
+                Object.values(calculations).forEach(calc => {
+                    if (calc.bestAction !== null) {
+                        uniqueActions.add(calc.bestAction);
+                    }
+                });
+                const count = uniqueActions.size;
+                const actionText = count === 1 ? t.summaryUniqueAction : t.summaryUniqueActions;
+                return `${count} ${actionText}`;
+            }
+            case 'sequence_build': {
+                const count = step.finalSequence ? step.finalSequence.length : 0;
+                const itemsText = currentLanguage === 'sk' ? t.summaryItems : 'items';
+                return `${count} ${itemsText}`;
+            }
             default:
                 return '';
         }
@@ -97,25 +115,54 @@ function displayMDPSolution(result, patterns) {
 
         // Krátky header názov s prekladmi
         const t = translations[currentLanguage];
-        const headerTitleMap = {
-            'goal_calculation': t.mdpStep1,
-            'goal_state': t.mdpStep2,
-            'complete_transition_matrix': t.mdpStep3,
-            'initial_utilities': t.mdpStep4,
-            'iteration': `${t.mdpStep5} ${step.iteration || ''}`.trim(),
-            'convergence': t.mdpConvergence,
-            'policy_calculation': t.mdpStep6,
-            'sequence_build': t.mdpStep7
-        };
-        const headerTitle = headerTitleMap[step.type] || `${t.mdpStep5} ${idx + 1}`;
+        let headerTitle = '';
+        switch (step.type) {
+            case 'goal_calculation':
+                headerTitle = t.mdpStep1;
+                break;
+            case 'goal_state':
+                headerTitle = t.mdpStep2;
+                break;
+            case 'complete_transition_matrix':
+                headerTitle = t.mdpStep3;
+                break;
+            case 'initial_utilities':
+                headerTitle = t.mdpStep4;
+                break;
+            case 'iteration':
+                headerTitle = `${t.mdpStep5} ${step.iteration || ''}`.trim();
+                break;
+            case 'convergence':
+                headerTitle = t.mdpConvergence;
+                break;
+            case 'policy_calculation':
+                headerTitle = t.mdpStep6;
+                break;
+            case 'sequence_build':
+                headerTitle = t.mdpStep7;
+                break;
+            default:
+                headerTitle = `${t.mdpStep5} ${idx + 1}`;
+        }
 
-        // Vytvoríme stručný summary
+        // Vytvoríme stručný summary (malý text)
         const summaryText = summaryForStep(step);
 
-        // Zabalíme do collapsible
-        const collapsible = wrapAsCollapsible(stepElement, headerTitle, summaryText, true);
+        // Pre convergence bez collapsible
+        if (step.type === 'convergence') {
+            stepElement.classList.add('mb-4');
+            mdpSteps.appendChild(stepElement);
+        } else {
+            // Zabalíme do collapsible - pre iteration posielame aj stepData
+            if (step.type === 'iteration') {
+                const collapsible = wrapAsCollapsible(stepElement, headerTitle, summaryText, true, 'iteration', step);
+                mdpSteps.appendChild(collapsible);
+            } else {
+                const collapsible = wrapAsCollapsible(stepElement, headerTitle, summaryText, true);
+                mdpSteps.appendChild(collapsible);
+            }
+        }
 
-        mdpSteps.appendChild(collapsible);
     });
 
     if (typeof renderMathInElement !== 'undefined') {
@@ -240,7 +287,7 @@ function createGoalCalculationStep(step, patterns) {
 
     if (step.forcedGoalUsed) {
         const goalPattern = patterns.find(p => p.filename === step.goalState);
-        content += `<p class="mb-2 text-green-600 dark:text-green-400">🎯 Používateľom vynútený cieľový vzor: <strong>${goalPattern ? goalPattern.name : step.goalState}</strong></p>`;
+        content += `<p class="mb-2 text-green-600 dark:text-green-400">${t.forcedGoalUsed} <strong>${goalPattern ? goalPattern.name : step.goalState}</strong></p>`;
         content += `<p class="mb-2 text-sm text-gray-600 dark:text-gray-400">${t.standardCalculationSkipped || 'Štandardný výpočet celkových podobností bol preskočený.'}</p>`;
         stepDiv.innerHTML = content;
         return stepDiv;
@@ -504,6 +551,12 @@ function createIterationStep(step, patterns) {
 
     const goalState = window.currentGoalState || null;
 
+    // Potrebujeme utilities z predchádzajúcej iterácie, aby sme vypočítali zmenu
+    const prevUtilities = window.lastIterationUtilities || null;
+    
+    // Uložíme aktuálne utility pre ďalšiu iteráciu
+    window.lastIterationUtilities = step.utilities;
+
     const table = document.createElement("table");
     table.className = "w-full text-xs border-collapse";
 
@@ -540,7 +593,21 @@ function createIterationStep(step, patterns) {
             rowHtml += `<td class="p-2 border-b border-gray-200 dark:border-gray-600 text-right ${sentimentClass}">${(sentiment * 100).toFixed(0)}%<\/td>`;
         }
         
-        rowHtml += `<td class="p-2 border-b border-gray-200 dark:border-gray-600 text-right">${utility.toFixed(3)}<\/td>`;
+        // Pridáme hodnotu utility a k nej v zátvorke zmenu (ak existuje a je nenulová)
+        let utilityDisplay = utility.toFixed(3);
+        if (prevUtilities && prevUtilities[filename] !== undefined && step.iteration > 1) {
+            const prevUtility = prevUtilities[filename];
+            const delta = utility - prevUtility;
+            // Zobrazíme len ak je zmena nenulová (alebo aspoň väčšia ako 0.0001)
+            if (Math.abs(delta) > 0.0001) {
+                const isPositive = delta > 0;
+                const sign = isPositive ? '+' : '▼';
+                const colorClass = isPositive ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400';
+                utilityDisplay = `${utility.toFixed(3)} <span class="${colorClass}">(${sign} ${Math.abs(delta).toFixed(3)})</span>`;
+            }
+        }
+        
+        rowHtml += `<td class="p-2 border-b border-gray-200 dark:border-gray-600 text-right">${utilityDisplay}<\/td>`;
         
         row.innerHTML = rowHtml;
         table.appendChild(row);
@@ -557,8 +624,11 @@ function createConvergenceStep(step) {
     stepDiv.className = "bg-green-50 dark:bg-green-900 dark:bg-opacity-30 p-4 rounded-lg border border-green-200 dark:border-green-600";
 
     stepDiv.innerHTML = `
-        <h4 class="font-semibold mb-2 text-green-600 dark:text-green-400">${t.mdpConvergence}</h4>
-        <p>${t.mdpConverged} ${step.iterations} ${t.mdpIterations}</p>
+        <div class="flex items-center gap-2">
+            <span class="text-green-600 dark:text-green-400 text-xl">✓</span>
+            <h4 class="font-semibold text-green-700 dark:text-green-300">${t.mdpConvergence}</h4>
+        </div>
+        <p class="mt-2 text-sm text-gray-700 dark:text-gray-300">${t.mdpConverged} ${step.iterations} ${t.mdpIterations}</p>
     `;
 
     return stepDiv;
@@ -716,7 +786,7 @@ function createSequenceBuildStep(step, patterns) {
 }
 
 // Pomocná funkcia: vytvorí kolapsovateľný obal pre stepDiv
-function wrapAsCollapsible(stepDiv, headerTitle, collapsedSummary, defaultCollapsed = true) {
+function wrapAsCollapsible(stepDiv, headerTitle, collapsedSummary, defaultCollapsed = true, stepType = null, stepData = null) {
     // Vytvoríme hlavný wrapper
     const wrapper = document.createElement('div');
     wrapper.className = 'mdp-collapsible bg-transparent rounded-lg';
@@ -741,9 +811,36 @@ function wrapAsCollapsible(stepDiv, headerTitle, collapsedSummary, defaultCollap
     titleEl.textContent = headerTitle;
 
     const summaryEl = document.createElement('div');
-    summaryEl.className = 'mdp-summary mdp-collapsed-summary';
+    summaryEl.className = 'mdp-summary mdp-collapsed-summary flex items-center gap-2 flex-wrap';
     summaryEl.title = collapsedSummary || '';
-    summaryEl.textContent = collapsedSummary || '';
+    
+    // Pre iteration typ - pridáme progress bar s epsilon na pravej strane
+    if (stepType === 'iteration' && stepData && stepData.maxChange !== undefined) {
+        const epsilon = parseFloat(document.getElementById('epsilonInput')?.value) || 0.1;
+        let progressPercent = 100;
+        if (stepData.maxChange > epsilon) {
+            progressPercent = Math.min(100, (epsilon / stepData.maxChange) * 100);
+        }
+        
+        // Farba progress baru
+        let progressColor = 'bg-red-500';
+        if (progressPercent > 75) progressColor = 'bg-green-500';
+        else if (progressPercent > 50) progressColor = 'bg-yellow-500';
+        else if (progressPercent > 25) progressColor = 'bg-orange-500';
+        
+        // Vytvoríme progress bar s epsilon na pravej strane
+        summaryEl.innerHTML = `
+            <span>${collapsedSummary}</span>
+            <div class="flex items-center gap-2">
+                <div class="w-24 bg-gray-200 rounded-full h-1.5 dark:bg-gray-700">
+                    <div class="${progressColor} h-1.5 rounded-full transition-all duration-300" style="width: ${progressPercent}%"></div>
+                </div>
+                <span class="text-xs text-gray-500 dark:text-gray-400">ε = ${epsilon}</span>
+            </div>
+        `;
+    } else {
+        summaryEl.textContent = collapsedSummary || '';
+    }
 
     titleWrap.appendChild(titleEl);
     titleWrap.appendChild(summaryEl);
@@ -807,7 +904,6 @@ function wrapAsCollapsible(stepDiv, headerTitle, collapsedSummary, defaultCollap
     wrapper.appendChild(header);
     wrapper.appendChild(contentWrap);
 
-    // Môžeš pridať medzeru medzi sekciami cez triedu outer
     wrapper.classList.add('p-2');
 
     return wrapper;
