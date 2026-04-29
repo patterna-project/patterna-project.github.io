@@ -169,67 +169,60 @@
                         </button>
                     </div>
 
-                    <!-- Samotné parametre - teraz priamo napojené na tlačidlo -->
                     <div id="paramsContainer" 
-                        class="flex items-center gap-1.2 p-2 rounded-lg transition-all duration-300 overflow-hidden">
-                        <div class="flex items-center gap-1 group relative">
-                            <label for="gammaInput" class="text-xs font-medium whitespace-nowrap">γ:</label>
-                            <input type="number" id="gammaInput" min="0" max="1" step="0.05" value="0.9"
-                                class="w-16 px-2 py-1 text-xs border rounded">
-                        </div>
-
-                        <div class="flex items-center gap-1 group relative">
-                            <label for="goalRewardInput" class="text-xs font-medium whitespace-nowrap">R(g):</label>
-                            <input type="number" id="goalRewardInput" min="0" step="1" value="10"
-                                class="w-16 px-2 py-1 text-xs border rounded">
-                        </div>
-
-                        <div class="flex items-center gap-1 group relative">
-                            <label for="otherRewardInput" class="text-xs font-medium whitespace-nowrap">R(o):</label>
-                            <input type="number" id="otherRewardInput" min="0" step="0.1" value="1"
-                                class="w-16 px-2 py-1 text-xs border rounded">
-                        </div>
-
-                        <div class="flex items-center gap-1 group relative">
-                            <label for="epsilonInput" class="text-xs font-medium whitespace-nowrap">ε:</label>
-                            <input type="number" id="epsilonInput" min="0.0001" max="1" step="0.001" value="0.1"
-                                class="w-20 px-2 py-1 text-xs border rounded">
-                        </div>
-
-                        <div class="flex items-center gap-1 group relative">
+                        class="flex items-center gap-1.5 p-2 rounded-lg transition-all duration-300 overflow-hidden">
+                        
+                        <!-- IDF SLIDER -->
+                        <div class="param-btn flex items-center gap-1 group relative">
                             <label for="idfCheckbox" class="text-xs font-medium whitespace-nowrap cursor-pointer select-none">IDF</label>
-                            <input type="checkbox" id="idfCheckbox" 
-                                class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500 cursor-pointer">
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" id="idfCheckbox" class="sr-only peer">
+                                <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-indigo-300 dark:peer-focus:ring-indigo-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-gray-600 peer-checked:bg-indigo-600"></div>
+                            </label>
                         </div>
 
-                        <div class="flex items-center gap-1 group relative">
+                        <!-- SENTIMENT SLIDER (🎭) -->
+                        <div class="param-btn flex items-center gap-1 group relative">
                             <label for="sentimentCheckbox" class="text-xs font-medium whitespace-nowrap cursor-pointer select-none">🎭</label>
-                            <input type="checkbox" id="sentimentCheckbox" 
-                                class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500 cursor-pointer"
-                                title="${window.translations?.[window.currentLanguage]?.sentimentTitle || 'Sentiment analysis'}">
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" id="sentimentCheckbox" class="sr-only peer">
+                                <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-indigo-300 dark:peer-focus:ring-indigo-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-gray-600 peer-checked:bg-indigo-600"></div>
+                            </label>
                         </div>
 
-                        <div class="flex items-center gap-1 group relative">
+                        <!-- REFERENCE SLIDER (📎) -->
+                        <div class="param-btn flex items-center gap-1 group relative">
                             <label for="referenceCheckbox" class="text-xs font-medium whitespace-nowrap cursor-pointer select-none">📎</label>
-                            <input type="checkbox" id="referenceCheckbox" 
-                                class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500 cursor-pointer"
-                                title="Boost transitions based on pattern references (when a pattern mentions another)">
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" id="referenceCheckbox" class="sr-only peer">
+                                <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-indigo-300 dark:peer-focus:ring-indigo-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-gray-600 peer-checked:bg-indigo-600"></div>
+                            </label>
                         </div>
 
-                        <div class="flex items-center gap-1 group relative">
+                        <!-- USE SLIDER -->
+                        <div class="param-btn flex items-center gap-1 group relative">
                             <label for="useCheckbox" class="text-xs font-medium whitespace-nowrap cursor-pointer select-none" title="Universal Sentence Encoder">USE</label>
-                            <input type="checkbox" id="useCheckbox" 
-                                class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500 cursor-pointer">
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" id="useCheckbox" class="sr-only peer">
+                                <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-indigo-300 dark:peer-focus:ring-indigo-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-gray-600 peer-checked:bg-indigo-600"></div>
+                            </label>
                         </div>
 
+                        <!-- STOP WORDS BUTTON -->
                         <div class="flex items-center gap-1 group relative">
-                            <button id="stopWordsBtn" 
-                                class="text-xs font-medium px-2 py-1 bg-indigo-100 dark:bg-indigo-900 text-indigo-700 dark:text-indigo-300 rounded hover:bg-indigo-200 dark:hover:bg-indigo-800 transition whitespace-nowrap flex items-center gap-1"
-                                title="${window.translations?.[window.currentLanguage]?.stopWordsTitle || 'Upraviť stop slová'}">
-                                🚫
-                            </button>
+                            <button id="stopWordsBtn" class="param-btn text-xs font-medium px-2 py-1 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded transition whitespace-nowrap flex items-center gap-1">🚫</button>
                         </div>
-                                                
+
+                        <!-- FORCES BUTTON -->
+                        <div class="flex items-center gap-1 group relative">
+                            <button id="forcesLexiconBtn" class="param-btn text-xs font-medium px-2 py-1 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded transition whitespace-nowrap flex items-center gap-1">⚖️</button>
+                        </div>
+
+                        <!-- ADVANCED BUTTON -->
+                        <div class="flex items-center gap-1 group relative">
+                            <button id="advancedBtn" class="param-btn text-xs font-medium px-2 py-1 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded transition whitespace-nowrap">⚙️</button>
+                        </div>
+
                     </div>
 
                     <!-- Loading bar -->
@@ -878,8 +871,15 @@
         <div id="stopWordsModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
             <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-lg w-full max-h-[90vh] overflow-hidden">
                 <div class="p-6">
+
                     <div class="flex justify-between items-start mb-4">
-                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white stop-words-title">Stop Words Editor</h3>
+                        <div class="flex items-center gap-3">
+                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white stop-words-title">Stop Words Editor</h3>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" id="stopWordsEnableCheckbox" class="sr-only peer" checked>
+                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-indigo-300 dark:peer-focus:ring-indigo-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-indigo-600"></div>
+                            </label>
+                        </div>
                         <button id="closeStopWordsModal" class="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -944,6 +944,152 @@
                             <p class="text-xs text-gray-500 dark:text-gray-400 mt-1 stop-words-hint">
                                 Enterom potvrdíš, slovo musí byť bez medzier a dlhé aspoň 2 znaky.
                             </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Advanced Settings Modal -->
+        <div id="advancedModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-md w-full">
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-2xl font-bold text-gray-800 dark:text-white">Pokročilé nastavenia</h3>
+                        <button id="closeAdvancedModal" class="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                        </button>
+                    </div>
+                    <div class="space-y-4">
+                        <!-- γ -->
+                        <div class="flex items-center justify-between gap-2">
+                            <label class="text-sm font-medium text-gray-700 dark:text-gray-300 w-1/2">γ (diskontný faktor)</label>
+                            <div class="flex items-center gap-2 flex-1">
+                                <input type="number" id="gammaInput" min="0" max="1" step="0.05" value="0.9"
+                                    class="w-full px-3 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600">
+                                <button type="button" id="resetGammaInputBtn"
+                                        class="reset-param-btn p-2 text-gray-500 hover:text-indigo-600 dark:text-gray-400 dark:hover:text-indigo-400 rounded-full transition-colors invisible opacity-0"
+                                        title="Resetovať na predvolenú hodnotu (0.9)">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- R(g) -->
+                        <div class="flex items-center justify-between gap-2">
+                            <label class="text-sm font-medium text-gray-700 dark:text-gray-300 w-1/2">R(g) (odmena za cieľ)</label>
+                            <div class="flex items-center gap-2 flex-1">
+                                <input type="number" id="goalRewardInput" min="0" step="1" value="10"
+                                    class="w-full px-3 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600">
+                                <button type="button" id="resetGoalRewardInputBtn"
+                                        class="reset-param-btn p-2 text-gray-500 hover:text-indigo-600 dark:text-gray-400 dark:hover:text-indigo-400 rounded-full transition-colors invisible opacity-0"
+                                        title="Resetovať na predvolenú hodnotu (10)">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- R(o) -->
+                        <div class="flex items-center justify-between gap-2">
+                            <label class="text-sm font-medium text-gray-700 dark:text-gray-300 w-1/2">R(o) (odmena za ostatné)</label>
+                            <div class="flex items-center gap-2 flex-1">
+                                <input type="number" id="otherRewardInput" min="0" step="0.1" value="1"
+                                    class="w-full px-3 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600">
+                                <button type="button" id="resetOtherRewardInputBtn"
+                                        class="reset-param-btn p-2 text-gray-500 hover:text-indigo-600 dark:text-gray-400 dark:hover:text-indigo-400 rounded-full transition-colors invisible opacity-0"
+                                        title="Resetovať na predvolenú hodnotu (1)">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- ε -->
+                        <div class="flex items-center justify-between gap-2">
+                            <label class="text-sm font-medium text-gray-700 dark:text-gray-300 w-1/2">ε (prah konvergencie)</label>
+                            <div class="flex items-center gap-2 flex-1">
+                                <input type="number" id="epsilonInput" min="0.0001" max="1" step="0.001" value="0.1"
+                                    class="w-full px-3 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600">
+                                <button type="button" id="resetEpsilonInputBtn"
+                                        class="reset-param-btn p-2 text-gray-500 hover:text-indigo-600 dark:text-gray-400 dark:hover:text-indigo-400 rounded-full transition-colors invisible opacity-0"
+                                        title="Resetovať na predvolenú hodnotu (0.1)">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex justify-end mt-6">
+                        <button id="closeAdvancedModalBtn" class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700">Zavrieť</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Forces Modal -->
+        <div id="forcesModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-hidden">
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="flex items-center gap-3">
+                            <h3 class="text-2xl font-bold text-gray-800 dark:text-white">Editor síl</h3>
+                            <!-- TOTO JE JEDINÝ PRVOK – SLIDER (žiadny obyčajný checkbox) -->
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" id="forcesEnableCheckbox" class="sr-only peer">
+                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-indigo-300 dark:peer-focus:ring-indigo-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-indigo-600"></div>
+                            </label>
+                        </div>
+                        <button id="closeForcesModal" class="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                        </button>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-2">
+                            <label for="forcesWeightInput" class="text-sm font-medium text-gray-700 dark:text-gray-300">Váha síl (α):</label>
+                            <input type="number" id="forcesWeightInput" min="0" max="1" step="0.05" value="0.3" class="w-20 px-2 py-1 border rounded dark:bg-gray-700">
+                        </div>
+                        <p class="text-sm text-gray-600 dark:text-gray-400">Pridávajte slová, ktoré reprezentujú softvérové sily (napr. "flexibility", "performance"). Záporná váha = sila, ktorá sa potláča (napr. "complexity").</p>
+                        <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                            <div class="flex justify-between items-center mb-2">
+                                <label class="text-sm font-medium text-gray-700 dark:text-gray-300">Aktuálne sily (<span id="forcesCount">0</span>/200):</label>
+                                <div class="flex gap-1">
+                                    <button id="loadForcesFromFileBtn" class="p-1.5 text-gray-500 hover:text-indigo-600 dark:text-gray-400 dark:hover:text-indigo-400 rounded-full hover:bg-gray-100" title="Načítať sily z .txt súboru">📂</button>
+                                    <button id="resetForcesBtn" 
+                                        class="p-1.5 text-gray-500 hover:text-indigo-600 dark:text-gray-400 dark:hover:text-indigo-400 rounded-full hover:bg-gray-100 hidden stop-words-reset"
+                                        title="Resetovať na predvolené">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                                        </svg>
+                                    </button>
+                                </div>
+                                <input type="file" id="forcesFileInput" accept=".txt" class="hidden">
+                            </div>
+                            <div id="forcesContainer" class="flex flex-wrap gap-2 min-h-[120px] max-h-[250px] overflow-y-auto p-3 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 custom-scrollbar"></div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Pridať novú silu:</label>
+                            <div class="flex gap-2">
+                                <input type="text" id="newForceWord" class="flex-1 px-4 py-2 text-sm border rounded-l-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-gray-700" placeholder="" autocomplete="off">
+
+                                <!-- Znamienko (+/-) -->
+                                <select id="newForceSign" class="px-3 py-2 text-sm border rounded-lg dark:bg-gray-700 w-16">
+                                    <option value="1">➕</option>
+                                    <option value="-1">➖</option>
+                                </select>
+                                
+                                <!-- Absolútna hodnota (0.1 – 1) -->
+                                <input type="number" id="newForceValue" class="w-24 px-3 py-2 text-sm border rounded-lg dark:bg-gray-700" min="0.1" max="1" step="0.05" value="0.5">
+                                
+                                <button id="addForceBtn" class="px-6 py-2 bg-indigo-600 text-white rounded-r-lg transition disabled:opacity-50">Pridať</button>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1 stop-words-hint">Enterom potvrdíš, slovo musí mať aspoň 2 znaky a žiadne medzery. Váha = znamienko × hodnota (0.1 – 1).</p>
                         </div>
                     </div>
                 </div>
@@ -1155,6 +1301,8 @@
         <script src="scripts/function/export.js"></script>
         <script src="scripts/function/header.js"></script>
         <script src="scripts/function/modals.js"></script>
+        <script src="scripts/function/forces.js"></script>
+        <script src="scripts/function/advanced.js"></script>
         <script src="scripts/function/nightmode.js"></script>
         <script src="scripts/function/examples.js"></script>
         <script src="scripts/function/toast.js"></script>

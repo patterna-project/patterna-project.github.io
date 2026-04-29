@@ -200,6 +200,8 @@ class PatternSimilarity {
     }
 
     preprocessText(text) {
+        // Rozhodneme, či používame stop slová
+        const useStopWords = window.stopWordsEnabled !== false;
         
         return text
             .toLowerCase()
@@ -209,11 +211,16 @@ class PatternSimilarity {
             .replace(/\s+/g, ' ')
             .trim()
             .split(' ')
-            .filter(word =>
-                word.length > 2 &&
-                !window.customStopWords.has(word) &&  
-                !/\d/.test(word)
-            )
+            .filter(word => {
+                // Základné podmienky
+                if (word.length <= 2) return false;
+                if (/\d/.test(word)) return false;
+                
+                // Stop slová – ignorujeme IBA ak sú zapnuté
+                if (useStopWords && window.customStopWords.has(word)) return false;
+                
+                return true;
+            })
             .map(word => this.stemWord(word));
     }
 
@@ -365,6 +372,46 @@ class PatternSimilarity {
         
         return matrix;
     }
+
+    computeForceVector(text) {
+        const tokens = this.preprocessText(text);
+        const vector = {};
+        for (const token of tokens) {
+            const weight = window.customForces?.get(token);
+            if (weight !== undefined) {
+                // POUŽI PRIAMO VÁHU VRÁTANE ZNAMENKA
+                vector[token] = (vector[token] || 0) + weight;
+            }
+        }
+        // Normalizácia (aby mal vektor jednotkovú dĺžku)
+        let norm = 0;
+        for (let val of Object.values(vector)) norm += val * val;
+        norm = Math.sqrt(norm);
+        if (norm > 0) {
+            for (let k in vector) vector[k] /= norm;
+        }
+        return vector;
+    }
+
+    calculateForceSimilarityMatrix(patterns) {
+        const vectors = patterns.map(p => this.computeForceVector(p.content));
+        const matrix = {};
+        for (let i = 0; i < patterns.length; i++) {
+            const p1 = patterns[i];
+            matrix[p1.filename] = {};
+            for (let j = 0; j < patterns.length; j++) {
+                const p2 = patterns[j];
+                if (i === j) {
+                    matrix[p1.filename][p2.filename] = 0;
+                } else {
+                    const sim = this.cosineSimilarity(vectors[i], vectors[j]);
+                    matrix[p1.filename][p2.filename] = sim;
+                }
+            }
+        }
+        return matrix;
+    }
+    
 }
 
 function displaySimilarityMatrix(sequence, similarityMatrix) {

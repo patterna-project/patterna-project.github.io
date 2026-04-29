@@ -1,4 +1,22 @@
-1.0.6
+1.0.7
+
+# NOVINKY VO VERZII 1.0.7
+
+## EDITOR PROTICHTODNÝCH SÍL
+- Pribudlo úplne nové tlačidlo **⚖️ (Forces Lexicon)** vedľa parametrov
+- Umožňuje definovať vlastné slová reprezentujúce **pozitívne** (napr. flexibility, performance) a **negatívne** sily (napr. complexity, coupling)
+- Každej sile je možné priradiť **vlastnú váhu** (absolútna hodnota 0.1 – 1) plus znamienko (+/–)
+- Váha síl (α) ovplyvňuje, nakoľko sa silová podobnosť pripočíta k textovej podobnosti (0 – žiadny vplyv, 1 – maximálny)
+
+---
+
+## GRAFICKÉ VYLEPŚENIA
+- Všetky ovládacie prvky v lište parametrov (🚫, ⚖️, ⚙️, IDF, 🎭, 📎, USE) majú teraz jednotnú triedu
+
+## PREKLADY
+- Kompletné preklady Forces modalu do SK/EN vrátane placeholdera a hintov
+- Iné chyby v prekladoch boli opravené
+
 # NOVINKY VO VERZII 1.0.6
 
 ## NAČÍTANIE STOP SLOV ZO SÚBORU

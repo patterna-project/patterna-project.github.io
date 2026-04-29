@@ -769,8 +769,15 @@ function resetParametersToDefault() {
     
     const useCheckbox = document.getElementById('useCheckbox');
     if (useCheckbox) useCheckbox.checked = defaultValues.useCheckbox;
+
+    window.forcesEnabled = false;
+    const forcesEnableCheckbox = document.getElementById('forcesEnableCheckbox');
+    if (forcesEnableCheckbox) forcesEnableCheckbox.checked = false;
+
+    const forcesWeightInput = document.getElementById('forcesWeightInput');
+    if (forcesWeightInput) forcesWeightInput.value = 0.3;
     
-    // Voliteľne: reset aj stop slov na predvolené
+    // reset aj stop slov na predvolené
     if (window.resetStopWordsToDefault && typeof window.resetStopWordsToDefault === 'function') {
         window.resetStopWordsToDefault();
     }

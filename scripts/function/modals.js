@@ -11,12 +11,14 @@ const MODALS = [
     { id: 'faqModal', openButtons: ['faqLink'] },
     { id: 'termsModal', openButtons: ['Termslink'] },
     { id: 'catalogModal', openButtons: ['loadCatalogBtn'] },
-    { id: 'stopWordsModal', openButtons: [] },          // otvára sa programovo
+    { id: 'stopWordsModal', openButtons: [] },
     { id: 'patternDetailModal', openButtons: [] },
     { id: 'aiExplanationModal', openButtons: [] },
     { id: 'whatsNewModal', openButtons: [] },
-    { id: 'explanationModal', openButtons: [] },        // otvára sa programovo
-    { id: 'feedbackModal', openButtons: ['openFeedbackBtn'] }  // NOVÝ FEEDBACK MODAL
+    { id: 'explanationModal', openButtons: [] },
+    { id: 'feedbackModal', openButtons: ['openFeedbackBtn'] },
+    { id: 'advancedModal', openButtons: ['advancedBtn'] },
+    { id: 'forcesModal', openButtons: ['forcesLexiconBtn'] }
 ];
 
 // ===== INICIALIZÁCIA =====
@@ -114,6 +116,18 @@ function initAllModals() {
         const modal = document.getElementById(modalConfig.id);
         if (!modal) return;
 
+        // Otváranie modálov podľa openButtons =====
+        modalConfig.openButtons.forEach(btnId => {
+            const btn = document.getElementById(btnId);
+            if (btn) {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    openModal(modalConfig.id);
+                });
+            }
+        });
+
         // Tlačidlá na zatvorenie (close button v modale)
         const closeBtn = modal.querySelector('[id^="close"]');
         if (closeBtn) {
@@ -132,6 +146,16 @@ function initAllModals() {
     const cancelCatalog = document.getElementById('cancelCatalog');
     if (cancelCatalog) {
         cancelCatalog.addEventListener('click', () => closeModal('catalogModal'));
+    }
+
+    // Zatvorenie advancedModal cez tlačidlá (tie už fungujú, ale nie sú v openButtons)
+    const closeAdvanced = document.getElementById('closeAdvancedModal');
+    if (closeAdvanced) {
+        closeAdvanced.addEventListener('click', () => closeModal('advancedModal'));
+    }
+    const closeAdvancedBtn = document.getElementById('closeAdvancedModalBtn');
+    if (closeAdvancedBtn) {
+        closeAdvancedBtn.addEventListener('click', () => closeModal('advancedModal'));
     }
 }
 

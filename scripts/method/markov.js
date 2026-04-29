@@ -619,6 +619,40 @@ async function generateSequence() {
             sentimentScores = getSentimentScores(selectedPatterns);
         }
 
+        // ===== KOMBINÁCIA S PROTICHTODNÝMI SILAMI =====
+        const useForces = window.forcesEnabled || false;
+        if (useForces) {
+            const forceWeight = parseFloat(document.getElementById('forcesWeightInput')?.value) || 0.3;
+            const forceMatrix = similarityCalculator.calculateForceSimilarityMatrix(selectedPatterns);
+            
+            // Uložíme silový príspevok pre UI
+            window.forceContributionScores = {};
+            for (let i = 0; i < selectedPatterns.length; i++) {
+                const p1 = selectedPatterns[i];
+                window.forceContributionScores[p1.filename] = {};
+                for (let j = 0; j < selectedPatterns.length; j++) {
+                    const p2 = selectedPatterns[j];
+                    if (p1.filename === p2.filename) continue;
+                    const contrib = forceWeight * forceMatrix[p1.filename][p2.filename];
+                    window.forceContributionScores[p1.filename][p2.filename] = contrib;
+                }
+            }
+            
+            for (let i = 0; i < selectedPatterns.length; i++) {
+                const p1 = selectedPatterns[i];
+                for (let j = 0; j < selectedPatterns.length; j++) {
+                    const p2 = selectedPatterns[j];
+                    if (p1.filename === p2.filename) continue;
+                    similarityMatrix[p1.filename][p2.filename] += window.forceContributionScores[p1.filename][p2.filename];
+                    // Orezanie na rozsah [0, 1]
+                    if (similarityMatrix[p1.filename][p2.filename] > 1.0) similarityMatrix[p1.filename][p2.filename] = 1.0;
+                    if (similarityMatrix[p1.filename][p2.filename] < 0) similarityMatrix[p1.filename][p2.filename] = 0;
+                }
+            }
+        } else {
+            window.forceContributionScores = null;
+        }
+
         const referenceMatrix = window.buildReferenceMatrix(selectedPatterns);
         window.referenceMatrix = referenceMatrix; 
 

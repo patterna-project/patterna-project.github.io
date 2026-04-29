@@ -1,5 +1,3 @@
-//function/stopwords.js
-
 // Predvolené stop slová
 const DEFAULT_STOP_WORDS = [
     'a', 'an', 'the', 'and', 'it', 'is', 'to', 'at', 'in', 'we', 'of', 'be'
@@ -7,6 +5,8 @@ const DEFAULT_STOP_WORDS = [
 
 // Inicializácia globálneho objektu pre stop slová
 window.customStopWords = new Set(DEFAULT_STOP_WORDS);
+// GLOBÁLNA PREMENNÁ - či sú stop slová zapnuté (default true)
+window.stopWordsEnabled = true;
 
 function initStopWordsSettings() {
     const stopWordsBtn = document.getElementById('stopWordsBtn');
@@ -19,7 +19,9 @@ function initStopWordsSettings() {
 
     const loadFromFileBtn = document.getElementById('loadStopWordsFromFileBtn');
     const fileInput = document.getElementById('stopWordsFileInput');
-
+    
+    // NOVÉ: Slider na zapnutie/vypnutie stop slov
+    const enableSlider = document.getElementById('stopWordsEnableCheckbox');
 
     if (!stopWordsBtn || !stopWordsModal) return;
 
@@ -50,6 +52,19 @@ function initStopWordsSettings() {
         if (addStopWordBtn && newStopWordInput) {
             addStopWordBtn.disabled = newStopWordInput.value.trim().length === 0;
         }
+    }
+
+    // NOVÉ: Inicializácia slidera pre zapnutie/vypnutie stop slov
+    if (enableSlider) {
+        window.stopWordsEnabled = enableSlider.checked;
+        enableSlider.addEventListener('change', (e) => {
+            window.stopWordsEnabled = e.target.checked;
+            const t = getT();
+            showToast(
+                window.stopWordsEnabled ? 'Stop slová sú zapnuté' : 'Stop slová sú vypnuté',
+                'info'
+            );
+        });
     }
 
     // Funkcia a spracovanie nahrania súboru
@@ -101,8 +116,6 @@ function initStopWordsSettings() {
             reader.readAsText(file);
         });
     }
-
-
 
     // Sledovanie inputu pre povolenie/zakázanie tlačidla
     newStopWordInput.addEventListener('input', updateButtonStates);

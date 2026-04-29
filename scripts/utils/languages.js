@@ -166,6 +166,38 @@ const translations = {
         stopWordsMaxLimit: "Maximálny počet stop slov je 200",
         stopWordsFileTruncated: "(súbor obsahoval viac slov, ponechaných bolo prvých 200)",
 
+        // Forces modal
+        forcesTitle: "Editor síl",
+        forcesEnableLabel: "Zohľadniť sily pri generovaní",
+        forcesWeightLabel: "Váha síl (α):",
+        forcesInfo: "Pridávajte slová, ktoré reprezentujú sily (napr. \"flexibility\", \"performance\"). Záporná váha = sila, ktorá sa potláča (napr. \"complexity\").",
+        forcesCurrent: "Aktuálne sily",
+        forcesAddLabel: "Pridať novú silu:",
+        forcesWordPlaceholder: "slovo (napr. flexibility)",
+        forcesPositiveStrong: "➕ silne pozitívna (+0.8)",
+        forcesPositiveMild: "➕ mierne pozitívna (+0.5)",
+        forcesNegativeMild: "➖ mierne negatívna (-0.5)",
+        forcesNegativeStrong: "➖ silne negatívna (-0.8)",
+        forcesAddButton: "Pridať",
+        forcesNoSpaces: "Slovo nesmie obsahovať medzery!",
+        forcesMinLength: "Slovo musí mať aspoň 2 znaky",
+        forcesMaxLimit: "Maximálny počet síl je 200",
+        forcesResetAfter: "Sily boli resetované na predvolené",
+        forcesLoadedFromFile: "Načítaných {count} síl zo súboru",
+        forcesNoValidWords: "Žiadne platné sily v súbore",
+        forcesFileTruncated: "(súbor obsahoval viac slov, ponechaných bolo prvých 200)",
+        forcesEmpty: "Žiadne sily. Pridajte nejaké!",
+        forcesRemoveTitle: "Odstrániť silu",
+        forcesWeightTooltip: "Váha, ktorou sa silová podobnosť pripočíta k textovej podobnosti (0 – žiadny vplyv, 1 – maximálny vplyv)",
+
+        // Advanced modal
+        advancedSettings: "Pokročilé nastavenia",
+        advancedGamma: "γ (diskontný faktor)",
+        advancedGoalReward: "R(g) (odmena za cieľ)",
+        advancedOtherReward: "R(o) (odmena za ostatné)",
+        advancedEpsilon: "ε (prah konvergencie)",
+        closeButton: "Zavrieť",
+
         // Pattern Detail Modal
         patternDetailTitle: "Detail vzoru",
         patternDetailBasicInfo: "Základné informácie",
@@ -244,6 +276,9 @@ const translations = {
         graphTooltip: "Interaktívny graf vzťahov medzi vzormi. Hrubšia čiara = vyššia podobnosť. Kliknutím na uzol zobrazíš detaily a top spojenia. Môžeš meniť prah zobrazenia posuvníkom.",
         statisticsTooltip: "Základné štatistiky o podobnostiach medzi vzormi – počet vzorov, priemerná podobnosť, medián, smerodajná odchýlka, top 5 najsilnejších spojení a distribúcia hodnôt.",
         referenceTooltip: "📎 Referenčný bonus – zvyšuje pravdepodobnosť prechodu od vzoru, ktorý je spomenutý, k vzoru, ktorý ho spomína. Pomáha rešpektovať závislosti v pattern languages (napr. keď vzor odkazuje na iný, ten spomínaný by mal ísť skôr v sekvencii).",
+        forcesLexiconTooltip: "Editor síl – spravuj slová reprezentujúce sily",
+        advancedTooltip: "Pokročilé nastavenia MDP (γ, R(g), R(o), ε)",
+        resetToDefaultTooltip: "Resetovať na predvolenú hodnotu ({value})",
 
         // MDP steps
         mdpTitle: "Postup riešenia Markov Decision Process (MDP):",
@@ -277,6 +312,7 @@ const translations = {
         mdpTransitionMatrix: "Pravdepodobnosti prechodu medzi všetkými stavmi (normalizované podobnosti):",
         mdpTransitionExplanation: "Prechodová matica vznikla normalizáciou matice súvislostí. Každý riadok predstavuje rozdelenie pravdepodobností prechodu z daného stavu do ostatných stavov. Cieľový stav (diagonála) má vždy pravdepodobnosť 0.",
         referenceBonusActive: "📎 Referenčný bonus aktívny (bonus: {bonus}) – hodnoty zobrazené ako: pôvodná (pôvodná+bonus)",
+        forcesActiveNotice: "⚖️ Protichodné sily aktívne (váha α = {weight}) – silová podobnosť pripočítaná k textovej podobnosti",
         mdpInitialUtilities: "Počiatočné utility",
         mdpIteration: "Iterácia",
         mdpMaxChange: "Maximálna zmena",
@@ -526,6 +562,38 @@ const translations = {
         stopWordsMaxLimit: "Maximum number of stop words is 200",
         stopWordsFileTruncated: "(file contained more words, only first 200 kept)",
 
+        //Forces modal
+        forcesTitle: "Forces Editor",
+        forcesEnableLabel: "Consider forces in generation",
+        forcesWeightLabel: "Forces weight (α):",
+        forcesInfo: "Add words representing forces (e.g. \"flexibility\", \"performance\"). Negative weight = suppressed force (e.g. \"complexity\").",
+        forcesCurrent: "Current forces",
+        forcesAddLabel: "Add new force:",
+        forcesWordPlaceholder: "word (e.g. flexibility)",
+        forcesPositiveStrong: "➕ strongly positive (+0.8)",
+        forcesPositiveMild: "➕ mildly positive (+0.5)",
+        forcesNegativeMild: "➖ mildly negative (-0.5)",
+        forcesNegativeStrong: "➖ strongly negative (-0.8)",
+        forcesAddButton: "Add",
+        forcesNoSpaces: "Word must not contain spaces!",
+        forcesMinLength: "Word must be at least 2 characters long",
+        forcesMaxLimit: "Maximum number of forces is 200",
+        forcesResetAfter: "Forces have been reset to default",
+        forcesLoadedFromFile: "Loaded {count} forces from file",
+        forcesNoValidWords: "No valid forces found in the file",
+        forcesFileTruncated: "(file contained more words, only first 200 kept)",
+        forcesEmpty: "No forces. Add some!",
+        forcesRemoveTitle: "Remove force",
+        forcesWeightTooltip: "Weight by which force similarity is added to text similarity (0 – no effect, 1 – maximum effect)",
+
+        // Advanced modal
+        advancedSettings: "Advanced Settings",
+        advancedGamma: "γ (discount factor)",
+        advancedGoalReward: "R(g) (goal reward)",
+        advancedOtherReward: "R(o) (other reward)",
+        advancedEpsilon: "ε (convergence threshold)",
+        closeButton: "Close",
+
         // Pattern Detail Modal
         patternDetailTitle: "Pattern Detail",
         patternDetailBasicInfo: "Basic Information",
@@ -603,6 +671,10 @@ const translations = {
         graphTooltip: "Interactive graph of relationships between patterns. Thicker line = higher similarity. Click on a node to see details and top connections. You can adjust the display threshold with the slider.",
         statisticsTooltip: "Basic statistics about similarities between patterns – number of patterns, average similarity, median, standard deviation, top 5 strongest connections and value distribution.",
         referenceTooltip: "📎 Reference bonus – boosts transitions from patterns that are mentioned to the patterns that mention them. Helps respect pattern language dependencies (e.g., when a pattern references another, the referenced pattern should appear earlier in the sequence).",
+        forcesLexiconTooltip: "Forces Editor – manage words representing forces",
+        advancedTooltip: "Advanced MDP settings (γ, R(g), R(o), ε)",
+        resetToDefaultTooltip: "Reset to default value ({value})",
+
 
         // MDP steps
         mdpTitle: "Markov Decision Process (MDP) Solution Steps:",
@@ -636,6 +708,7 @@ const translations = {
         mdpTransitionMatrix: "Transition probabilities between all states (normalized similarities):",
         mdpTransitionExplanation: "The transition matrix is created by normalizing the similarity matrix. Each row represents the probability distribution of transitioning from a given state to other states. The goal state (diagonal) always has probability 0.",
         referenceBonusActive: "📎 Reference bonus active (bonus: {bonus}) – values shown as: raw (raw+bonus)",
+        forcesActiveNotice: "⚖️ Conflicting forces active (weight α = {weight}) – force similarity added to text similarity",
         mdpInitialUtilities: "Initial Utilities",
         mdpIteration: "Iteration",
         mdpMaxChange: "Maximum change",
@@ -884,48 +957,46 @@ function updateTextContent() {
     const epsilonInput = document.getElementById('epsilonInput');
     if (epsilonInput) epsilonInput.title = t.mdpParamEpsilonTitle;
 
-    const idfCheckbox = document.getElementById('idfCheckbox');
-    if (idfCheckbox) idfCheckbox.title = t.idfTitle;
-
-    const sentimentCheckbox = document.getElementById('sentimentCheckbox');
-    if (sentimentCheckbox) {
-        sentimentCheckbox.title = t.sentimentTitle;
-    }
-
-    const referenceCheckbox = document.getElementById('referenceCheckbox');
-    if (referenceCheckbox) {
-        referenceCheckbox.title = t.referenceTooltip;
-    }
-
-    const useCheckbox = document.getElementById('useCheckbox');
-    if (useCheckbox) useCheckbox.title = t.useTooltip;
+    // Tooltips pre parametre (IDF, sentiment, reference, USE) 
+    const setTooltipOnSliderWrapper = (checkboxId, tooltipText) => {
+        const checkbox = document.getElementById(checkboxId);
+        if (checkbox) {
+            const wrapper = checkbox.closest('.group');
+            if (wrapper) wrapper.title = tooltipText;
+        }
+    };
+    setTooltipOnSliderWrapper('idfCheckbox', t.idfTitle);
+    setTooltipOnSliderWrapper('sentimentCheckbox', t.sentimentTitle);
+    setTooltipOnSliderWrapper('referenceCheckbox', t.referenceTooltip);
+    setTooltipOnSliderWrapper('useCheckbox', t.useTooltip);
 
     const stopWordsBtn = document.getElementById('stopWordsBtn');
     if (stopWordsBtn) stopWordsBtn.title = t.stopWordsTitle;
+
+    const forcesLexiconBtn = document.getElementById('forcesLexiconBtn');
+    if (forcesLexiconBtn) forcesLexiconBtn.title = t.forcesLexiconTooltip;
+    
+    
+    const advancedBtn = document.getElementById('advancedBtn');
+    if (advancedBtn) advancedBtn.title = t.advancedTooltip;
 
     document.querySelectorAll('.view-pattern-btn').forEach(btn => {
         btn.setAttribute('title', t.patternDetailViewButton || 'Zobraziť podrobnosti');
     });
     
     const confidenceTooltip = document.getElementById('confidenceTooltip');
-    if (confidenceTooltip) {
-        confidenceTooltip.title = t.overallConfidenceTooltip;
-    }
+    if (confidenceTooltip) confidenceTooltip.title = t.overallConfidenceTooltip;
+    
 
     const aiConfidenceSpan = document.querySelector('[data-i18n="aiConfidence"]');
-    if (aiConfidenceSpan) {
-        aiConfidenceSpan.textContent = t.aiConfidence;
-    }
+    if (aiConfidenceSpan) aiConfidenceSpan.textContent = t.aiConfidence;
 
     const explainSequenceBtn = document.getElementById('explainSequenceBtn');
-    if (explainSequenceBtn) {
-        explainSequenceBtn.innerHTML = `${t.explainSequenceButton}`;
-    }
+    if (explainSequenceBtn) explainSequenceBtn.innerHTML = `${t.explainSequenceButton}`;
+    
 
     const folderTooltip = document.getElementById('folderTooltip');
-    if (folderTooltip) {
-        folderTooltip.title = t.folderWithTxtFilesTooltip;
-    }
+    if (folderTooltip) folderTooltip.title = t.folderWithTxtFilesTooltip;
 
     // Tooltips a texty pre tlačidlá zobrazenia
     const matrixViewBtn = document.getElementById('matrixViewBtn');
@@ -1193,6 +1264,69 @@ function updateModalContent() {
                 window.renderStopWords();
             }
         }
+    }
+
+    // ===== ADVANCED MODAL =====
+    const advancedModalElement = document.getElementById('advancedModal');
+    if (advancedModalElement) {
+        const title = advancedModalElement.querySelector('h3');
+        if (title) title.textContent = t.advancedSettings;
+        
+        const labels = advancedModalElement.querySelectorAll('label');
+        if (labels.length >= 4) {
+            labels[0].textContent = t.advancedGamma;
+            labels[1].textContent = t.advancedGoalReward;
+            labels[2].textContent = t.advancedOtherReward;
+            labels[3].textContent = t.advancedEpsilon;
+        }
+        
+        const closeBtn = advancedModalElement.querySelector('#closeAdvancedModalBtn');
+        if (closeBtn) closeBtn.textContent = t.closeButton;
+    }
+
+    // ===== FORCES MODAL =====
+    const forcesModalElement = document.getElementById('forcesModal');
+    if (forcesModalElement) {
+        const title = forcesModalElement.querySelector('h3');
+        if (title) title.textContent = t.forcesTitle;
+        
+        const enableLabel = forcesModalElement.querySelector('.flex.items-center.justify-between label');
+        if (enableLabel) enableLabel.textContent = t.forcesEnableLabel;
+        
+        const weightLabel = forcesModalElement.querySelector('.flex.items-center.gap-2 label');
+        if (weightLabel) weightLabel.textContent = t.forcesWeightLabel;
+        
+        const infoText = forcesModalElement.querySelector('.text-sm.text-gray-600'); // prvý info paragraph
+        if (infoText) infoText.textContent = t.forcesInfo;
+        
+        const currentLabel = forcesModalElement.querySelector('.bg-gray-50 .text-sm.font-medium');
+        if (currentLabel) {
+            // vnútri je aj span s id forcesCount – zachovať
+            const textNode = currentLabel.childNodes[0];
+            if (textNode && textNode.nodeType === Node.TEXT_NODE) {
+                textNode.textContent = t.forcesCurrent + ' (';
+            }
+        }
+        
+        const addLabel = forcesModalElement.querySelector('#forcesModal .block.text-sm.font-medium');
+        if (addLabel) addLabel.textContent = t.forcesAddLabel;
+        
+        const addButton = forcesModalElement.querySelector('#addForceBtn');
+        if (addButton) addButton.textContent = t.forcesAddButton;
+        
+        const hint = forcesModalElement.querySelector('.stop-words-hint');
+        if (hint) hint.textContent = t.stopWordsHint;
+
+        const forceWordInput = forcesModalElement.querySelector('#newForceWord');
+        if (forceWordInput) {
+            forceWordInput.placeholder = t.forcesWordPlaceholder || 'slovo (napr. flexibility)';
+        }
+        
+        // Tooltipy pre tlačidlá v forces modale (načítanie z .txt, reset)
+        const loadBtn = forcesModalElement.querySelector('#loadForcesFromFileBtn');
+        if (loadBtn) loadBtn.title = t.loadForcesFromFile || 'Načítať sily z .txt súboru';
+        const resetForcesBtn = forcesModalElement.querySelector('#resetForcesBtn');
+        if (resetForcesBtn) resetForcesBtn.title = t.resetForces || 'Resetovať na predvolené';
     }
 
     // Pattern Detail Modal

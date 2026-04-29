@@ -195,6 +195,13 @@ function createCompleteTransitionMatrixStep(step, patterns) {
         content += `<p class="mb-2 text-xs text-blue-600 dark:text-blue-400">${msg}</p>`;
     }
 
+    // Check if forces were used
+    const useForces = window.forcesEnabled || false;
+    if (useForces) {
+        const forceWeight = parseFloat(document.getElementById('forcesWeightInput')?.value) || 0.3;
+        content += `<p class="mb-2 text-xs text-purple-600 dark:text-purple-400">${t.forcesActiveNotice?.replace('{weight}', forceWeight)}</p>`;
+    }
+
     content += `
         <div class="mb-3 p-2 bg-gray-100 dark:bg-gray-800 rounded text-xs">
             <p class="font-semibold mb-1">${t.formulaLabel}</p>
@@ -226,6 +233,7 @@ function createCompleteTransitionMatrixStep(step, patterns) {
     // Get raw and boosted scores if available
     const rawScores = window.rawTransitionScores || {};
     const boostedScores = window.boostedTransitionScores || {};
+    const forceContrib = window.forceContributionScores || {};
 
     // Riadky
     patterns.forEach((pattern1, i) => {
@@ -240,27 +248,44 @@ function createCompleteTransitionMatrixStep(step, patterns) {
             
             const raw = rawScores[pattern1.filename]?.[pattern2.filename] || 0;
             const boosted = boostedScores[pattern1.filename]?.[pattern2.filename] || 0;
+            const force = forceContrib[pattern1.filename]?.[pattern2.filename] || 0;
             
+            let displayText = '';
+            
+            // Referenčný bonus aj sily – kombinované zobrazenie
             if (useReferences && raw !== boosted && boosted > 0) {
                 const bonusValue = window.referenceBonusValue || 0.1;
-                cell.innerHTML = `${raw.toFixed(3)}<span class="text-xs text-green-500 dark:text-green-400">(+${bonusValue.toFixed(2)})</span> → ${probability.toFixed(3)}`;
+                if (Math.abs(force) > 0.0001 && useForces) {
+                    // Oboje – referencie aj sily
+                    displayText = `${raw.toFixed(3)} <span class="text-xs text-blue-500 dark:text-blue-400">(📎+${bonusValue.toFixed(2)})</span> <span class="text-xs text-purple-500 dark:text-purple-400">(⚖️${force > 0 ? '+' : ''}${force.toFixed(3)})</span> → ${probability.toFixed(3)}`;
+                } else {
+                    // Iba referencie
+                    displayText = `${raw.toFixed(3)}<span class="text-xs text-blue-500 dark:text-blue-400">(📎+${bonusValue.toFixed(2)})</span> → ${probability.toFixed(3)}`;
+                }
+            } else if (Math.abs(force) > 0.0001 && useForces) {
+                // Iba sily
+                displayText = `${raw.toFixed(3)} <span class="text-xs text-purple-500 dark:text-purple-400">(⚖️${force > 0 ? '+' : ''}${force.toFixed(3)})</span> → ${probability.toFixed(3)}`;
             } else {
-                cell.textContent = probability.toFixed(3);
+                // Nič
+                displayText = probability.toFixed(3);
             }
             
+            cell.innerHTML = displayText;
+            
+            // Farba podľa výslednej pravdepodobnosti (intenzita)
             const intensity = probability * 0.7;
             cell.style.backgroundColor = `rgba(99, 102, 241, ${intensity})`;
             cell.style.color = probability > 0.5 ? 'white' : 'black';
             
-            if (useReferences && raw !== boosted) {
-                cell.title = `${pattern1.name} → ${pattern2.name}: raw=${raw.toFixed(3)}, boosted=${boosted.toFixed(3)} → probability=${probability.toFixed(3)} (bonus applied)`;
-            } else {
-                cell.title = `${pattern1.name} → ${pattern2.name}: ${probability.toFixed(3)}`;
-            }
-
+            // Tooltip s podrobnosťami
+            let tooltip = `${pattern1.name} → ${pattern2.name}: raw text=${raw.toFixed(3)}`;
+            if (Math.abs(force) > 0.0001) tooltip += `, force contrib=${force.toFixed(3)}`;
+            if (useReferences && raw !== boosted) tooltip += `, reference bonus=${(boosted - raw).toFixed(3)}`;
+            tooltip += ` → probability=${probability.toFixed(3)}`;
+            cell.title = tooltip;
+            
             row.appendChild(cell);
         });
-
         table.appendChild(row);
     });
 

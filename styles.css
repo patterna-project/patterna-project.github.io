@@ -1447,29 +1447,20 @@ html:not(.dark) .link-percentage {
 .stop-word-tag span {
     color: var(--text-default);
 }
-#stopWordsBtn {
-    background: transparent !important;
-    border: none !important;
-    padding: 0.25rem 0.5rem !important;
-    font-size: 1rem !important;
-    line-height: 1 !important;
-    min-height: 32px;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
+
+/* TLAČIDLÁ PARAMETROV (🚫, ⚖️, ⚙️) */
+.param-btn {
     transition: all 0.2s ease !important;
-    box-shadow: none !important;
-    outline: none !important;
 }
-html:not(.dark) #stopWordsBtn:hover {
+html:not(.dark) .param-btn:hover {
     transform: scale(1.1) !important;
     filter: drop-shadow(0 2px 4px rgba(79, 70, 229, 0.3)) !important;
 }
-.dark #stopWordsBtn:hover {
+.dark .param-btn:hover {
     transform: scale(1.1) !important;
     filter: drop-shadow(0 2px 4px rgba(129, 140, 248, 0.5)) !important;
 }
-#stopWordsBtn:active {
+.param-btn:active {
     transform: scale(0.95) !important;
 }
 
@@ -1914,4 +1905,24 @@ input[type=range]::-webkit-slider-thumb:hover {
 #sankeyDiagram .link-group text {
     pointer-events: none;
     user-select: none;
+}
+
+/* Skryjeme originálny checkbox v slideroch (vo všetkých modáloch a parametroch) */
+.sr-only,
+input[type="checkbox"].sr-only {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    visibility: hidden !important;
+    -webkit-appearance: none !important;
+    appearance: none !important;
+    background: transparent !important;
 }
