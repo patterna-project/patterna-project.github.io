@@ -192,21 +192,103 @@ function getConfidenceColor(percent) {
  * @returns {boolean} - True ak textA odkazuje na patternB
  */
 function checkPatternReference(textA, patternB) {
-    const patternName = patternB.name.toLowerCase();
-    const patternFilename = patternB.filename.replace('.txt', '').toLowerCase().replace(/_/g, ' ');
+    // ===== 1. NORMALIZÁCIA TEXTU A NÁZVU =====
+    // Normalizácia textu – malé písmená, odstránenie diakritiky (voliteľné)
+    let normalizedText = textA.toLowerCase();
     
-    const patterns = [
-        new RegExp(`\\b(?:see|cf\\.?|refer to|as in)\\s+${escapeRegex(patternName)}\\b`, 'i'),
-        new RegExp(`\\b${escapeRegex(patternName)}\\s+pattern\\b`, 'i'),
-        new RegExp(`\\bpattern\\s+${escapeRegex(patternName)}\\b`, 'i'),
-        new RegExp(`\\b${escapeRegex(patternFilename)}\\b`, 'i')
+    // Normalizácia názvu vzoru na viacero variantov
+    let patternNameRaw = patternB.name.toLowerCase();
+    
+    // Nahradenie všetkých typov pomlčiek a spojovníkov medzerou
+    // "‑" (U+2011), "–" (U+2013), "—" (U+2014), "-" (U+002D)
+    const hyphenChars = /[‑–—\-]/g;
+    const patternNameNormalized = patternNameRaw.replace(hyphenChars, ' ');
+    // Odstránenie viacnásobných medzier a orezanie
+    const patternNameClean = patternNameNormalized.replace(/\s+/g, ' ').trim();
+    
+    // Varianty názvu pre vyhľadávanie
+    const patternNameWithUnderscore = patternNameClean.replace(/\s+/g, '_');
+    const patternNameWithDash = patternNameClean.replace(/\s+/g, '-');
+    const patternNameNoSpaces = patternNameClean.replace(/\s+/g, '');
+    
+    // Filename bez prípony (normalizovaný)
+    const patternFilename = patternB.filename.replace('.txt', '').toLowerCase();
+    const patternFilenameNormalized = patternFilename.replace(hyphenChars, ' ').replace(/\s+/g, ' ');
+    
+    // ===== 2. ZOZNAM FRÁZ PRE VYHĽADÁVANIE =====
+    const keyPhrases = [
+        'see', 'cf', 'cf.', 'refer to', 'as in', 'paired with', 'foundation for',
+        'leads to', 'supports', 'enables', 'works with', 'is used with',
+        'can be combined with', 'fits with', 'is essential for', 'often used with',
+        'calls', 'invokes', 'delegates to', 'uses', 'employs', 'leverages',
+        'follows', 'extends', 'implements', 'depends on', 'relies on', 'builds on',
+        'based on', 'derived from', 'inspired by', 'similar to', 'same as',
+        'counterpart', 'variant', 'alternative', 'specialization of',
+        'generalization of', 'look at', 'check', 'note that', 'see also', 'refers to',
+        // Nové frázy pre lepšie pokrytie
+        'is the foundation for', 'is a prerequisite for', 'is used as a basis for',
+        'works well with', 'complements', 'is often combined with', 'is a variation of',
+        'is a special case of', 'is implemented using', 'is based on'
     ];
-
-    for (let regex of patterns) {
-        if (regex.test(textA)) {
-            return true;
-        }
+    
+    // ===== 3. TESTOVANIE JEDNOTLIVÝCH VARIANT =====
+    
+    // 3a. Fráza + názov (normalizovaný)
+    for (let phrase of keyPhrases) {
+        // Hľadáme frázu nasledovanú normalizovaným názvom
+        const regex = new RegExp(`\\b${escapeRegex(phrase)}\\s+${escapeRegex(patternNameClean)}\\b`, 'i');
+        if (regex.test(normalizedText)) return true;
     }
+    
+    // 3b. Názov v zátvorkách
+    const parenRegex = new RegExp(`\\(\\s*${escapeRegex(patternNameClean)}\\s*\\)`, 'i');
+    if (parenRegex.test(normalizedText)) return true;
+    
+    // 3c. Názov v hranatých zátvorkách
+    const bracketRegex = new RegExp(`\\[\\s*${escapeRegex(patternNameClean)}\\s*\\]`, 'i');
+    if (bracketRegex.test(normalizedText)) return true;
+    
+    // 3d. Odkaz na súbor .txt
+    const fileRegex = new RegExp(`\\b${escapeRegex(patternFilename)}\\.txt\\b`, 'i');
+    if (fileRegex.test(normalizedText)) return true;
+    
+    // 3e. Názov s podčiarkovníkmi (pattern_name)
+    if (patternNameWithUnderscore !== patternNameClean) {
+        const underscoreRegex = new RegExp(`\\b${escapeRegex(patternNameWithUnderscore)}\\b`, 'i');
+        if (underscoreRegex.test(normalizedText)) return true;
+    }
+    
+    // 3f. Názov s pomlčkami (pattern-name)
+    if (patternNameWithDash !== patternNameClean) {
+        const dashRegex = new RegExp(`\\b${escapeRegex(patternNameWithDash)}\\b`, 'i');
+        if (dashRegex.test(normalizedText)) return true;
+    }
+    
+    // 3g. Názov bez medzier (patternname)
+    if (patternNameNoSpaces !== patternNameClean && patternNameNoSpaces.length > 0) {
+        const noSpacesRegex = new RegExp(`\\b${escapeRegex(patternNameNoSpaces)}\\b`, 'i');
+        if (noSpacesRegex.test(normalizedText)) return true;
+    }
+    
+    // 3h. "X pattern" konštrukcia
+    const patternWordRegex = new RegExp(`\\b${escapeRegex(patternNameClean)}\\s+pattern\\b`, 'i');
+    if (patternWordRegex.test(normalizedText)) return true;
+    
+    // 3i. "pattern X" konštrukcia
+    const patternWordReverseRegex = new RegExp(`\\bpattern\\s+${escapeRegex(patternNameClean)}\\b`, 'i');
+    if (patternWordReverseRegex.test(normalizedText)) return true;
+    
+    // 3j. Konštrukcia "X (Y)" kde Y je filename (napr. "foundation for TDD (test_driven_development.txt)")
+    const parenWithFileRegex = new RegExp(`\\(\\s*${escapeRegex(patternFilename)}\\.txt\\s*\\)`, 'i');
+    if (parenWithFileRegex.test(normalizedText)) return true;
+    
+    // 3k. Normalizovaný názov ako samostatné slovo (voliteľné – môže mať falošné pozitíva)
+    // Toto je posledná možnosť – zapnuté explicitne
+    if (window.enableSimpleNameReference === true) {
+        const simpleNameRegex = new RegExp(`\\b${escapeRegex(patternNameClean)}\\b`, 'i');
+        if (simpleNameRegex.test(normalizedText)) return true;
+    }
+    
     return false;
 }
 
