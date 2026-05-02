@@ -12,7 +12,7 @@
   <a href="https://www.fiit.stuba.sk/">
     <img src="https://img.shields.io/badge/bachelor's_thesis-8b5cf6?style=for-the-badge&logo=academia&logoColor=white" alt="Bachelor's Thesis">
   </a>
-  <a href="https://www.overleaf.com/read/czbdxjrnbfqz">
+  <a href="https://patterna-project.github.io/patterna-project.github.io/guide">
     <img src="https://img.shields.io/badge/guide-0a9396?style=for-the-badge&logo=overleaf&logoColor=white" alt="Guide">
   </a>
 </p>
