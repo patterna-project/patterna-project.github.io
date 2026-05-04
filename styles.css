@@ -1926,3 +1926,220 @@ input[type="checkbox"].sr-only {
     appearance: none !important;
     background: transparent !important;
 }
+
+/* ===== FLOATING SELECTED PATTERNS PANEL ===== */
+.selected-panel-container {
+    position: fixed;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    gap: 0;
+    z-index: 100;
+    transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+}
+
+.selected-panel {
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.1) 100%);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-left: none;
+    border-radius: 0 20px 20px 0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+    transition: all 0.3s ease;
+    max-width: 280px;
+    overflow: hidden;
+}
+.selected-panel-container:hover .selected-panel {
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.85) 100%);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    border-color: rgba(0, 0, 0, 0.08);
+}
+.dark .selected-panel {
+    background: linear-gradient(90deg, rgba(31, 41, 55, 0.5) 0%, rgba(31, 41, 55, 0.1) 100%);
+    border-color: rgba(255, 255, 255, 0.08);
+}
+.dark .selected-panel-container:hover .selected-panel {
+    background: linear-gradient(90deg, rgba(31, 41, 55, 0.9) 0%, rgba(31, 41, 55, 0.7) 100%);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.selected-panel-content {
+    max-height: 380px;
+    overflow-y: auto;
+    padding: 10px;
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+    transition: scrollbar-color 0.2s;
+}
+.selected-panel-content:hover {
+    scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+.selected-panel-content::-webkit-scrollbar {
+    width: 4px;
+}
+.selected-panel-content::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 2px;
+}
+.selected-panel-content::-webkit-scrollbar-thumb {
+    background: transparent;
+    border-radius: 2px;
+}
+.selected-panel-content:hover::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+}
+.selected-panel-content:hover::-webkit-scrollbar-track {
+    background: var(--scrollbar-track);
+}
+
+/* Šípka – samostatne, žiadne pozadie */
+.selected-panel-toggle {
+    background: transparent !important;
+    border: none;
+    cursor: pointer;
+    width: 32px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6b7280;
+    transition: all 0.2s ease;
+    opacity: 0;
+    margin-left: -8px;
+    border-radius: 0 20px 20px 0;
+}
+.selected-panel-container:hover .selected-panel-toggle {
+    opacity: 1;
+}
+.selected-panel-toggle:hover {
+    color: #4f46e5;
+    transform: scale(1.05);
+}
+.dark .selected-panel-toggle {
+    color: #9ca3af;
+}
+.dark .selected-panel-toggle:hover {
+    color: #a5b4fc;
+}
+
+/* Zbalený stav – panel skrytý, šípka zostáva */
+.selected-panel-container.collapsed .selected-panel {
+    display: none;
+}
+.selected-panel-container.collapsed .selected-panel-toggle {
+    opacity: 1;
+    margin-left: 0;
+    background: transparent !important;
+}
+
+/* Ikonka šípky – správny smer */
+.toggle-icon {
+    transition: transform 0.25s ease;
+}
+.selected-panel-container:not(.collapsed) .toggle-icon {
+    transform: rotate(180deg);
+}
+.selected-panel-container.collapsed .toggle-icon {
+    transform: rotate(0deg);
+}
+
+/* Zoznam vybraných vzorov */
+.selected-patterns-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+.selected-pattern-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 8px 10px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 14px;
+    font-size: 0.8rem;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease;
+}
+.dark .selected-pattern-item {
+    background-color: rgba(31, 41, 55, 0.6);
+    border-color: rgba(255, 255, 255, 0.05);
+}
+.selected-pattern-item:hover {
+    background-color: rgba(79, 70, 229, 0.15);
+    transform: translateX(3px);
+}
+
+.selected-pattern-name {
+    flex: 1;
+    color: #1f2937;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    /* ŽIADNE padding-right – krížik bude prekrývať koniec textu */
+    padding-right: 0;
+}
+.dark .selected-pattern-name {
+    color: #f3f4f6;
+}
+
+.selected-pattern-remove {
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: #9ca3af;
+    transition: all 0.2s ease;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    opacity: 0;
+}
+.selected-pattern-item:hover .selected-pattern-remove {
+    opacity: 1;
+}
+.selected-pattern-remove:hover {
+    color: #ef4444;
+    background-color: rgba(239, 68, 68, 0.1);
+}
+.selected-empty {
+    text-align: center;
+    color: #9ca3af;
+    font-size: 0.75rem;
+    padding: 16px 8px;
+    font-style: italic;
+}
+
+/* Mobilná verzia */
+@media (max-width: 768px) {
+    .selected-panel-container {
+        top: auto;
+        bottom: 16px;
+        left: 16px;
+        right: auto;
+        transform: none;
+        flex-direction: row;
+    }
+    .selected-panel {
+        max-width: calc(100vw - 80px);
+        border-radius: 20px;
+        border-left: 1px solid rgba(0,0,0,0.1);
+    }
+    .selected-panel-toggle {
+        height: 48px;
+        border-radius: 20px;
+        margin-left: -8px;
+    }
+    .selected-panel-container.collapsed .selected-panel-toggle {
+        margin-left: 0;
+    }
+}

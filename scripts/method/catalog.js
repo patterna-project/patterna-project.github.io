@@ -266,6 +266,9 @@ function initializeCatalogSections(catalogName, structure, catalogType = 'user')
                     forcedGoalPattern = null;
                     updateGoalFlags();
                 }
+
+                if (typeof updateSelectedPanelVisibility === 'function') updateSelectedPanelVisibility();
+
             });
 
             const span = document.createElement("span");
@@ -406,6 +409,9 @@ function initializeCatalogSections(catalogName, structure, catalogType = 'user')
                 updateStartFlags();
                 updateGoalFlags();
             }
+
+            if (typeof updateSelectedPanelVisibility === 'function') updateSelectedPanelVisibility();
+
             
             updateAllLanguageCounters();
             updateCatalogBadges();

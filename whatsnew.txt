@@ -1,4 +1,22 @@
-1.0.7
+1.0.8
+
+# NOVINKY VO VERZII 1.0.8
+
+## PLAVUJÚCI PANEL VYBRANÝCH VZOROV
+- Pribudol plávajúci panel na ľavej strane obrazovky, ktorý zobrazuje **všetky aktuálne vybrané vzory**
+- Panel je skrytý, kým nie je vybraný aspoň jeden vzor – neprekáža pri výbere
+- Každý vzor v paneli má tlačidlo **✕** na rýchle odstránenie (zobrazí sa pri prejdení myšou)
+- **Zbaliteľný režim** – kliknutím na šípku sa panel zúži na minimum, nezavadzia pri práci
+
+## VYLEPŠENIA REFERENČNEJ MATICE
+- Rozšírený slovník fráz na detekciu explicitných referencií medzi vzormi
+- Pridaná podpora pre varianty názvov s pomlčkami, podčiarkovníkmi a bez medzier
+- Lepšia detekcia explicitných odkazov v textoch vzorov
+
+## OPRAVY CHÝB
+- Select all (tlačidlo ✓) teraz správne aktualizuje plávajúci panel
+
+---
 
 # NOVINKY VO VERZII 1.0.7
 

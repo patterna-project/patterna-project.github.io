@@ -237,6 +237,8 @@ document.getElementById('clearBtn').addEventListener('click', () => {
     updateGenerateButtonState();
     updateSelectAllButtonsColor();
     resetParametersToDefault();
+    updateSelectedPanelVisibility();
+
 
     showToast(t?.allPatternsCleared || 'Všetky vzory boli vymazané', 'info');
 });
@@ -542,12 +544,15 @@ function toggleParams(expand) {
     }
 }
 
-document.getElementById('toggleParamsBtn')?.addEventListener('click', () => {
-    toggleParams();
-});
-
-// Upravíme generovanie - pridáme event listener, ktorý zavolá toggleParams pred generovaním
 document.getElementById("generateBtn").addEventListener("click", async () => {
+    // Zatvoríme panel (ak je otvorený)
+    if (selectedPanelContainer && !selectedPanelContainer.classList.contains('collapsed')) {
+        const toggleBtn = document.getElementById('toggleSelectedPanelBtn');
+        isPanelCollapsed = true;
+        selectedPanelContainer.classList.add('collapsed');
+        if (toggleBtn) toggleBtn.title = 'Otvoriť panel';
+    }
+    
     // Zbalíme parametre
     toggleParams(false);
     
@@ -782,3 +787,129 @@ function resetParametersToDefault() {
         window.resetStopWordsToDefault();
     }
 }
+
+
+
+
+
+
+// ============================================================
+// PLAVUJÚCI PANEL S VYBRANÝMI VZORMI
+// ============================================================
+
+let selectedPanelContainer = null;
+let selectedPatternsList = null;
+let isPanelCollapsed = false;
+
+function initSelectedPanel() {
+    selectedPanelContainer = document.getElementById('selectedPanelContainer');
+    selectedPatternsList = document.getElementById('selectedPatternsList');
+    
+    if (!selectedPanelContainer || !selectedPatternsList) return;
+    
+    const toggleBtn = document.getElementById('toggleSelectedPanelBtn');
+    if (toggleBtn) {
+        toggleBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            isPanelCollapsed = !isPanelCollapsed;
+            if (isPanelCollapsed) {
+                selectedPanelContainer.classList.add('collapsed');
+                toggleBtn.title = 'Otvoriť panel';
+            } else {
+                selectedPanelContainer.classList.remove('collapsed');
+                toggleBtn.title = 'Zbaliť panel';
+            }
+        });
+    }
+}
+
+function updateSelectedPanelVisibility() {
+    if (!selectedPanelContainer) return;
+    
+    let totalSelected = 0;
+    Object.keys(globalCheckedPatterns).forEach(catalogName => {
+        const patterns = globalCheckedPatterns[catalogName] || {};
+        totalSelected += Object.keys(patterns).filter(f => patterns[f]).length;
+    });
+    
+    if (totalSelected > 0) {
+        selectedPanelContainer.classList.remove('hidden');
+        renderSelectedPatternsList();
+    } else {
+        selectedPanelContainer.classList.add('hidden');
+    }
+}
+
+function renderSelectedPatternsList() {
+    if (!selectedPatternsList) return;
+    
+    const selectedItems = [];
+    Object.keys(globalCheckedPatterns).forEach(catalogName => {
+        const patterns = globalCheckedPatterns[catalogName] || {};
+        Object.keys(patterns).forEach(filename => {
+            if (patterns[filename] && allPatternsData[filename]) {
+                selectedItems.push({
+                    filename: filename,
+                    name: allPatternsData[filename].name,
+                    catalog: catalogName
+                });
+            }
+        });
+    });
+    
+    if (selectedItems.length === 0) {
+        selectedPatternsList.innerHTML = '<div class="selected-empty">Žiadne vybrané vzory</div>';
+        return;
+    }
+    
+    selectedPatternsList.innerHTML = '';
+    selectedItems.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'selected-pattern-item';
+        div.innerHTML = `
+            <span class="selected-pattern-name" title="${item.name} (${item.catalog})">${item.name}</span>
+            <button class="selected-pattern-remove" data-filename="${item.filename}" title="Odstrániť">✕</button>
+        `;
+        
+        const removeBtn = div.querySelector('.selected-pattern-remove');
+        removeBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            Object.keys(globalCheckedPatterns).forEach(catalogName => {
+                if (globalCheckedPatterns[catalogName] && globalCheckedPatterns[catalogName][item.filename]) {
+                    delete globalCheckedPatterns[catalogName][item.filename];
+                }
+            });
+            
+            const checkbox = document.querySelector(`input[type="checkbox"][value="${item.filename}"]`);
+            if (checkbox) checkbox.checked = false;
+            
+            updateAllLanguageCounters();
+            updateCatalogBadges();
+            updateSelectAllButtonsColor();
+            updateGenerateButtonState();
+            
+            renderSelectedPatternsList();
+            updateSelectedPanelVisibility();
+        });
+        
+        selectedPatternsList.appendChild(div);
+    });
+}
+
+function enhanceCheckboxListener() {
+    document.addEventListener('change', (e) => {
+        if (e.target.type === 'checkbox' && e.target.closest('#patternCheckboxes')) {
+            setTimeout(() => {
+                updateSelectedPanelVisibility();
+            }, 10);
+        }
+    });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    initSelectedPanel();
+    enhanceCheckboxListener();
+    setTimeout(() => {
+        updateSelectedPanelVisibility();
+    }, 500);
+});

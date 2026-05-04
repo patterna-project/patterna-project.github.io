@@ -128,6 +128,23 @@
 
         <!-- Main -->
         <main class="flex-grow container mx-auto p-6">
+
+            <!-- Plávajúci panel vybraných vzorov -->
+            <div id="selectedPanelContainer" class="selected-panel-container hidden">
+                <div id="selectedPanel" class="selected-panel">
+                    <div class="selected-panel-content">
+                        <div id="selectedPatternsList" class="selected-patterns-list">
+                            <div class="selected-empty">Žiadne vybrané vzory</div>
+                        </div>
+                    </div>
+                </div>
+                <button id="toggleSelectedPanelBtn" class="selected-panel-toggle" title="Zbaliť panel">
+                    <svg class="toggle-icon" viewBox="0 0 24 24" width="20" height="20">
+                        <path fill="currentColor" d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                    </svg>
+                </button>
+            </div>
+
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
             <section class="col-span-2 bg-white rounded-2xl shadow p-6 dark:bg-gray-800">
                 <div class="flex flex-wrap items-center gap-2 mb-4">
