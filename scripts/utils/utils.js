@@ -183,8 +183,6 @@ function getConfidenceColor(percent) {
     }
 }
 
-
-
 /**
  * Zistí, či textA priamo odkazuje na patternB (podľa názvu alebo filename)
  * @param {string} textA - Obsah vzoru A
@@ -193,49 +191,35 @@ function getConfidenceColor(percent) {
  */
 function checkPatternReference(textA, patternB) {
     // ===== 1. NORMALIZÁCIA TEXTU A NÁZVU =====
-    // Normalizácia textu – malé písmená, odstránenie diakritiky (voliteľné)
     let normalizedText = textA.toLowerCase();
     
-    // Normalizácia názvu vzoru na viacero variantov
     let patternNameRaw = patternB.name.toLowerCase();
-    
-    // Nahradenie všetkých typov pomlčiek a spojovníkov medzerou
-    // "‑" (U+2011), "–" (U+2013), "—" (U+2014), "-" (U+002D)
     const hyphenChars = /[‑–—\-]/g;
     const patternNameNormalized = patternNameRaw.replace(hyphenChars, ' ');
-    // Odstránenie viacnásobných medzier a orezanie
     const patternNameClean = patternNameNormalized.replace(/\s+/g, ' ').trim();
     
-    // Varianty názvu pre vyhľadávanie
     const patternNameWithUnderscore = patternNameClean.replace(/\s+/g, '_');
     const patternNameWithDash = patternNameClean.replace(/\s+/g, '-');
     const patternNameNoSpaces = patternNameClean.replace(/\s+/g, '');
     
-    // Filename bez prípony (normalizovaný)
     const patternFilename = patternB.filename.replace('.txt', '').toLowerCase();
     const patternFilenameNormalized = patternFilename.replace(hyphenChars, ' ').replace(/\s+/g, ' ');
     
-    // ===== 2. ZOZNAM FRÁZ PRE VYHĽADÁVANIE =====
-    const keyPhrases = [
-        'see', 'cf', 'cf.', 'refer to', 'as in', 'paired with', 'foundation for',
-        'leads to', 'supports', 'enables', 'works with', 'is used with',
-        'can be combined with', 'fits with', 'is essential for', 'often used with',
-        'calls', 'invokes', 'delegates to', 'uses', 'employs', 'leverages',
-        'follows', 'extends', 'implements', 'depends on', 'relies on', 'builds on',
-        'based on', 'derived from', 'inspired by', 'similar to', 'same as',
-        'counterpart', 'variant', 'alternative', 'specialization of',
-        'generalization of', 'look at', 'check', 'note that', 'see also', 'refers to',
-        // Nové frázy pre lepšie pokrytie
-        'is the foundation for', 'is a prerequisite for', 'is used as a basis for',
-        'works well with', 'complements', 'is often combined with', 'is a variation of',
-        'is a special case of', 'is implemented using', 'is based on'
-    ];
+    // ===== 2. DYNAMICKÉ FRÁZY – použijeme vlastné alebo predvolené =====
+    // Ak referencie nie sú vôbec povolené, vrátime false
+    if (window.referenceEnabled === false) return false;
+    
+    let phrases;
+    if (window.customReferencePhrases && window.customReferencePhrases.size > 0) {
+        phrases = Array.from(window.customReferencePhrases);
+    } else {
+        phrases = DEFAULT_REFERENCE_PHRASES;
+    }
     
     // ===== 3. TESTOVANIE JEDNOTLIVÝCH VARIANT =====
     
     // 3a. Fráza + názov (normalizovaný)
-    for (let phrase of keyPhrases) {
-        // Hľadáme frázu nasledovanú normalizovaným názvom
+    for (let phrase of phrases) {
         const regex = new RegExp(`\\b${escapeRegex(phrase)}\\s+${escapeRegex(patternNameClean)}\\b`, 'i');
         if (regex.test(normalizedText)) return true;
     }
@@ -278,12 +262,11 @@ function checkPatternReference(textA, patternB) {
     const patternWordReverseRegex = new RegExp(`\\bpattern\\s+${escapeRegex(patternNameClean)}\\b`, 'i');
     if (patternWordReverseRegex.test(normalizedText)) return true;
     
-    // 3j. Konštrukcia "X (Y)" kde Y je filename (napr. "foundation for TDD (test_driven_development.txt)")
+    // 3j. Konštrukcia "X (Y)" kde Y je filename
     const parenWithFileRegex = new RegExp(`\\(\\s*${escapeRegex(patternFilename)}\\.txt\\s*\\)`, 'i');
     if (parenWithFileRegex.test(normalizedText)) return true;
     
-    // 3k. Normalizovaný názov ako samostatné slovo (voliteľné – môže mať falošné pozitíva)
-    // Toto je posledná možnosť – zapnuté explicitne
+    // 3k. Voliteľné: samostatný názov (môže mať falošné pozitíva)
     if (window.enableSimpleNameReference === true) {
         const simpleNameRegex = new RegExp(`\\b${escapeRegex(patternNameClean)}\\b`, 'i');
         if (simpleNameRegex.test(normalizedText)) return true;

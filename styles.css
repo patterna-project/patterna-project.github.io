@@ -2143,3 +2143,13 @@ input[type="checkbox"].sr-only {
         margin-left: 0;
     }
 }
+
+/* ===== INDIKÁCIA ZAPNUTÝCH FUNKCIÍ (STOP WORDS A FORCES) ===== */
+.param-btn.btn-enabled {
+    box-shadow: 0 0 0 2px #4f46e5, 0 0 0 4px rgba(79, 70, 229, 0.3) !important;
+    transition: box-shadow 0.2s ease;
+}
+
+.dark .param-btn.btn-enabled {
+    box-shadow: 0 0 0 2px #818cf8, 0 0 0 4px rgba(129, 140, 248, 0.3) !important;
+}

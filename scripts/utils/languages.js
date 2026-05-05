@@ -151,7 +151,6 @@ const translations = {
         stopWordsAdd: "Pridať nové stop slovo:",
         stopWordsPlaceholder: "napr. 'example' (iba jedno slovo)",
         stopWordsHint: "Enterom potvrdíš, slovo musí byť bez medzier a dlhé aspoň 2 znaky.",
-        stopWordsReset: "Resetovať na predvolené",
         stopWordsEmpty: "Žiadne stop slová. Pridajte nejaké!",
         stopWordsAddButton: "Pridať",
         stopWordsRemoveTitle: "Odstrániť",
@@ -160,11 +159,12 @@ const translations = {
         stopWordsExists: 'Stop slovo "{word}" už existuje',
         stopWordsMaxLimit: 'Maximálny počet stop slov je 30',
         stopWordsResetAfter: 'Stop slová boli resetované na predvolené',
-        stopWordsLoadFromFile: "Načítať stop slová z .txt súboru (prepíše aktuálne)",
         stopWordsLoadedFromFile: "Načítaných {count} stop slov zo súboru",
         stopWordsNoValidWords: "V súbore neboli nájdené žiadne platné stop slová",
         stopWordsMaxLimit: "Maximálny počet stop slov je 200",
         stopWordsFileTruncated: "(súbor obsahoval viac slov, ponechaných bolo prvých 200)",
+        loadFromFileTooltip: "Načítať z .txt súboru (prepíše aktuálne)",
+        resetDefaultTooltip: "Resetovať na predvolené",
 
         // Forces modal
         forcesTitle: "Editor síl",
@@ -189,6 +189,23 @@ const translations = {
         forcesEmpty: "Žiadne sily. Pridajte nejaké!",
         forcesRemoveTitle: "Odstrániť silu",
         forcesWeightTooltip: "Váha, ktorou sa silová podobnosť pripočíta k textovej podobnosti (0 – žiadny vplyv, 1 – maximálny vplyv)",
+
+        //Reference modal
+        referenceTitle: "Editor referenčných fráz",
+        referenceInfo: "Fráz, ktoré indikujú explicitný odkaz na iný vzor. Pridávajte ich ako jednotlivé frázy (napr. \"see also\", \"refers to\", \"paired with\").",
+        referenceCurrent: "Aktuálne frázy",
+        referenceAddLabel: "Pridať novú frázu:",
+        referenceAddPlaceholder: "napr. 'see also'",
+        referenceAddButton: "Pridať",
+        referenceEmpty: "Žiadne frázy. Pridajte nejaké!",
+        referenceExists: 'Fráza "{phrase}" už existuje',
+        referenceMaxLimit: "Maximálny počet fráz je 200",
+        referenceResetAfter: "Referenčné frázy boli resetované na predvolené",
+        referenceLoadedFromFile: "Načítaných {count} fráz zo súboru",
+        referenceNoValidPhrases: "Žiadne platné frázy v súbore",
+        referenceFileTruncated: "(súbor obsahoval viac fráz, ponechaných bolo prvých 200)",
+        referenceTooltip: "Editor referenčných fráz – spravuj slová/slovné spojenia, ktoré sa považujú za explicitný odkaz na iný vzor",
+        referenceNoEscapeHint: "Frázu nemusíte escapovať, stačí zadať text. Hľadanie je case‑insensitive.",
 
         // Advanced modal
         advancedSettings: "Pokročilé nastavenia",
@@ -547,7 +564,6 @@ const translations = {
         stopWordsAdd: "Add new stop word:",
         stopWordsPlaceholder: "e.g. 'example' (single word only)",
         stopWordsHint: "Press Enter to confirm, word must be without spaces and at least 2 characters long.",
-        stopWordsReset: "Reset to default",
         stopWordsEmpty: "No stop words. Add some!",
         stopWordsAddButton: "Add",
         stopWordsRemoveTitle: "Remove",
@@ -556,11 +572,12 @@ const translations = {
         stopWordsExists: 'Stop word "{word}" already exists',
         stopWordsMaxLimit: 'Maximum number of stop words is 30',
         stopWordsResetAfter: 'Stop words have been reset to default',
-        stopWordsLoadFromFile: "Load stop words from .txt file (overwrites current)",
         stopWordsLoadedFromFile: "Loaded {count} stop words from file",
         stopWordsNoValidWords: "No valid stop words found in the file",
         stopWordsMaxLimit: "Maximum number of stop words is 200",
         stopWordsFileTruncated: "(file contained more words, only first 200 kept)",
+        loadFromFileTooltip: "Load from .txt file (overwrites current)",
+        resetDefaultTooltip: "Reset to default",
 
         //Forces modal
         forcesTitle: "Forces Editor",
@@ -585,6 +602,24 @@ const translations = {
         forcesEmpty: "No forces. Add some!",
         forcesRemoveTitle: "Remove force",
         forcesWeightTooltip: "Weight by which force similarity is added to text similarity (0 – no effect, 1 – maximum effect)",
+
+        //reference modal
+        referenceTitle: "Reference Phrases Editor",
+        referenceInfo: "Phrases that indicate an explicit reference to another pattern. Add them as single phrases (e.g., \"see also\", \"refers to\", \"paired with\").",
+        referenceCurrent: "Current phrases",
+        referenceAddLabel: "Add new phrase:",
+        referenceAddPlaceholder: "e.g. 'see also'",
+        referenceAddButton: "Add",
+        referenceEmpty: "No phrases. Add some!",
+        referenceExists: 'Phrase "{phrase}" already exists',
+        referenceMaxLimit: "Maximum number of phrases is 200",
+        referenceResetAfter: "Reference phrases have been reset to default",
+        referenceLoadedFromFile: "Loaded {count} phrases from file",
+        referenceNoValidPhrases: "No valid phrases found in the file",
+        referenceFileTruncated: "(file contained more phrases, only first 200 kept)",
+        referenceTooltip: "Reference phrases editor – manage words/phrases considered as an explicit reference to another pattern",
+        referenceNoEscapeHint: "You don't need to escape the phrase, just type the text. Search is case‑insensitive.",
+
 
         // Advanced modal
         advancedSettings: "Advanced Settings",
@@ -976,6 +1011,8 @@ function updateTextContent() {
     const forcesLexiconBtn = document.getElementById('forcesLexiconBtn');
     if (forcesLexiconBtn) forcesLexiconBtn.title = t.forcesLexiconTooltip;
     
+    const referenceBtn = document.getElementById('referenceBtn');
+    if (referenceBtn) referenceBtn.title = t.referenceTooltip;
     
     const advancedBtn = document.getElementById('advancedBtn');
     if (advancedBtn) advancedBtn.title = t.advancedTooltip;
@@ -1235,9 +1272,9 @@ function updateModalContent() {
         
         const currentLabel = stopWordsModal.querySelector('.stop-words-current-label');
         if (currentLabel) currentLabel.textContent = t.stopWordsCurrent;
-        
-        const resetBtn = stopWordsModal.querySelector('.stop-words-reset');
-        if (resetBtn) resetBtn.title = t.stopWordsReset;
+
+        const resetBtn = document.getElementById('resetStopWordsBtn');
+        if (resetBtn) resetBtn.title = t.resetDefaultTooltip;
         
         const addLabel = stopWordsModal.querySelector('.stop-words-add-label');
         if (addLabel) addLabel.textContent = t.stopWordsAdd;
@@ -1250,10 +1287,10 @@ function updateModalContent() {
         
         const hint = stopWordsModal.querySelector('.stop-words-hint');
         if (hint) hint.textContent = t.stopWordsHint;
-
-        const loadFromFileBtn = document.getElementById('loadStopWordsFromFileBtn');
-        if (loadFromFileBtn) loadFromFileBtn.title = t.stopWordsLoadFromFile;
         
+        const loadStopWordsBtn = document.getElementById('loadStopWordsFromFileBtn');
+        if (loadStopWordsBtn) loadStopWordsBtn.title = t.loadFromFileTooltip;
+
         // Uložíme pre neskoršie použitie v renderStopWords
         window.stopWordsEmptyText = t.stopWordsEmpty;
         window.stopWordsRemoveTitle = t.stopWordsRemoveTitle;
@@ -1304,7 +1341,7 @@ function updateModalContent() {
             // vnútri je aj span s id forcesCount – zachovať
             const textNode = currentLabel.childNodes[0];
             if (textNode && textNode.nodeType === Node.TEXT_NODE) {
-                textNode.textContent = t.forcesCurrent + ' (';
+                textNode.textContent = t.forcesCurrent + '   ';
             }
         }
         
@@ -1321,12 +1358,52 @@ function updateModalContent() {
         if (forceWordInput) {
             forceWordInput.placeholder = t.forcesWordPlaceholder || 'slovo (napr. flexibility)';
         }
+
+        const loadForcesBtn = forcesModalElement.querySelector('#loadForcesFromFileBtn');
+        if (loadForcesBtn) loadForcesBtn.title = t.loadFromFileTooltip;
         
-        // Tooltipy pre tlačidlá v forces modale (načítanie z .txt, reset)
-        const loadBtn = forcesModalElement.querySelector('#loadForcesFromFileBtn');
-        if (loadBtn) loadBtn.title = t.loadForcesFromFile || 'Načítať sily z .txt súboru';
-        const resetForcesBtn = forcesModalElement.querySelector('#resetForcesBtn');
-        if (resetForcesBtn) resetForcesBtn.title = t.resetForces || 'Resetovať na predvolené';
+        const resetBtn = forcesModalElement.querySelector('#resetForcesBtn');
+        if (resetBtn) resetBtn.title = t.resetDefaultTooltip;       
+        
+    }
+
+    // Reference Modal
+    const refModal = document.getElementById('referenceModal');
+    if (refModal) {
+        const title = refModal.querySelector('h3');
+        if (title) title.textContent = t.referenceTitle;
+        
+        const info = refModal.querySelector('.text-sm.text-gray-600');
+        if (info) info.textContent = t.referenceInfo;
+        
+        const currentLabel = refModal.querySelector('.bg-gray-50 .text-sm.font-medium');
+        if (currentLabel) {
+            const textNode = currentLabel.childNodes[0];
+            if (textNode && textNode.nodeType === Node.TEXT_NODE) {
+                textNode.textContent = t.referenceCurrent + ' (';
+            }
+        }
+        
+        const addLabel = refModal.querySelector('.block.text-sm.font-medium');
+        if (addLabel) addLabel.textContent = t.referenceAddLabel;
+        
+        const addButton = refModal.querySelector('#addReferencePhraseBtn');
+        if (addButton) addButton.textContent = t.referenceAddButton;
+        
+        const input = refModal.querySelector('#newReferencePhrase');
+        if (input) input.placeholder = t.referenceAddPlaceholder;
+        
+        const emptyText = refModal.querySelector('#referencePhrasesContainer .text-gray-400');
+        if (emptyText) emptyText.textContent = t.referenceEmpty;
+        
+        const loadRefBtn = refModal.querySelector('#loadReferenceFromFileBtn');
+        if (loadRefBtn) loadRefBtn.title = t.loadFromFileTooltip;
+
+        const resetBtn = document.getElementById('resetReferenceBtn');
+        if (resetBtn)  resetBtn.title = t.resetDefaultTooltip;
+
+        const noEscapeHint = document.getElementById('referenceNoEscapeHint');
+        if (noEscapeHint) noEscapeHint.textContent = t.referenceNoEscapeHint;
     }
 
     // Pattern Detail Modal

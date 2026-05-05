@@ -135,7 +135,7 @@ function initForcesSettings() {
             removeBtn.addEventListener('click', () => {
                 window.customForces.delete(word);
                 renderForces();
-                updateForcesCount();
+                updateForceCounts();
                 updateForcesButtonStates();
             });
             forcesContainer.appendChild(tag);
@@ -143,13 +143,8 @@ function initForcesSettings() {
         if (sorted.length === 0) {
             forcesContainer.innerHTML = `<p class="text-gray-400 italic text-center py-4">${t?.forcesEmpty || 'Žiadne sily. Pridajte nejaké!'}</p>`;
         }
-        updateForcesCount();
+        updateForceCounts();
         updateForcesButtonStates();
-    }
-
-    function updateForcesCount() {
-        const countSpan = document.getElementById('forcesCount');
-        if (countSpan) countSpan.textContent = window.customForces.size;
     }
 
     function resetForcesToDefault() {
@@ -158,6 +153,7 @@ function initForcesSettings() {
             window.customForces.set(word, weight);
         }
         renderForces();
+        updateForceCounts();
         if (forcesWeightInput) forcesWeightInput.value = 0.3;
         updateForcesButtonStates();
     }
@@ -189,6 +185,7 @@ function initForcesSettings() {
 
         window.customForces.set(word, weight);
         renderForces();
+        updateForceCounts()
 
         // Reset vstupov
         newForceWord.value = '';
@@ -258,8 +255,42 @@ function initForcesSettings() {
         });
     }
 
+    // ===== AKTUALIZÁCIA VZHĽADU TLAČIDLA FORCES =====
+    function updateForcesButtonStyle() {
+        const btn = document.getElementById('forcesLexiconBtn');
+        if (!btn) return;
+        if (window.forcesEnabled) {
+            btn.classList.add('btn-enabled');
+        } else {
+            btn.classList.remove('btn-enabled');
+        }
+    }
+
+    // Sleduj zmenu checkboxu
+    if (forcesEnableCheckbox) {
+        forcesEnableCheckbox.addEventListener('change', () => {
+            updateForcesButtonStyle();
+        });
+    }
+    
+    // Inicializácia štýlu podľa počiatočnej hodnoty
+    updateForcesButtonStyle();
     updateForceButtonState();
     updateForcesButtonStates();
+
+
+}
+
+function updateForceCounts() {
+    const positive = Array.from(window.customForces.values()).filter(w => w > 0).length;
+    const negative = Array.from(window.customForces.values()).filter(w => w < 0).length;
+    const total = window.customForces.size;
+    const posSpan = document.getElementById('forcesPositiveCount');
+    const negSpan = document.getElementById('forcesNegativeCount');
+    const totalSpan = document.getElementById('forcesCount');
+    if (posSpan) posSpan.textContent = positive;
+    if (negSpan) negSpan.textContent = negative;
+    if (totalSpan) totalSpan.textContent = total;
 }
 
 document.addEventListener('DOMContentLoaded', initForcesSettings);

@@ -207,15 +207,6 @@
                             </label>
                         </div>
 
-                        <!-- REFERENCE SLIDER (📎) -->
-                        <div class="param-btn flex items-center gap-1 group relative">
-                            <label for="referenceCheckbox" class="text-xs font-medium whitespace-nowrap cursor-pointer select-none">📎</label>
-                            <label class="relative inline-flex items-center cursor-pointer">
-                                <input type="checkbox" id="referenceCheckbox" class="sr-only peer">
-                                <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-indigo-300 dark:peer-focus:ring-indigo-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-gray-600 peer-checked:bg-indigo-600"></div>
-                            </label>
-                        </div>
-
                         <!-- USE SLIDER -->
                         <div class="param-btn flex items-center gap-1 group relative">
                             <label for="useCheckbox" class="text-xs font-medium whitespace-nowrap cursor-pointer select-none" title="Universal Sentence Encoder">USE</label>
@@ -223,6 +214,11 @@
                                 <input type="checkbox" id="useCheckbox" class="sr-only peer">
                                 <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-indigo-300 dark:peer-focus:ring-indigo-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-gray-600 peer-checked:bg-indigo-600"></div>
                             </label>
+                        </div>
+
+                        <!-- REFERENCE BUTTON -->
+                        <div class="flex items-center gap-1 group relative">
+                            <button id="referenceBtn" class="param-btn text-xs font-medium px-2 py-1 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded transition whitespace-nowrap flex items-center gap-1">📎</button>
                         </div>
 
                         <!-- STOP WORDS BUTTON -->
@@ -1075,7 +1071,14 @@
                         <p class="text-sm text-gray-600 dark:text-gray-400">Pridávajte slová, ktoré reprezentujú softvérové sily (napr. "flexibility", "performance"). Záporná váha = sila, ktorá sa potláča (napr. "complexity").</p>
                         <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
                             <div class="flex justify-between items-center mb-2">
-                                <label class="text-sm font-medium text-gray-700 dark:text-gray-300">Aktuálne sily (<span id="forcesCount">0</span>/200):</label>
+                                <div class="flex justify-between items-center mb-2">
+                                    <label class="text-sm font-medium text-gray-700 dark:text-gray-300 mr-2">Aktuálne sily:</label>
+                                    <div class="flex gap-3">
+                                        <span class="text-xs text-green-600 dark:text-green-400">➕ <span id="forcesPositiveCount">0</span></span>
+                                        <span class="text-xs text-red-600 dark:text-red-400">➖ <span id="forcesNegativeCount">0</span></span>
+                                        <span class="text-xs text-gray-500"><span id="forcesCount">0</span>/200</span>
+                                    </div>
+                                </div>
                                 <div class="flex gap-1">
                                     <button id="loadForcesFromFileBtn" class="p-1.5 text-gray-500 hover:text-indigo-600 dark:text-gray-400 dark:hover:text-indigo-400 rounded-full hover:bg-gray-100" title="Načítať sily z .txt súboru">📂</button>
                                     <button id="resetForcesBtn" 
@@ -1107,6 +1110,50 @@
                                 <button id="addForceBtn" class="px-6 py-2 bg-indigo-600 text-white rounded-r-lg transition disabled:opacity-50">Pridať</button>
                             </div>
                             <p class="text-xs text-gray-500 mt-1 stop-words-hint">Enterom potvrdíš, slovo musí mať aspoň 2 znaky a žiadne medzery. Váha = znamienko × hodnota (0.1 – 1).</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reference Phrases Modal -->
+        <div id="referenceModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-hidden">
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="flex items-center gap-3">
+                            <h3 class="text-2xl font-bold text-gray-800 dark:text-white">Editor referenčných fráz</h3>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" id="referenceEnableCheckbox" class="sr-only peer" checked>
+                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-indigo-300 dark:peer-focus:ring-indigo-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-indigo-600"></div>
+                            </label>
+                        </div>
+                        <button id="closeReferenceModal" class="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                        </button>
+                    </div>
+                    <div class="space-y-4">
+                        <p class="text-sm text-gray-600 dark:text-gray-400">Fráz, ktoré indikujú explicitný odkaz na iný vzor. Pridávajte ich ako jednotlivé frázy (napr. "see also", "refers to", "paired with").</p>
+                        <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                            <div class="flex justify-between items-center mb-2">
+                                <label class="text-sm font-medium text-gray-700 dark:text-gray-300">Aktuálne frázy (<span id="referencePhrasesCount">0</span>/200):</label>
+                                <div class="flex gap-1">
+                                    <button id="loadReferenceFromFileBtn" class="p-1.5 text-gray-500 hover:text-indigo-600 dark:text-gray-400 dark:hover:text-indigo-400 rounded-full hover:bg-gray-100" title="Načítať frázy z .txt súboru">📂</button>
+                                    <button id="resetReferenceBtn" class="p-1.5 text-gray-500 hover:text-indigo-600 dark:text-gray-400 dark:hover:text-indigo-400 rounded-full hover:bg-gray-100 hidden" title="Resetovať na predvolené">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                                    </button>
+                                </div>
+                                <input type="file" id="referenceFileInput" accept=".txt" class="hidden">
+                            </div>
+                            <div id="referencePhrasesContainer" class="flex flex-wrap gap-2 min-h-[120px] max-h-[250px] overflow-y-auto p-3 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 custom-scrollbar"></div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Pridať novú frázu:</label>
+                            <div class="flex gap-2">
+                                <input type="text" id="newReferencePhrase" class="flex-1 px-4 py-2 text-sm border rounded-l-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-gray-700" placeholder="napr. 'see also'" autocomplete="off">
+                                <button id="addReferencePhraseBtn" class="px-6 py-2 bg-indigo-600 text-white rounded-r-lg transition disabled:opacity-50">Pridať</button>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">Frázu nemusíte escapovať, stačí zadať text. Hľadanie je case‑insensitive.</p>
                         </div>
                     </div>
                 </div>
@@ -1319,6 +1366,7 @@
         <script src="scripts/function/header.js"></script>
         <script src="scripts/function/modals.js"></script>
         <script src="scripts/function/forces.js"></script>
+        <script src="scripts/function/reference.js"></script>
         <script src="scripts/function/advanced.js"></script>
         <script src="scripts/function/nightmode.js"></script>
         <script src="scripts/function/examples.js"></script>

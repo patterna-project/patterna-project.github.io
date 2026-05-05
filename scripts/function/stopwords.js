@@ -54,11 +54,12 @@ function initStopWordsSettings() {
         }
     }
 
-    // NOVÉ: Inicializácia slidera pre zapnutie/vypnutie stop slov
+    // Inicializácia slidera pre zapnutie/vypnutie stop slov
     if (enableSlider) {
         window.stopWordsEnabled = enableSlider.checked;
         enableSlider.addEventListener('change', (e) => {
             window.stopWordsEnabled = e.target.checked;
+            updateParamButtonsState();
             const t = getT();
             showToast(
                 window.stopWordsEnabled ? 'Stop slová sú zapnuté' : 'Stop slová sú vypnuté',
@@ -240,6 +241,27 @@ function initStopWordsSettings() {
         
         updateButtonStates();
     }
+
+        // ===== AKTUALIZÁCIA VZHĽADU TLAČIDLA STOP WORDS =====
+    function updateStopWordsButtonStyle() {
+        const btn = document.getElementById('stopWordsBtn');
+        if (!btn) return;
+        if (window.stopWordsEnabled) {
+            btn.classList.add('btn-enabled');
+        } else {
+            btn.classList.remove('btn-enabled');
+        }
+    }
+
+    // Sleduj zmenu slidera
+    if (enableSlider) {
+        enableSlider.addEventListener('change', () => {
+            updateStopWordsButtonStyle();
+        });
+    }
+    
+    // Inicializácia štýlu podľa počiatočnej hodnoty
+    updateStopWordsButtonStyle();
 }
 
 // Inicializácia po načítaní DOM

@@ -540,7 +540,7 @@ async function generateSequence() {
         const useSentiment = document.getElementById('sentimentCheckbox')?.checked || false;
         const useUSE = document.getElementById('useCheckbox')?.checked || false;
         const useIDF = document.getElementById('idfCheckbox')?.checked || false;
-        const useReferences = document.getElementById('referenceCheckbox')?.checked || false;
+        const useReferences = window.referenceEnabled !== undefined ? window.referenceEnabled : false;
 
         // Zozbierame všetky zaškrtnuté vzory z globálneho stavu
         const selectedFiles = [];

@@ -1,4 +1,23 @@
-1.0.8
+1.0.9
+
+# NOVINKY VO VERZII 1.0.9
+
+## PRIDANÝ EDITOR REFERENČNÝCH FRÁZ
+- Nové tlačidlo **📎 (Reference)** v paneli parametrov - plnohodnotný editor referenčných fráz (pôvodne boli preddefinované, teraz si môže user definovať vlastné)
+- Umožňuje definovať **vlastné frázy**, ktoré indikujú explicitný odkaz na iný vzor (napr. "see also", "refers to", "paired with", "foundation for", "leads to", "supports", "enables", a mnoho ďalších)
+- Každú frázu je možné **pridať, odstrániť** a načítať z `.txt` súboru (jedna fráza na riadok)
+- Predvolený slovník obsahuje **viac ako 50 najčastejšie používaných fráz** z literatúry o vzoroch
+- Frázy sú case‑insensitive – "See Also" aj "see also" budú fungovať rovnako
+
+## VYLEPŠENIA ROZHRANIA
+- Tlačidlá 🚫 (Stop words), ⚖️ (Forces) a 📎 (Reference) majú pri zapnutí funkcie **modrý glow efekt** – okamžite vidíte, čo je aktívne
+- Jednotný štýl všetkých troch editorov (stop slová, sily, referenčné frázy)
+
+## OPRAVY CHÝB
+- Opravené chýbajúce uzatváracie zátvorky v modale Forces
+- Správne zobrazenie počtu síl pri načítaní zo súboru
+
+---
 
 # NOVINKY VO VERZII 1.0.8
 
