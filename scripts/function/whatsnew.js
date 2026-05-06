@@ -1,82 +1,34 @@
-//function/whatsnew.js
+// function/whatsnew.js
 
 // Kľúč pre localStorage
 const WHATS_NEW_SEEN_KEY = 'patterna_whats_new_seen';
 
-// Globálna premenná pre aktuálnu verziu aplikácie
+// Globálne premenné
 let currentAppVersion = '';
+let cachedWhatsNewContent = null;      // Uložený obsah pre rýchle zobrazenie
+let cachedWhatsNewVersion = null;
 
-async function checkAndShowWhatsNew() {
+// ========== FUNKCIE PRE PRÁCU S OBSAHOM ==========
+
+async function fetchWhatsNew() {
     try {
-        // 1. Načítanie obsahu
         const response = await fetch('whatsnew.txt');
-        if (!response.ok) return;
+        if (!response.ok) return null;
         const fullContent = await response.text();
-        if (!fullContent || fullContent.trim().length === 0) return;
+        if (!fullContent || fullContent.trim().length === 0) return null;
 
-        // 2. Rozdelenie obsahu: prvý riadok je verzia, zvyšok je obsah pre modal
         const lines = fullContent.split('\n');
         const versionLine = lines[0].trim();
-        
-        // Ak je prvý riadok prázdny, nepokračujeme
-        if (versionLine.length === 0) return;
-        
-        // Uložíme verziu do globálnej premennej
-        currentAppVersion = versionLine;
-        
-        // Obsah pre modal je od druhého riadku ďalej (zachováme formátovanie)
+        if (versionLine.length === 0) return null;
+
         const modalContent = lines.slice(1).join('\n').trim();
-        
-        // Ak je modalContent prázdny, zobrazíme len verziu alebo nič
-        if (modalContent.length === 0) {
-            console.debug('Whats New modal: Obsah je prázdny (iba verzia)');
-            // Aktualizujeme len about modal s verziou
-            updateAboutVersion();
-            return;
-        }
-
-        // 3. Kontrola, či používateľ už videl túto verziu
-        const seenVersion = localStorage.getItem(WHATS_NEW_SEEN_KEY);
-        if (seenVersion === currentAppVersion) {
-            // Už videl, len aktualizujeme about modal
-            updateAboutVersion();
-            return;
-        }
-
-        // 4. Zobrazenie modalu
-        const modal = document.getElementById('whatsNewModal');
-        const contentDiv = document.getElementById('whatsNewContent');
-        if (!modal || !contentDiv) return;
-
-        // Nastavenie nadpisu modalu podľa jazyka
-        const title = modal.querySelector('h3');
-        if (title) {
-            const t = window.translations?.[window.currentLanguage];
-            title.textContent = t?.whatsNewTitle || 'What\'s New';
-        }
-
-        // Formátovanie obsahu
-        contentDiv.innerHTML = formatWhatsNewContent(modalContent);
-        openModal('whatsNewModal');
-        localStorage.setItem(WHATS_NEW_SEEN_KEY, currentAppVersion);
-        
-        // Aktualizujeme about modal s novou verziou
-        updateAboutVersion();
-
+        return { version: versionLine, content: modalContent };
     } catch (error) {
-        console.debug('Whats New modal error:', error);
+        console.debug('Whats New fetch error:', error);
+        return null;
     }
 }
 
-// Funkcia na aktualizáciu verzie len v about modal
-function updateAboutVersion() {
-    const aboutVersionSpan = document.getElementById('aboutVersion');
-    if (aboutVersionSpan && currentAppVersion) {
-        aboutVersionSpan.textContent = currentAppVersion;
-    }
-}
-
-// Formátovanie obsahu (nezmenené)
 function formatWhatsNewContent(content) {
     const paragraphs = content.split(/\n\s*\n/);
     return paragraphs.map(para => {
@@ -102,11 +54,102 @@ function formatWhatsNewContent(content) {
     }).join('');
 }
 
-// Inicializácia po načítaní DOM
+// Zobrazenie modalu s načítaným obsahom (neukladá do localStorage)
+async function showWhatsNewModal() {
+    let data;
+    if (cachedWhatsNewContent && cachedWhatsNewVersion) {
+        data = { version: cachedWhatsNewVersion, content: cachedWhatsNewContent };
+    } else {
+        data = await fetchWhatsNew();
+        if (data) {
+            cachedWhatsNewVersion = data.version;
+            cachedWhatsNewContent = data.content;
+        }
+    }
+
+    if (!data || !data.content || data.content.length === 0) {
+        // Nemáme čo zobraziť – možno tichá chyba alebo toast
+        const t = window.translations?.[window.currentLanguage];
+        showToast(t?.whatsNewEmpty || 'Žiadne novinky nie sú k dispozícii.', 'info');
+        return;
+    }
+
+    const modal = document.getElementById('whatsNewModal');
+    const contentDiv = document.getElementById('whatsNewContent');
+    if (!modal || !contentDiv) return;
+
+    const title = modal.querySelector('h3');
+    if (title) {
+        const t = window.translations?.[window.currentLanguage];
+        title.textContent = t?.whatsNewTitle || 'What\'s New';
+    }
+
+    contentDiv.innerHTML = formatWhatsNewContent(data.content);
+    openModal('whatsNewModal');
+}
+
+// Automatické zobrazenie pri novej verzii (ukladá do localStorage)
+async function checkAndShowWhatsNew() {
+    const data = await fetchWhatsNew();
+    if (!data) return;
+
+    // Uloženie aktuálnej verzie do globálnej premennej pre About modal
+    currentAppVersion = data.version;
+    updateAboutVersion();
+
+    const seenVersion = localStorage.getItem(WHATS_NEW_SEEN_KEY);
+    if (seenVersion === currentAppVersion) return;   // už videné
+
+    // Inak zobrazíme modal a uložíme verziu
+    if (!data.content || data.content.length === 0) return;
+
+    const modal = document.getElementById('whatsNewModal');
+    const contentDiv = document.getElementById('whatsNewContent');
+    if (!modal || !contentDiv) return;
+
+    const title = modal.querySelector('h3');
+    if (title) {
+        const t = window.translations?.[window.currentLanguage];
+        title.textContent = t?.whatsNewTitle || 'What\'s New';
+    }
+
+    contentDiv.innerHTML = formatWhatsNewContent(data.content);
+    openModal('whatsNewModal');
+    localStorage.setItem(WHATS_NEW_SEEN_KEY, currentAppVersion);
+}
+
+// Aktualizácia verzie v About modale
+function updateAboutVersion() {
+    const aboutVersionSpan = document.getElementById('aboutVersion');
+    if (aboutVersionSpan && currentAppVersion) {
+        aboutVersionSpan.textContent = currentAppVersion;
+        // Pridáme vizuálnu indikáciu, že je klikateľné
+        aboutVersionSpan.style.cursor = 'pointer';
+        aboutVersionSpan.style.textDecoration = 'underline dotted';
+        aboutVersionSpan.title = window.translations?.[window.currentLanguage]?.clickToSeeWhatsNew || 'Kliknite pre zobrazenie noviniek';
+    }
+}
+
+// Pridanie event listenera na verziu v About modale
+function bindVersionClickListener() {
+    const aboutVersionSpan = document.getElementById('aboutVersion');
+    if (aboutVersionSpan) {
+        // Odstraníme starý listener, aby sa nenabaľoval
+        aboutVersionSpan.removeEventListener('click', showWhatsNewModal);
+        aboutVersionSpan.addEventListener('click', showWhatsNewModal);
+    } else {
+        // Ak element ešte neexistuje, skúsime neskôr (napr. keď sa načíta About modal)
+        setTimeout(bindVersionClickListener, 500);
+    }
+}
+
+// ========== INICIALIZÁCIA ==========
 document.addEventListener('DOMContentLoaded', () => {
     setTimeout(checkAndShowWhatsNew, 500);
+    bindVersionClickListener();
 });
 
-// Export funkcií pre iné moduly
+// Export funkcií pre prípadné volanie z iných modulov
 window.updateAboutVersion = updateAboutVersion;
 window.getCurrentAppVersion = () => currentAppVersion;
+window.showWhatsNewModal = showWhatsNewModal;  // ak by niekto chcel zavolať manuálne

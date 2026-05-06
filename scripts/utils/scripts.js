@@ -819,6 +819,7 @@ function initSelectedPanel() {
                 selectedPanelContainer.classList.remove('collapsed');
                 toggleBtn.title = 'Zbaliť panel';
             }
+            updatePanelButtonTooltip();
         });
     }
 }
@@ -872,6 +873,8 @@ function renderSelectedPatternsList() {
         `;
         
         const removeBtn = div.querySelector('.selected-pattern-remove');
+        const t = translations[currentLanguage];
+        removeBtn.title = t?.removePatternTooltip || 'Odstrániť';
         removeBtn.addEventListener('click', (e) => {
             e.stopPropagation();
             Object.keys(globalCheckedPatterns).forEach(catalogName => {
@@ -913,3 +916,15 @@ document.addEventListener('DOMContentLoaded', () => {
         updateSelectedPanelVisibility();
     }, 500);
 });
+
+function updatePanelButtonTooltip() {
+    const toggleBtn = document.getElementById('toggleSelectedPanelBtn');
+    const panelContainer = document.getElementById('selectedPanelContainer');
+    const t = translations[currentLanguage];
+    
+    if (!toggleBtn || !panelContainer) return;
+    
+    const isCollapsed = panelContainer.classList.contains('collapsed');
+    toggleBtn.title = isCollapsed ? (t.openPanel || 'Otvoriť panel') : (t.collapsePanel || 'Zbaliť panel');
+}
+window.updatePanelButtonTooltip = updatePanelButtonTooltip;

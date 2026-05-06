@@ -76,7 +76,7 @@ function exportAsPdf(sequenceData) {
     // Nastavenie fontu
     doc.setFont("helvetica");
     doc.setFontSize(16);
-    doc.text("SEKVENCIA ORGANIZAČNÝCH VZOROV", 20, 20);
+    doc.text("SEKVENCIA VZOROV", 20, 20);
 
     doc.setFontSize(12);
     doc.text(`Generované: ${new Date().toLocaleDateString('sk-SK')} ${new Date().toLocaleTimeString('sk-SK')}`, 20, 30);
@@ -133,7 +133,7 @@ function exportAsPng(sequenceData) {
 
     // Pridáme nadpis
     const title = document.createElement('h2');
-    title.textContent = 'Sekvencia organizačných vzorov';
+    title.textContent = 'Sekvencia vzorov';
     title.style.fontSize = '20px';
     title.style.fontWeight = 'bold';
     title.style.marginBottom = '20px';
@@ -265,7 +265,7 @@ function exportAsPng(sequenceData) {
 
 function generateExportText(sequenceData) {
     const t = translations[currentLanguage];
-    let text = 'SEKVENCIA ORGANIZAČNÝCH VZOROV\n';
+    let text = 'SEKVENCIA VZOROV\n';
     text += 'Generované pomocou Patterna\n';
     text += `Dátum: ${new Date().toLocaleDateString('sk-SK')}\n\n`;
 
@@ -524,7 +524,7 @@ function generateProReadme(sequenceData, params, statistics) {
     lines.push('');
     lines.push('='.repeat(60));
     lines.push('Vygenerované pomocou Patterna - nástroj pre analýzu a generovanie');
-    lines.push('sekvencií organizačných vzorov na základe protichodných síl.');
+    lines.push('sekvencií vzorov na základe protichodných síl.');
     lines.push('='.repeat(60));
     
     return lines.join('\n');
