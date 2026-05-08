@@ -11,11 +11,11 @@ const translations = {
 
         // Examples dropdown
         selectExample: "Vyberte príklad:",
-        exampleA: "A",
-        exampleB: "B",
-        exampleC: "C",
-        exampleD: "D",
-        exampleE: "E",
+        exampleA: "Tvorba",
+        exampleB: "Testovanie",
+        exampleC: "Architektúra",
+        exampleD: "Agilné",
+        exampleE: "Mix",
 
         // Main section
         selectPatterns: "Vyber vzory",
@@ -88,7 +88,7 @@ const translations = {
 
         // Tutorial
         tutorialStep1Title: "Výber katalógu",
-        tutorialStep1Intro: "Tu si môžete vybrať predvolený katalóg (Coplien & Harrison) alebo nahrať vlastný katalóg vzorov.",
+        tutorialStep1Intro: "Tu si môžete vybrať predvolený katalóg alebo nahrať vlastný katalóg vzorov.",
         tutorialStep2Title: "Výber vzorov",
         tutorialStep2Intro: "Zaškrtnite vzory, ktoré chcete analyzovať. Môžete vyhľadávať a vybrať viacero vzorov naraz.",
         tutorialStep3Title: "Generovanie sekvencie",
@@ -419,7 +419,7 @@ const translations = {
 
         // Alerts and messages
         selectAtLeastTwoPatterns: "Vyber aspoň 2 vzory!",
-        examplesOnlyForCoplien: "Príklady sú dostupné len pre Coplien a Harrison katalóg",
+        examplesOnlyForCoplien: "Príklady sú dostupné len pre predvolený katalóg",
         catalogNotFound: "Katalóg nebol nájdený",
         enterCatalogName: "Zadajte názov katalógu",
         selectFolder: "Vyberte priečinok s txt súbormi",
@@ -451,11 +451,11 @@ const translations = {
 
         // Examples dropdown
         selectExample: "Select example:",
-        exampleA: "A",
-        exampleB: "B",
-        exampleC: "C",
-        exampleD: "D",
-        exampleE: "E",
+        exampleA: "Creation",
+        exampleB: "Testing",
+        exampleC: "Architecture",
+        exampleD: "Agile",
+        exampleE: "Mix",
 
         // Main section
         selectPatterns: "Select Patterns",
@@ -528,7 +528,7 @@ const translations = {
 
         // Tutorial
         tutorialStep1Title: "Catalog Selection",
-        tutorialStep1Intro: "Here you can select the default catalog (Coplien & Harrison) or upload your own pattern catalog.",
+        tutorialStep1Intro: "Here you can select the default catalog or upload your own pattern catalog.",
         tutorialStep2Title: "Pattern Selection",
         tutorialStep2Intro: "Check the patterns you want to analyze. You can search and select multiple patterns at once.",
         tutorialStep3Title: "Sequence Generation",
@@ -861,7 +861,7 @@ const translations = {
 
         // Alerts and messages
         selectAtLeastTwoPatterns: 'Select at least 2 patterns!',
-        examplesOnlyForCoplien: "Examples are only available for Coplien and Harrison catalog",
+        examplesOnlyForCoplien: "Examples are only available for the default catalog",
         catalogNotFound: "Catalog not found",
         enterCatalogName: "Enter catalog name",
         selectFolder: "Select folder with txt files",

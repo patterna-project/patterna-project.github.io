@@ -1,11 +1,24 @@
-//function/examples.js
+// function/examples.js
+
+// Nové príklady pre aktuálny Default katalóg:
+// Štruktúra: každé pole = jeden príklad (max 3 vzory na príklad)
+// Názvy súborov MUSIA presne zodpovedať tým v DefaultPatterns priečinkoch
 
 const examples = [
-    ["build_prototypes.txt", "day_care.txt", "developer_controls_process.txt"], // A
-    ["completion_headroom.txt", "informal_labor_plan.txt", "team_per_task.txt"], // B
-    ["interrupts_unjam_blocking.txt", "get_on_with_it.txt", "size_the_schedule.txt"], // C
-    ["mercenary_analyst.txt", "recommitment_meeting.txt", "private_world.txt"], // D
-    ["someone_always_makes_progress.txt", "work_split.txt", "take_no_small_slips.txt"] // E
+    // Príklad A: Factory Method + Singleton + Observer (creational + behavioral)
+    ["factory_method_demo.txt", "singleton_demo.txt", "observer_demo.txt"],
+    
+    // Príklad B: Unit Test + Integration Test + TDD (testing)
+    ["unit_testing.txt", "integration_testing.txt", "test_driven_development.txt"],
+    
+    // Príklad C: Layered Architecture + Microservices + Event Driven (architectural)
+    ["layered_architecture.txt", "microservices_basics.txt", "event_driven.txt"],
+    
+    // Príklad D: Daily Standup + Sprint Planning + Retrospective (agile practices)
+    ["daily_standup.txt", "sprint_planning.txt", "retrospective.txt"],
+    
+    // Príklad E: Factory Method + Layered Architecture + TDD (mix)
+    ["factory_method_demo.txt", "layered_architecture.txt", "test_driven_development.txt"]
 ];
 
 document.querySelectorAll("#examplesMenu button[data-index]").forEach(btn => {
@@ -14,7 +27,7 @@ document.querySelectorAll("#examplesMenu button[data-index]").forEach(btn => {
 
         const idx = parseInt(btn.dataset.index, 10);
         if (examples[idx]) {
-            // 1. NAJPRV PREPNEME DO COPLIEN KATALÓGU
+            // 1. NAJPRV PREPNEME DO DEFAULT (COPLIEN) KATALÓGU
             if (currentCatalog !== 'coplien') {
                 switchToCoplienCatalog();
             }
@@ -36,22 +49,28 @@ document.querySelectorAll("#examplesMenu button[data-index]").forEach(btn => {
 
             // 3. NASTAVÍME len vybrané vzory z príkladu
             examples[idx].forEach(filename => {
-                // Zistíme, do ktorého jazyka patrí súbor
+                // Zistíme, do ktorého jazyka (sekcie) patrí súbor
+                let foundLanguage = null;
                 for (const [language, files] of Object.entries(patternLanguages)) {
                     if (files.includes(filename)) {
-                        if (!globalCheckedPatterns[language]) {
-                            globalCheckedPatterns[language] = {};
-                        }
-                        globalCheckedPatterns[language][filename] = true;
+                        foundLanguage = language;
                         break;
                     }
                 }
+                
+                if (foundLanguage) {
+                    if (!globalCheckedPatterns[foundLanguage]) {
+                        globalCheckedPatterns[foundLanguage] = {};
+                    }
+                    globalCheckedPatterns[foundLanguage][filename] = true;
+                } else {
+                    console.warn(`Súbor ${filename} nebol nájdený v žiadnej sekcii Default katalógu`);
+                }
             });
 
-            // 4. Aktualizujeme UI podľa aktuálneho katalógu (teraz už Coplien)
+            // 4. Aktualizujeme UI – všetky checkboxy
             const allCheckboxes = document.querySelectorAll('#patternCheckboxes input[type="checkbox"]');
             allCheckboxes.forEach(cb => {
-                // Checkbox je zaškrtnutý len ak je v globalCheckedPatterns
                 let isChecked = false;
                 Object.keys(globalCheckedPatterns).forEach(catalogName => {
                     if (globalCheckedPatterns[catalogName]?.[cb.value]) {
@@ -61,13 +80,22 @@ document.querySelectorAll("#examplesMenu button[data-index]").forEach(btn => {
                 cb.checked = isChecked;
             });
 
-            // 5. Aktualizujeme všetky počítadlá a badge
+            // 5. Aktualizujeme všetky počítadlá, badge, tlačidlá
             updateAllLanguageCounters();
             updateCatalogBadges();
             updateSelectAllButtonsColor();
-            updateGenerateButtonState(); 
+            updateGenerateButtonState();
+            
+            // 6. Resetneme forced start/goal (aby neostali z predchádzajúceho)
             forcedStartPattern = null;
-            forcedGoalPattern = null; 
+            forcedGoalPattern = null;
+            updateStartFlags();
+            updateGoalFlags();
+
+            // 7. *** DÔLEŽITÉ: AKTUALIZUJEME PLAVUJÚCI PANEL S VYBRANÝMI VZORMI ***
+            if (typeof updateSelectedPanelVisibility === 'function') {
+                updateSelectedPanelVisibility();
+            }
         }
         document.getElementById("examplesMenu").classList.add("hidden");
     });

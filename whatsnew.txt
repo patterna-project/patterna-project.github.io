@@ -10,6 +10,9 @@
   - Matica podobností, graf a štatistiky
   - Práca s vygenerovanou sekvenciou a export výsledkov
 
+  ## OPRAVY CHÝB
+- **Plávajúci panel** vybraných vzorov sa teraz správne zobrazí aj po kliknutí na príklady (A–E)
+
 ---
 
 # NOVINKY VO VERZII 1.0.9

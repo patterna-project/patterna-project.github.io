@@ -2154,7 +2154,7 @@ input[type="checkbox"].sr-only {
     box-shadow: 0 0 0 2px #818cf8, 0 0 0 4px rgba(129, 140, 248, 0.3) !important;
 }
 
-/* ===== VYLEPŠENÝ TUTORIÁL (intro.js) – ČISTÁ VERZIA ===== */
+/* TUTORIÁL (intro.js)  */
 .introjs-tooltip {
     min-width: 420px !important;
     max-width: 560px !important;
@@ -2203,7 +2203,6 @@ input[type="checkbox"].sr-only {
     transform: scale(1.02);
 }
 
-/* Krížik – pôvodný (necháme ho, ale nech sa zobrazí) */
 .introjs-tooltip .introjs-skipbutton {
     color: var(--text-gray-500) !important;
     background: transparent !important;
@@ -2231,7 +2230,6 @@ input[type="checkbox"].sr-only {
     border-top-color: var(--bg-white) !important;
 }
 
-/* ===== PROGRESS BAR – NEKLIKATEĽNÝ, ROZDELENÝ NA SEGMENTY ===== */
 .introjs-custom-progress {
     margin: 12px 16px 8px 16px;
     padding: 0;
