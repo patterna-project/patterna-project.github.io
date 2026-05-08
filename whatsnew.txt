@@ -1,4 +1,16 @@
-1.0.9
+1.1.0
+
+# NOVINKY VO VERZII 1.1.0
+
+## PRIDANÝ INTERAKTÍVNY TUTORIÁL
+- Úplne nový **sprievodca aplikáciou** – spustíte ho tlačidlom **"Tutorial"** v hlavnom paneli
+- Postupne vás prevedie všetkými dôležitými časťami aplikácie:
+  - Výber katalógu a vzorov
+  - Generovanie sekvencie a parametre MDP
+  - Matica podobností, graf a štatistiky
+  - Práca s vygenerovanou sekvenciou a export výsledkov
+
+---
 
 # NOVINKY VO VERZII 1.0.9
 

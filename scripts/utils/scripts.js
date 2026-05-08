@@ -862,6 +862,8 @@ function renderSelectedPatternsList() {
         selectedPatternsList.innerHTML = '<div class="selected-empty">Žiadne vybrané vzory</div>';
         return;
     }
+
+    selectedItems.sort((a, b) => a.name.localeCompare(b.name));
     
     selectedPatternsList.innerHTML = '';
     selectedItems.forEach(item => {

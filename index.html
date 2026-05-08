@@ -9,6 +9,9 @@
         <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
         <!-- Tailwind CSS -->
         <script src="https://cdn.tailwindcss.com"></script>
+        <!-- intro.js pre interaktívny tutoriál -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intro.js/7.2.0/introjs.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/intro.js/7.2.0/intro.min.js"></script>
         <!--  TensorFlow.js for NLP -->
         <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.18.0/dist/tf.min.js"></script>
         <!-- Universal Sentence Encoder -->
@@ -73,6 +76,10 @@
                     
                     
                     </div>
+
+                    <button id="tutorialBtn" class="bg-white text-indigo-600 px-4 py-2 rounded-lg mr-2 hover:bg-gray-200">
+                        Tutorial
+                    </button>
 
                     <div class="relative inline-block text-left">
                         <button id="examplesToggle"
@@ -1373,6 +1380,7 @@
         <script src="scripts/function/toast.js"></script>
         <script src="scripts/function/stopwords.js"></script>
         <script src="scripts/function/whatsnew.js"></script>
+        <script src="scripts/function/tutorial.js"></script>
 
 
     </body>
