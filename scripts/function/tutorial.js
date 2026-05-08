@@ -1,4 +1,5 @@
 // function/tutorial.js
+
 document.addEventListener('DOMContentLoaded', function() {
     const tutorialBtn = document.getElementById('tutorialBtn');
     if (!tutorialBtn) return;
@@ -96,9 +97,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const totalSteps = mappedSteps.length;
 
-        // ============================================================
-        // PROGRESS BAR – ROZDELENÝ NA ČASTI (NIE KLIKATEĽNÝ)
-        // ============================================================
+        // PROGRESS BAR – ROZDELENÝ NA ČASTI
         function injectProgressBar(currentStep) {
             const tooltip = document.querySelector('.introjs-tooltip');
             if (!tooltip) return false;
