@@ -107,6 +107,7 @@ const translations = {
         prevLabel: "← Späť",
         doneLabel: "Hotovo",
         closeTutorial: "Zatvoriť tutoriál",
+        tutorialButton: "Tutoriál",
 
         // About Modal
         aboutPatterna: "O projekte Patterna",
@@ -547,6 +548,7 @@ const translations = {
         prevLabel: "← Back",
         doneLabel: "Done",
         closeTutorial: "Close tutorial",
+        tutorialButton: "Tutorial",
 
         // About Modal
         aboutPatterna: "About Patterna Project",
@@ -956,6 +958,11 @@ function updateTextContent() {
     const cookieConsentText = document.getElementById('cookieConsentText');
     if (cookieConsentText) {
         cookieConsentText.textContent = t.cookieConsentText;
+    }
+
+    const tutorialBtn = document.getElementById('tutorialBtn');
+    if (tutorialBtn) {
+        tutorialBtn.textContent = t.tutorialButton || 'Tutoriál';
     }
 
     const acceptCookiesBtn = document.getElementById('acceptCookies');

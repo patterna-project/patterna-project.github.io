@@ -97,7 +97,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const totalSteps = mappedSteps.length;
 
-        // PROGRESS BAR – ROZDELENÝ NA ČASTI
+        // PROGRESS BAR – ROZDELENÝ NA ČASTI (len jeden, žiadne duplicity)
+        let progressBarInjected = false;
+        
         function injectProgressBar(currentStep) {
             const tooltip = document.querySelector('.introjs-tooltip');
             if (!tooltip) return false;
@@ -112,9 +114,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 } else {
                     tooltip.insertBefore(container, tooltip.firstChild);
                 }
+                progressBarInjected = true;
             }
 
-            // Vytvoríme štruktúru progress baru (bez inline štýlov, všetko je v CSS)
             container.innerHTML = `
                 <div class="progress-bar-container">
                     <div class="progress-bar-segments">
@@ -138,13 +140,15 @@ document.addEventListener('DOMContentLoaded', function() {
             return true;
         }
 
-        // Odstránenie pôvodného "Preskočiť" tlačidla
+        // Odstránenie pôvodného "Preskočiť" tlačidla (ak existuje)
         function removeSkipButton() {
             const skipBtn = document.querySelector('.introjs-skipbutton');
             if (skipBtn) skipBtn.remove();
         }
 
-        // Pridanie krížika (×) do pravého horného rohu
+        // Pridanie krížika (×) do pravého horného rohu (len jeden)
+        let closeBtnInjected = false;
+        
         function injectOurCloseCross() {
             const tooltip = document.querySelector('.introjs-tooltip');
             if (!tooltip) return false;
@@ -174,6 +178,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             header.appendChild(closeBtn);
             header.style.cssText = 'padding-right: 40px; position: relative;';
+            closeBtnInjected = true;
             
             return true;
         }
@@ -186,11 +191,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const doneBtn = document.querySelector('.introjs-donebutton');
                 
                 if (prevBtn) {
-                    if (currentStep === 1) {
-                        prevBtn.style.display = 'none';
-                    } else {
-                        prevBtn.style.display = '';
-                    }
+                    prevBtn.style.display = (currentStep === 1) ? 'none' : '';
                 }
                 
                 if (nextBtn && doneBtn) {
@@ -223,13 +224,12 @@ document.addEventListener('DOMContentLoaded', function() {
             tooltipPosition: 'bottom'
         });
 
-        // Udalosť PRED zmenou kroku
+        // Udalosť PRED zmenou kroku – aktualizujeme iba progress bar a viditeľnosť, NEPRIDÁVAME NOVÉ ELEMENTY
         intro.onbeforechange(function(targetElement) {
             const currentStepNumber = intro._currentStep + 1;
             setTimeout(() => {
-                removeSkipButton();
+                // Len aktualizujeme existujúce elementy, nevytvárame nové
                 injectProgressBar(currentStepNumber);
-                injectOurCloseCross();
                 updateButtonsVisibility(currentStepNumber, totalSteps);
             }, 80);
         });
@@ -244,6 +244,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         intro.start();
         
+        // Po spustení inicializujeme progress bar, krížik a viditeľnosť len raz
         setTimeout(() => {
             removeSkipButton();
             injectProgressBar(1);

@@ -2196,11 +2196,13 @@ input[type="checkbox"].sr-only {
     padding: 6px 16px !important;
     font-size: 0.8rem !important;
     transition: all 0.2s ease;
+    text-shadow: none !important;          /* ← toto chýba */
+    -webkit-font-smoothing: antialiased;   /* ← bonus pre ostrejší text */
 }
 
 .introjs-tooltip .introjs-button:hover {
     background-color: var(--btn-primary-hover) !important;
-    transform: scale(1.02);
+    filter: brightness(0.95);
 }
 
 .introjs-tooltip .introjs-skipbutton {
