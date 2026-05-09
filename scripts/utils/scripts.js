@@ -781,6 +781,10 @@ function resetParametersToDefault() {
 
     const forcesWeightInput = document.getElementById('forcesWeightInput');
     if (forcesWeightInput) forcesWeightInput.value = 0.3;
+
+    window.referenceBonusValue = 0.6;
+    const referenceWeightInput = document.getElementById('referenceBonusWeightInput');
+    if (referenceWeightInput) referenceWeightInput.value = 0.6;
     
     // reset aj stop slov na predvolené
     if (window.resetStopWordsToDefault && typeof window.resetStopWordsToDefault === 'function') {

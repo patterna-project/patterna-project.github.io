@@ -10,6 +10,11 @@
   - Matica podobností, graf a štatistiky
   - Práca s vygenerovanou sekvenciou a export výsledkov
 
+## NASTAVITEĽNÁ VÁHA REFERENČNÉHO BONUSU
+- V editore referenčných fráz (📎) pribudol posuvník **Váha bonusu (b)** v rozsahu 0 – 1
+- Umožňuje presne nastaviť, nakoľko sa zohľadnia explicitné odkazy medzi vzormi
+- Vyššia hodnota (napr. b = 0.9) zvýhodňuje prechody podľa referencií, nižšia (napr. b = 0.3) ich len jemne upravuje
+
   ## OPRAVY CHÝB
 - **Plávajúci panel** vybraných vzorov sa teraz správne zobrazí aj po kliknutí na príklady (A–E)
 

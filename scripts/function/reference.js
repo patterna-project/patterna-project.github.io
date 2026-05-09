@@ -1,4 +1,4 @@
-//function/reference.js
+// function/reference.js
 
 // Predvolené frázy pre referencie
 const DEFAULT_REFERENCE_PHRASES = [
@@ -17,6 +17,7 @@ const DEFAULT_REFERENCE_PHRASES = [
 
 window.customReferencePhrases = new Set(DEFAULT_REFERENCE_PHRASES);
 window.referenceEnabled = true;  // zodpovedá checkboxu v UI
+window.referenceBonusValue = 0.6; // PREDVOLENÁ HODNOTA (b)
 
 function initReferenceSettings() {
     const refBtn = document.getElementById('referenceBtn');
@@ -30,6 +31,32 @@ function initReferenceSettings() {
     const fileInput = document.getElementById('referenceFileInput');
     const enableCheckbox = document.getElementById('referenceEnableCheckbox');
     const countSpan = document.getElementById('referencePhrasesCount');
+    
+    // ===== NOVÉ: SLIDER PRE VÁHU REFERENČNÉHO BONUSU =====
+    const bonusWeightInput = document.getElementById('referenceBonusWeightInput');
+    
+    // Validácia váhy bonusu – rozsah 0 – 1
+    if (bonusWeightInput) {
+        bonusWeightInput.value = window.referenceBonusValue;
+        bonusWeightInput.addEventListener('blur', function() {
+            let value = parseFloat(this.value);
+            if (isNaN(value)) {
+                this.value = 0.6;
+                window.referenceBonusValue = 0.6;
+            } else {
+                value = Math.min(Math.max(value, 0), 1);
+                this.value = value;
+                window.referenceBonusValue = value;
+            }
+        });
+        bonusWeightInput.addEventListener('input', function() {
+            let value = parseFloat(this.value);
+            if (!isNaN(value)) {
+                value = Math.min(Math.max(value, 0), 1);
+                window.referenceBonusValue = value;
+            }
+        });
+    }
 
     if (!refBtn || !refModal) return;
 
@@ -90,6 +117,11 @@ function initReferenceSettings() {
         window.customReferencePhrases.clear();
         DEFAULT_REFERENCE_PHRASES.forEach(p => window.customReferencePhrases.add(p));
         renderPhrases();
+        // Reset aj váhy bonusu na 0.6
+        if (bonusWeightInput) {
+            bonusWeightInput.value = 0.6;
+            window.referenceBonusValue = 0.6;
+        }
         const t = getT();
         showToast(t?.referenceResetAfter || 'Referenčné frázy boli resetované na predvolené', 'info');
     }

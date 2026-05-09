@@ -218,7 +218,7 @@ const translations = {
         forcesRemoveTitle: "Odstrániť silu",
         forcesWeightTooltip: "Váha, ktorou sa silová podobnosť pripočíta k textovej podobnosti (0 – žiadny vplyv, 1 – maximálny vplyv)",
 
-        //Reference modal
+        // Reference modal
         referenceTitle: "Editor referenčných fráz",
         referenceInfo: "Fráz, ktoré indikujú explicitný odkaz na iný vzor. Pridávajte ich ako jednotlivé frázy (napr. \"see also\", \"refers to\", \"paired with\").",
         referenceCurrent: "Aktuálne frázy",
@@ -234,6 +234,8 @@ const translations = {
         referenceFileTruncated: "(súbor obsahoval viac fráz, ponechaných bolo prvých 200)",
         referenceTooltip: "Editor referenčných fráz – spravuj slová/slovné spojenia, ktoré sa považujú za explicitný odkaz na iný vzor",
         referenceNoEscapeHint: "Frázu nemusíte escapovať, stačí zadať text. Hľadanie je case‑insensitive.",
+        referenceBonusWeightLabel: "Váha bonusu (b):",
+        referenceBonusWeightTooltip: "Váha, ktorou sa referenčný bonus pripočíta k textovej podobnosti (0 – žiadny vplyv, 1 – maximálny vplyv)",
 
         // Advanced modal
         advancedSettings: "Pokročilé nastavenia",
@@ -660,7 +662,7 @@ const translations = {
         forcesRemoveTitle: "Remove force",
         forcesWeightTooltip: "Weight by which force similarity is added to text similarity (0 – no effect, 1 – maximum effect)",
 
-        //reference modal
+        // Reference modal
         referenceTitle: "Reference Phrases Editor",
         referenceInfo: "Phrases that indicate an explicit reference to another pattern. Add them as single phrases (e.g., \"see also\", \"refers to\", \"paired with\").",
         referenceCurrent: "Current phrases",
@@ -676,7 +678,8 @@ const translations = {
         referenceFileTruncated: "(file contained more phrases, only first 200 kept)",
         referenceTooltip: "Reference phrases editor – manage words/phrases considered as an explicit reference to another pattern",
         referenceNoEscapeHint: "You don't need to escape the phrase, just type the text. Search is case‑insensitive.",
-
+        referenceBonusWeightLabel: "Bonus weight (b):",
+        referenceBonusWeightTooltip: "Weight by which the reference bonus is added to text similarity (0 – no effect, 1 – maximum effect)",
 
         // Advanced modal
         advancedSettings: "Advanced Settings",
@@ -1455,7 +1458,16 @@ function updateModalContent() {
                 textNode.textContent = t.referenceCurrent + ' (';
             }
         }
+
+        const referenceBonusWeightInput = document.getElementById('referenceBonusWeightInput');
+        if (referenceBonusWeightInput) {
+            const wrapper = referenceBonusWeightInput.closest('.flex.items-center.gap-2');
+            if (wrapper) wrapper.title = t.referenceBonusWeightTooltip || 'Váha referenčného bonusu (0 – žiadny vplyv, 1 – maximálny vplyv)';
+        }
         
+        const referenceBonusLabel = document.querySelector('#referenceModal .flex.items-center.gap-2 label');
+        if (referenceBonusLabel) referenceBonusLabel.textContent = t.referenceBonusWeightLabel;
+
         const addLabel = refModal.querySelector('.block.text-sm.font-medium');
         if (addLabel) addLabel.textContent = t.referenceAddLabel;
         

@@ -1,4 +1,5 @@
 // Default forces lexicon (word -> weight)
+
 const DEFAULT_FORCES = {
     "flexibility": 0.8,
     "adaptability": 0.7,
@@ -22,7 +23,18 @@ const DEFAULT_FORCES = {
 };
 
 window.customForces = new Map();
+window.stemmedForces = new Map();   // stemnuté slovo → pôvodná váha
 window.forcesEnabled = false;
+
+function updateStemmedForces() {
+    window.stemmedForces.clear();
+    if (!window.customForces) return;
+    for (const [word, weight] of window.customForces.entries()) {
+        // Použijeme rovnaký stemmer ako v matrix.js
+        const stemmed = window.porterStemmer ? window.porterStemmer(word) : word;
+        window.stemmedForces.set(stemmed, weight);
+    }
+}
 
 // Kontrola, či sú aktuálne sily rovnaké ako predvolené
 function isDefaultForces() {
@@ -152,6 +164,7 @@ function initForcesSettings() {
         for (const [word, weight] of Object.entries(DEFAULT_FORCES)) {
             window.customForces.set(word, weight);
         }
+        updateStemmedForces();    
         renderForces();
         updateForceCounts();
         if (forcesWeightInput) forcesWeightInput.value = 0.3;
@@ -185,6 +198,7 @@ function initForcesSettings() {
 
         window.customForces.set(word, weight);
         renderForces();
+        updateStemmedForces();    
         updateForceCounts()
 
         // Reset vstupov
@@ -241,6 +255,7 @@ function initForcesSettings() {
                 }
                 if (newMap.size > 0) {
                     window.customForces = newMap;
+                    updateStemmedForces();  
                     renderForces();
                     let msg = (t?.forcesLoadedFromFile || 'Načítaných {count} síl zo súboru').replace('{count}', newMap.size);
                     if (newMap.size === 200 && lines.length > 200) msg += ' ' + (t?.forcesFileTruncated || '(súbor obsahoval viac slov, ponechaných bolo prvých 200)');

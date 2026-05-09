@@ -673,7 +673,7 @@ async function generateSequence() {
             useSentiment,       
             sentimentScores,
             useReferences ? referenceMatrix : null,   
-            0.6               
+            window.referenceBonusValue !== undefined ? window.referenceBonusValue : 0.6          
         );
 
         // Je vôbec možné vytvoriť sekvenciu?
@@ -688,8 +688,9 @@ async function generateSequence() {
         window.rawTransitionScores = result.rawTransitionScores;       
         window.boostedTransitionScores = result.boostedTransitionScores; 
         window.referenceBonusActive = useReferences;                  
-        window.referenceBonusValue = 0.6;                           
+        window.referenceBonusValue = window.referenceBonusValue !== undefined ? window.referenceBonusValue : 0.6;
 
+        
         // Fáza 3: Zobrazenie výsledkov
         updateLoadingIndicator(90, t.preparingResults);
         await delay(300);

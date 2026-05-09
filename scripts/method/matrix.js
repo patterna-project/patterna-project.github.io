@@ -376,10 +376,11 @@ class PatternSimilarity {
     computeForceVector(text) {
         const tokens = this.preprocessText(text);
         const vector = {};
+        // Použijeme stemnutý slovník síl (ak existuje)
+        const forceMap = window.stemmedForces || window.customForces;
         for (const token of tokens) {
-            const weight = window.customForces?.get(token);
+            const weight = forceMap.get(token);
             if (weight !== undefined) {
-                // POUŽI PRIAMO VÁHU VRÁTANE ZNAMENKA
                 vector[token] = (vector[token] || 0) + weight;
             }
         }
@@ -413,6 +414,9 @@ class PatternSimilarity {
     }
     
 }
+
+window.porterStemmer = porterStemmer;
+
 
 function displaySimilarityMatrix(sequence, similarityMatrix) {
     const matrixDiv = document.getElementById("similarityMatrix");
