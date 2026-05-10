@@ -4,7 +4,7 @@
 
 <p align="center">
   <a href="https://patterna-project-github-io.vercel.app">
-    <img src="https://img.shields.io/badge/Spustiť_Patternu-4f46e5?style=for-the-badge&logo=vercel&logoColor=white" alt="Spustiť Patternu">
+    <img src="https://img.shields.io/badge/live_demo-4f46e5?style=for-the-badge&logo=vercel&logoColor=white" alt="Spustiť Patternu">
   </a>
   <a href="https://tally.so/r/Y5rWkB">
     <img src="https://img.shields.io/badge/feedback-16a34a?style=for-the-badge&logo=tally&logoColor=white" alt="Feedback">
