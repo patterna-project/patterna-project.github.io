@@ -7,7 +7,7 @@
     <img src="https://img.shields.io/badge/Spustiť_Patternu-4f46e5?style=for-the-badge&logo=vercel&logoColor=white" alt="Spustiť Patternu">
   </a>
   <a href="https://tally.so/r/Y5rWkB">
-    <img src="https://img.shields.io/badge/feedback-16a34a?style=for-the-badge&logo=vercel&logoColor=white" alt="Feedback">  
+    <img src="https://img.shields.io/badge/Feedback-16a34a?style=for-the-badge&logo=googlechat&logoColor=white" alt="Feedback">
   </a>
   <a href="https://www.fiit.stuba.sk/">
     <img src="https://img.shields.io/badge/bachelor's_thesis-8b5cf6?style=for-the-badge&logo=academia&logoColor=white" alt="Bachelor's Thesis">
